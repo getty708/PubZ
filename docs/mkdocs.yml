@@ -1,0 +1,24 @@
+site_name: BMAN - User & Developer Guide
+repo_url: https://github.com/moird/dockerfiles
+dev_addr: 0.0.0.0:8000
+site_dir: /site
+theme:
+  name: 'material'
+markdown_extensions:
+    - mdx_math:
+        enable_dollar_delimiter: true
+    - admonition
+    - pymdownx.keys
+    - codehilite
+extra_javascript: 
+  - http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+nav:
+- Home: 'index.md'
+- Developer Guide:
+    - 'Home': './dev/index-dev.md'
+- User Guide:
+    - 'Home': './user/index-user.md'
+- About:
+    - 'License': 'license.md'
+    - 'Release Notes': 'release-notes.md'
+  

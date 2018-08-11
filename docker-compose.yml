@@ -1,0 +1,51 @@
+version: '2'
+services:
+  storage:
+    image: busybox
+    volumes:
+      - ./storage/db:/var/lib/mysql
+  db:
+    image: mysql
+    ports:
+      - "3306:3306" # <-これがないと外からアクセス出来ない
+    hostname: db
+    environment:
+      MYSQL_ROOT_PASSWORD: docker
+      MYSQL_DATABASE: docker
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+    volumes:
+      - ./storage/db:/var/lib/mysgql
+      - ./mysql:/etc/mysql/conf.d
+    volumes_from:
+      - storage
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1g
+      - PMA_HOST=db
+      - PMA_USER=root
+      - PMA_PASSWORD=docker
+    links:
+      - db
+    ports:
+      - "7070:80"
+  django:
+    build: ./django
+    command: python /code/app/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./django:/code
+    ports:
+      - "7000:8000"
+    depends_on:
+      - db
+    tty: true
+  docs:
+    build: ./docs/docker
+    command: mkdocs serve    
+    volumes:
+      - ./docs:/docs
+    ports:
+      - "7777:8000"
+    tty: true
+
