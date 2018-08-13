@@ -1,4 +1,4 @@
-# BibRich
+# BMAN - Bibtex Management System
 Bibtex mangament system which has rich automation functions.
 
 
@@ -6,10 +6,10 @@ Bibtex mangament system which has rich automation functions.
 [Document]()
 
 
-## Discription
+## Description
 See [Offical Documnet](#)
 
-## Requirement
+## Requirements
 + Main Host Server
   + docker
   + docker-compose

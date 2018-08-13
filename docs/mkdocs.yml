@@ -1,5 +1,5 @@
-site_name: BMAN - User & Developer Guide
-repo_url: https://github.com/moird/dockerfiles
+site_name: BMAN - Bibtex Mangement System
+repo_url: https://github.com/getty708/bman
 dev_addr: 0.0.0.0:8000
 site_dir: /site
 theme:
@@ -14,11 +14,12 @@ extra_javascript:
   - http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML
 nav:
 - Home: 'index.md'
-- Developer Guide:
-    - 'Home': './dev/index-dev.md'
-- User Guide:
-    - 'Home': './user/index-user.md'
 - About:
     - 'License': 'license.md'
-    - 'Release Notes': 'release-notes.md'
+    - 'Release Notes': 'release-notes.md'  
+- Developer Guide:
+    - 'Home': './dev/index-dev.md'
+    - 'Models': './dev/models.md'  
+- User Guide:
+    - 'Home': './user/index-user.md'
   
