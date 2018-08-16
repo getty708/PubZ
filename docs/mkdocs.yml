@@ -19,6 +19,7 @@ nav:
     - 'Release Notes': 'release-notes.md'  
 - Developer Guide:
     - 'Home': './dev/index-dev.md'
+    - 'Coding Policy': './dev/code.md'
     - 'Models': './dev/models.md'  
 - User Guide:
     - 'Home': './user/index-user.md'
