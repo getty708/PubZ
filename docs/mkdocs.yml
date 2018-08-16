@@ -5,8 +5,6 @@ site_dir: /site
 theme:
   name: 'material'
 markdown_extensions:
-    - mdx_math:
-        enable_dollar_delimiter: true
     - admonition
     - pymdownx.keys
     - codehilite
