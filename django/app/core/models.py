@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 # --------------------------------------------------
@@ -12,57 +13,161 @@ class Bibtex(models.Model):
     
     """ Fields
     """
-    language = model.CharField(
+    language = models.CharField(
         max_length=2,
         choices=LANGUAGE_CHOICES,)
-    title_en = model.CharField(max_length=512)
-    title_ja = model.CharField(max_length=512)
-    authors = model.ManyToManyField()
-    book = model.ManyToManyField()
-    volume = model.IntergerField(null=True)
-    number = model.IntergerField(null=True)
-    chapter = model.IntergerField(null=True)
-    page = model.TextField(max_length=16)
-    edition = model.TextField(max_length=16)
-    pub_date = model.DateField()
-    is_date = model.BooleanField()
-    acceptance_rate = model.FloatField(null=True)
-    inpact_factor = model.FloatField(null=True)
-    url = model.UrlField(null=True)
-    note = model.TextField(null=True)
-    abstruct = model.TextField(null=True)
-    image = model.ImageField(null=True)
-    tags = model.ManyToManyField()    
-    is_published = model.BooleanField()
-    
-    
+    title_en = models.CharField(max_length=512,blank=True)
+    title_ja = models.CharField(max_length=512,blank=True)
+    authors = models.ManyToManyField(
+        'core.Author',
+        through='AuthorOrder',
+    )
+    book = models.ForeignKey(
+        'core.Book',
+        on_delete=models.PROTECT,
+    )
+    volume = models.IntegerField(null=True,blank=True)
+    number = models.IntegerField(null=True,blank=True)
+    chapter = models.IntegerField(null=True,blank=True)
+    page = models.CharField(max_length=32, null=True,blank=True)
+    edition = models.TextField(max_length=16,null=True,blank=True)
+    pub_date = models.DateField(null=True,blank=True)
+    use_date_info = models.BooleanField(default=False)
+    acceptance_rate = models.FloatField(null=True,blank=True)
+    inpact_factor = models.FloatField(null=True,blank=True)
+    url = models.URLField(null=True,blank=True)
+    note = models.TextField(null=True,blank=True)
+    abstruct = models.TextField(null=True,blank=True)
+    image = models.ImageField(null=True,blank=True)
+    tags = models.ManyToManyField(
+        'core.Tag',
+        null=True, blank=True,
+    )
+    is_published = models.BooleanField(default=False)
+    created = models.DateTimeField(auto_now_add=True, blank=False)
+    modified = models.DateTimeField(auto_now=True, blank=False)    
+    owner = models.ForeignKey(
+        'auth.User',
+        null=True,
+        on_delete=models.SET_NULL
+    )
 
+    def __str__(self):
+        if self.language == 'EN':
+            return self.title_en
+        elif self.language == 'JA':
+            return self.title_en
+        return "Bibtex[{}]".format(self.id)
+    
 
 # --------------------------------------------------
 class Author(models.Model):
     name_en = models.CharField(max_length=128)
-    name_ja = models.CharField(max_length=128)
+    name_ja = models.CharField(max_length=128, null=True, blank=True)
     dep_en = models.TextField(null=True)
     dep_ja = models.TextField(null=True)
-    mail = models.EmailFiled()
-    date_join = models.DateField()
-    date_leave = models.DataField()    
+    mail = models.EmailField(null=True, blank=True)
+    date_join = models.DateField(null=True, blank=True)
+    date_leave = models.DateField(null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True, blank=False)
+    modified = models.DateTimeField(auto_now=True, blank=False)    
+    owner = models.ForeignKey(
+        'auth.User',
+        null=True,
+        on_delete=models.SET_NULL
+    )
 
-
+    def __str__(self):
+        return self.name_en
+    
 
 # --------------------------------------------------
 class Book(models.Model):
-    title = models.CharField(max_length=256)
-    style = models.CharField(max_length=8)
-    institution = models.CharField(max_length=256)
-    publisher = models.CharField(max_length=256)
-    adderss = models.TextField()
+    STYLE_CHOICES = (
+        ('INTPROC', 'International Proceedings',),
+        ('JOURNAL', 'Journal Paper',),
+        ('CONF_DOMESTIC', 'Domestic Conference',),
+        ('CONF_DOMESTIC_NO_REVIEW', 'Domestic Conference (No Review)',),
+        ('CONF_NATIONAL', 'National Conference'),
+        ('BOOK', 'Book/Review/Editor/Translation',),
+        ('KEYNOTE', 'Keynote/Panel Discution/Seminer'),
+        ('NEWS', 'New Paper article',),
+        ('OTHERS', 'others',),
+        ('AWARD', 'Award',),
+    )
     
+    title = models.CharField(max_length=256)
+    abbr  = models.CharField(max_length=256, null=True,blank=True)    
+    style = models.CharField(
+        max_length=32,
+        choices=STYLE_CHOICES,
+    )
+    institution = models.CharField(max_length=256,null=True,blank=True)
+    organizer = models.CharField(max_length=256, null=True,blank=True)
+    publisher = models.CharField(max_length=256,null=True,blank=True)
+    adderss = models.TextField(null=True,blank=True)
+    created = models.DateTimeField(auto_now_add=True, blank=False)
+    modified = models.DateTimeField(auto_now=True, blank=False)    
+    owner = models.ForeignKey(
+        'auth.User',
+        null=True,
+        on_delete=models.SET_NULL
+    )
 
-
+    def __str__(self):
+        print(self.abbr)
+        if self.abbr is not None:
+            return self.abbr
+        return self.title
 
 
 # --------------------------------------------------
 class Tag(models.Model):
-    name = models.CharFeild(max_length=32)
+    name = models.CharField(max_length=32)
     description = models.TextField()
+    created = models.DateTimeField(auto_now_add=True, blank=False)
+    modified = models.DateTimeField(auto_now=True, blank=False)    
+    owner = models.ForeignKey(
+        'auth.User',
+        null=True,
+        on_delete=models.SET_NULL
+    )
+
+    def __str__(self):
+        return self.name
+
+  
+
+# --------------------------------------------------
+# Intermidiate Models
+# 
+
+class AuthorOrder(models.Model):
+    bibtex = models.ForeignKey(
+        'core.Bibtex',
+        on_delete=models.PROTECT,
+    )
+    author = models.ForeignKey(
+        'core.Author',
+        on_delete=models.PROTECT,
+    )
+    order = models.PositiveSmallIntegerField()
+    created = models.DateTimeField(auto_now_add=True, blank=False)
+    modified = models.DateTimeField(auto_now=True, blank=False)    
+    owner = models.ForeignKey(
+        'auth.User',
+        null=True,
+        on_delete=models.SET_NULL
+    )
+
+
+    def __str__(self):
+        if self.order == 1:            
+            order = "1st"
+        elif self.order == 2:
+            order = "2nd"
+        elif self.order == 3:
+            order = "3rd"
+        else:
+            order = "{}th".format(self.order)
+        return "Bibtex[{}] {}".format(self.bibtex.id, order)

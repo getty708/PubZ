@@ -667,3 +667,7 @@ ASALocalRun/
 
 
 # End of https://www.gitignore.io/api/sublimetext,visualstudio,jupyternotebook,visualstudiocode
+
+
+
+django/**/migrations/
