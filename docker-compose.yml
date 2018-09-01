@@ -32,7 +32,7 @@ services:
       - "7070:80"
   django:
     build: ./django
-    command: python /code/app/manage.py runserver 0.0.0.0:8000
+    # command: python /code/app/manage.py runserver 0.0.0.0:8000
     volumes:
       - ./django:/code
     ports:
