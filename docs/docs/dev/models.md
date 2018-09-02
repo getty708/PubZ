@@ -3,18 +3,13 @@
 -----------
 ## class **Bibtex**
 ```
-TBA
+core.models.Bibtex
 ```
 
 Bibtex object. All information of your publications are represented as this model.
 
 ### Properties
 + **id**: Defined by djnago app automatically. `AutoField`, primary key.
-+ (**type**: Publication Type. See [Validation/type](#type) for the avaiable choises. `CharField(64) with choices`.)
-
-!!! Warning
-	Double inputs. Select where to place this columns, Bibtex or Book
-
 + **lang**: A default language setting for this publication.
 + **title_en**: A title of your pubilication (English). `CharField(512)`, unique, required. [Check validation rules](#title), blank=True.
 + **title_ja**: A title of your pubilication (Japanese). `CharField(512)`, unique, required. [Check validation rules](#title), blank=True.
@@ -22,11 +17,7 @@ Bibtex object. All information of your publications are represented as this mode
 !!! Warning
 	We have to check whether `title_en` or `title_ja` is provided.
 	
-+ **authors**: Auhtors of this pubilcation. This columns shall be selected from `Author` model. `ManyToManyField`, foreign-key-ristriction(`Author`), required.
-
-!!! Warning
-	We should discuss how to store the order of authors.
-
++ **authors**: Auhtors of this pubilcation. This columns shall be selected from `Author` model. The order is stored in `AuthorOrder` model, which is an intermidiate model for `Bibtex` and `Author`. `ManyToManyField (through='AuthorOrder')`, foreign-key-ristriction(`Author`), required.
 + **book**: A book which this work is published. e.g. {International proceedings, journals, news papers, ...}.`ForeignKey`, foreign-key-ristriction(`Book`), required.
 
 + **volume**: A volume number (巻). Before published, ingnore this columns. `IntegerField`.
@@ -41,12 +32,12 @@ Bibtex object. All information of your publications are represented as this mode
 + **url**: An URL to PDF or something. `URLField`.
 + **note**: Note. If you need, you can add some text. `TextField`.
 + **abstruct**: Abstruct of the paper. `TextField`. 
-+ **Image**: A signle thumbnail iamge to represent this publication. This information are used in the [`TileDisplayStyle`](#). `ImageField`.
-+ **tags**: Tag for this publication. `ManyToManyField`, foreign-key-ristriction(`Tag`), required.
 
 !!! Info
 	This abstuct is used in tile-style display.
 
++ **image**: A signle thumbnail iamge to represent this publication. This information are used in the [`TileDisplayStyle`](#). `ImageField`.
++ **tags**: Tag for this publication. `ManyToManyField`, foreign-key-ristriction(`Tag`), required.
 + **is_published**: Whether it is published or not. `BooleanField`, default=`False`, required.
 + **created**: Datetime which this object is created. This column is automatically filled by django app. `DateTimeField`.
 + **modified**: Datetime which this object is edited last time. This column is automatically filled by django app. `DateTimeField`.
@@ -90,7 +81,7 @@ Just a number, or double hyphen notation style (e.g. `100--120`).
 -----------
 ## class **Author**
 ```
-TBA
+core.models.Author
 ```
 This model manages infomation about authors.
 
@@ -130,7 +121,7 @@ core.models.AuthorOder
 -----------
 ## class **Book**
 ```
-TBA
+core.models.Book
 ```
 This model stores information about publications.
 
@@ -167,7 +158,7 @@ If you want to chage these rule, check [TBA page](#)
 -----------
 ## class **Tag**
 ```
-TBA
+core.models.Tag
 ```
 
 Add tags to bibtex's. This model is used in search, web emedding API.
