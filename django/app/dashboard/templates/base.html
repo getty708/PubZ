@@ -1,0 +1,59 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:'ja' }}">
+		<head>
+				<meta charset="UTF-8">
+				<title>{% block title %}Dashboard{% endblock %}</title>
+				<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+				<!-- Javascript -->
+				<script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
+				<script src="{% static 'js/tether/dist/js/tether.min.js' %}"></script>
+				<script src="{% static 'js/moment/moment.min.js' %}"></script>
+				<script src="{% static 'js/chartjs/Chart.min.js' %}"></script>
+				<!-- Bootstrap -->
+				<link href="{% static 'bootstrap/dist/css/bootstrap.css' %}" rel="stylesheet">
+				<script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
+				{% block extrahead %}{% endblock %}
+		</head>
+		<body style="height: 100vh">
+				<nav class="navbar sticky-top  navbar-dark bg-dark  w-100" >
+						<a class="navbar-brand mb-0 h1" href="{% url 'dashboard:index' %}">BMAN Dashboard</a>
+						<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+								<div class="navbar-nav">
+										<a class="nav-item nav-link" href="{% url 'dashboard:index' %}">List View</a>
+								</div>
+						</div>
+				</nav>				
+				<div class="container-fluid w-100 h-100" style="overflow:auto;">
+						<div class="row h-100">
+								<div class="col-sm-2 bg-light h-100" >
+										<ul class="nav flex-column">
+												<li class="nav-item">
+														<a class="nav-link active" href="#">Jounral</a>
+												</li>
+												<li class="nav-item">
+														<a class="nav-link" href="#">Internatinal Conference</a>
+												</li>
+												<li class="nav-item">
+														<a class="nav-link" href="#">Domestic Conference</a>
+												</li>
+										</ul>
+								</div>
+								<div class="col-sm-10">								
+										{% block content %}
+										{{ content }}
+										{% endblock %}
+								</div>
+						</div>
+				</div>
+				<!-- Footer -->
+				<div class="container-fluid  w-100 bg-dark" style="overflow:auto;">
+						<div class="row bg-inverse py-2">
+								<div class="col-12  text-white d-flex justify-content-end">
+										<span class="px-3" style="font-size: 1em;">Hara Lab.</span>
+								</div>
+						</div>
+				</div>
+		</body>
+</html>
