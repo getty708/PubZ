@@ -1,0 +1,6 @@
+<h1>{{ bibtex.title_en }}</h1>
+<ul>
+		{% for choice in bibtex.choice_set.all %}
+		<li>{{ choice.choice_text }}</li>
+		{% endfor %}
+</ul>

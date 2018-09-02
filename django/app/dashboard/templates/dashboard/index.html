@@ -1,0 +1,9 @@
+{% if latest_bibtex_list %}
+    <ul>
+    {% for bibtex in latest_bibtex_list %}
+        <li><a href="{% url 'dashboard:detail' bibtex.id  %}">{{ bibtex.title_en }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
