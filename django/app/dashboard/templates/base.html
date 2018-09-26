@@ -28,7 +28,8 @@
 				<div class="container-fluid w-100 h-100" style="overflow:auto;">
 						<div class="row h-100">
 								<div class="col-sm-2 bg-light h-100" >
-										<ul class="nav flex-column">
+										<h3 class="h5 mt-3" >Bibtex Category</h3>
+										<ul class="nav flex-column mb-3">
 												<li class="nav-item">
 														<a class="nav-link active" href="#">Jounral</a>
 												</li>
@@ -39,7 +40,14 @@
 														<a class="nav-link" href="#">Domestic Conference</a>
 												</li>
 										</ul>
-								</div>
+										<ul class="nav flex-column mb-3">
+												<h3 class="h5" >Additional Info</h3>
+												<li class="nav-item">
+														<a class="nav-link active" href="{% url 'dashboard:book_index' %}">Book</a>
+														<a class="nav-link active" href="{% url 'dashboard:author_index' %}">Author</a>
+												</li>
+										</ul>
+								</div>								
 								<div class="col-sm-10">								
 										{% block content %}
 										{{ content }}

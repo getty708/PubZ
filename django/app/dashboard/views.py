@@ -4,9 +4,12 @@ from django.views import generic
 
 
 
-from core.models import Bibtex
+from core.models import Author, Bibtex, Book
 
 
+"""
+Bibtex
+"""
 class IndexView(generic.ListView):
     template_name = 'dashboard/index.html'
     context_object_name = 'latest_bibtex_list'
@@ -18,4 +21,40 @@ class IndexView(generic.ListView):
 class DetailView(generic.DetailView):
     model = Bibtex
     template_name = 'dashboard/detail.html'    
+    
+
+
+"""
+Book
+"""
+class BookIndexView(generic.ListView):
+    template_name = 'dashboard/book/index.html'
+    context_object_name = 'latest_book_list'
+
+    def get_queryset(self):
+        return Book.objects.order_by('title')
+
+
+class BookDetailView(generic.DetailView):
+    model = Book
+    template_name = 'dashboard/book/detail.html'    
+    
+
+
+
+"""
+Author
+"""
+class AuthorIndexView(generic.ListView):
+    template_name = 'dashboard/author/index.html'
+    context_object_name = 'latest_author_list'
+
+    def get_queryset(self):
+        return Author.objects.order_by('name_en')
+
+
+class AuthorDetailView(generic.DetailView):
+    model = Author
+    template_name = 'dashboard/author/detail.html'
+    
     
