@@ -6,7 +6,12 @@ app_name = 'dashboard'
 urlpatterns = [
     # ex: /polls/
     path('', views.IndexView.as_view(), name='index'),
-    path('<int:pk>/', views.DetailView.as_view(), name='detail'),
+    path('list/', views.IndexView.as_view(), name='index_list'),
+    path('tab/', views.IndexViewTable.as_view(), name='index_table'),
+    path('bib/', views.IndexViewBib.as_view(), name='index_bib'),
+    path('latex/', views.IndexViewLatex.as_view(), name='index_latex'),
+    path('<int:pk>/', views.DetailView.as_view(), name='bib_detail'),
+    path('bib/<int:pk>/', views.DetailView.as_view(), name='detail'),
     path('book/',          views.BookIndexView.as_view(),  name='book_index'),    
     path('book/<int:pk>/', views.BookDetailView.as_view(), name='book_detail'),
     path('author/',         views.AuthorIndexView.as_view(),  name='author_index'),
