@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard | Top{% endblock title %}
+
+{% block content %}
+
+{% if latest_bibtex_list %}
+<div class="row">
+		<div class="col-12 my-3">
+				<h2>Papers</h2>
+				{% search_box 'list' %}
+				<ul>
+						{% for bibtex in latest_bibtex_list %}
+						<li><a href="{% url 'dashboard:detail' bibtex.id  %}">{{ bibtex.title_en }}</a></li>
+						{% endfor %}
+				</ul>
+				{% else %}
+				<p>No polls are available.</p>
+				{% endif %}
+		</div>
+</div>
+{% endblock content %}

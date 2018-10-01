@@ -3,52 +3,45 @@
 -----------
 ## class **Bibtex**
 ```
-TBA
+core.models.Bibtex
 ```
 
 Bibtex object. All information of your publications are represented as this model.
 
 ### Properties
 + **id**: Defined by djnago app automatically. `AutoField`, primary key.
-+ (**type**: Publication Type. See [Validation/type](#type) for the avaiable choises. `CharField(64) with choices`.)
-
-!!! Warning
-	Double inputs. Select where to place this columns, Bibtex or Book
-
 + **lang**: A default language setting for this publication.
-+ **title_en**: A title of your pubilication (English). `CharField(512)`, unique, required. [Check validation rules](#title)
-+ **title_ja**: A title of your pubilication (Japanese). `CharField(512)`, unique, required. [Check validation rules](#title)
++ **title_en**: A title of your pubilication (English). `CharField(512)`, unique, required. [Check validation rules](#title), blank=True.
++ **title_ja**: A title of your pubilication (Japanese). `CharField(512)`, unique, required. [Check validation rules](#title), blank=True.
 
 !!! Warning
-	If there are more English displays than Japanese, "title" is fixed to write in English.
+	We have to check whether `title_en` or `title_ja` is provided.
 	
-+ **authors**: Auhtors of this pubilcation. This columns shall be selected from `Author` model. `ManyToManyField`, foreign-key-ristriction(`Author`), required.
-
-!!! Warning
-	We should discuss how to store the order of authors.
-
++ **authors**: Auhtors of this pubilcation. This columns shall be selected from `Author` model. The order is stored in `AuthorOrder` model, which is an intermidiate model for `Bibtex` and `Author`. `ManyToManyField (through='AuthorOrder')`, foreign-key-ristriction(`Author`), required.
 + **book**: A book which this work is published. e.g. {International proceedings, journals, news papers, ...}.`ForeignKey`, foreign-key-ristriction(`Book`), required.
 
 + **volume**: A volume number (巻). Before published, ingnore this columns. `IntegerField`.
-+ **number**: A number of the book (号). Before published, ignore this columns. `IntegerField`, null=True.
-+ **chapter**: A chapter number (章). Before published, ignore this columns. `IntegerField`, null=True.
-+ **page**: A cpage number (章). Before published, ignore this columns. `TextField`, null=True. [Check validation rule](#page).
-+ **edition**: An Edition (版).  Before published or no longer needed to the format of the publication, ignore this columns. `TextField`, null=True. Check validation rule.
++ **number**: A number of the book (号). Before published, ignore this columns. `IntegerField`, null=True,blank=True.
++ **chapter**: A chapter number (章). Before published, ignore this columns. `IntegerField`, null=True,blank=True.
++ **page**: A cpage number (章). Before published, ignore this columns. `TextField`, null=True,blank=True. [Check validation rule](#page).
++ **edition**: An Edition (版).  Before published or no longer needed to the format of the publication, ignore this columns. `TextField`, null=True,blank=True. Check validation rule.
 + **pub_date**: A set of {year,month,date} which the book is published. If date-info is no needed, set 01 to the date.
-+ **is_date**: Whether use date-info or not in the `pub_date` column. `BooleanField`, default=`False`.
++ **use_date_info**: Whether use date-info or not in the `pub_date` column. `BooleanField`, default=`False`.
 + **acceptance_rate**: If acceptance rate of the book of this time. Set this columns when it is available. `FloatField`, default=null.
 + **impact_factor**: Inpact factor (IF). Set the value only when it is available. `FloatField`, default=null.
 + **url**: An URL to PDF or something. `URLField`.
 + **note**: Note. If you need, you can add some text. `TextField`.
 + **abstruct**: Abstruct of the paper. `TextField`. 
-+ **Image**: A signle thumbnail iamge to represent this publication. This information are used in the [`TyleDisplayStyle`](#). `ImageField`.
-+ **tags**: Tag for this publication. `ManyToManyField`, foreign-key-ristriction(`Tag`), required.
 
 !!! Info
 	This abstuct is used in tile-style display.
 
++ **image**: A signle thumbnail iamge to represent this publication. This information are used in the [`TileDisplayStyle`](#). `ImageField`.
++ **tags**: Tag for this publication. `ManyToManyField`, foreign-key-ristriction(`Tag`), required.
 + **is_published**: Whether it is published or not. `BooleanField`, default=`False`, required.
-
++ **created**: Datetime which this object is created. This column is automatically filled by django app. `DateTimeField`.
++ **modified**: Datetime which this object is edited last time. This column is automatically filled by django app. `DateTimeField`.
++ **owner**: User who creates this object. This column is automatically filled by django app. `DateTimeField`.
 
 
 
@@ -88,20 +81,22 @@ Just a number, or double hyphen notation style (e.g. `100--120`).
 -----------
 ## class **Author**
 ```
-TBA
+core.models.Author
 ```
 This model manages infomation about authors.
 
 ### Properties
 + **id**: Defined by djnago app automatically. `AutoField`, primary key.
 + **name_en**: Full Name (English). First name and family name should be split by space ([See validation](#name)). `CharField(128)`.
-+ **name_ja**: Full Name (Japanese). First name and family name should be split by space ([See validation](#name)). `CharField(128)`.
-+ **dep_en**: Depertment Infomation (English). `TextField`, required.
-+ **dep_ja**: Depertment Infomation (Japanese). `TextField`, null=True.
-+ **mail**: E-mail address. `EmailFiled`.
-+ **join**: Date which this poerson joinded this department. `DataField`, null=True.
-+ **leave**: Date which this poerson leave this department. `DateField`, null=True.
-
++ **name_ja**: Full Name (Japanese). First name and family name should be split by space ([See validation](#name)). `CharField(128)`, null=True,blank=True.
++ **dep_en**: Depertment Infomation (English). `TextField`, null=True,blank=True.
++ **dep_ja**: Depertment Infomation (Japanese). `TextField`, null=True,blank=True.
++ **mail**: E-mail address. `EmailFiled`, null=True,blank=True.
++ **join**: Date which this poerson joinded this department. `DataField`, null=True,blank=True.
++ **leave**: Date which this poerson leave this department. `DateField`, null=True,blank=True.
++ **created**: Datetime which this object is created. This column is automatically filled by django app. `DateTimeField`.
++ **modified**: Datetime which this object is edited last time. This column is automatically filled by django app. `DateTimeField`.
++ **owner**: User who creates this object. This column is automatically filled by django app. `DateTimeField`.
 
 ### Validation Rule
 #### name
@@ -109,9 +104,24 @@ TBA
 
 
 -----------
+## class **AuthorOrder**
+```
+core.models.AuthorOder
+```
+
+### Properties
++ **id**: Defined by djnago app automatically. `AutoField`, primary key.
++ **bibtex**: Bibtex id. `ForeignKey()`, foreign-key-ristriction(`Bibtex`), required.
++ **author**: Author id. `ForeignKey()`, foreign-key-ristriction(`Author`), required.
++ **order**: Order of Author. `PositiveSmallIntegerFeild`.
++ **created**: Datetime which this object is created. This column is automatically filled by django app. `DateTimeField`.
++ **modified**: Datetime which this object is edited last time. This column is automatically filled by django app. `DateTimeField`.
++ **owner**: User who creates this object. This column is automatically filled by django app. `DateTimeField`.
+
+-----------
 ## class **Book**
 ```
-TBA
+core.models.Book
 ```
 This model stores information about publications.
 
@@ -119,14 +129,15 @@ This model stores information about publications.
 ### Properties
 + **id**: Defined by djnago app automatically. `AutoField`, primary key.
 + **title**: Book tiltle (full). Some words should be replaced based on the local rules. [See validation](#title). `CharField`, required.
-+ **type**: Publication Type. See [Validation/type](#type) for the avaiable choises. `CharField(64) with choices`.
++ **abbr**: Book tiltle (Abbreviation). Some words should be replaced based on the local rules. [See validation](#title). `CharField`, null=True,blank=True.
++ **style**: Publication Type. See [Validation/type](#type) for the avaiable choises. `CharField(64) with choices`.
 
 !!! Warning
 	Double inputs. Select where to place this columns, Bibtex or Book
-+ **institution**: Institution (). `CharField(256)`
-+ **organizer**: An ornaizer of this Book. `CharField(256)`
-+ **publisher**: A publisher of this Book. `CharField(256)`
-+ **address**: An address of this publisher. `CharField(512)`
++ **institution**: Institution (). `CharField(256)`, null=True,blank=True.
++ **organizer**: An ornaizer of this Book. `CharField(256)`, null=True,blank=True.
++ **publisher**: A publisher of this Book. `CharField(256)`, null=True,blank=True
++ **address**: An address of this publisher. `CharField(512)`, null=True,blank=True.
 
 !!! Warning
 	Do we really need this column? Check it to Prof.
@@ -147,7 +158,7 @@ If you want to chage these rule, check [TBA page](#)
 -----------
 ## class **Tag**
 ```
-TBA
+core.models.Tag
 ```
 
 Add tags to bibtex's. This model is used in search, web emedding API.
@@ -157,6 +168,9 @@ Add tags to bibtex's. This model is used in search, web emedding API.
 + **name**: A tag name. `CharField(128)`
 + **description**: A description for this tag.
 + (**bib**: Specify a publication. `ForeignKey`, foreign-key-ristriction(`Bibtex`), required.)
++ **created**: Datetime which this object is created. This column is automatically filled by django app. `DateTimeField`.
++ **modified**: Datetime which this object is edited last time. This column is automatically filled by django app. `DateTimeField`.
++ **owner**: User who creates this object. This column is automatically filled by django app. `DateTimeField`.
 
 ### Validation Rules
 TBA

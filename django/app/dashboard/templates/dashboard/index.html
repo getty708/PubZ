@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% load utils_search %}
+{% load utils_bib_format %}
+
+
+{% block title %}Dashboard | Top{% endblock title %}
+
+{% block content %}
+
+<div class="row my-3">
+		<div class="col-12">
+				<h2>Papers</h2>
+		</div>
+</div>
+<div class="row mb-3">
+		<div class="col-12">
+				{% search_box 'list' %}
+		</div>
+</div>
+<div class="row mb-3">
+		<div class="col-12">
+				{% if latest_bibtex_list %}
+				<ul>
+						{% for bibtex in latest_bibtex_list %}
+						<li>{{ bibtex | bibtex_list_format }}</li>
+						{% endfor %}
+				</ul>
+				{% else %}
+				<p>No polls are available.</p>
+				{% endif %}
+		</div>
+</div>
+{% endblock content %}

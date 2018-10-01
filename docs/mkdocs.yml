@@ -1,24 +1,25 @@
 site_name: BMAN - Bibtex Mangement System
 repo_url: https://github.com/getty708/bman
 dev_addr: 0.0.0.0:8000
-site_dir: /site
+site_dir: ./site
 theme:
   name: 'material'
 markdown_extensions:
     - admonition
     - pymdownx.keys
     - codehilite
-extra_javascript: 
-  - http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML
 nav:
-- Home: 'index.md'
+- Home: './index.md'
 - About:
-    - 'License': 'license.md'
+    - 'License': './license.md'
     - 'Release Notes': 'release-notes.md'  
 - Developer Guide:
     - 'Home': './dev/index-dev.md'
     - 'Coding Policy': './dev/code.md'
-    - 'Models': './dev/models.md'  
+    - 'Models': './dev/models.md'
+    - 'Dashboard': './dev/dashboard.md'
+    - 'Registration': './dev/registration.md'
+    - 'API': './dev/api.md'
 - User Guide:
     - 'Home': './user/index-user.md'
   

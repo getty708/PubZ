@@ -1,0 +1,33 @@
+<div class="card">
+		<div class="card-header">
+				Search Box
+		</div>
+		<div class="card-body">
+				<div class="row mb-3">
+						<div class="col-12">
+								<div class="input-group input-group-sm mb-3">
+										<input type="text" class="form-control" placeholder="Keyword" aria-label="Keyword" aria-describedby="basic-addon2">
+										<div class="input-group-append">
+												<button class="btn btn-secondary" type="button">Search</button>
+										</div>
+								</div>
+						</div>
+						<div class="col-12 mb-1">
+								<div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+										<a href="{% url 'dashboard:index_list' %}" class="btn btn{% if display_mode != 'list' %}-outline{% endif %}-secondary" >List View</a>
+										<a href="{% url 'dashboard:index_table' %}" class="btn btn{% if display_mode != 'table' %}-outline{% endif %}-secondary" >Table View</a>
+										<a href="{% url 'dashboard:index_bib' %}" class="btn btn{% if display_mode != 'bib' %}-outline{% endif %}-secondary" >Bibtex View</a>
+										<a href="{% url 'dashboard:index_latex' %}" class="btn btn{% if display_mode != 'latex' %}-outline{% endif %}-secondary" >Latex View</a>
+
+								</div>
+						</div>
+				</div>
+				<div class="row">
+						<div class="col-12">
+								<p class="card-text">TBA</p>
+						</div>
+				</div>
+		</div>
+		<div class="card-footer">
+		</div>		
+</div>

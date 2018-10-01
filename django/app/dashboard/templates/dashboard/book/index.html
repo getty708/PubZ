@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard | Manage Books{% endblock title %}
+
+{% block content %}
+
+{% if latest_book_list %}
+<div class="row">
+		<div class="col-12 my-3">
+				<h2>Books</h2>
+				<ul>
+						{% for book in latest_book_list %}
+						<li><a href="{% url 'dashboard:book_detail' book.id  %}">{{ book.title }}</a></li>
+						{% endfor %}
+				</ul>
+				{% else %}
+				<p>No Books are available.</p>
+				{% endif %}
+		</div>
+</div>
+{% endblock content %}
