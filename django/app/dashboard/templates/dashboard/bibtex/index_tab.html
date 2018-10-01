@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard | Table View{% endblock title %}
+{% load utils_search %}
+
+
+{% block content %}
+
+<div class="row">
+		<div class="col-12 my-3">
+				<h2>Papers</h2>
+				{% search_box 'table' %}
+				{% if latest_bibtex_list %}
+				<table class="table table-sm">
+						<thead>
+								<tr>
+										<th scope="col">#</th>
+										<th scope="col">Title</th>
+										<th scope="col">Book</th>
+										<th scope="col">Author</th>
+										<th scope="col">Option</th>
+								</tr>
+						</thead>
+						<tbody>
+								{% for bibtex in latest_bibtex_list %}
+								<tr>
+										<th scope="row">{{ forloop.counter }}</th>
+										<td>
+												{% if bibtex.title_en %}
+												{{ bibtex.title_en}}
+												{% else %}
+												{{ bibtex.title_ja }}
+												{% endif %}
+										</td>
+										<td>{{ bibtex.book }}</td>
+										<td>TBA</td>
+										<td>
+												<a href="{% url 'dashboard:detail' bibtex.id  %}">Detail</a>
+										</td>
+								</tr>
+								{% endfor %}
+						</tbody>
+				</table>				
+				{% else %}
+				<p>No data are available.</p>
+				{% endif %}
+		</div>
+</div>
+{% endblock content %}
