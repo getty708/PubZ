@@ -671,3 +671,4 @@ ASALocalRun/
 
 
 django/**/migrations/
+django/app/static/**/dist/
