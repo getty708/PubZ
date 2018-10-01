@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard | Author Add{% endblock title %}
+
+{% block content %}
+
+<div class="row">
+		<div class="col-12 my-3">
+				{% if book.id %}
+				<h2>Edit Author Info: {{ author }}</h2>
+				{% else%}
+				<h2>Add New Author</h2>
+				{% endif %}
+				{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+				<form action="{{ submit_url}}" method="post">
+						{% csrf_token %}
+						<div class="form-group row">
+								<label for="example-text-input" class="col-2 col-form-label">Name</label>
+								<div class="col-5">{{ form.name_en }}</div>
+								<div class="col-5">{{ form.name_ja }}</div>
+						</div>
+						<div class="form-group row">
+								<label for="example-text-input" class="col-2 col-form-label">Department</label>
+								<div class="col-5">{{ form.dep_en }}</div>
+								<div class="col-5">{{ form.dep_ja }}</div>
+						</div>
+						<div class="form-group row">
+								<label for="example-text-input" class="col-2 col-form-label">Mail</label>
+								<div class="col-5">{{ form.mail }}</div>
+						</div>
+						<div class="form-group row">
+								<label for="example-text-input" class="col-2 col-form-label">Date</label>
+								<div class="col-5">{{ form.date_join }}</div>
+								<div class="col-5">{{ form.date_leave }}</div>
+						</div>						
+						{% if book.id %}
+						<button type="submit" class="btn btn-primary">修正</button>						
+						<a href="{% url 'dashboard:book_detail' book.id %}" class="btn btn-outline-primary btn-sm">戻る</a>
+						{% else %}
+						<button type="submit" class="btn btn-primary">登録</button>
+						<a href="{% url 'dashboard:book_index' %}" class="btn btn-outline-primary btn-sm">戻る</a>
+						{% endif %}
+				</form>				
+				
+		</div>
+</div>
+{% endblock content %}

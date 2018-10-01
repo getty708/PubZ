@@ -34,14 +34,16 @@ class Bibtex(models.Model):
     pub_date = models.DateField(null=True,blank=True)
     use_date_info = models.BooleanField(default=False)
     acceptance_rate = models.FloatField(null=True,blank=True)
-    inpact_factor = models.FloatField(null=True,blank=True)
+    impact_factor = models.FloatField(null=True,blank=True)
     url = models.URLField(null=True,blank=True)
     note = models.TextField(null=True,blank=True)
     abstruct = models.TextField(null=True,blank=True)
     image = models.ImageField(null=True,blank=True)
     tags = models.ManyToManyField(
         'core.Tag',
-        null=True, blank=True,
+        # on_delete=models.SET_NULL,
+        # null=True,
+        # blank=True,
     )
     is_published = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True, blank=False)
@@ -64,8 +66,8 @@ class Bibtex(models.Model):
 class Author(models.Model):
     name_en = models.CharField(max_length=128)
     name_ja = models.CharField(max_length=128, null=True, blank=True)
-    dep_en = models.TextField(null=True)
-    dep_ja = models.TextField(null=True)
+    dep_en = models.TextField(null=True,blank=True)
+    dep_ja = models.TextField(null=True, blank=True)
     mail = models.EmailField(null=True, blank=True)
     date_join = models.DateField(null=True, blank=True)
     date_leave = models.DateField(null=True, blank=True)
@@ -73,7 +75,7 @@ class Author(models.Model):
     modified = models.DateTimeField(auto_now=True, blank=False)    
     owner = models.ForeignKey(
         'auth.User',
-        null=True,
+        null=True,blank=False,
         on_delete=models.SET_NULL
     )
 
@@ -105,7 +107,7 @@ class Book(models.Model):
     institution = models.CharField(max_length=256,null=True,blank=True)
     organizer = models.CharField(max_length=256, null=True,blank=True)
     publisher = models.CharField(max_length=256,null=True,blank=True)
-    adderss = models.TextField(null=True,blank=True)
+    address = models.TextField(null=True,blank=True)
     created = models.DateTimeField(auto_now_add=True, blank=False)
     modified = models.DateTimeField(auto_now=True, blank=False)    
     owner = models.ForeignKey(
