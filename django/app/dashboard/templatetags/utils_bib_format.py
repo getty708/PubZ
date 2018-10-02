@@ -26,7 +26,10 @@ class BibtexFormatBase(object):
         context['title'] = bibtex.title_en if bibtex.title_en else bibtex.title_ja
         context['url_bib'] = self.url_bib
         context['book_title'] = bibtex.book.title
-        context['year'] = bibtex.pub_date.year
+        try:
+            context['year'] = bibtex.pub_date.year
+        except AttributeError:
+            context['year'] = "None"
         context['publisher'] = bibtex.book.publisher
         # Get Authors
         authors = AuthorOrder.objects.filter(bibtex=bibtex).order_by('order')
@@ -107,7 +110,7 @@ class BibtexFormatListDefault(BibtexFormatBase):
         html = (
             '{authors}; '
             '<a href="{url_bib}">"{title}"</a>, '
-            '2017'
+            '{year}'
         )
         return html    
 
@@ -115,7 +118,7 @@ class BibtexFormatListDefault(BibtexFormatBase):
         html = (
             '{authors}; '
             '<a href="{url_bib}">"{title}"</a>, '
-            '2017 '
+            '{year} '
             '(JOURNAL)'
         )
         return html
