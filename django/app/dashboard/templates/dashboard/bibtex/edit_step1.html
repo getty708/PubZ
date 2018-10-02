@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard | Bibtex Add{% endblock title %}
+
+{% block content %}
+
+<div class="row">
+		<div class="col-12 my-3">
+				<h2>Add New Bibtex [Step.1]</h2>
+				{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+				
+				<form action="{{ submit_url }}" method="post">
+						{{ form.non_field_errors }}						
+						{% csrf_token %}
+						<div class="form-group row">
+								{{ form.language.errors }}
+								<label for="example-text-input" class="col-2 col-form-label">Language</label>
+								<div class="col-5">{{ form.lang }}</div>
+						</div>
+						<div class="form-group row">
+								{{ form.title.errors }}								
+								<label for="example-text-input" class="col-2 col-form-label">Title</label>
+								<div class="col-10">{{ form.title }}</div>
+						</div>
+						<div class="form-group row">
+								{{ form.book.errors }}
+								<label for="example-text-input" class="col-2 col-form-label">Book</label>
+								<div class="col-5">{{ form.book }}</div>
+								<div class="col-5"><a href="{% url 'dashboard:bibtex_add' %}" class="btn btn-sm btn-outline-primary" >Add New Book</a></div>
+						</div>
+
+						<button type="submit" class="btn btn-sm btn-primary">Add New</button>
+						<a href="{% url 'dashboard:index' %}" class="btn btn-outline-primary btn-sm">Back</a>
+				</form>				
+		</div>
+</div>
+{% endblock content %}

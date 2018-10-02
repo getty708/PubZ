@@ -16,8 +16,8 @@ class Bibtex(models.Model):
     language = models.CharField(
         max_length=2,
         choices=LANGUAGE_CHOICES,)
-    title_en = models.CharField(max_length=512,blank=True)
-    title_ja = models.CharField(max_length=512,blank=True)
+    title_en = models.CharField(max_length=512,null=True,blank=True, default="")
+    title_ja = models.CharField(max_length=512,null=True,blank=True, default="")
     authors = models.ManyToManyField(
         'core.Author',
         through='AuthorOrder',
@@ -32,7 +32,7 @@ class Bibtex(models.Model):
     page = models.CharField(max_length=32, null=True,blank=True)
     edition = models.TextField(max_length=16,null=True,blank=True)
     pub_date = models.DateField(null=True,blank=True)
-    use_date_info = models.BooleanField(default=False)
+    use_date_info = models.BooleanField(default=False, blank=True)
     acceptance_rate = models.FloatField(null=True,blank=True)
     impact_factor = models.FloatField(null=True,blank=True)
     url = models.URLField(null=True,blank=True)
@@ -41,11 +41,9 @@ class Bibtex(models.Model):
     image = models.ImageField(null=True,blank=True)
     tags = models.ManyToManyField(
         'core.Tag',
-        # on_delete=models.SET_NULL,
-        # null=True,
-        # blank=True,
+        blank=True,
     )
-    is_published = models.BooleanField(default=False)
+    is_published = models.BooleanField(default=False, blank=True)
     created = models.DateTimeField(auto_now_add=True, blank=False)
     modified = models.DateTimeField(auto_now=True, blank=False)    
     owner = models.ForeignKey(
@@ -58,7 +56,7 @@ class Bibtex(models.Model):
         if self.language == 'EN':
             return self.title_en
         elif self.language == 'JA':
-            return self.title_en
+            return self.title_ja
         return "Bibtex[{}]".format(self.id)
     
 
@@ -117,7 +115,6 @@ class Book(models.Model):
     )
 
     def __str__(self):
-        print(self.abbr)
         if self.abbr is not None:
             return self.abbr
         return self.title

@@ -19,8 +19,9 @@ urlpatterns = [
     
 
     # Edit Function
-    path('add',            views_edit.bibtex_edit, name='bibtex_add'),    
-    path('edit/<int:pk>/', views_edit.bibtex_edit, name='bibtex_edit'),
+    path('add',            views_edit.bibtex_edit, name='bibtex_add'),
+    path('add/step1/',     views_edit.bibtex_edit_step1, name='bibtex_add_step1'),
+    path('edit/<int:bibtex_id>/', views_edit.bibtex_edit, name='bibtex_edit'),
     path('book/add',            views_edit.book_edit, name='book_add'),
     path('book/edit/<int:pk>/', views_edit.book_edit, name='book_edit'),    
     path('author/add',            views_edit.author_edit, name='author_add'),
