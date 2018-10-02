@@ -5,7 +5,7 @@ from django.views import generic
 
 
 from core.models import Author, Bibtex, Book
-
+from notification import alert
 
 """
 Bibtex
@@ -82,3 +82,18 @@ class AuthorDetailView(generic.DetailView):
     template_name = 'dashboard/author/detail.html'
     
     
+
+
+"""
+Notification
+"""
+def notification_alert(request):
+    msg = False
+    # Send Email
+    status = alert.send_email_test()
+    return render(request,
+                  'notification/alert.html',
+                  {
+                      'msg': msg,
+                      'status': status,
+                  })

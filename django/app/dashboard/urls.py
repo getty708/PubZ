@@ -16,7 +16,7 @@ urlpatterns = [
     path('book/<int:pk>/', views.BookDetailView.as_view(), name='book_detail'),
     path('author/',         views.AuthorIndexView.as_view(),  name='author_index'),
     path('author/<int:pk>/',views.AuthorDetailView.as_view(), name='author_detail'),
-    
+    path('notification/alert',views.notification_alert,  name='notification_alert'),
 
     # Edit Function
     path('add',            views_edit.bibtex_edit, name='bibtex_add'),
