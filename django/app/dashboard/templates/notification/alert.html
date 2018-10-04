@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% load utils_search %}
+{% load utils_bib_format %}
+
+
+{% block title %}Dashboard | Notification{% endblock title %}
+
+{% block content %}
+
+<div class="row my-3">
+		<div class="col-12">
+				{{ status }}
+				{% if status %}
+				<h2>Send Alert ... Successed</h2>
+				{% else %}
+				<h2>Send Alert ... Failed</h2>				
+				{% endif %}
+		</div>
+</div>
+{% endblock content %}
