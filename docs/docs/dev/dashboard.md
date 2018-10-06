@@ -48,7 +48,7 @@ class BibtexFormatListDefault(BibtexFormatBase):
 dashboard.templatetags.utils_bib_format.BibtexFormatListDefault
 ```
 
-##### International Proceedings
+#### International Proceedings
 
 + Bibtex View
 ```
@@ -95,7 +95,7 @@ dashboard.templatetags.utils_bib_format.BibtexFormatListDefault
 |国際会議|International Conference on Database and Expert Systems Applications (DEXA 2018)|Shinya Kato and Daichi Amagata and Shunya Nishio and Takahiro Hara|Monitoring Range Motif on Streaming Time-Series|2018年9月|link|
 
 
-##### Journal Paper
+#### Journal Paper
 
 + Bibtex View
 ```
@@ -142,7 +142,7 @@ dashboard.templatetags.utils_bib_format.BibtexFormatListDefault
 |論文誌|ACM/Springer Personal and Ubiquitous Computing (ACM/Springer PUC)|J. Korpela and T. Maekawa|Privacy-Preserving Recognition of Object-Based Activities Using Near-Infrared Reflective Markers|2018年4月|link|
 
 
-##### Domestic Conference(査読付き)
+#### Domestic Conference(査読付き)
 
 + Bibtex View
 ```
@@ -187,7 +187,7 @@ dashboard.templatetags.utils_bib_format.BibtexFormatListDefault
 |国内会議(査読あり)|情報処理学会マルチメディア，分散，協調とモバイル(DICOMO2018)シンポジウム論文集|加藤 慎也, 天方 大地, 西尾 俊哉, 原 隆浩|ストリーミング時系列データの効率的なモチーフモニタリングアルゴリズム|2018年7月|link|
 
 
-##### Domestic Conference
+#### Domestic Conference
 
 + Bibtex View
 ```
@@ -230,7 +230,7 @@ dashboard.templatetags.utils_bib_format.BibtexFormatListDefault
 |国内研究会|情報処理学会マルチメディア，分散，協調とモバイル(DICOMO2018)シンポジウム論文集|加藤 慎也, 天方 大地, 西尾 俊哉, 原 隆浩|位置情報サービス利用におけるダミーを用いたユーザ位置曖昧化手法の視認性評価|2018年7月|link|
 
 
-##### National Conference
+#### National Conference
 
 + Bibtex View
 ```
@@ -271,7 +271,7 @@ dashboard.templatetags.utils_bib_format.BibtexFormatListDefault
 |全国大会|IPSJ情報処理学会第80回全国大会|中嶋 奎介, 横山 正浩, 義久 智樹, 原 隆浩|社会センサデータ生成・共有基盤におけるストリーミングデータ処理機構|2018年3月|link|
 
 
-##### Book/Review/Editor/Translation
+#### Book/Review/Editor/Translation
 
 + Bibtex View
 ```
@@ -314,7 +314,7 @@ dashboard.templatetags.utils_bib_format.BibtexFormatListDefault
 |著書／監修／編集／訳書|Challenges and Solutions," Adaptive Mobile Computing: Advances in Processing Mobile Data Sets (Chapter 3)|Takahiro Hara|Fusion of Heterogeneous Mobile Data, Challenges and Solutions|2017年8月|link|
 
 
-##### Presentaion/Panel Discution/Seminer
+#### Presentaion/Panel Discution/Seminer
 
 + Bibtex View
 ```
@@ -355,7 +355,7 @@ dashboard.templatetags.utils_bib_format.BibtexFormatListDefault
 |基調講演/セミナー・パネル討論等|実世界指向AIが引き起こすイノベーション|前川 卓也|第一回ビジネスedgeセミナー「AIは経営とビジネスモデルにどんなイノベーションを起こすのか」基調講演|2018年6月|link|
 
 
-##### News Paper article
+#### News Paper article
 
 + Bibtex View
 ```
@@ -396,7 +396,7 @@ dashboard.templatetags.utils_bib_format.BibtexFormatListDefault
 |新聞報道記事|世界初! AIを使った生き物目線の映像|前川 卓也|MBSテレビ ちちんぷいぷい|2017年9月|link|
 
 
-##### Others
+#### Others
 
 + Bibtex View
 ```
@@ -443,7 +443,7 @@ dashboard.templatetags.utils_bib_format.BibtexFormatListDefault
 |その他（一般記事等）|「デジタルコンテンツクリエーション最前線」開催報告|義久 智樹, 水野 慎士, 三上 浩司, 林 洋人, 楠 房子|情報処理学会論文誌デジタルコンテンツ (DCON)|2017年8月|link|
 
 
-##### Award
+#### Award
 
 + Bibtex View
 ```
