@@ -2,6 +2,8 @@ from django import forms
 
 
 from core import models
+from dashboard import validators
+
 
 
 """
@@ -96,7 +98,6 @@ class BibtexForm(forms.ModelForm):
 
     def __init__(self,*args,**kwargs):
         super(BibtexForm,self).__init__(*args,**kwargs)
-        print(self.Meta.fields)
         for key in self.Meta.fields:
             self.fields[key].widget.attrs.update({
                 'class': 'form-control form-control-sm',
@@ -129,4 +130,31 @@ class BibtexFormStep1(forms.Form):
     book.widget.attrs.update({
             'class': 'form-control form-control-sm',
     })    
+
+
+    def clean_base(self, key):
+        validator_dict = validators.validation_callback_bibtex_add_step1
+        val = self.cleaned_data[key]        
+        if key in validator_dict.keys():
+            callback_funcs = validator_dict[key]
+            for func in callback_funcs:
+                val = func(val)
+            return val
+        else:
+            return val
+
+
+    def clean_lang(self):
+        return self.clean_base('lang')
+        
+    def clean_title(self):
+        return self.clean_base('title')
+
+    def clean_book(self):
+        return self.clean_base('book')
+    
+    def clean(self):
+        cleaned_data = super().clean()
+        return cleaned_data
+
     
