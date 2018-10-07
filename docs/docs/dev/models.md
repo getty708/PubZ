@@ -153,6 +153,11 @@ If you want to chage these rule, check [TBA page](#)
 !!! Warning
 	We should select whether the information about year etc.. should be placed. If we palce them in `Bibtex` model, `Book` model shall not have such infomation. Otherwise if we place them in the `Book` object, we shall make copy function to make new `Book` obeject from previous year's one with ease.
 
+#### abbr
+TBA
+
+#### institude
+TBA
 
 
 -----------

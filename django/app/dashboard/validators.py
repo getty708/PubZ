@@ -50,18 +50,33 @@ def val_bibtex_title_en_replace_keywords(title_en):
 # ===============
 
 
-# Registration form for Bibtex (Step.1)
+# BibtexFormStep1 (Step.1)
 # - url: `dashboard:bibtex_add_step1`
-validation_callback_bibtex_add_step1 = {
+validation_callback_bibtex_form_step1 = {
     "title": [val_bibtex_title_en_replace_keywords],
 }
 
 
-# Registration form for Bibtex (Detail)
+# BibtexForm (Detail)
 # - url: `dashboard:bibtex_edit`
-validation_callback_bibtex_edit = {
+validation_callback_bibtex_form = {
     "title_en": [val_bibtex_title_en_replace_keywords],
 }
+
+
+# BookForm
+# - url: `dashboard:bool_edit`
+validation_callback_book_form = {
+
+}
+
+
+# AuthorForm
+# - url: `dashboard:bool_edit`
+validation_callback_author_form = {
+
+}
+
 
 
 
