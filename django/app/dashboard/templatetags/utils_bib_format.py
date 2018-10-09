@@ -17,7 +17,7 @@ class BibtexFormatBase(object):
         self.bibtex = bibtex
         self.style = bibtex.book.style
         self.url_bib = reverse("dashboard:bib_detail", kwargs={'pk':bibtex.id})
-        
+
 
     def __call__(self):
         # Convert Bibtex object into dict
@@ -35,8 +35,8 @@ class BibtexFormatBase(object):
         html_template = self.get_template()
         html = html_template.format(**context)
         return mark_safe(html)
-    
-    
+
+
     def get_template(self,):
         try:
             html = eval('self.get_template_{}()'.format(self.style))
@@ -45,7 +45,7 @@ class BibtexFormatBase(object):
         return html
 
     #
-    #  Template 
+    #  Template
     def get_author_name(self, author):
         """
         Args.
@@ -62,7 +62,7 @@ class BibtexFormatBase(object):
             name = author.name_ja
         return name
 
-        
+
     def get_html_authors(self, authors):
         """
         Args.
@@ -85,16 +85,16 @@ class BibtexFormatBase(object):
             if not i+1 == len(authors):
                 html += ', '
         return html
-    
-        
+
+
     def get_template_DEFAULT(self):
         html = (
             '{authors}; '
             '<a href="{url_bib}">"{title}"</a>, '
             '(Default Style)'
         )
-        return html        
-    
+        return html
+
 
 
 
@@ -102,14 +102,17 @@ class BibtexFormatBase(object):
 #  Custom List View
 # ==================
 class BibtexFormatListDefault(BibtexFormatBase):
-    
+
     def get_template_INTPROC(self):
         html = (
-            '{authors}; '
+            '{authors}, '
             '<a href="{url_bib}">"{title}"</a>, '
-            '2017'
+            '{book}, '
+            'volume {volume}, '
+            'number {number}, '
+            'pages {page} {year_string} {year}.'
         )
-        return html    
+        return html
 
     def get_template_JOURNAL(self):
         html = (
@@ -119,13 +122,13 @@ class BibtexFormatListDefault(BibtexFormatBase):
             '(JOURNAL)'
         )
         return html
-    
+
 
 # ====================
 #  Custom Bibtex View
 # ====================
 class BibtexFormatBibtexDefault(BibtexFormatBase):
-    
+
     def get_template_DEFAULT(self):
         html = [
             '<pre class="mb-0" >',
@@ -140,23 +143,59 @@ class BibtexFormatBibtexDefault(BibtexFormatBase):
             '  publisher={publisher},',
             '}}',
             '</pre>',
-        ]        
+        ]
         return "\n".join(html)
 
-    
+    def get_template_INTERPROC(self):
+        html = [
+            '<pre class="mb-0" >',
+            '@inproceedings{{citekey,',
+            '  title={title},',
+            '  author={authors},',
+            '  booktitle={book_title},',
+            '  volume={volume},',
+            '  number={number},',
+            '  pages={page},',
+            '  year={year},',
+            '  month={month},',
+            '  year={year},',
+            '}}',
+            '</pre>',
+        ]
+        return "\n".join(html)
+
+    def get_template_JOURNAL(self):
+        html = [
+            '<pre class="mb-0" >',
+            '@inproceedings{{citekey,',
+            '  title={title},',
+            '  author={authors},',
+            '  booktitle={book_title},',
+            '  volume={volume},',
+            '  number={number},',
+            '  pages={page},',
+            '  year={year},',
+            '  month={month},',
+            '  year={year},',
+            '}}',
+            '</pre>',
+        ]
+        return "\n".join(html)
+
+
 # ===================
 #  Custom Latex View
 # ===================
-class BibtexFormatLatexDefault(BibtexFormatBase):    
+class BibtexFormatLatexDefault(BibtexFormatBase):
     def get_template_DEFAULT(self):
         html = (
             '\item {authors}, '
             '"{title}", '
             '{book_title}, '
             '{volume}, {year},'
-        )  
+        )
         return html
-    
+
 
 
 
