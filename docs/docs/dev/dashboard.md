@@ -15,25 +15,52 @@ This application provides all usrs to view and seatch function.
 | `^/dashboard/view/tile/$`   | Tile style view   |
 
 
-## Display Style
-To change display style {List, Table, Bibtex}, plsease edit the function in `~/templatetags/display_style.py`. We are provide call back function for some display formats. When you want to change the style, just change the callback function that you 
-want.
+## How to Edit Display Style
+To change display style {List, Table, Bibtex, Latex}, plsease edit the function in `dashboard/templatetags/utils_bib_fomrat.py`. We provide call back function (implemented as Class Object) for several display formats. When you want to change the style, just overwrite  the `get_template_{TEMPLATE STYLE}` functions.
 
+```python
+# Example of Template tag function.
+# ---------------------------------
+
+class BibtexFormatListDefault(BibtexFormatBase):
+    
+    def get_template_INTPROC(self):
+        html = (
+            '{authors}; '
+            '<a href="{url_bib}">"{title}"</a>, '
+            '2017'
+        )
+        return html    
+
+    def get_template_JOURNAL(self):
+        html = (
+            '{authors}; '
+            '<a href="{url_bib}">"{title}"</a>, '
+            '2017 '
+            '(JOURNAL)'
+        )
+        return html
 ```
-Example of Template tag function.
----------------------------------
 
+### Default Style Examples
+#### List Style
+```
+dashboard.templatetags.utils_bib_format.BibtexFormatListDefault
+```
+
+##### International Proceedings
+```
 TBA
 ```
 
-###  Callback funtion
-#### Requrements
+##### Journal
+```
+TBA
+```
+
+.....
 
 
-
-
-### memo (東出)
-List, Bibetex, Tableの基本的なviewは吉村が整備．東出はtemplatetagを作成する.
 
 
 

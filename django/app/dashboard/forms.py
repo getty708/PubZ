@@ -13,29 +13,31 @@ class AuthorForm(forms.ModelForm):
         fields = [
             'name_en','name_ja','dep_en','dep_ja','mail','date_join','date_leave',
         ]
+        widgets = {
+            'dep_en': forms.Textarea(attrs={'cols': 80, 'rows': 3}),
+            'dep_ja': forms.Textarea(attrs={'cols': 80, 'rows': 3}),
+        }
 
     def __init__(self, *args, **kwargs):
         super(AuthorForm, self).__init__(*args, **kwargs)
-        self.fields["name_en"].widget.attrs.update({
-            'class': 'form-control form-control-sm',
-        })
-        self.fields["name_ja"].widget.attrs.update({
-            'class': 'form-control form-control-sm',
-        })
-        self.fields["dep_en"].widget.attrs.update({
-            'class': 'form-control form-control-sm',
-        })
-        self.fields["dep_ja"].widget.attrs.update({
-            'class': 'form-control form-control-sm',
-        })
-        self.fields["mail"].widget.attrs.update({
-            'class': 'form-control form-control-sm',
-        })
+        for key in self.Meta.fields:
+            self.fields[key].widget.attrs.update({
+                'class': 'form-control form-control-sm',
+            })
+        for key in ["name", "dep"]:
+            for lang in [("en","English",), ("ja","日本語",)]:
+                self.fields["{}_{}".format(key, lang[0])].widget.attrs.update({
+                    'class': 'form-control form-control-sm',
+                    'placeholder': lang[1],
+                })
+
         self.fields["date_join"].widget.attrs.update({
             'class': 'form-control form-control-sm',
-        })
+            'placeholder': "Date of Join",
+        })                
         self.fields["date_leave"].widget.attrs.update({
             'class': 'form-control form-control-sm',
+            'placeholder': "Date of Leave",
         })
 
         
@@ -48,17 +50,10 @@ class AuthorOrderForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(AuthorOrderForm, self).__init__(*args, **kwargs)
-        self.fields["bibtex"].widget.attrs.update({
-            'class': 'form-control form-control-sm',
-        })
-        self.fields["author"].widget.attrs.update({
-            'class': 'form-control form-control-sm',
-        })
-        self.fields["order"].widget.attrs.update({
-            'class': 'form-control form-control-sm',
-        })
-        
-
+        for key in self.Meta.fields:
+            self.fields[key].widget.attrs.update({
+                'class': 'form-control form-control-sm',
+            })
         
 """
 Book
@@ -73,24 +68,15 @@ class BookForm(forms.ModelForm):
 
     def __init__(self,*args,**kwargs):
         super(BookForm,self).__init__(*args, **kwargs)
-        self.fields["title"].widget.attrs.update({
-            'class': 'form-control form-control-sm',
-        })
+        for key in self.Meta.fields:
+            self.fields[key].widget.attrs.update({
+                'class': 'form-control form-control-sm',
+            })
+
+        # Cutomize
         self.fields["abbr"].widget.attrs.update({
             'class': 'form-control form-control-sm',
             'placeholder': 'abbr',
-        })
-        self.fields["institution"].widget.attrs.update({
-            'class': 'form-control form-control-sm',
-        })
-        self.fields["organizer"].widget.attrs.update({
-            'class': 'form-control form-control-sm',
-        })
-        self.fields["publisher"].widget.attrs.update({
-            'class': 'form-control form-control-sm',
-        })
-        self.fields["address"].widget.attrs.update({
-            'class': 'form-control form-control-sm',
         })
 
         
@@ -111,61 +97,36 @@ class BibtexForm(forms.ModelForm):
     def __init__(self,*args,**kwargs):
         super(BibtexForm,self).__init__(*args,**kwargs)
         print(self.Meta.fields)
-        
-        self.fields["language"].widget.attrs.update({
-            'class': 'form-control form-control-sm',
-        })
-        self.fields["title_en"].widget.attrs.update({
-            'class': 'form-control form-control-sm',
-        })
-        self.fields["title_ja"].widget.attrs.update({
-            'class': 'form-control form-control-sm',
-        })
-        self.fields["book"].widget.attrs.update({
-            'class': 'form-control form-control-sm',
-        })
-        self.fields["volume"].widget.attrs.update({
-            'class': 'form-control form-control-sm',
-        })
-        self.fields["number"].widget.attrs.update({
-            'class': 'form-control form-control-sm',
-        })
-        self.fields["chapter"].widget.attrs.update({
-            'class': 'form-control form-control-sm',
-        })
-        self.fields["page"].widget.attrs.update({
-            'class': 'form-control form-control-sm',
-        })
-        self.fields["edition"].widget.attrs.update({
-            'class': 'form-control form-control-sm',
-        })
-        self.fields["pub_date"].widget.attrs.update({
-            'class': 'form-control form-control-sm',
-        })
-        self.fields["use_date_info"].widget.attrs.update({
-            'class': 'form-control form-control-sm',
-        })
-        self.fields["acceptance_rate"].widget.attrs.update({
-            'class': 'form-control form-control-sm',
-        })
-        self.fields["impact_factor"].widget.attrs.update({
-            'class': 'form-control form-control-sm',
-        })
-        self.fields["url"].widget.attrs.update({
-            'class': 'form-control form-control-sm',
-        })
-        self.fields["note"].widget.attrs.update({
-            'class': 'form-control form-control-sm',
-        })
-        self.fields["abstruct"].widget.attrs.update({
-            'class': 'form-control form-control-sm',
-        })
-        self.fields["image"].widget.attrs.update({
-            'class': 'form-control form-control-sm',
-        })
-        self.fields["is_published"].widget.attrs.update({
-            'class': 'form-control form-control-sm',
-        })        
+        for key in self.Meta.fields:
+            self.fields[key].widget.attrs.update({
+                'class': 'form-control form-control-sm',
+            })
+              
         
 
         
+"""
+Registration Form
+"""
+class BibtexFormStep1(forms.Form):
+    # language
+    lang = forms.ChoiceField(choices=models.Bibtex.LANGUAGE_CHOICES)
+    lang.widget.attrs.update({
+            'class': 'form-control form-control-sm',
+    })
+    # Title
+    title = forms.CharField(
+        max_length=256,
+    )
+    title.widget.attrs.update({
+        'class': 'form-control form-control-sm',
+        'placeholder': "Engilsh / 日本語",
+    })
+    # Book
+    book = forms.ModelChoiceField(
+        queryset=models.Book.objects.order_by('style', 'title',),
+        empty_label='---')
+    book.widget.attrs.update({
+            'class': 'form-control form-control-sm',
+    })    
+    
