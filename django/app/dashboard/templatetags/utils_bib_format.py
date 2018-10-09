@@ -116,10 +116,86 @@ class BibtexFormatListDefault(BibtexFormatBase):
 
     def get_template_JOURNAL(self):
         html = (
-            '{authors}; '
+            '{authors}, '
             '<a href="{url_bib}">"{title}"</a>, '
-            '2017 '
-            '(JOURNAL)'
+            '{book}, '
+            'volume {volume}, '
+            'number {number}, '
+            'pages {page} {year_string} {year}.'
+        )
+        return html
+
+    def get_template_DOMCONF-REVIEWD(self):
+        html = (
+            '{authors}, '
+            '<a href="{url_bib}">"{title}"</a>, '
+            '{book}, '
+            'pages {page} {year}年{month}月.'
+        )
+        return html
+
+    def get_template_DOMCONF(self):
+        html = (
+            '{authors}, '
+            '<a href="{url_bib}">"{title}"</a>, '
+            '{book}, '
+            'pages {page} {year}年{month}月.'
+        )
+        return html
+
+    def get_template_NATCONF(self):
+        html = (
+            '{authors}, '
+            '<a href="{url_bib}">"{title}"</a>, '
+            '{book}, '
+            '{year}年{month}月.'
+        )
+        return html
+
+    def get_template_BRET(self):
+        html = (
+            '{authors}, '
+            '<a href="{url_bib}">"{title}"</a>, '
+            '{book}, '
+            'pages {page} {month_siring} {year}.'
+        )
+        return html
+
+    def get_template_PPS(self):
+        html = (
+            '{authors}, '
+            '<a href="{url_bib}">"{title}"</a>, '
+            '{book}, '
+            '{year}年{month}月.'
+        )
+        return html
+
+    def get_template_NEWS(self):
+        html = (
+            '{authors}, '
+            '<a href="{url_bib}">"{title}"</a>, '
+            '{book}, '
+            '{year}年{month}月.'
+        )
+        return html
+
+    def get_template_OTHERS(self):
+        html = (
+            '{authors}, '
+            '<a href="{url_bib}">"{title}"</a>, '
+            '{book}, '
+            'volume {volume}, '
+            'number {number}, '
+            '{page} {year}年{month}月.'
+        )
+        return html
+
+    def get_template_AWARD(self):
+        html = (
+            '{authors}, '
+            '<a href="{url_bib}">"{title}"</a>, '
+            '{book}, '
+            '{year}年{month}月.'
         )
         return html
 
@@ -156,7 +232,6 @@ class BibtexFormatBibtexDefault(BibtexFormatBase):
             '  volume={volume},',
             '  number={number},',
             '  pages={page},',
-            '  year={year},',
             '  month={month},',
             '  year={year},',
             '}}',
@@ -167,6 +242,23 @@ class BibtexFormatBibtexDefault(BibtexFormatBase):
     def get_template_JOURNAL(self):
         html = [
             '<pre class="mb-0" >',
+            '@article{{citekey,',
+            '  title={title},',
+            '  author={authors},',
+            '  journal={book_title},',
+            '  volume={volume},',
+            '  number={number},',
+            '  pages={page},',
+            '  month={month},',
+            '  year={year},',
+            '}}',
+            '</pre>',
+        ]
+        return "\n".join(html)
+
+    def get_template_DOMCONF-REVIEWD(self):
+        html = [
+            '<pre class="mb-0" >',
             '@inproceedings{{citekey,',
             '  title={title},',
             '  author={authors},',
@@ -174,7 +266,109 @@ class BibtexFormatBibtexDefault(BibtexFormatBase):
             '  volume={volume},',
             '  number={number},',
             '  pages={page},',
+            '  month={month},',
             '  year={year},',
+            '}}',
+            '</pre>',
+        ]
+        return "\n".join(html)
+
+    def get_template_DOMCONF(self):
+        html = [
+            '<pre class="mb-0" >',
+            '@article{{citekey,',
+            '  title={title},',
+            '  author={authors},',
+            '  journal={book_title},',
+            '  month={month},',
+            '  year={year},',
+            '  note={note},',
+            '}}',
+            '</pre>',
+        ]
+        return "\n".join(html)
+
+    def get_template_NATCONF(self):
+        html = [
+            '<pre class="mb-0" >',
+            '@inproceedings{{citekey,',
+            '  title={title},',
+            '  author={authors},',
+            '  booktitle={book_title},',
+            '  month={month},',
+            '  year={year},',
+            '}}',
+            '</pre>',
+        ]
+        return "\n".join(html)
+
+    def get_template_BRET(self):
+        html = [
+            '<pre class="mb-0" >',
+            '@article{{citekey,',
+            '  title={title},',
+            '  author={authors},',
+            '  booktitle={book_title},',
+            '  pages={page},',
+            '  month={month},',
+            '  year={year},',
+            '}}',
+            '</pre>',
+        ]
+        return "\n".join(html)
+
+    def get_template_PPS(self):
+        html = [
+            '<pre class="mb-0" >',
+            '@article{{citekey,',
+            '  title={title},',
+            '  author={authors},',
+            '  journal={book_title},',
+            '  month={month},',
+            '  year={year},',
+            '}}',
+            '</pre>',
+        ]
+        return "\n".join(html)
+
+    def get_template_NEWS(self):
+        html = [
+            '<pre class="mb-0" >',
+            '@article{{citekey,',
+            '  title={title},',
+            '  author={authors},',
+            '  journal={book_title},',
+            '  month={month},',
+            '  year={year},',
+            '}}',
+            '</pre>',
+        ]
+        return "\n".join(html)
+
+    def get_template_OTHERS(self):
+        html = [
+            '<pre class="mb-0" >',
+            '@article{{citekey,',
+            '  title={title},',
+            '  author={authors},',
+            '  journal={book_title},',
+            '  volume={volume},',
+            '  number={number},',
+            '  pages={page},',
+            '  month={month},',
+            '  year={year},',
+            '}}',
+            '</pre>',
+        ]
+        return "\n".join(html)
+
+    def get_template_AWARD(self):
+        html = [
+            '<pre class="mb-0" >',
+            '@inproceedings{{citekey,',
+            '  title={title},',
+            '  author={authors},',
+            '  booktitle={book_title},',
             '  month={month},',
             '  year={year},',
             '}}',

@@ -338,7 +338,7 @@ dashboard.templatetags.utils_bib_format.BibtexFormatListDefault
 
 + List View
 ```
-[1] <authors_ja>or<authors_en>, "<title_ja>or<title_en>," <book>, <pub_date[1]> <pub_date[0]>.
+[1] <authors_ja>or<authors_en>, "<title_ja>or<title_en>," <book>, <pub_date[0]>年<pub_date[1]>月.
 ```
 ```
 [1] 前川 卓也, "実世界指向AIが引き起こすイノベーション," 第一回ビジネスedgeセミナー「AIは経営とビジネスモデルにどんなイノベーションを起こすのか」基調講演, 2018年6月.
