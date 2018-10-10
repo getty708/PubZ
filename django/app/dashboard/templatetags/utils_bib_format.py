@@ -107,7 +107,7 @@ class BibtexFormatListDefault(BibtexFormatBase):
         html = (
             '{authors}, '
             '<a href="{url_bib}">"{title}"</a>, '
-            '{book}, '
+            '{book_title}, '
             'volume {volume}, '
             'number {number}, '
             'pages {page} {year_string} {year}.'
@@ -118,7 +118,7 @@ class BibtexFormatListDefault(BibtexFormatBase):
         html = (
             '{authors}, '
             '<a href="{url_bib}">"{title}"</a>, '
-            '{book}, '
+            '{book_title}, '
             'volume {volume}, '
             'number {number}, '
             'pages {page} {year_string} {year}.'
@@ -129,7 +129,7 @@ class BibtexFormatListDefault(BibtexFormatBase):
         html = (
             '{authors}, '
             '<a href="{url_bib}">"{title}"</a>, '
-            '{book}, '
+            '{book_title}, '
             'pages {page} {year}年{month}月.'
         )
         return html
@@ -138,7 +138,7 @@ class BibtexFormatListDefault(BibtexFormatBase):
         html = (
             '{authors}, '
             '<a href="{url_bib}">"{title}"</a>, '
-            '{book}, '
+            '{book_title}, '
             'pages {page} {year}年{month}月.'
         )
         return html
@@ -147,7 +147,7 @@ class BibtexFormatListDefault(BibtexFormatBase):
         html = (
             '{authors}, '
             '<a href="{url_bib}">"{title}"</a>, '
-            '{book}, '
+            '{book_title}, '
             '{year}年{month}月.'
         )
         return html
@@ -156,7 +156,7 @@ class BibtexFormatListDefault(BibtexFormatBase):
         html = (
             '{authors}, '
             '<a href="{url_bib}">"{title}"</a>, '
-            '{book}, '
+            '{book_title}, '
             'pages {page} {month_siring} {year}.'
         )
         return html
@@ -165,7 +165,7 @@ class BibtexFormatListDefault(BibtexFormatBase):
         html = (
             '{authors}, '
             '<a href="{url_bib}">"{title}"</a>, '
-            '{book}, '
+            '{book_title}, '
             '{year}年{month}月.'
         )
         return html
@@ -174,7 +174,7 @@ class BibtexFormatListDefault(BibtexFormatBase):
         html = (
             '{authors}, '
             '<a href="{url_bib}">"{title}"</a>, '
-            '{book}, '
+            '{book_title}, '
             '{year}年{month}月.'
         )
         return html
@@ -183,7 +183,7 @@ class BibtexFormatListDefault(BibtexFormatBase):
         html = (
             '{authors}, '
             '<a href="{url_bib}">"{title}"</a>, '
-            '{book}, '
+            '{book_title}, '
             'volume {volume}, '
             'number {number}, '
             '{page} {year}年{month}月.'
@@ -194,7 +194,7 @@ class BibtexFormatListDefault(BibtexFormatBase):
         html = (
             '{authors}, '
             '<a href="{url_bib}">"{title}"</a>, '
-            '{book}, '
+            '{book_title}, '
             '{year}年{month}月.'
         )
         return html
