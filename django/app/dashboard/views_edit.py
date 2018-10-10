@@ -121,7 +121,7 @@ Author
 def author_edit(request, author_id=None):
     msg = False
     if author_id:
-        author = get_object_or_404(Author, pk=book_id)
+        author = get_object_or_404(Author, pk=author_id)
         submit_url = reverse("dashboard:author_edit",
                              kwargs={'author_id':author.id})
     else:
