@@ -1,16 +1,70 @@
 {% extends "base.html" %}
 
 {% block title %}Dashboard | Top{% endblock title %}
+{% load utils_bib_format %}
 
 {% block content %}
 <div class="row">
 		<div class="col-12 my-3">
 				<h1 class="h3" >{{ bibtex.title_en }}</h1>
-				<ul>
-						{% for choice in bibtex.choice_set.all %}
-						<li>{{ choice.choice_text }}</li>
-						{% endfor %}
-				</ul>
+				<table border width="95%">
+					<tr>
+					<td>分類</td>
+					<td>{{ bibtex.book_style }}</td>
+					</tr>
+					<tr>
+					<td>表題(en)</td>
+					<td>{{ bibtex.title_en }}</td>
+					</tr>
+					<tr>
+					<td>表題(ja)</td>
+					<td>{{ bibtex.title_ja }}</td>
+					</tr>
+					<tr>
+					<td>著者名</td>
+					<td>{{ bibtex.authors }}</td>
+					</tr>
+					<tr>
+					<td>刊行物名等</td>
+					<td>{{ bibtex.book }}</td>
+					</tr>
+					<tr>
+					<td>volume</td>
+					<td>{{ bibtex.volume }}</td>
+					</tr>
+					<tr>
+					<td>number</td>
+					<td>{{ bibtex.number }}</td>
+					</tr>
+					<tr>
+					<td>chapter</td>
+					<td>{{ bibtex.chapter }}</td>
+					</tr>
+					<tr>
+					<td>page</td>
+					<td>{{ bibtex.page }}</td>
+					</tr>
+					<tr>
+					<td>出版日</td>
+					<td>{{ bibtex.pub_date }}</td>
+					</tr>
+					<tr>
+					<td>採択率</td>
+					<td>{{ bibtex.acceptance_rate }}</td>
+					</tr>
+					<tr>
+					<td>IF</td>
+					<td>{{ bibtex.impact_factorr }}</td>
+					</tr>
+					<tr>
+					<td>note</td>
+					<td>{{ bibtex.note }}</td>
+					</tr>
+					<tr>
+					<td>tags</td>
+					<td>{{ bibtex.tags }}</td>
+					</tr>
+				</table>
 		</div>
 </div>
 {% endblock content %}
