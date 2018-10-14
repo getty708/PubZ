@@ -124,12 +124,17 @@ class Book(models.Model):
 class Tag(models.Model):
     name = models.CharField(max_length=32)
     description = models.TextField()
+    parent = models.ForeignKey(
+        'core.Tag',
+        null=True,blank=True,
+        on_delete=models.SET_NULL,
+    )
     created = models.DateTimeField(auto_now_add=True, blank=False)
     modified = models.DateTimeField(auto_now=True, blank=False)    
     owner = models.ForeignKey(
         'auth.User',
         null=True,
-        on_delete=models.SET_NULL
+        on_delete=models.SET_NULL,
     )
 
     def __str__(self):
@@ -170,3 +175,24 @@ class AuthorOrder(models.Model):
         else:
             order = "{}th".format(self.order)
         return "Bibtex[{}] {}".format(self.bibtex.id, order)
+
+
+
+# --------------------------------------------------
+
+class TagChain(models.Model):
+    bibtex = models.ForeignKey(
+        'core.Bibtex',
+        on_delete=models.PROTECT,
+    )
+    tag = models.ForeignKey(
+        'core.Tag',
+        on_delete=models.PROTECT,
+    )
+    created = models.DateTimeField(auto_now_add=True, blank=False)
+    modified = models.DateTimeField(auto_now=True, blank=False)    
+    owner = models.ForeignKey(
+        'auth.User',
+        null=True,
+        on_delete=models.SET_NULL
+    )
