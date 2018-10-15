@@ -17,11 +17,12 @@
 				{% block extrahead %}{% endblock %}
 		</head>
 		<body style="height: 100vh">
-				<nav class="navbar sticky-top  navbar-dark bg-dark  w-100" >
+				<nav class="navbar navbar-expand-md sticky-top navbar-dark bg-dark  w-100" >
 						<a class="navbar-brand mb-0 h1" href="{% url 'dashboard:index' %}">BMAN Dashboard</a>
 						<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 								<div class="navbar-nav">
-										<a class="nav-item nav-link" href="{% url 'dashboard:index' %}">List View</a>
+										<a class="nav-item nav-link" href="{% url 'dashboard:index' %}">Home</a>
+										<a class="nav-item nav-link" href="{% url 'dashboard:bibtex_add_step1' %}">Add New Bib</a>
 								</div>
 						</div>
 				</nav>
@@ -47,8 +48,17 @@
 														<a class="nav-link active" href="{% url 'dashboard:author_index' %}">Author</a>
 												</li>
 										</ul>
-								</div>
-								<div class="col-sm-10">
+                  
+										<ul class="nav flex-column mb-3">
+												<h3 class="h5" >Add New</h3>
+												<li class="nav-item">
+														<a class="nav-link active" href="{% url 'dashboard:book_add' %}">Add New Book</a>
+														<a class="nav-link active" href="{% url 'dashboard:author_add' %}">Add New Author</a>
+														<a class="btn btn-sm btn-outline-primary" href="{% url 'dashboard:bibtex_add_step1' %}">Add New Bib</a>
+												</li>
+										</ul>										
+								</div>								
+								<div class="col-sm-10">								
 										{% block content %}
 										{{ content }}
 										{% endblock %}

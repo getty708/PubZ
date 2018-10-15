@@ -31,9 +31,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # My App
+    'api.apps.ApiConfig',
     'core.apps.CoreConfig',
     'dashboard.apps.DashboardConfig',
     'api.apps.ApiConfig',
+    'notification.apps.NotificationConfig',
+    # Default
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -131,3 +135,13 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+
+
+# Mail Settings
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'localhost'
+# EMAIL_PORT = 25
+# EMAIL_HOST_USER = 'apptest'
+# EMAIL_HOST_PASSWORD = 'xxxxxxxx'
+# EMAIL_USE_TLS = False

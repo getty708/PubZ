@@ -31,11 +31,15 @@ class BibtexFormatBase(object):
         context['citekey'] = "test_id"
         context['url_bib'] = self.url_bib
         context['book_title'] = bibtex.book.title
+ 
+        try:
+            context['year'] = bibtex.pub_date.year
+        except AttributeError:
+            context['year'] = "None"
         context['publisher'] = bibtex.book.publisher
         context['volume'] = bibtex.volume
         context['number'] = bibtex.number
         context['page'] = bibtex.page
-        context['year'] = bibtex.pub_date.year
         context['month'] = bibtex.pub_date.month
         context['month_string'] = self.get_string_month(bibtex.pub_date.month)
 

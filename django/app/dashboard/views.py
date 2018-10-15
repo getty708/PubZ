@@ -5,7 +5,7 @@ from django.views import generic
 
 
 from core.models import Author, Bibtex, Book
-
+from notification import alert
 
 """
 Bibtex
@@ -15,16 +15,14 @@ class IndexView(generic.ListView):
     context_object_name = 'latest_bibtex_list'
 
     def get_queryset(self):
-        #return Bibtex.objects.order_by('-pub_date').filter('style=='+book_style)[:5]
-        return Bibtex.objects.order_by('-pub_date')[:5]
-
+        return Bibtex.objects.order_by('-pub_date', 'title_en', 'title_ja')
 
 class IndexViewTable(generic.ListView):
     template_name = 'dashboard/bibtex/index_tab.html'
     context_object_name = 'latest_bibtex_list'
 
     def get_queryset(self):
-        return Bibtex.objects.order_by('-pub_date')[:5]
+        return Bibtex.objects.order_by('-pub_date')
 
 
 class IndexViewBib(generic.ListView):
@@ -32,17 +30,17 @@ class IndexViewBib(generic.ListView):
     context_object_name = 'latest_bibtex_list'
 
     def get_queryset(self):
-        return Bibtex.objects.order_by('-pub_date')[:5]
+        return Bibtex.objects.order_by('-pub_date')
 
 class IndexViewLatex(generic.ListView):
     template_name = 'dashboard/bibtex/index_latex.html'
     context_object_name = 'latest_bibtex_list'
 
     def get_queryset(self):
-        return Bibtex.objects.order_by('-pub_date')[:5]
+        return Bibtex.objects.order_by('-pub_date')
 
-
-
+      
+      
 class DetailView(generic.DetailView):
     model = Bibtex
     template_name = 'dashboard/detail.html'
@@ -81,3 +79,18 @@ class AuthorIndexView(generic.ListView):
 class AuthorDetailView(generic.DetailView):
     model = Author
     template_name = 'dashboard/author/detail.html'
+
+
+"""
+Notification
+"""
+def notification_alert(request):
+    msg = False
+    # Send Email
+    status = alert.send_email_test()
+    return render(request,
+                  'notification/alert.html',
+                  {
+                      'msg': msg,
+                      'status': status,
+                  })
