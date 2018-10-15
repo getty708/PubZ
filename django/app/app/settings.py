@@ -35,7 +35,6 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'core.apps.CoreConfig',
     'dashboard.apps.DashboardConfig',
-    'api.apps.ApiConfig',
     'notification.apps.NotificationConfig',
     # Default
     'django.contrib.admin',
