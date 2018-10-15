@@ -17,7 +17,7 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         return Bibtex.objects.order_by('-pub_date', 'title_en', 'title_ja')
 
-
+    
 class IndexViewTable(generic.ListView):
     template_name = 'dashboard/bibtex/index_tab.html'
     context_object_name = 'latest_bibtex_list'

@@ -1,0 +1,23 @@
+{% extends "api/api_base.html" %}
+
+{% load utils_search %}
+{% load utils_bib_format %}
+
+
+{% block title %}Embedding | List{% endblock title %}
+
+{% block content %}
+<div class="row mb-3">
+		<div class="col-12">
+				{% if latest_bibtex_list %}
+				<ul>
+						{% for bibtex in latest_bibtex_list %}
+						<li>{{ bibtex | bibtex_list_format }}</li>
+						{% endfor %}
+				</ul>
+				{% else %}
+				<p>No polls are available.</p>
+				{% endif %}
+		</div>
+</div>
+{% endblock content %}
