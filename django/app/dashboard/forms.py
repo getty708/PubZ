@@ -1,5 +1,5 @@
 from django import forms
-
+from dal import autocomplete
 
 from core import models
 from dashboard import validators
@@ -16,6 +16,7 @@ class AuthorForm(forms.ModelForm):
             'name_en','name_ja','dep_en','dep_ja','mail','date_join','date_leave',
         ]
         widgets = {
+            'name_en': autocomplete.ModelSelect2(url='api/autocomplete/author'),
             'dep_en': forms.Textarea(attrs={'cols': 80, 'rows': 3}),
             'dep_ja': forms.Textarea(attrs={'cols': 80, 'rows': 3}),
         }
