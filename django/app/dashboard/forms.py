@@ -16,8 +16,6 @@ class AuthorForm(forms.ModelForm):
             'name_en','name_ja','dep_en','dep_ja','mail','date_join','date_leave',
         ]
         widgets = {
-            'name_en': autocomplete.Select2(url='api/autocomplete/author',
-                                                attrs={'data-html': True}),
             'dep_en': forms.Textarea(attrs={'cols': 80, 'rows': 3}),
             'dep_ja': forms.Textarea(attrs={'cols': 80, 'rows': 3}),
         }
@@ -77,6 +75,10 @@ class AuthorOrderForm(forms.ModelForm):
         fields = [
             'bibtex','author','order',
         ]
+        widgets = {
+            'author': autocomplete.ListSelect2(
+                url='api:autocomplete_author',),
+        }
 
     def __init__(self, *args, **kwargs):
         super(AuthorOrderForm, self).__init__(*args, **kwargs)
