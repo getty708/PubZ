@@ -40,3 +40,44 @@ TBA
 ### Step.3 Edit detail of Bibtex
 Register detail information of the bib object. Validation is performed afeter click send button.
 (Validation and user check)
+
+
+
+
+
+## Validation 
+In this section, we are going to describe how to edit and apply validation rules in this application.
+Validation rules for each field are described in [Model](./models.md). Please check it.
+
+
+### Where should you write validation rules?
+Pleas edit `dashboard/validators.py` to implement validation rules. The rules are expressed as function. For clarity, function names shall obey the following setting.
+
+```python
+def val_<field name of model/form field >_<short discription>(val):
+	"""
+	Returns.
+	--------
+	- <Detail discritption about values to be returned >
+	"""
+	# Rules here!
+	return val_checked
+	
+
+# ----------------
+def val_bibtex_title_en_replace_keywords(val):
+	""" 
+	Return.
+	------
+    - Title string, some keywords are replaced with registerd format
+    (e.g. Conference => Conf., International => Int'l.)
+	
+	"""
+	# Write Validation Rule
+	return title_checked
+```
+
+!!! Info
+	Each rule funtion shall check a single rule, not multiple. If you want to apply severel validation rules, you should devide the funtion and register them.
+	
+	
