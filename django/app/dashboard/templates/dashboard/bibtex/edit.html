@@ -35,14 +35,14 @@
 						<div class="form-group row">
 								<label for="example-text-input" class="col-2 col-form-label">Authors</label>
 								<div class="col-5">
-										<a href="{% url 'dashboard:author_order_add' %}" class="btn btn-sm btn-outline-primary" target="_blank">Add Author</a>
+										<a href="{% url 'dashboard:author_order_add' %}?bibtex={{ bibtex.id }}" class="btn btn-sm btn-outline-primary" target="_blank">Add Author</a>
 								</div>
 						</div>
 						<div class="form-group row">
 								{{ form.book.errors }}
 								<label for="example-text-input" class="col-2 col-form-label">Book</label>
 								<div class="col-5">{{ form.book }}</div>
-								<div class="col-5"><a href="{% url 'dashboard:bibtex_add' %}" class="btn btn-sm btn-outline-primary" >Add New Book</a></div>
+								<div class="col-5"><a href="{% url 'dashboard:book_add' %}" class="btn btn-sm btn-outline-primary" target="_blank" >Add New Book</a></div>
 						</div>
 						<div class="form-group row">
 								{{ form.volume.errors }}
