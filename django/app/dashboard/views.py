@@ -17,7 +17,6 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         return Bibtex.objects.order_by('-pub_date', 'title_en', 'title_ja')
 
-
 class IndexViewTable(generic.ListView):
     template_name = 'dashboard/bibtex/index_tab.html'
     context_object_name = 'latest_bibtex_list'
@@ -25,7 +24,7 @@ class IndexViewTable(generic.ListView):
     def get_queryset(self):
         return Bibtex.objects.order_by('-pub_date')
 
-    
+
 class IndexViewBib(generic.ListView):
     template_name = 'dashboard/bibtex/index_bib.html'
     context_object_name = 'latest_bibtex_list'
@@ -39,13 +38,13 @@ class IndexViewLatex(generic.ListView):
 
     def get_queryset(self):
         return Bibtex.objects.order_by('-pub_date')
-    
-    
 
+      
+      
 class DetailView(generic.DetailView):
     model = Bibtex
-    template_name = 'dashboard/detail.html'    
-    
+    template_name = 'dashboard/detail.html'
+
 
 
 """
@@ -61,8 +60,8 @@ class BookIndexView(generic.ListView):
 
 class BookDetailView(generic.DetailView):
     model = Book
-    template_name = 'dashboard/book/detail.html'    
-    
+    template_name = 'dashboard/book/detail.html'
+
 
 
 
@@ -80,8 +79,6 @@ class AuthorIndexView(generic.ListView):
 class AuthorDetailView(generic.DetailView):
     model = Author
     template_name = 'dashboard/author/detail.html'
-    
-    
 
 
 """

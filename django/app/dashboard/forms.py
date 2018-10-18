@@ -2,6 +2,8 @@ from django import forms
 
 
 from core import models
+from dashboard import validators
+
 
 
 """
@@ -39,6 +41,32 @@ class AuthorForm(forms.ModelForm):
             'class': 'form-control form-control-sm',
             'placeholder': "Date of Leave",
         })
+
+
+    def clean_base(self, key):
+        validator_dict = validators.validation_callback_author_form
+        val = self.cleaned_data[key]
+        if key in validator_dict.keys():
+            callback_funcs = validator_dict[key]
+            for func in callback_funcs:
+                val = func(val)
+        return val
+        
+    def clean_name_en(self):
+        return self.clean_base('name_en')
+
+    def clean_name_ja(self):
+        return self.clean_base('name_ja')
+
+    def clean_dep_en(self):
+        return self.clean_base('name_en')
+
+    def clean_dep_ja(self):
+        return self.clean_base('name_en')     
+           
+    def clean(self):
+        cleaned_data = super().clean()        
+        return cleaned_data        
 
         
 class AuthorOrderForm(forms.ModelForm):
@@ -79,6 +107,30 @@ class BookForm(forms.ModelForm):
             'placeholder': 'abbr',
         })
 
+
+    def clean_base(self, key):
+        validator_dict = validators.validation_callback_book_form
+        val = self.cleaned_data[key]        
+        if key in validator_dict.keys():
+            callback_funcs = validator_dict[key]
+            for func in callback_funcs:
+                val = func(val)
+        return val
+        
+    def clean_title(self):
+        return self.clean_base('title')
+
+    def clean_abbr(self):
+        return self.clean_base('abbr')
+    
+    def clean_institution(self):
+        return self.clean_base('institution')
+    
+            
+    def clean(self):
+        cleaned_data = super().clean()        
+        return cleaned_data        
+        
         
 
 """
@@ -96,12 +148,37 @@ class BibtexForm(forms.ModelForm):
 
     def __init__(self,*args,**kwargs):
         super(BibtexForm,self).__init__(*args,**kwargs)
-        print(self.Meta.fields)
         for key in self.Meta.fields:
             self.fields[key].widget.attrs.update({
                 'class': 'form-control form-control-sm',
             })
-              
+
+    # Validation
+    def clean_base(self, key):
+        validator_dict = validators.validation_callback_bibtex_form
+        val = self.cleaned_data[key]        
+        if key in validator_dict.keys():
+            callback_funcs = validator_dict[key]
+            for func in callback_funcs:
+                val = func(val)
+        return val
+    
+
+    def clean_title_en(self):
+        return self.clean_base('title_en')
+
+    def clean_title_ja(self):
+        return self.clean_base('title_ja')
+    
+    def clean_page(self):
+        return self.clean_base('page')
+    
+            
+    def clean(self):
+        cleaned_data = super().clean()        
+        return cleaned_data
+            
+    
         
 
         
@@ -129,4 +206,29 @@ class BibtexFormStep1(forms.Form):
     book.widget.attrs.update({
             'class': 'form-control form-control-sm',
     })    
+
+
+    def clean_base(self, key):
+        validator_dict = validators.validation_callback_bibtex_form_step1
+        val = self.cleaned_data[key]        
+        if key in validator_dict.keys():
+            callback_funcs = validator_dict[key]
+            for func in callback_funcs:
+                val = func(val)
+        return val
+
+
+    def clean_lang(self):
+        return self.clean_base('lang')
+        
+    def clean_title(self):
+        return self.clean_base('title')
+
+    def clean_book(self):
+        return self.clean_base('book')
+    
+    def clean(self):
+        cleaned_data = super().clean()        
+        return cleaned_data
+
     
