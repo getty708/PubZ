@@ -7,7 +7,9 @@
 <div class="row">
 		<div class="col-12 my-3">
 				<h1 class="h3" >{{ bibtex.title_en }}</h1>
-				<table border width="95%">
+		</div>
+		<div class="col-12 my-3">
+				<table class="table table-sm table-striped">
 					<tr><td>分類</td><td>{{ bibtex.book_style }}</td></tr>
 					<tr><td>表題(en)</td><td>{{ bibtex.title_en }}</td></tr>
 					<tr><td>表題(ja)</td><td>{{ bibtex.title_ja }}</td></tr>
@@ -24,5 +26,8 @@
 					<tr><td>tags</td><td>{{ bibtex.tags }}</td></tr>
 				</table>
 		</div>
+		<div class="col-12 my-3">
+				<a href="{% url 'dashboard:bibtex_edit' bibtex.id %}" class="btn btn-sm btn-outline-primary"  >Edit</a>
+		</div>		
 </div>
 {% endblock content %}
