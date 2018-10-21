@@ -17,6 +17,11 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         return Bibtex.objects.order_by('-pub_date', 'title_en', 'title_ja')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["book_style_list"] = ["INTPROC","JOURNAL","CONF_DOMESTIC","CONF_DOMESTIC_NO_REVIEW","CONF_NATIONAL","BOOK","KEYNOTE","NEWS","OTHERS","AWARD"]
+        return context
+
 class AddTestDatas(generic.ListView):###for test
     template_name = 'dashboard/index.html'
     context_object_name = 'latest_bibtex_list'
@@ -34,16 +39,22 @@ class AddTestDatas(generic.ListView):###for test
     author_2.save()
 
     ##add book
-    book = Book(title="ACM Transactions on Asian and Low-Resource Language Information Processing",style="INTPROC")
-    book.save()
+    book1 = Book(title="ACM Transactions on Asian and Low-Resource Language Information Processing",style="INTPROC")
+    book2 = Book(title="IEEE",style="JOURNAL")
+    book1.save()
+    book2.save()
 
     ##add bibtex
-    bibtex = Bibtex(language='EN', title_en='Wikipedia-Based Relatedness Measurements for Multilingual Short Text Clustering',book=book,volume=3,number=5,chapter=1,page="10-20")
-    bibtex.save()
+    bibtex1 = Bibtex(language='EN', title_en='Wikipedia-Based Relatedness Measurements for Multilingual Short Text Clustering',book=book1,volume=3,number=5,chapter=1,page="10-20")
+    bibtex2 = Bibtex(language='EN', title_en='wikipedia-based for clustering 2',book=book2,volume=2,number=2,chapter=2,page="15-24")
+    bibtex1.save()
+    bibtex2.save()
 
     ##add AuthorOrder
-    AuthorOrder(bibtex=bibtex,author=author_1,order=1).save()
-    AuthorOrder(bibtex=bibtex,author=author_2,order=2).save()
+    AuthorOrder(bibtex=bibtex1,author=author_1,order=1).save()
+    AuthorOrder(bibtex=bibtex1,author=author_2,order=2).save()
+    #AuthorOrder(bibtex=bibtex2,author=author_1,order=1).save()
+    #AuthorOrder(bibtex=bibtex2,author=author_2,order=2).save()
 
     def get_queryset(self):
         return Bibtex.objects.order_by('-pub_date', 'title_en', 'title_ja')

@@ -414,6 +414,11 @@ class BibtexFormatLatexDefault(BibtexFormatBase):
 # ===================
 #  Filter Func.
 # ===================
+
+@register.filter(name='test_format')
+def test_format(bibtex):
+    return bibtex
+
 @register.filter(name='bibtex_list_format')
 def bibtex_list_format(bibtex, func=BibtexFormatListDefault, *args,**kwargs):
     """

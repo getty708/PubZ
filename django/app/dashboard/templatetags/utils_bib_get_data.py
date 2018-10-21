@@ -73,3 +73,15 @@ class BibtexGetData(object):
 @register.filter(name='bibtex_get')
 def bibtex_get(bibtex, type):
     return BibtexGetData(bibtex)(type)
+
+@register.filter(name='get_display_name')
+def get_display_name(book_style):
+
+    book_style_list = ["INTPROC","JOURNAL","CONF_DOMESTIC","CONF_DOMESTIC_NO_REVIEW","CONF_NATIONAL","BOOK","KEYNOTE","NEWS","OTHERS","AWARD"]
+    display_name_list = ["interproceedings","Journal Paper","Domestic Conference","Domestic Conference(No Reviewed)","National Conference","Book/Review/Editor/Translation","Presentaion/Panel Discution/Seminer	","New Paper article","others","Award"]
+
+    return display_name_list[book_style_list.index(book_style)]
+
+@register.filter(name='get_booktype_bibtex')
+def get_booktype_bibtex(bibtex, book_style):
+    return bibtex.filter(book__style=book_style)
