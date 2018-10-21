@@ -73,6 +73,8 @@ class DetailView(generic.DetailView):
     model = Bibtex
     template_name = 'dashboard/detail.html'
 
+    def get_queryset(self):
+        return AuthorOrder.objects.order_by('-order'), Author.objects.all()
 
 
 """
