@@ -20,6 +20,9 @@
 </div>
 <div class="row mb-3">
 		<div class="col-12">
+			{% for p in ["interproc","jounrls","award"] %}
+			  {{ p }}
+	   	{% endfor %}
 				{% if latest_bibtex_list %}
 				<ul>
 						{% for bibtex in latest_bibtex_list %}
