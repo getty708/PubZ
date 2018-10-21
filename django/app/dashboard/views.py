@@ -4,7 +4,7 @@ from django.views import generic
 
 
 
-from core.models import Author, Bibtex, Book
+from core.models import Author, Bibtex, Book, AuthorOrder
 from notification import alert
 
 """
@@ -13,6 +13,31 @@ Bibtex
 class IndexView(generic.ListView):
     template_name = 'dashboard/index.html'
     context_object_name = 'latest_bibtex_list'
+
+    def get_queryset(self):
+        return Bibtex.objects.order_by('-pub_date', 'title_en', 'title_ja')
+
+class AddTestDatas(generic.ListView):###for test
+    template_name = 'dashboard/index.html'
+    context_object_name = 'latest_bibtex_list'
+
+    ##add author
+    author_1 = Author(name_en='Tatsuya Nakamura', dep_en='Osaka University',mail="mail@mail.co.jp")
+    author_1.save()
+    author_2 = Author(name_en='Takahiro Hara', dep_en='Osaka University',mail="mail@mail.co.jp")
+    author_2.save()
+
+    ##add book
+    book = Book(title="ACM Transactions on Asian and Low-Resource Language Information Processing",style="INTPROC")
+    book.save()
+
+    ##add bibtex
+    bibtex = Bibtex(language='EN', title_en='Wikipedia-Based Relatedness Measurements for Multilingual Short Text Clustering',book=book,volume=3,number=5,chapter=1,page="10-20",pub_date=datetime.date(2018, 2, 1))
+    bibtex.save()
+
+    ##add AuthorOrder
+    AuthorOrder(bibtex=bibtex,author=author_1,order=1)
+    AuthorOrder(bibtex=bibtex,author=author_2,order=2)
 
     def get_queryset(self):
         return Bibtex.objects.order_by('-pub_date', 'title_en', 'title_ja')
@@ -39,8 +64,8 @@ class IndexViewLatex(generic.ListView):
     def get_queryset(self):
         return Bibtex.objects.order_by('-pub_date')
 
-      
-      
+
+
 class DetailView(generic.DetailView):
     model = Bibtex
     template_name = 'dashboard/detail.html'

@@ -48,17 +48,18 @@
 														<a class="nav-link active" href="{% url 'dashboard:author_index' %}">Author</a>
 												</li>
 										</ul>
-                  
+
 										<ul class="nav flex-column mb-3">
 												<h3 class="h5" >Add New</h3>
 												<li class="nav-item">
 														<a class="nav-link active" href="{% url 'dashboard:book_add' %}">Add New Book</a>
 														<a class="nav-link active" href="{% url 'dashboard:author_add' %}">Add New Author</a>
 														<a class="btn btn-sm btn-outline-primary" href="{% url 'dashboard:bibtex_add_step1' %}">Add New Bib</a>
+														<a class="btn btn-sm btn-outline-primary" href="add_test_datas">Add Test Data</a>
 												</li>
-										</ul>										
-								</div>								
-								<div class="col-sm-10">								
+										</ul>
+								</div>
+								<div class="col-sm-10">
 										{% block content %}
 										{{ content }}
 										{% endblock %}
