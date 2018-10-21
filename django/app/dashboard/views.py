@@ -4,7 +4,7 @@ from django.views import generic
 
 
 
-from core.models import Author, Bibtex, Book, AuthorOrder
+from core.models import Author, Bibtex, Book, AuthorOrder, Tag
 from notification import alert
 
 """
@@ -32,12 +32,15 @@ class AddTestDatas(generic.ListView):###for test
     book.save()
 
     ##add bibtex
-    bibtex = Bibtex(language='EN', title_en='Wikipedia-Based Relatedness Measurements for Multilingual Short Text Clustering',book=book,volume=3,number=5,chapter=1,page="10-20",pub_date=datetime.date(2018, 2, 1))
+    bibtex = Bibtex(language='EN', title_en='Wikipedia-Based Relatedness Measurements for Multilingual Short Text Clustering',book=book,volume=3,number=5,chapter=1,page="10-20")
     bibtex.save()
 
     ##add AuthorOrder
     AuthorOrder(bibtex=bibtex,author=author_1,order=1)
     AuthorOrder(bibtex=bibtex,author=author_2,order=2)
+
+    ##add Tag
+    Tag(bibtex=bibtex,name="Clustering",description="for clustering")
 
     def get_queryset(self):
         return Bibtex.objects.order_by('-pub_date', 'title_en', 'title_ja')
