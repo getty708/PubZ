@@ -17,7 +17,7 @@ class BibtexGetData(object):
         context = bibtex.__dict__
 
         context['publisher'] = bibtex.book.publisher
-        context["book_style"] = self.style
+        context["book_style"] = self.translate_book_style(self.style)
 
         # Get Authors
         authors = AuthorOrder.objects.filter(bibtex=bibtex).order_by('order')
@@ -29,9 +29,13 @@ class BibtexGetData(object):
 
         return context[type]
 
+    def translate_book_style(self, book_style):
+
+        return book_style##koko
+
     def get_string_tags(self, tags):
 
-        if len(authors) == 0:
+        if len(tags) == 0:
             return "None"
         tags_string = ""
         for i, tag in enumerate(tags):

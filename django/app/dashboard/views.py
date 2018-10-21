@@ -21,6 +21,12 @@ class AddTestDatas(generic.ListView):###for test
     template_name = 'dashboard/index.html'
     context_object_name = 'latest_bibtex_list'
 
+    ##add Tag
+    tag1 = Tag(name="Clustering",description="for clustering")
+    tag2 = Tag(name="Wikipedia",description="for wikipedia")
+    tag1.save()
+    tag2.save()
+
     ##add author
     author_1 = Author(name_en='Tatsuya Nakamura', dep_en='Osaka University',mail="mail@mail.co.jp")
     author_1.save()
@@ -36,11 +42,8 @@ class AddTestDatas(generic.ListView):###for test
     bibtex.save()
 
     ##add AuthorOrder
-    AuthorOrder(bibtex=bibtex,author=author_1,order=1)
-    AuthorOrder(bibtex=bibtex,author=author_2,order=2)
-
-    ##add Tag
-    Tag(bibtex=bibtex,name="Clustering",description="for clustering")
+    AuthorOrder(bibtex=bibtex,author=author_1,order=1).save()
+    AuthorOrder(bibtex=bibtex,author=author_2,order=2).save()
 
     def get_queryset(self):
         return Bibtex.objects.order_by('-pub_date', 'title_en', 'title_ja')
@@ -72,9 +75,6 @@ class IndexViewLatex(generic.ListView):
 class DetailView(generic.DetailView):
     model = Bibtex
     template_name = 'dashboard/detail.html'
-
-    def get_queryset(self):
-        return AuthorOrder.objects.order_by('-order'), Author.objects.all()
 
 
 """

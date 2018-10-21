@@ -10,18 +10,18 @@
 		</div>
 		<div class="col-12 my-3">
 				<table class="table table-sm table-striped">
-					<tr><td>分類</td><td>{{ bibtex | bibtex_get:"book_style" }}</td></tr>
-					<tr><td>表題(en)</td><td>{{ bibtex.title_en }}</td></tr>
-					<tr><td>表題(ja)</td><td>{{ bibtex.title_ja }}</td></tr>
-					<tr><td>著者名</td><td>{{ bibtex | bibtex_get:"authors" }}</td></tr>
-					<tr><td>刊行物名等</td><td>{{ bibtex.book }}</td></tr>
+					<tr><td>book_style</td><td>{{ bibtex | bibtex_get:"book_style" }}</td></tr>
+					<tr><td>title(en)</td><td>{{ bibtex.title_en }}</td></tr>
+					<tr><td>title(ja)</td><td>{{ bibtex.title_ja }}</td></tr>
+					<tr><td>authors</td><td>{{ bibtex | bibtex_get:"authors" }}</td></tr>
+					<tr><td>book</td><td>{{ bibtex.book }}</td></tr>
 					<tr><td>volume</td><td>{{ bibtex.volume }}</td></tr>
 					<tr><td>number</td><td>{{ bibtex.number }}</td></tr>
 					<tr><td>chapter</td><td>{{ bibtex.chapter }}</td></tr>
 					<tr><td>page</td><td>{{ bibtex.page }}</td></tr>
-					<tr><td>出版日</td><td>{{ bibtex.pub_date }}</td></tr>
-					<tr><td>採択率</td><td>{{ bibtex.acceptance_rate }}</td></tr>
-					<tr><td>IF</td><td>{{ bibtex.impact_factor }}</td></tr>
+					<tr><td>publication_date</td><td>{{ bibtex.pub_date }}</td></tr>
+					<tr><td>acceptance_rate</td><td>{{ bibtex.acceptance_rate }}</td></tr>
+					<tr><td>impact_factor</td><td>{{ bibtex.impact_factor }}</td></tr>
 					<tr><td>note</td><td>{{ bibtex.note }}</td></tr>
 					<tr><td>tags</td><td>{{ bibtex | bibtex_get:"tags" }}</td></tr>
 				</table>
