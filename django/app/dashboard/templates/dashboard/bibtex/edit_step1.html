@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Dashboard | Bibtex Add{% endblock title %}
 
@@ -65,4 +66,8 @@
 				
 
 </div>
+
+<script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+{{ form.media }}
+
 {% endblock content %}
