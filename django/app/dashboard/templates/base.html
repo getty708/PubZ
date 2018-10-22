@@ -32,13 +32,34 @@
 										<h3 class="h5 mt-3" >Bibtex Category</h3>
 										<ul class="nav flex-column mb-3">
 												<li class="nav-item">
-														<a class="nav-link active" href="#journal">journal</a>
+														<a class="nav-link active" href="#JOURNAL">journal</a>
 												</li>
 												<li class="nav-item">
-														<a class="nav-link" href="#">Internatinal Conference</a>
+														<a class="nav-link" href="#INTPROC">Internatinal Conference</a>
 												</li>
 												<li class="nav-item">
-														<a class="nav-link" href="#">Domestic Conference</a>
+														<a class="nav-link" href="#CONF_DOMESTIC">Domestic Conference</a>
+												</li>
+												<li class="nav-item">
+														<a class="nav-link" href="#CONF_DOMESTIC_NO_REVIEW">Domestic Conference<br>(NoReview)</a>
+												</li>
+												<li class="nav-item">
+														<a class="nav-link" href="#CONF_NATIONAL">National Conference</a>
+												</li>
+												<li class="nav-item">
+														<a class="nav-link" href="#BOOK">Book/Review/<br>Editor</a>
+												</li>
+												<li class="nav-item">
+														<a class="nav-link" href="#KEYNOTE">Presentaion/<br>Seminer</a>
+												</li>
+												<li class="nav-item">
+														<a class="nav-link" href="#NEWS">NewsPaper</a>
+												</li>
+												<li class="nav-item">
+														<a class="nav-link" href="#OTHERS">Others</a>
+												</li>
+												<li class="nav-item">
+														<a class="nav-link" href="#AWARD">Award</a>
 												</li>
 										</ul>
 										<ul class="nav flex-column mb-3">
@@ -55,7 +76,6 @@
 														<a class="nav-link active" href="{% url 'dashboard:book_add' %}">Add New Book</a>
 														<a class="nav-link active" href="{% url 'dashboard:author_add' %}">Add New Author</a>
 														<a class="btn btn-sm btn-outline-primary" href="{% url 'dashboard:bibtex_add_step1' %}">Add New Bib</a>
-														<a class="btn btn-sm btn-outline-primary" href="add_test_datas">Add Test Data</a>
 												</li>
 										</ul>
 								</div>

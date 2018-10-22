@@ -22,20 +22,20 @@
 <div class="row mb-3">
 		<div class="col-12">
 			{% for book_style in book_style_list %}
-			  <h3>{{ book_style|get_display_name }}</h3>
-                                {% if latest_bibtex_list|get_booktype_bibtex:book_style %}
-				<ul>
-						{% for bibtex in latest_bibtex_list|get_booktype_bibtex:book_style %}
-						<li>{{ bibtex|bibtex_list_format }}</li>
-						{% endfor %}
-				</ul>
+			  <h4 id="{{book_style}}">{{ book_style|get_display_name }}</h4>
+        {% if latest_bibtex_list|get_booktype_bibtex:book_style %}
+					<ul>
+							{% for bibtex in latest_bibtex_list|get_booktype_bibtex:book_style %}
+							<li>{{ bibtex|bibtex_list_format }}</li>
+							{% endfor %}
+					</ul>
 				{% else %}
-				<p>No polls are available.</p>
+					<p>No polls are available.</p>
 				{% endif %}
 
 
 	   	{% endfor %}
-				
+
 		</div>
 </div>
 {% endblock content %}

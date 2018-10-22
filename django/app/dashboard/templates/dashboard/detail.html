@@ -6,11 +6,17 @@
 {% block content %}
 <div class="row">
 		<div class="col-12 my-3">
-				<h1 class="h3" >{{ bibtex.title_en }}</h1>
+				<h1 class="h3" >
+					{% if bibtex.title_en %}
+						{{ bibtex.title_en }}
+					{% elif bibtex.title_ja %}
+						{{ bibtex.title_ja }}
+					{% endif %}
+				</h1>
 		</div>
 		<div class="col-12 my-3">
 				<table class="table table-sm table-striped">
-					<tr><td>book_style</td><td>{{ bibtex | bibtex_get:"book_style" }}</td></tr>
+					<tr><td>book_style</td><td>{{ bibtex|bibtex_get:"book_style"|get_display_name }}</td></tr>
 					<tr><td>title(en)</td><td>{{ bibtex.title_en }}</td></tr>
 					<tr><td>title(ja)</td><td>{{ bibtex.title_ja }}</td></tr>
 					<tr><td>authors</td><td>{{ bibtex | bibtex_get:"authors" }}</td></tr>

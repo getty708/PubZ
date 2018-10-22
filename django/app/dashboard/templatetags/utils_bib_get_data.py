@@ -85,3 +85,7 @@ def get_display_name(book_style):
 @register.filter(name='get_booktype_bibtex')
 def get_booktype_bibtex(bibtex, book_style):
     return bibtex.filter(book__style=book_style)
+
+@register.filter(name='get_booktype_book')
+def get_booktype_book(book, book_style):
+    return book.filter(style=book_style)
