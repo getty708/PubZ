@@ -5,8 +5,10 @@
 ### where
 ・keyword
 ・book_style
-・book(conference)
-・pub_date
+・author
+・book_name(conference)
+・tags
+・pub_date(duration)
 
 ### order by
-・pub_date
+・pub_date(ascending, decending)
