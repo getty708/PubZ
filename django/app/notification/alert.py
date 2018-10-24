@@ -11,7 +11,7 @@ def send_email_test():
     message = "The following papers have missing items.¥n"
 
     """
-    not_published_list = Bibtex.objects.filter(is_pulished=False)
+    not_published_list = Bibtex.objects.filter(is_published=False)
     mail_template = get_template('mail.txt')
     for bib in not_published_list:
         context = {
@@ -29,12 +29,8 @@ def send_email_test():
     recipient_list = [
         "mmde-m1@mmde-mail.ise.eng.osaka-u.ac.jp"
     ]
-
-    i = send_mail(subject, message, from_email, recipient_list)
-    if i>0:
-        return True
-    else:
-        return False
+    
+    return send_mail(subject, message, from_email, recipient_list)
 
 """
 {% if bib.title_en=blank %}
