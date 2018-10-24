@@ -3,4 +3,3 @@
 {% else %}
 {{ bib.title_en }}
 {% endif %}
-{{ bib.book }}
