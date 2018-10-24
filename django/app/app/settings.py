@@ -36,9 +36,6 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'dashboard.apps.DashboardConfig',
     'notification.apps.NotificationConfig',
-    # Additional Packages
-    'dal',
-    'dal_select2',
     # Default
     'django.contrib.admin',
     'django.contrib.auth',

@@ -1,5 +1,5 @@
 from django import forms
-from dal import autocomplete
+
 
 from core import models
 from dashboard import validators
@@ -75,10 +75,6 @@ class AuthorOrderForm(forms.ModelForm):
         fields = [
             'bibtex','author','order',
         ]
-        widgets = {
-            'author': autocomplete.ListSelect2(
-                url='api:autocomplete_author',),
-        }
 
     def __init__(self, *args, **kwargs):
         super(AuthorOrderForm, self).__init__(*args, **kwargs)

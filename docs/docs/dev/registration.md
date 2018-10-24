@@ -7,17 +7,6 @@ Root URL = `^dashboard/`
 
 | URL | Action |
 |-----|-------------|
-| `^list/` | View the papers as a list|
-| `^tab/` | View the papers as a table |
-| `^latex/` | View the papers in Latex form |
-| `^bib/` | View the papers's reference as bib |
-| `^<int:pk>/` | View the detail of paper #int |
-| `^bib/<int:pk>/` | View the detail of paper #int |
-| `^book/` | View the list of books |
-| `^book/<int:pk>/` | View the detail of book #int |
-| `^author/` | View the list of authors |
-| `^author/<int:pk>/` | View the detail of author #int |
-| `^notification/alert/` | View the notification/alert |
 | `^add/` | Add new bibtex object |
 | `^add/step1/` | Start to add new bibtex object (this function will be integrated with `^add/`) |
 | `^edit/<int:bibtex_id>/` | Edit bibtex object |

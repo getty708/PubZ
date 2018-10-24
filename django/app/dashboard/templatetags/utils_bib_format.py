@@ -34,14 +34,15 @@ class BibtexFormatBase(object):
  
         try:
             context['year'] = bibtex.pub_date.year
-            context['month'] = bibtex.pub_date.month
-            context['month_string'] = self.get_string_month(bibtex.pub_date.month)
         except AttributeError:
-            context['year']  = "None"
-            context['month'] = "None"
-            context['month_string'] = "None"
+            context['year'] = "None"
         context['publisher'] = bibtex.book.publisher
-        
+        context['volume'] = bibtex.volume
+        context['number'] = bibtex.number
+        context['page'] = bibtex.page
+        context['month'] = bibtex.pub_date.month
+        context['month_string'] = self.get_string_month(bibtex.pub_date.month)
+
         # Get Authors
         authors = AuthorOrder.objects.filter(bibtex=bibtex).order_by('order')
         context["authors"] = self.get_html_authors(authors)
