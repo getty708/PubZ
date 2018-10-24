@@ -1,0 +1,6 @@
+﻿{% if bib.title_en == null %}
+{{ bib.title_ja }}
+{% else %}
+{{ bib.title_en }}
+{% endif %}
+{{ bib.book }}
