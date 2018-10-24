@@ -10,7 +10,7 @@ def send_email_test():
     # 本文
     message = "The following papers have missing items.¥n"
 
-
+    """
     not_published_list = Bibtex.objects.filter(is_published=False)
     mail_template = get_template('notification/mail_templates/mail.txt')
     for bib in not_published_list:
@@ -18,7 +18,7 @@ def send_email_test():
             "bib": bib,
         }
         message = message + mail_template.render(context) + "¥n"
-
+    """
 
     # 送信元
     from_email = "test@test.com"
