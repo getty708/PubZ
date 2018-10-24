@@ -31,12 +31,3 @@ def send_email_test():
     ]
 
     return send_mail(subject, message, from_email, recipient_list)
-
-"""
-{% if bib.title_en=blank %}
-{{ bib.title_ja }}
-{% else %}
-{{ bib.title_en }}
-{% endif %}
-{{ bib.book }}
-"""
