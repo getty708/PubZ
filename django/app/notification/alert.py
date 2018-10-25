@@ -8,17 +8,17 @@ def send_email_test():
     subject = "Please update the registration information."
 
     # 本文
-    message = "The following papers have missing items.¥n"
+    message = "The following papers have missing items.\n"
 
-    """
     not_published_list = Bibtex.objects.filter(is_published=False)
-    mail_template = get_template('notification/mail_templates/mail.txt')
+    mail_template = get_template('notification/mail_templates/mail_basic.txt')
     for bib in not_published_list:
+        book = Bibtex.objects.get(id=bib.id).book
         context = {
             "bib": bib,
+            "book": book,
         }
-        message = message + mail_template.render(context) + "¥n"
-    """
+        message = message + mail_template.render(context) + "\n"
 
     # 送信元
     from_email = "test@test.com"
