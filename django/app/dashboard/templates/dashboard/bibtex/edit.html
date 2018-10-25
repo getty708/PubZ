@@ -10,7 +10,12 @@
 				{% if book.id %}
 				<h2>Edit Bibtex : {{ bibitex }}</h2>
 				{% else%}
-				<h2>Add New Bibtex</h2>
+				<h2 display : inline>Add New Bibtex
+					<!-- Button trigger modal -->
+					<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal">
+  						Help
+					</button>
+				</h2>
 				{% endif %}
 				{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
@@ -104,6 +109,39 @@
 						{% endif %}
 				</form>				
 		</div>
+		<!-- Modal -->
+					<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ 		 				<div class="modal-dialog" role="document">
+    						<div class="modal-content">
+      						<div class="modal-header">
+        						<h5 class="modal-title" id="exampleModalLabel">Step 3. </h5>
+		        				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          					<span aria-hidden="true">&times;</span>
+		        				</button>
+      						</div>
+      						<div class="modal-body">
+        						<h4> Edit detail of Bibtex </h4>
+									<ol>
+										<li>
+												The <font size="-1" face="Verdana" color="Crimson" style="background:#E0E0E0">Language</font>, <font size="-1" face="Verdana" color="Crimson" style="background:#E0E0E0">Title</font> and <font size="-1" face="Verdana" color="Crimson" style="background:#E0E0E0">Book</font> will be filled in automatically.
+										</li>
+										<li>
+												Please fill in the table with other informatin of the Bibtex.
+										</li>
+										<li>
+												Press <font size="-1" face="Verdana" color="Crimson" style="background:#E0E0E0">Update</font> button to finish the registration, and then you can see the list of all the regisgered Bibtex.
+										</li>
+									</ol>
+									<hr>
+									<img src="../images/RegistrationFlow3.png" alt="Flow3" />
+		      				</div>
+      						<div class="modal-footer">
+        						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+ 						   	</div>
+    						</div>
+  						</div>
+					</div>
+					<!-- Modal End-->
 </div>
 <script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
 {{ form.media }}
