@@ -15,7 +15,16 @@ class IndexView(generic.ListView):
     context_object_name = 'latest_bibtex_list'
 
     def get_queryset(self):
-        return Bibtex.objects.order_by('-pub_date', 'title_en', 'title_ja')
+        ##get query
+        if "title_in" in self.request.GET:
+            title_in = self.request.GET.get("title_in")
+        if "author_in" in self.request.GET:
+            author_in = self.request.GET.get("author_in")
+        if "year_in" in self.request.GET:
+            year_in = self.request.GET.get("year_in")
+
+        ##filtering
+        return Bibtex.objects.filter(title_ja=title_in).order_by('-pub_date', 'title_en', 'title_ja')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
