@@ -5,12 +5,44 @@
 		<div class="card-body">
 				<div class="row mb-3">
 						<div class="col-12">
-								<div class="input-group input-group-sm mb-3">
-										<input type="text" class="form-control" placeholder="Keyword" aria-label="Keyword" aria-describedby="basic-addon2">
-										<div class="input-group-append">
-												<button class="btn btn-secondary" type="button">Search</button>
-										</div>
-								</div>
+									<form action="" method="get">
+									<div class="input-group input-group-sm mb-3">
+											<input type="text" class="form-control" placeholder="Keyword1 Keyword2 ..." aria-label="Keyword" aria-describedby="basic-addon2" name="keywords">
+											<div class="input-group-append">
+													<button class="btn btn-secondary" type="submit">Search</button>
+											</div>
+									</div>
+
+									<div class="form-group row">
+										<label for="example-text-input" class="col-2 col-form-label">book style</label>
+										<div class="col-4"><select name=book_style  class="form-control form-control-sm">
+										<option value="ALL">all</option>
+										<option value="INTPROC">Interproceedings</option>
+										<option value="JOURNAL">Jounals</option>
+										<option value="CONF_DOMESTIC">Domestic Conference</option>
+										<option value="CONF_DOMESTIC_NO_REVIEW">Domestic Conf(NoReview)</option>
+										<option value="CONF_NATIONAL">National Conference</option>
+										<option value="BOOK">Book/Review/Editor</option>
+										<option value="KEYNOTE">Presentaion/Seminer</option>
+										<option value="NEWS">New Paper article</option>
+										<option value="OTHERS">others</option>
+										<option value="AWARD">Award</option>
+										</select></div>
+										<label for="example-text-input" class="col-2 col-form-label">order</label>
+										<div class="col-4"><select name=order  class="form-control form-control-sm">
+										<option value="ascending">ascending(pub_date)</option>
+										<option value="desending">desending(pub_date)</option>
+										</select></div>
+									</div>
+
+									<div class="form-group row">
+										<label for="example-text-input" class="col-2 col-form-label">pubdate</label>
+										<div class="col-3">
+			        			<input type="date" name="pubdate_start" class="form-control form-control-sm"></div>~
+										<div class="col-3"><input type="date" name="pubdate_end" class="form-control form-control-sm"></div>
+									</div>
+
+		    					</form>
 						</div>
 						<div class="col-12 mb-1">
 								<div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
@@ -20,16 +52,6 @@
 										<a href="{% url 'dashboard:index_latex' %}" class="btn btn{% if display_mode != 'latex' %}-outline{% endif %}-secondary" >Latex View</a>
 
 								</div>
-						</div>
-				</div>
-				<div class="row">
-						<div class="col-12">
-							<form action="" method="get">
-        				<label>title:<input type="text" size="10" name="title_in"></label>
-	        			<label>author:<input type="text" size="10" name="author_in"></label>
-	        			<label>year:<input type="text" size="2" name="year_in"></label>
-        				<input type="submit" value="検索">
-    					</form>
 						</div>
 				</div>
 		</div>

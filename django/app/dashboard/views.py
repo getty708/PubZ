@@ -2,29 +2,93 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404, render
 from django.views import generic
 
-
+import datetime
 
 from core.models import Author, Bibtex, Book, AuthorOrder, Tag
 from notification import alert
-
+from dashboard.forms import BibtexForm
+from django.db.models import Q
 """
 Bibtex
 """
 class IndexView(generic.ListView):
     template_name = 'dashboard/index.html'
     context_object_name = 'latest_bibtex_list'
+    form_class = BibtexForm
+
+    def keywords_filtering(self, bibtex_queryset, keywords):
+
+        keywords_list = keywords.split(" ")
+
+        for one_keyword in keywords_list:
+            bibtex_queryset = bibtex_queryset.filter(
+                Q(title_en__icontains=one_keyword) |
+                Q(title_ja__contains=one_keyword) |
+                Q(book__title__icontains=one_keyword) |
+                Q(note__icontains=one_keyword)
+            ).distinct()
+
+        return bibtex_queryset
 
     def get_queryset(self):
         ##get query
-        if "title_in" in self.request.GET:
-            title_in = self.request.GET.get("title_in")
-        if "author_in" in self.request.GET:
-            author_in = self.request.GET.get("author_in")
-        if "year_in" in self.request.GET:
-            year_in = self.request.GET.get("year_in")
+        if "keywords" in self.request.GET:
+            keywords = self.request.GET.get("keywords")
+        else:
+            keywords = None
+        if "book_style" in self.request.GET:
+            book_style = self.request.GET.get("book_style")
+        else:
+            book_style = None
+        if "order" in self.request.GET:
+            order = self.request.GET.get("order")
+        else:
+            order = None
+        if "pubdate_start" in self.request.GET:
+            pubdate_start = self.request.GET.get("pubdate_start")
+            if pubdate_start!="":
+                pd_start_list = pubdate_start.split("-")
+                pubdate_start_field = datetime.date(int(pd_start_list[0]), int(pd_start_list[1]), int(pd_start_list[2]))
+            else:
+                pubdate_start_field = None
+        else:
+            pubdate_start_field = None
+        if "pubdate_end" in self.request.GET:
+            pubdate_end = self.request.GET.get("pubdate_end")
+            if pubdate_end!="":
+                pd_end_list = pubdate_end.split("-")
+                pubdate_end_field = datetime.date(int(pd_end_list[0]), int(pd_end_list[1]), int(pd_end_list[2]))
+            else:
+                pubdate_end_field = None
+        else:
+            pubdate_end_field = None
 
         ##filtering
-        return Bibtex.objects.filter(title_ja=title_in).order_by('-pub_date', 'title_en', 'title_ja')
+        bibtex_queryset = Bibtex.objects.all()
+
+        #book_style
+        if  book_style!=None and book_style!="ALL":
+            bibtex_queryset = bibtex_queryset.filter(book__style=book_style)
+
+        #pubdate
+        if pubdate_start_field!=None and pubdate_end_field!=None:
+            bibtex_queryset = bibtex_queryset.filter(pub_date__gte=pubdate_start_field, pub_date__lte=pubdate_end_field)
+        elif pubdate_start_field!=None:
+            bibtex_queryset = bibtex_queryset.filter(pub_date__gte=pubdate_start_field)
+        elif pubdate_end_field!=None:
+            bibtex_queryset = bibtex_queryset.filter(pub_date__lte=pubdate_end_field)
+
+        #keywords
+        if keywords!=None:
+            bibtex_queryset = self.keywords_filtering(bibtex_queryset,keywords)
+
+        #order
+        if order==None:
+            return bibtex_queryset.order_by('-pub_date', 'title_en', 'title_ja')
+        elif order=="ascending":
+            return bibtex_queryset.order_by('-pub_date', 'title_en', 'title_ja')
+        elif order=="desending":
+            return bibtex_queryset.order_by('pub_date', 'title_en', 'title_ja')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
