@@ -5,8 +5,8 @@ from dashboard import views, views_edit
 app_name = 'dashboard'
 urlpatterns = [
     # ex: /polls/
-    path('', views.IndexView.as_view(), name='index'),
-    path('list/', views.IndexView.as_view(), name='index_list'),
+    path('', views.IndexViewList.as_view(), name='index'),
+    path('list/', views.IndexViewList.as_view(), name='index_list'),
     path('tab/', views.IndexViewTable.as_view(), name='index_table'),
     path('bib/', views.IndexViewBib.as_view(), name='index_bib'),
     path('latex/', views.IndexViewLatex.as_view(), name='index_latex'),

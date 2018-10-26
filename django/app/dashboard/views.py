@@ -12,9 +12,6 @@ from django.db.models import Q
 Bibtex
 """
 class IndexView(generic.ListView):
-    template_name = 'dashboard/index.html'
-    context_object_name = 'latest_bibtex_list'
-    form_class = BibtexForm
 
     def keywords_filtering(self, bibtex_queryset, keywords):
 
@@ -95,6 +92,11 @@ class IndexView(generic.ListView):
         context["book_style_list"] = ["INTPROC","JOURNAL","CONF_DOMESTIC","CONF_DOMESTIC_NO_REVIEW","CONF_NATIONAL","BOOK","KEYNOTE","NEWS","OTHERS","AWARD"]
         return context
 
+class IndexViewList(IndexView):
+
+    template_name = 'dashboard/index.html'
+    context_object_name = 'latest_bibtex_list'
+
 class AddTestDatas(generic.TemplateView):###for test
 
     #add test kanren ha,
@@ -145,43 +147,17 @@ class AddTestDatas(generic.TemplateView):###for test
     #AuthorOrder(bibtex=bibtex2,author=author_1,order=1).save()
     #AuthorOrder(bibtex=bibtex2,author=author_2,order=2).save()
 
-class IndexViewTable(generic.ListView):
+class IndexViewTable(IndexView):
     template_name = 'dashboard/bibtex/index_tab.html'
     context_object_name = 'latest_bibtex_list'
 
-    def get_queryset(self):
-        return Bibtex.objects.order_by('-pub_date')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["book_style_list"] = ["INTPROC","JOURNAL","CONF_DOMESTIC","CONF_DOMESTIC_NO_REVIEW","CONF_NATIONAL","BOOK","KEYNOTE","NEWS","OTHERS","AWARD"]
-        return context
-
-
-class IndexViewBib(generic.ListView):
+class IndexViewBib(IndexView):
     template_name = 'dashboard/bibtex/index_bib.html'
     context_object_name = 'latest_bibtex_list'
 
-    def get_queryset(self):
-        return Bibtex.objects.order_by('-pub_date')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["book_style_list"] = ["INTPROC","JOURNAL","CONF_DOMESTIC","CONF_DOMESTIC_NO_REVIEW","CONF_NATIONAL","BOOK","KEYNOTE","NEWS","OTHERS","AWARD"]
-        return context
-
-class IndexViewLatex(generic.ListView):
+class IndexViewLatex(IndexView):
     template_name = 'dashboard/bibtex/index_latex.html'
     context_object_name = 'latest_bibtex_list'
-
-    def get_queryset(self):
-        return Bibtex.objects.order_by('-pub_date')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["book_style_list"] = ["INTPROC","JOURNAL","CONF_DOMESTIC","CONF_DOMESTIC_NO_REVIEW","CONF_NATIONAL","BOOK","KEYNOTE","NEWS","OTHERS","AWARD"]
-        return context
-
 
 
 class DetailView(generic.DetailView):
