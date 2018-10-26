@@ -18,7 +18,7 @@ urlpatterns = [
     path('author/<int:pk>/',views.AuthorDetailView.as_view(), name='author_detail'),
     path('notification/alert',views.notification_alert,  name='notification_alert'),
 
-    path('add_test_datas/', views.AddTestDatas.as_view(), name='addtestdatas'),##for test
+    #path('add_test_datas/', views.AddTestDatas.as_view(), name='addtestdatas'),##for test
 
     # Edit Function
     path('add',            views_edit.bibtex_edit, name='bibtex_add'),

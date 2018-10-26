@@ -38,7 +38,7 @@
 												{% endif %}
 										</td>
 										<td>{{ bibtex.book }}</td>
-										<td>TBA</td>
+										<td>{{ bibtex | bibtex_get:"authors"  }}</td>
 										<td>
 												<a href="{% url 'dashboard:detail' bibtex.id  %}">Detail</a>
 										</td>
