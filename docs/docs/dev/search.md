@@ -1,14 +1,14 @@
 # Dashboard Search Function
 
-## search conditions
-
 ### where
-・keyword
-・book_style
-・author
-・book_name(conference)
-・tags
-・pub_date(duration)
++partial match & A==a
+
++keyword
+++AND search.
+++title,book,author,note,(tag)
+
++book_style
++pub_date
 
 ### order by
-・pub_date(ascending, decending)
++pub_date(ascending, decending)

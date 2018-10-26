@@ -22,6 +22,8 @@ class IndexView(generic.ListView):
                 Q(title_en__icontains=one_keyword) |
                 Q(title_ja__contains=one_keyword) |
                 Q(book__title__icontains=one_keyword) |
+                Q(authors__name_en__icontains=one_keyword) |
+                Q(authors__name_ja__icontains=one_keyword) |
                 Q(note__icontains=one_keyword)
             ).distinct()
 

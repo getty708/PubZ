@@ -2,6 +2,7 @@
 
 {% block title %}Dashboard | Top{% endblock title %}
 {% load utils_bib_get_data %}
+{% load utils_bib_format %}
 
 {% block content %}
 <div class="row">
@@ -30,6 +31,7 @@
 					<tr><td>impact_factor</td><td>{{ bibtex.impact_factor }}</td></tr>
 					<tr><td>note</td><td>{{ bibtex.note }}</td></tr>
 					<tr><td>tags</td><td>{{ bibtex | bibtex_get:"tags" }}</td></tr>
+					<tr><td>Bibtex</td><td>{{ bibtex | bibtex_bib_format }}</td></tr>
 				</table>
 		</div>
 		<div class="col-12 my-3">
