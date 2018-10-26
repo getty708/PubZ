@@ -99,7 +99,7 @@ class IndexViewList(IndexView):
     template_name = 'dashboard/index.html'
     context_object_name = 'latest_bibtex_list'
 
-class AddTestDatas(generic.TemplateView):###for test
+"""class AddTestDatas(generic.TemplateView):###for test
 
     #add test kanren ha,
     #urls no add to
@@ -147,7 +147,7 @@ class AddTestDatas(generic.TemplateView):###for test
     AuthorOrder(bibtex=bibtex1,author=author_1,order=1).save()
     AuthorOrder(bibtex=bibtex1,author=author_2,order=2).save()
     #AuthorOrder(bibtex=bibtex2,author=author_1,order=1).save()
-    #AuthorOrder(bibtex=bibtex2,author=author_2,order=2).save()
+    #AuthorOrder(bibtex=bibtex2,author=author_2,order=2).save()"""
 
 class IndexViewTable(IndexView):
     template_name = 'dashboard/bibtex/index_tab.html'
