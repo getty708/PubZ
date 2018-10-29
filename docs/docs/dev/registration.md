@@ -43,7 +43,7 @@ Just provide `language, title, book`. In the next page, our app returns you a fo
 2. Please fill in the table with other informatin of the Bibtex.
 3. Press __`Update`__ button to finish the registration, and then you can see the list of all the regisgered Bibtex.
 
-
+![RegisterFLow](../../../django/app/static/images/RegistrationFlow.png)
 
 ## Validation
 In this section, we are going to describe how to edit and apply validation rules in this application.

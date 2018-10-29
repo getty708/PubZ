@@ -1,7 +1,6 @@
 from django.urls import path
 
-from api import views
-from api import views_autocomplete
+from api import views, views_autocomplete
 
 app_name = 'api'
 urlpatterns = [

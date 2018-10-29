@@ -37,8 +37,8 @@
 						<div class="form-group row">
 								{{ form.book.errors }}
 								<label for="example-text-input" class="col-2 col-form-label">Book</label>
-								<div class="col-5">{{ form.book }}</div>
-								<div class="col-5"><a href="{% url 'dashboard:bibtex_add' %}" class="btn btn-sm btn-outline-primary" >Add New Book</a></div>
+								<div class="col-6">{{ form.book }}</div>
+								<div class="col-3"><a href="{% url 'dashboard:book_add' %}" class="btn btn-sm btn-outline-primary" >Add New Book</a></div>
 						</div>
 
 						<button type="submit" class="btn btn-sm btn-primary">Add New</button>
@@ -59,13 +59,13 @@
         							<h4> Register Title and Book </h4>
         								<ol>
 											<li>
-												As for the first step, you need to choose the <font size="-1" face="Verdana" color="Crimson" style="background:#F0F0F0">Language</font>, input the <font size="-1" face="Verdana" color="Crimson" style="background:#F0F0F0">Title</font> and choose the <font size="-1" face="Verdana" color="Crimson" style="background:#F0F0F0">Book</font> of the Bibtex. 
+												As for the first step, you need to choose the <font class="p-1 bg-light text-danger">Language</font>, input the <font class="p-1 bg-light text-danger">Title</font> and choose the <font class="p-1 bg-light text-danger">Book</font> of the Bibtex. 
 											</li>
 											<li>
-												If the this book is not included in our system, please press <font size="-1" face="Verdana" color="Crimson" style="background:#F0F0F0">Add New Book</font>, and refer <strong>[Step 2]</strong> within the <font size="-1" face="Verdana" color="Crimson" style="background:#F0F0F0">Help</font> button. 
+												If the this book is not included in our system, please press <font class="p-1 bg-light text-danger">Add New Book</font>, and refer <strong>[Step 2]</strong> within the <font class="p-1 bg-light text-danger">Help</font> button. 
 											</li>
 											<li>
-												Press <font size="-1" face="Verdana" color="Crimson" style="background:#F0F0F0">Add New</font> button and continue the registration. 
+												Press <font class="p-1 bg-light text-danger">Add New</font> button and continue the registration. 
 											</li>
 										</ol>
 										<hr>
