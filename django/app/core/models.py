@@ -38,9 +38,10 @@ class Bibtex(models.Model):
     url = models.URLField(null=True,blank=True)
     note = models.TextField(null=True,blank=True)
     abstruct = models.TextField(null=True,blank=True)
-    image = models.ImageField(null=True,blank=True)
+    image = models.ImageField(null=True,blank=True, upload_to="api")
     tags = models.ManyToManyField(
         'core.Tag',
+        through='core.TagChain',
         blank=True,
     )
     is_published = models.BooleanField(default=False, blank=True)
