@@ -17,6 +17,20 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         return Bibtex.objects.order_by('-pub_date', 'title_en', 'title_ja')
 
+        query_set,self.query_param_dic = utils.perse_get_query_params(self.request)
+
+        return query_set
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["book_style_list"] = ["INTPROC","JOURNAL","CONF_DOMESTIC","CONF_DOMESTIC_NO_REVIEW","CONF_NATIONAL","BOOK","KEYNOTE","NEWS","OTHERS","AWARD"]
+        context["query_params"] = self.query_param_dic
+        return context
+
+class IndexViewList(IndexView):
+
+    template_name = 'dashboard/index.html'
+    context_object_name = 'latest_bibtex_list'
 
 class IndexViewTable(generic.ListView):
     template_name = 'dashboard/bibtex/index_tab.html'
@@ -40,8 +54,8 @@ class IndexViewLatex(generic.ListView):
     def get_queryset(self):
         return Bibtex.objects.order_by('-pub_date')
 
-      
-      
+
+
 class DetailView(generic.DetailView):
     model = Bibtex
     template_name = 'dashboard/detail.html'
