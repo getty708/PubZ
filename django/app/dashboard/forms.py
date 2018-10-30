@@ -149,6 +149,10 @@ class BibtexForm(forms.ModelForm):
             'acceptance_rate','impact_factor','url','note',
             'abstruct','image','is_published',
         ]
+        widgets = {
+            'book': autocomplete.ListSelect2(
+                url='api:autocomplete_book',),
+        }
 
     def __init__(self,*args,**kwargs):
         super(BibtexForm,self).__init__(*args,**kwargs)
@@ -206,11 +210,12 @@ class BibtexFormStep1(forms.Form):
     # Book
     book = forms.ModelChoiceField(
         queryset=models.Book.objects.order_by('style', 'title',),
-        empty_label='---')
+        empty_label='---',
+        widget=autocomplete.ListSelect2(url='api:autocomplete_book')
+        )
     book.widget.attrs.update({
             'class': 'form-control form-control-sm',
-    })    
-
+    })   
 
     def clean_base(self, key):
         validator_dict = validators.validation_callback_bibtex_form_step1
