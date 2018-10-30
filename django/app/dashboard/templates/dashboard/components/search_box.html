@@ -7,7 +7,7 @@
 						<div class="col-12">
 									<form action="" method="get">
 									<div class="input-group input-group-sm mb-3">
-											<input type="text" class="form-control" placeholder="Keyword1 Keyword2 ...(and search)" aria-label="Keyword" aria-describedby="basic-addon2" name="keywords">
+											<input type="text" class="form-control" placeholder="Keyword1 Keyword2 ...(and search)" value="{% if query_params %}{{query_params.keywords}}{% endif %}" aria-label="Keyword" aria-describedby="basic-addon2" name="keywords">
 											<div class="input-group-append">
 													<button class="btn btn-secondary" type="submit">Search</button>
 											</div>
@@ -15,7 +15,8 @@
 
 									<div class="form-group row">
 										<label for="example-text-input" class="col-2 col-form-label">book style</label>
-										<div class="col-4"><select name=book_style  class="form-control form-control-sm">
+										<div class="col-4"><select name=book_style  class="form-control form-control-sm"
+											{% if query_params %} default={{query_params.book_style}} {% endif %}>
 										<option value="ALL">all</option>
 										<option value="INTPROC">Interproceedings</option>
 										<option value="JOURNAL">Jounals</option>

@@ -8,90 +8,28 @@ from core.models import Author, Bibtex, Book, AuthorOrder, Tag
 from notification import alert
 from dashboard.forms import BibtexForm
 from django.db.models import Q
+
+from dashboard.templatetags import utils_search as utils
+
 """
 Bibtex
 """
 class IndexView(generic.ListView):
 
-    def keywords_filtering(self, bibtex_queryset, keywords):
-
-        keywords_list = keywords.split(" ")
-
-        for one_keyword in keywords_list:
-            bibtex_queryset = bibtex_queryset.filter(
-                Q(title_en__icontains=one_keyword) |
-                Q(title_ja__contains=one_keyword) |
-                Q(book__title__icontains=one_keyword) |
-                Q(authors__name_en__icontains=one_keyword) |
-                Q(authors__name_ja__icontains=one_keyword) |
-                Q(note__icontains=one_keyword)
-            ).distinct()
-
-        return bibtex_queryset
-
     def get_queryset(self):
-        ##get query
-        if "keywords" in self.request.GET:
-            keywords = self.request.GET.get("keywords")
-        else:
-            keywords = None
-        if "book_style" in self.request.GET:
-            book_style = self.request.GET.get("book_style")
-        else:
-            book_style = None
-        if "order" in self.request.GET:
-            order = self.request.GET.get("order")
-        else:
-            order = None
-        if "pubdate_start" in self.request.GET:
-            pubdate_start = self.request.GET.get("pubdate_start")
-            if pubdate_start!="":
-                pd_start_list = pubdate_start.split("-")
-                pubdate_start_field = datetime.date(int(pd_start_list[0]), int(pd_start_list[1]), int(pd_start_list[2]))
-            else:
-                pubdate_start_field = None
-        else:
-            pubdate_start_field = None
-        if "pubdate_end" in self.request.GET:
-            pubdate_end = self.request.GET.get("pubdate_end")
-            if pubdate_end!="":
-                pd_end_list = pubdate_end.split("-")
-                pubdate_end_field = datetime.date(int(pd_end_list[0]), int(pd_end_list[1]), int(pd_end_list[2]))
-            else:
-                pubdate_end_field = None
-        else:
-            pubdate_end_field = None
 
-        ##filtering
-        bibtex_queryset = Bibtex.objects.all()
+        query_set,self.query_param_dic = utils.perse_get_query_params(self.request)
 
-        #book_style
-        if  book_style!=None and book_style!="ALL":
-            bibtex_queryset = bibtex_queryset.filter(book__style=book_style)
-
-        #pubdate
-        if pubdate_start_field!=None and pubdate_end_field!=None:
-            bibtex_queryset = bibtex_queryset.filter(pub_date__gte=pubdate_start_field, pub_date__lte=pubdate_end_field)
-        elif pubdate_start_field!=None:
-            bibtex_queryset = bibtex_queryset.filter(pub_date__gte=pubdate_start_field)
-        elif pubdate_end_field!=None:
-            bibtex_queryset = bibtex_queryset.filter(pub_date__lte=pubdate_end_field)
-
-        #keywords
-        if keywords!=None:
-            bibtex_queryset = self.keywords_filtering(bibtex_queryset,keywords)
-
-        #order
-        if order==None:
-            return bibtex_queryset.order_by('-pub_date', 'title_en', 'title_ja')
-        elif order=="ascending":
-            return bibtex_queryset.order_by('-pub_date', 'title_en', 'title_ja')
-        elif order=="desending":
-            return bibtex_queryset.order_by('pub_date', 'title_en', 'title_ja')
+        return query_set
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["book_style_list"] = ["INTPROC","JOURNAL","CONF_DOMESTIC","CONF_DOMESTIC_NO_REVIEW","CONF_NATIONAL","BOOK","KEYNOTE","NEWS","OTHERS","AWARD"]
+        context["query_params"] = self.query_param_dic
+        """if self.query_param_dic in locals():
+            context["query_params"] = self.query_param_dic
+        else:
+            context["query_params"] = {"keywords":"","book_style":"","order":"","pubdate_start":"","pubdate_end":""}"""
         return context
 
 class IndexViewList(IndexView):
