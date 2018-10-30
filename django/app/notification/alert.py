@@ -2,6 +2,7 @@
 from django.core.mail import send_mail
 from django.template.loader import get_template
 from core.models import Bibtex
+from .const import address
 
 def send_email_test():
     # 件名
