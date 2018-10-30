@@ -27,7 +27,7 @@ def send_email_test():
 
     # あて先
     recipient_list = [
-        "mmde-m1@mmde-mail.ise.eng.osaka-u.ac.jp"
+        "test@test.com"
     ]
 
     return send_mail(subject, message, from_email, recipient_list)
