@@ -8,7 +8,7 @@
 <div class="row">
 		<div class="col-12 my-3">
 				<h2>Papers</h2>
-				{% search_box 'list' %}
+				{% search_box 'list' query_params %}
 				<ul>
 						{% for bibtex in latest_bibtex_list %}
 						<li><a href="{% url 'dashboard:detail' bibtex.id  %}">{{ bibtex.title_en }}</a></li>

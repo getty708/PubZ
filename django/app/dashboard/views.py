@@ -26,10 +26,6 @@ class IndexView(generic.ListView):
         context = super().get_context_data(**kwargs)
         context["book_style_list"] = ["INTPROC","JOURNAL","CONF_DOMESTIC","CONF_DOMESTIC_NO_REVIEW","CONF_NATIONAL","BOOK","KEYNOTE","NEWS","OTHERS","AWARD"]
         context["query_params"] = self.query_param_dic
-        """if self.query_param_dic in locals():
-            context["query_params"] = self.query_param_dic
-        else:
-            context["query_params"] = {"keywords":"","book_style":"","order":"","pubdate_start":"","pubdate_end":""}"""
         return context
 
 class IndexViewList(IndexView):

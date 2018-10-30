@@ -7,7 +7,7 @@
 						<div class="col-12">
 									<form action="" method="get">
 									<div class="input-group input-group-sm mb-3">
-											<input type="text" class="form-control" placeholder="Keyword1 Keyword2 ...(and search)" value="{% if query_params %}{{query_params.keywords}}{% endif %}" aria-label="Keyword" aria-describedby="basic-addon2" name="keywords">
+											<input type="text" class="form-control" placeholder="Keyword1 Keyword2 ...(and search)" value="{% if query_params.keywords %}{{query_params.keywords}}{% endif %}" aria-label="Keyword" aria-describedby="basic-addon2" name="keywords">
 											<div class="input-group-append">
 													<button class="btn btn-secondary" type="submit">Search</button>
 											</div>
@@ -15,32 +15,31 @@
 
 									<div class="form-group row">
 										<label for="example-text-input" class="col-2 col-form-label">book style</label>
-										<div class="col-4"><select name=book_style  class="form-control form-control-sm"
-											{% if query_params %} default={{query_params.book_style}} {% endif %}>
-										<option value="ALL">all</option>
-										<option value="INTPROC">Interproceedings</option>
-										<option value="JOURNAL">Jounals</option>
-										<option value="CONF_DOMESTIC">Domestic Conference</option>
-										<option value="CONF_DOMESTIC_NO_REVIEW">Domestic Conf(NoReview)</option>
-										<option value="CONF_NATIONAL">National Conference</option>
-										<option value="BOOK">Book/Review/Editor</option>
-										<option value="KEYNOTE">Presentaion/Seminer</option>
-										<option value="NEWS">New Paper article</option>
-										<option value="OTHERS">others</option>
-										<option value="AWARD">Award</option>
+										<div class="col-4"><select name=book_style  class="form-control form-control-sm">
+										<option value="ALL" {% if query_params.book_style == "ALL" %}selected{% endif %}>all</option>
+										<option value="INTPROC" {% if query_params.book_style == "INTPROC" %}selected{% endif %}>Interproceedings</option>
+										<option value="JOURNAL" {% if query_params.book_style == "JOURNAL" %}selected{% endif %}>Jounals</option>
+										<option value="CONF_DOMESTIC" {% if query_params.book_style == "CONF_DOMESTIC" %}selected{% endif %}>Domestic Conference</option>
+										<option value="CONF_DOMESTIC_NO_REVIEW" {% if query_params.book_style == "CONF_DOMESTIC_NO_REVIEW" %}selected{% endif %}>Domestic Conf(NoReview)</option>
+										<option value="CONF_NATIONAL" {% if query_params.book_style == "CONF_NATIONAL" %}selected{% endif %}>National Conference</option>
+										<option value="BOOK" {% if query_params.book_style == "BOOK" %}selected{% endif %}>Book/Review/Editor</option>
+										<option value="KEYNOTE" {% if query_params.book_style == "KEYNOTE" %}selected{% endif %}>Presentaion/Seminer</option>
+										<option value="NEWS" {% if query_params.book_style == "NEWS" %}selected{% endif %}>New Paper article</option>
+										<option value="OTHERS" {% if query_params.book_style == "OTHERS" %}selected{% endif %}>others</option>
+										<option value="AWARD" {% if query_params.book_style == "AWARD" %}selected{% endif %}>Award</option>
 										</select></div>
 										<label for="example-text-input" class="col-2 col-form-label">order</label>
 										<div class="col-4"><select name=order  class="form-control form-control-sm">
-										<option value="ascending">ascending(pub_date)</option>
-										<option value="desending">desending(pub_date)</option>
+										<option value="ascending" {% if query_params.order == "ascending" %}selected{% endif %}>ascending(pub_date)</option>
+										<option value="desending" {% if query_params.order == "desending" %}selected{% endif %}>desending(pub_date)</option>
 										</select></div>
 									</div>
 
 									<div class="form-group row">
 										<label for="example-text-input" class="col-2 col-form-label">pubdate</label>
 										<div class="col-3">
-			        			<input type="date" name="pubdate_start" class="form-control form-control-sm"></div>~
-										<div class="col-3"><input type="date" name="pubdate_end" class="form-control form-control-sm"></div>
+			        			<input type="date" name="pubdate_start" value="{% if query_params.pubdate_start %}{{query_params.pubdate_start}}{% endif %}" class="form-control form-control-sm"></div>~
+										<div class="col-3"><input type="date" name="pubdate_end" value="{% if query_params.pubdate_end %}{{query_params.pubdate_end}}{% endif %}" class="form-control form-control-sm"></div>
 									</div>
 
 		    					</form>
