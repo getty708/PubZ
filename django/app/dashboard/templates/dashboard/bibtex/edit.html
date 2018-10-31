@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load utils_author %}
 
 {% block title %}Dashboard | Bibtex Add{% endblock title %}
 
@@ -40,6 +41,9 @@
 						</div>
 						<div class="form-group row">
 								<label for="example-text-input" class="col-2 col-form-label">Authors</label>
+								<div class="col-1"> 
+									{{ bibtex | bibtex_author_format }} 
+								</div>
 								<div class="col-5">
 										<a href="{% url 'dashboard:author_order_add' %}?bibtex={{ bibtex.id }}" class="btn btn-sm btn-outline-primary" target="_blank">Add Author</a>
 								</div>
