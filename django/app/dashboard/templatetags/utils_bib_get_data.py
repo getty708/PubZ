@@ -3,7 +3,7 @@ from django.shortcuts import reverse
 from django import template
 register = template.Library()
 
-from core.models import Author, AuthorOrder, Tag
+from core.models import Author, AuthorOrder, Tag#, TagChain
 
 class BibtexGetData(object):
     def __init__(self, bibtex, *args, **kwargs):
@@ -24,8 +24,9 @@ class BibtexGetData(object):
         context["authors"] = self.get_string_authors(authors)
 
         # Get tags
-        tags = Tag.objects.filter(bibtex=bibtex).order_by('name')
-        context["tags"] = self.get_string_tags(tags)
+        #tags = TagChain.objects.filter(bibtex=bibtex).order_by('created')
+        #context["tags"] = self.get_string_tags(tags)
+        context["tags"] = "tagtest"
 
         return context[type]
 
