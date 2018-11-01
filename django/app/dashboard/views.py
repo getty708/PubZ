@@ -96,11 +96,6 @@ class IndexViewLatex(IndexView):
     context_object_name = 'latest_bibtex_list'
 
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> feature-view
 class DetailView(generic.DetailView):
     model = Bibtex
     template_name = 'dashboard/detail.html'
