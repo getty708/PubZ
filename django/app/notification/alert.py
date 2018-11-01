@@ -22,9 +22,9 @@ def send_email_test():
         message = message + mail_template.render(context) + "\n"
 
     # 送信元
-    from_email = "test@test.com"
+    #from_email = "test@test.com"
 
-    #from_email = "settings.EMAIL_HOST_USER"
+    from_email = "settings.EMAIL_HOST_USER"
 
     # あて先
     recipient_list = address
