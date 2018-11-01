@@ -58,9 +58,13 @@ def perse_get_query_params(req):
     else:
         pubdate_end = None
         pubdate_end_field = None
+    if "tags" in req.GET:
+        tags = req.GET.get("tags")
+    else:
+        tags = None
 
     ##query params save
-    query_param_dic = {"keywords":keywords,"book_style":book_style,"order":order,"pubdate_start":pubdate_start,"pubdate_end":pubdate_end}
+    query_param_dic = {"keywords":keywords,"book_style":book_style,"order":order,"pubdate_start":pubdate_start,"pubdate_end":pubdate_end, "tags": tags}
 
     ##filtering
     bibtex_queryset = Bibtex.objects.all()
@@ -80,6 +84,10 @@ def perse_get_query_params(req):
     #keywords
     if keywords!=None:
         bibtex_queryset = keywords_filtering(bibtex_queryset,keywords)
+    
+    #tags
+    if tags != None:
+        bibtex_queryset = tags_filtering(bibtex_queryset, tags)
 
     #order
     if order==None:
@@ -102,6 +110,17 @@ def keywords_filtering(bibtex_queryset, keywords):
             Q(authors__name_en__icontains=one_keyword) |
             Q(authors__name_ja__icontains=one_keyword) |
             Q(note__icontains=one_keyword)
+        ).distinct()
+
+    return bibtex_queryset
+
+
+def tags_filtering(bibtex_queryset, tags):
+    tags_list = tags.split(" ")
+
+    for tag in tags_list:
+        bibtex_queryset = bibtex_queryset.filter(
+            Q(tags__name__icontains=tag)
         ).distinct()
 
     return bibtex_queryset
