@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Dashboard | Bibtex Add{% endblock title %}
 
@@ -9,7 +10,7 @@
 				<h2>Add New Bibtex [Step.1]</h2>
 				{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-				
+						
 				<form action="{{ submit_url }}" method="post">
 						{{ form.non_field_errors }}						
 						{% csrf_token %}
@@ -32,7 +33,41 @@
 
 						<button type="submit" class="btn btn-sm btn-primary">Add New</button>
 						<a href="{% url 'dashboard:index' %}" class="btn btn-outline-primary btn-sm">Back</a>
+
+						<!-- Button trigger modal -->
+						<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal">
+  						Guide
+						</button>
+
+						<!-- Modal -->
+						<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ 		 					<div class="modal-dialog" role="document">
+    							<div class="modal-content">
+      							<div class="modal-header">
+        							<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+		        					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          						<span aria-hidden="true">&times;</span>
+		        					</button>
+      							</div>
+      							<div class="modal-body">
+        							...
+		      					</div>
+      							<div class="modal-footer">
+        							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+<!--							    	<button type="button" class="btn btn-primary">Save changes</button>   -->
+ 						     	</div>
+    							</div>
+  							</div>
+						</div>
+
 				</form>				
 		</div>
+
+				
+
 </div>
+
+<script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+{{ form.media }}
+
 {% endblock content %}

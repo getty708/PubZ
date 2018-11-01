@@ -1,12 +1,21 @@
 {% extends "base.html" %}
 
 {% block title %}Dashboard | Book {% endblock title %}
+{% load utils_bib_get_data %}
 
 {% block content %}
 <div class="row">
 		<div class="col-12 my-3">
 				<h1 class="h3" ><small class="text-secondary mr-2" >Book Title:</small>{{ book.title }}</h1>
-				TBA
+		<table class="table table-sm table-striped">
+					<tr><td>title</td><td>{{ book.title }}</td></tr>
+					<tr><td>abbreviation</td><td>{{ book.abbr }}</td></tr>
+					<tr><td>publication_style</td><td>{{ book.style|get_display_name }}</td></tr>
+					<tr><td>institution</td><td>{{ book.institution }}</td></tr>
+					<tr><td>organizer</td><td>{{ book.organizer }}</td></tr>
+					<tr><td>publisher</td><td>{{ book.publisher }}</td></tr>
+					<tr><td>address</td><td>{{ book.address }}</td></tr>
+		</table>
 		</div>
 </div>
 {% endblock content %}

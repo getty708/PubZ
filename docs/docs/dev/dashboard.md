@@ -485,7 +485,6 @@ dashboard.templatetags.utils_bib_format.BibtexFormatListDefault
 
 -天方さんにBook/Review/...のtypeをどうするか相談！
 
-
 ## Search Function
 Use search form.
 

@@ -9,9 +9,10 @@ register = template.Library()
 
 
 @register.inclusion_tag('dashboard/components/search_box.html')
-def search_box(display_mode, *args, **kwargs):
+def search_box(display_mode, query_params,*args, **kwargs):
     return {
         "display_mode": display_mode,
+        "query_params": query_params
     }
 
 def perse_get_query_params(req):
@@ -22,7 +23,7 @@ def perse_get_query_params(req):
      -
      Return.
      -------
-     - QuerySet
+     - QuerySet, request_dict
     """
     ##return get query
     if "keywords" in req.GET:
@@ -45,6 +46,10 @@ def perse_get_query_params(req):
         else:
             pubdate_start_field = None
     else:
+<<<<<<< HEAD
+=======
+        pubdate_start = None
+>>>>>>> feature-view
         pubdate_start_field = None
     if "pubdate_end" in req.GET:
         pubdate_end = req.GET.get("pubdate_end")
@@ -54,10 +59,18 @@ def perse_get_query_params(req):
         else:
             pubdate_end_field = None
     else:
+<<<<<<< HEAD
         pubdate_end_field = None
 
     ##query params save
     query_param_dic = {"keywords":keywords       }
+=======
+        pubdate_end = None
+        pubdate_end_field = None
+
+    ##query params save
+    query_param_dic = {"keywords":keywords,"book_style":book_style,"order":order,"pubdate_start":pubdate_start,"pubdate_end":pubdate_end}
+>>>>>>> feature-view
 
     ##filtering
     bibtex_queryset = Bibtex.objects.all()
@@ -80,11 +93,19 @@ def perse_get_query_params(req):
 
     #order
     if order==None:
+<<<<<<< HEAD
         return bibtex_queryset.order_by('-pub_date', 'title_en', 'title_ja')
     elif order=="ascending":
         return bibtex_queryset.order_by('-pub_date', 'title_en', 'title_ja')
     elif order=="desending":
         return bibtex_queryset.order_by('pub_date', 'title_en', 'title_ja')
+=======
+        return bibtex_queryset.order_by('-pub_date', 'title_en', 'title_ja'),query_param_dic
+    elif order=="ascending":
+        return bibtex_queryset.order_by('-pub_date', 'title_en', 'title_ja'),query_param_dic
+    elif order=="desending":
+        return bibtex_queryset.order_by('pub_date', 'title_en', 'title_ja'),query_param_dic
+>>>>>>> feature-view
 
 
 def keywords_filtering(bibtex_queryset, keywords):

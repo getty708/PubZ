@@ -2,6 +2,7 @@
 
 {% block title %}Dashboard | Table View{% endblock title %}
 {% load utils_search %}
+{% load utils_bib_get_data %}
 
 
 {% block content %}
@@ -26,7 +27,7 @@
 								</tr>
 						</thead>
 						<tbody>
-								{% for bibtex in latest_bibtex_list %}
+								{% for bibtex in latest_bibtex_list|get_booktype_bibtex:book_style %}
 								<tr>
 										<th scope="row">{{ forloop.counter }}</th>
 										<td>
@@ -37,7 +38,7 @@
 												{% endif %}
 										</td>
 										<td>{{ bibtex.book }}</td>
-										<td>TBA</td>
+										<td>{{ bibtex | bibtex_get:"authors"  }}</td>
 										<td>
 												<a href="{% url 'dashboard:detail' bibtex.id  %}">Detail</a>
 										</td>
@@ -48,6 +49,7 @@
 				{% else %}
 				<p>No data are available.</p>
 				{% endif %}
+				{% endfor %}
 		</div>
 </div>
 {% endblock content %}
