@@ -1,7 +1,6 @@
 from dal import autocomplete
 
-from core.models import Author
-from core.models import Book
+from core.models import Author, Book
 
 class AutocompleteAuthor(autocomplete.Select2QuerySetView):
     def get_queryset(self):
