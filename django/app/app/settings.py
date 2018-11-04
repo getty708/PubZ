@@ -150,3 +150,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_HOST_USER = 'apptest'
 # EMAIL_HOST_PASSWORD = 'xxxxxxxx'
 # EMAIL_USE_TLS = False
+
+X_FRAME_OPTIONS = 'ALLOWALL'
