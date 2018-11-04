@@ -1,7 +1,9 @@
 from django import forms
-
+from dal import autocomplete
 
 from core import models
+from dashboard import validators
+
 
 
 """
@@ -40,6 +42,32 @@ class AuthorForm(forms.ModelForm):
             'placeholder': "Date of Leave",
         })
 
+
+    def clean_base(self, key):
+        validator_dict = validators.validation_callback_author_form
+        val = self.cleaned_data[key]
+        if key in validator_dict.keys():
+            callback_funcs = validator_dict[key]
+            for func in callback_funcs:
+                val = func(val)
+        return val
+        
+    def clean_name_en(self):
+        return self.clean_base('name_en')
+
+    def clean_name_ja(self):
+        return self.clean_base('name_ja')
+
+    def clean_dep_en(self):
+        return self.clean_base('name_en')
+
+    def clean_dep_ja(self):
+        return self.clean_base('name_en')     
+           
+    def clean(self):
+        cleaned_data = super().clean()        
+        return cleaned_data        
+
         
 class AuthorOrderForm(forms.ModelForm):
     class Meta:
@@ -47,6 +75,10 @@ class AuthorOrderForm(forms.ModelForm):
         fields = [
             'bibtex','author','order',
         ]
+        widgets = {
+            'author': autocomplete.ListSelect2(
+                url='api:autocomplete_author',),
+        }
 
     def __init__(self, *args, **kwargs):
         super(AuthorOrderForm, self).__init__(*args, **kwargs)
@@ -79,6 +111,30 @@ class BookForm(forms.ModelForm):
             'placeholder': 'abbr',
         })
 
+
+    def clean_base(self, key):
+        validator_dict = validators.validation_callback_book_form
+        val = self.cleaned_data[key]        
+        if key in validator_dict.keys():
+            callback_funcs = validator_dict[key]
+            for func in callback_funcs:
+                val = func(val)
+        return val
+        
+    def clean_title(self):
+        return self.clean_base('title')
+
+    def clean_abbr(self):
+        return self.clean_base('abbr')
+    
+    def clean_institution(self):
+        return self.clean_base('institution')
+    
+            
+    def clean(self):
+        cleaned_data = super().clean()        
+        return cleaned_data        
+        
         
 
 """
@@ -93,15 +149,44 @@ class BibtexForm(forms.ModelForm):
             'acceptance_rate','impact_factor','url','note',
             'abstruct','image','is_published',
         ]
+        widgets = {
+            'book': autocomplete.ListSelect2(
+                url='api:autocomplete_book',),
+        }
 
     def __init__(self,*args,**kwargs):
         super(BibtexForm,self).__init__(*args,**kwargs)
-        print(self.Meta.fields)
         for key in self.Meta.fields:
             self.fields[key].widget.attrs.update({
                 'class': 'form-control form-control-sm',
             })
-              
+
+    # Validation
+    def clean_base(self, key):
+        validator_dict = validators.validation_callback_bibtex_form
+        val = self.cleaned_data[key]        
+        if key in validator_dict.keys():
+            callback_funcs = validator_dict[key]
+            for func in callback_funcs:
+                val = func(val)
+        return val
+    
+
+    def clean_title_en(self):
+        return self.clean_base('title_en')
+
+    def clean_title_ja(self):
+        return self.clean_base('title_ja')
+    
+    def clean_page(self):
+        return self.clean_base('page')
+    
+            
+    def clean(self):
+        cleaned_data = super().clean()        
+        return cleaned_data
+            
+    
         
 
         
@@ -125,8 +210,34 @@ class BibtexFormStep1(forms.Form):
     # Book
     book = forms.ModelChoiceField(
         queryset=models.Book.objects.order_by('style', 'title',),
-        empty_label='---')
+        empty_label='---',
+        widget=autocomplete.ListSelect2(url='api:autocomplete_book')
+        )
     book.widget.attrs.update({
             'class': 'form-control form-control-sm',
-    })    
+    })   
+
+    def clean_base(self, key):
+        validator_dict = validators.validation_callback_bibtex_form_step1
+        val = self.cleaned_data[key]        
+        if key in validator_dict.keys():
+            callback_funcs = validator_dict[key]
+            for func in callback_funcs:
+                val = func(val)
+        return val
+
+
+    def clean_lang(self):
+        return self.clean_base('lang')
+        
+    def clean_title(self):
+        return self.clean_base('title')
+
+    def clean_book(self):
+        return self.clean_base('book')
+    
+    def clean(self):
+        cleaned_data = super().clean()        
+        return cleaned_data
+
     

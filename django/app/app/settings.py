@@ -36,6 +36,9 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'dashboard.apps.DashboardConfig',
     'notification.apps.NotificationConfig',
+    # Additional Packages
+    'dal',
+    'dal_select2',
     # Default
     'django.contrib.admin',
     'django.contrib.auth',
@@ -90,7 +93,7 @@ DATABASES = {
         'USER': 'docker',
         'PASSWORD': 'docker',
         'HOST': 'db',
-    }    
+    }
 }
 
 
@@ -135,12 +138,15 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
+# Media files (Pictures)
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 # Mail Settings
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'localhost'
-# EMAIL_PORT = 25
-# EMAIL_HOST_USER = 'apptest'
-# EMAIL_HOST_PASSWORD = 'xxxxxxxx'
-# EMAIL_USE_TLS = False
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'bmanbman888'
+EMAIL_HOST_PASSWORD = 'uetskqmsskqhvpco'
+EMAIL_USE_TLS = True

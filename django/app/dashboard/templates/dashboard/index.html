@@ -2,6 +2,7 @@
 
 {% load utils_search %}
 {% load utils_bib_format %}
+{% load utils_bib_get_data %}
 
 
 {% block title %}Dashboard | Top{% endblock title %}
@@ -15,20 +16,26 @@
 </div>
 <div class="row mb-3">
 		<div class="col-12">
-				{% search_box 'list' %}
+				{% search_box 'list' query_params %}
 		</div>
 </div>
 <div class="row mb-3">
 		<div class="col-12">
-				{% if latest_bibtex_list %}
-				<ul>
-						{% for bibtex in latest_bibtex_list %}
-						<li>{{ bibtex | bibtex_list_format }}</li>
-						{% endfor %}
-				</ul>
+			{% for book_style in book_style_list %}
+			  <h4 id="{{book_style}}">{{ book_style|get_display_name }}</h4>
+        {% if latest_bibtex_list|get_booktype_bibtex:book_style %}
+					<ul>
+							{% for bibtex in latest_bibtex_list|get_booktype_bibtex:book_style %}
+							<li>{{ bibtex|bibtex_list_format }}</li>
+							{% endfor %}
+					</ul>
 				{% else %}
-				<p>No polls are available.</p>
+					<p>No polls are available.</p>
 				{% endif %}
+
+
+	   	{% endfor %}
+
 		</div>
 </div>
 {% endblock content %}

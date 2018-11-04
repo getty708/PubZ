@@ -153,6 +153,11 @@ If you want to chage these rule, check [TBA page](#)
 !!! Warning
 	We should select whether the information about year etc.. should be placed. If we palce them in `Bibtex` model, `Book` model shall not have such infomation. Otherwise if we place them in the `Book` object, we shall make copy function to make new `Book` obeject from previous year's one with ease.
 
+#### abbr
+TBA
+
+#### institude
+TBA
 
 
 -----------
@@ -167,13 +172,36 @@ Add tags to bibtex's. This model is used in search, web emedding API.
 + **id**: Defined by djnago app automatically. `AutoField`, primary key.
 + **name**: A tag name. `CharField(128)`
 + **description**: A description for this tag.
-+ (**bib**: Specify a publication. `ForeignKey`, foreign-key-ristriction(`Bibtex`), required.)
++ **parent**: Parent Tag of this. `ForeignKey`, foreign-key-ristriction(`Tag`), required.
 + **created**: Datetime which this object is created. This column is automatically filled by django app. `DateTimeField`.
 + **modified**: Datetime which this object is edited last time. This column is automatically filled by django app. `DateTimeField`.
 + **owner**: User who creates this object. This column is automatically filled by django app. `DateTimeField`.
 
 ### Validation Rules
 TBA
+
+----------
+## class **TagChain**
+
+```
+core.models.TagChain
+```
+
+This is a relation schema between Bibtex and Tag.
+
+### Properties
++ **id**: Defined by djnago app automatically. `AutoField`, primary key.
++ **bibtex**: Bibtex id. `ForeignKey()`, foreign-key-ristriction(`Bibtex`), required.
++ **tag**: Bibtex id. `ForeignKey()`, foreign-key-ristriction(`Tag`), required.
++ **created**: Datetime which this object is created. This column is automatically filled by django app. `DateTimeField`.
++ **modified**: Datetime which this object is edited last time. This column is automatically filled by django app. `DateTimeField`.
++ **owner**: User who creates this object. This column is automatically filled by django app. `DateTimeField`.
+
+
+### Validation
+TBA
+
+
 
 
 -----------

@@ -12,6 +12,7 @@ RUN apt-get install emacs24-nox -y
 # MySQLクライアントとPythonドライバ
 RUN apt-get install -y mysql-client
 RUN pip3 install -r requirements.txt
-RUN pip3 install PyMySQL 
+RUN pip3 install PyMySQL
+RUN pip3 install django-autocomplete-light
 
 ADD . /code/

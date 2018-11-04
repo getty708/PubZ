@@ -4,7 +4,7 @@ from django.views import generic
 from django.contrib.auth.models import User
 
 
-from core.models import Author, Bibtex, Book
+from core.models import Author, AuthorOrder, Bibtex, Book
 from dashboard import forms
 
 
@@ -121,7 +121,7 @@ Author
 def author_edit(request, author_id=None):
     msg = False
     if author_id:
-        author = get_object_or_404(Author, pk=book_id)
+        author = get_object_or_404(Author, pk=author_id)
         submit_url = reverse("dashboard:author_edit",
                              kwargs={'author_id':author.id})
     else:
@@ -142,6 +142,49 @@ def author_edit(request, author_id=None):
                   {'msg': msg,
                    'form':form,
                    'author': author,
+                   'submit_url': submit_url})
+
+
+
+"""
+AuthorOrder
+"""
+def author_order_edit(request, author_order_id=None):
+    msg = False    
+    if author_order_id:
+        author_order = get_object_or_404(AuthorOder, pk=author_order_id)
+        bibtex = author_order.bibtex
+        submit_url = reverse("dashboard:author_order_edit",
+                             kwargs={'author_order_id':author_order.id})
+    else:
+        author_order = AuthorOrder()
+        submit_url = reverse("dashboard:author_order_add")
+        if "bibtex" in request.GET:
+            bibtex_id = request.GET.get("bibtex")
+            bibtex = get_object_or_404(Bibtex, pk=bibtex_id)
+            author_order.bibtex = bibtex
+        elif request.method == 'POST':
+            pass
+        else:
+            raise Http404("Invalid BibtexID")
+        
+    if request.method == 'POST':
+        form = forms.AuthorOrderForm(request.POST, instance=author_order)
+        if form.is_valid():
+            author_order_new = form.save(commit=False)
+            author_order_new.owner = get_login_user(request.user.id)
+            author_order_new.save()
+            return redirect('dashboard:author_index')
+
+    print(author_order.__dict__)
+    print(bibtex.__dict__)
+    form = forms.AuthorOrderForm(instance=author_order)
+    return render(request,
+                  'dashboard/author_order/edit.html',
+                  {'msg': msg,
+                   'form':form,
+                   'bibtex': bibtex,
+                   'author_order': author_order,
                    'submit_url': submit_url})
 
 
