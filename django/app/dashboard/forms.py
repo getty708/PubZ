@@ -22,17 +22,25 @@ class AuthorForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(AuthorForm, self).__init__(*args, **kwargs)
-        for key in self.Meta.fields:
-            self.fields[key].widget.attrs.update({
-                'class': 'form-control form-control-sm',
-            })
-        for key in ["name", "dep"]:
-            for lang in [("en","English",), ("ja","日本語",)]:
-                self.fields["{}_{}".format(key, lang[0])].widget.attrs.update({
-                    'class': 'form-control form-control-sm',
-                    'placeholder': lang[1],
-                })
-
+        self.fields["name_en"].widget.attrs.update({
+            'class': 'form-control form-control-sm',
+            'placeholder': "English",
+        })
+        self.fields["name_ja"].widget.attrs.update({
+            'class': 'form-control form-control-sm',
+            'placeholder': "日本語",
+        })                
+        self.fields["dep_en"].widget.attrs.update({
+            'class': 'form-control form-control-sm',
+            'placeholder': "English",
+        })
+        self.fields["dep_ja"].widget.attrs.update({
+            'class': 'form-control form-control-sm',
+            'placeholder': "日本語",
+        })
+        self.fields["mail"].widget.attrs.update({
+            'class': 'form-control form-control-sm',
+        })        
         self.fields["date_join"].widget.attrs.update({
             'class': 'form-control form-control-sm',
             'placeholder': "Date of Join",
@@ -59,10 +67,10 @@ class AuthorForm(forms.ModelForm):
         return self.clean_base('name_ja')
 
     def clean_dep_en(self):
-        return self.clean_base('name_en')
+        return self.clean_base('dep_en')
 
     def clean_dep_ja(self):
-        return self.clean_base('name_en')     
+        return self.clean_base('dep_ja')     
            
     def clean(self):
         cleaned_data = super().clean()        

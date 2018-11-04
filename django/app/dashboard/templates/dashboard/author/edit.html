@@ -34,12 +34,12 @@
 								<div class="col-5">{{ form.date_join }}</div>
 								<div class="col-5">{{ form.date_leave }}</div>
 						</div>						
-						{% if book.id %}
-						<button type="submit" class="btn btn-primary">修正</button>						
-						<a href="{% url 'dashboard:book_detail' book.id %}" class="btn btn-outline-primary btn-sm">戻る</a>
+						{% if author.id %}
+						<button type="submit" class="btn btn-sm btn-primary">Update</button>						
+						<a href="{% url 'dashboard:author_detail' author.id %}" class="btn btn-outline-primary btn-sm">Back</a>
 						{% else %}
-						<button type="submit" class="btn btn-sm btn-primary">登録</button>
-						<a href="{% url 'dashboard:book_index' %}" class="btn btn-outline-primary btn-sm">戻る</a>
+						<button type="submit" class="btn btn-sm btn-primary">Add</button>
+						<a href="{% url 'dashboard:author_detail' author.id %}" class="btn btn-outline-primary btn-sm">Back</a>						
 						{% endif %}
 				</form>				
 				
