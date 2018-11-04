@@ -8,11 +8,17 @@
     {% if papers_to_show %}
     {% for paper, author in papers_to_show %}
 
-    <div class="col-lg-6 col-sm-6 d-flex align-items-stretch">
-        <div class="card" width="50%">
-            <div class="card-header">Paper</div>
-            <!-- <img class="card-img-top" src="{{ paper.image.url }}" alt="Card image cap"> -->
-            <div class="card-body">
+    <div class="col-lg-12 col-sm-12 d-flex align-items-stretch">
+        <div class="card">
+        <div class="row no-gutters">
+            <div class="col-lg-4 col-sm-4">
+                <img class="img-fluid" src="{{ paper.image.url }}" alt="Card image cap">
+            </div>
+            <!-- <div class="card-header">Paper</div> -->
+            <!-- <img class="img-fluid" src="{{ paper.image.url }}" alt="Card image cap"> -->
+            <div class="col-lg-8 col-sm-8">
+            <div class="card-block px-2">
+            <div class="card-body"></div>
                 <h5 class="card-title">{{ paper.title_en }}</h5>
                 <p>{{ author }}</p>
                 <!-- <p class="card-text">Daichi Amagata, Takahiro Hara, and Makoto Onizuka</p> -->
@@ -25,11 +31,16 @@
                 <a href="{{ paper.url }}" class="btn btn-primary btn-sm">PDF</a>
                 <!-- <img class="card-img-top" src="{{ paper.image.url }}" alt="Card image cap"> -->
             </div>
+            </div>
+            </div>
+
             <div class="card-footer">
-                <small class="text-muted">Last updated 3 mins ago</small>
+                    <small class="text-muted">Last updated 3 mins ago</small>
             </div>
         </div>
+        </div>
     </div>
+    <br>
     {% endfor %}
     {% else %}
     <p>No data are available.</p>
