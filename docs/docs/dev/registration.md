@@ -23,7 +23,7 @@ Just provide `language, title, book`. In the next page, our app returns you a fo
 -->
 
 1. Press __`Add New Bib`__ to register a new Bibtext into our system.  
-2. For the first step, you need to choose the __`Language`__, input the __`Title`__ and choose the __`Book`__.  
+2. For the first step, you need to choose the __`Language`__, input the __`Title`__ and choose the __`Book`__ of the Bibtex.  
 3. If the __`Book`__ is not included in our system, please press __`Add New Book`__, and refer __[Step 2]__. 
 4. Press __`Add New`__ button and continue the registration.  
 
@@ -31,7 +31,7 @@ Just provide `language, title, book`. In the next page, our app returns you a fo
 ### Step 2. Register Book Infomation (if necessary).
 1. Please fill in the form with the book's information.
 2. After press the 'Register' button, you can see the list of all the registered book.
-3. Go back to the Bib registration page, and choose the new-registered book from the list.  
+3. Please go back to the Bibtex registration page, and the new-registered book can be chosen from the list now.   
 
 
 ### Step 3. Edit detail of Bibtex
@@ -43,7 +43,7 @@ Just provide `language, title, book`. In the next page, our app returns you a fo
 2. Please fill in the table with other informatin of the Bibtex.
 3. Press __`Update`__ button to finish the registration, and then you can see the list of all the regisgered Bibtex.
 
-
+![RegisterFLow](images/RegistrationFlow.png)
 
 ## Validation
 In this section, we are going to describe how to edit and apply validation rules in this application.
