@@ -42,7 +42,7 @@ python manage.py migrate
 # Create Super User
 python manage.py createsuperuser
 # Migrate Bibtex models
-python manage.py makemigrateions core
+python manage.py makemigrations core
 python manage.py migrate
 ```
 
