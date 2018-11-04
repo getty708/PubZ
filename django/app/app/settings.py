@@ -150,3 +150,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'bmanbman888'
 EMAIL_HOST_PASSWORD = 'uetskqmsskqhvpco'
 EMAIL_USE_TLS = True
+
+# enable iframe
+X_FRAME_OPTIONS = 'ALLOWALL'
