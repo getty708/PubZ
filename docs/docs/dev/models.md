@@ -20,7 +20,7 @@ Bibtex object. All information of your publications are represented as this mode
 + **authors**: Auhtors of this pubilcation. This columns shall be selected from `Author` model. The order is stored in `AuthorOrder` model, which is an intermidiate model for `Bibtex` and `Author`. `ManyToManyField (through='AuthorOrder')`, foreign-key-ristriction(`Author`), required.
 + **book**: A book which this work is published. e.g. {International proceedings, journals, news papers, ...}.`ForeignKey`, foreign-key-ristriction(`Book`), required.
 
-+ **volume**: A volume number (巻). Before published, ingnore this columns. `IntegerField`.
++ **volume**: A volume number (巻). Before published, ingnore this columns. `CharField (max_length=128)`.
 + **number**: A number of the book (号). Before published, ignore this columns. `IntegerField`, null=True,blank=True.
 + **chapter**: A chapter number (章). Before published, ignore this columns. `IntegerField`, null=True,blank=True.
 + **page**: A cpage number (章). Before published, ignore this columns. `TextField`, null=True,blank=True. [Check validation rule](#page).
