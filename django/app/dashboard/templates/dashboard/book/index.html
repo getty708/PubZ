@@ -1,21 +1,25 @@
 {% extends "base.html" %}
 
 {% block title %}Dashboard | Manage Books{% endblock title %}
+{% load utils_bib_get_data %}
 
 {% block content %}
 
-{% if latest_book_list %}
 <div class="row">
 		<div class="col-12 my-3">
 				<h2>Books</h2>
-				<ul>
-						{% for book in latest_book_list %}
+					{% for book_style in book_style_list %}
+				  <h4 id="{{book_style}}">{{ book_style|get_display_name }}</h4>
+	      	{% if latest_book_list|get_booktype_book:book_style %}
+					<ul>
+						{% for book in latest_book_list|get_booktype_book:book_style %}
 						<li><a href="{% url 'dashboard:book_detail' book.id  %}">{{ book.title }}</a></li>
 						{% endfor %}
-				</ul>
-				{% else %}
-				<p>No Books are available.</p>
-				{% endif %}
+					</ul>
+					{% else %}
+						<p>No Books are available.</p>
+					{% endif %}
+					{% endfor %}
 		</div>
 </div>
 {% endblock content %}

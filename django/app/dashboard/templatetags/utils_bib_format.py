@@ -31,7 +31,7 @@ class BibtexFormatBase(object):
         context['citekey'] = "test_id"
         context['url_bib'] = self.url_bib
         context['book_title'] = bibtex.book.title
- 
+
         try:
             context['year'] = bibtex.pub_date.year
             context['month'] = bibtex.pub_date.month
@@ -41,7 +41,7 @@ class BibtexFormatBase(object):
             context['month'] = "None"
             context['month_string'] = "None"
         context['publisher'] = bibtex.book.publisher
-        
+
         # Get Authors
         authors = AuthorOrder.objects.filter(bibtex=bibtex).order_by('order')
         context["authors"] = self.get_html_authors(authors)
@@ -228,7 +228,7 @@ class BibtexFormatBibtexDefault(BibtexFormatBase):
         html = [
             '<pre class="mb-0" >',
             '@article{{{citekey},',
-            '  title = {{{title}}},',
+            '  title = {{<a href="{url_bib}">{title}</a>}},',
             '  author = {{{authors}}},',
             '  journal = {{{book_title}}},',
             '  volume = {{{volume}}},',
@@ -245,7 +245,7 @@ class BibtexFormatBibtexDefault(BibtexFormatBase):
         html = [
             '<pre class="mb-0" >',
             '@inproceedings{{{citekey},',
-            '  title = {{{title}}},',
+            '  title = {{<a href="{url_bib}">{title}</a>}},',
             '  author = {{{authors}}},',
             '  booktitle = {{{book_title}}},',
             '  volume = {{{volume}}},',
@@ -262,7 +262,7 @@ class BibtexFormatBibtexDefault(BibtexFormatBase):
         html = [
             '<pre class="mb-0" >',
             '@article{{{citekey},',
-            '  title = {{{title}}},',
+            '  title = {{<a href="{url_bib}">{title}</a>}},',
             '  author = {{{authors}}},',
             '  journal = {{{book_title}}},',
             '  volume = {{{volume}}},',
@@ -279,7 +279,7 @@ class BibtexFormatBibtexDefault(BibtexFormatBase):
         html = [
             '<pre class="mb-0" >',
             '@inproceedings{{{citekey},',
-            '  title = {{{title}}},',
+            '  title = {{<a href="{url_bib}">{title}</a>}},',
             '  author = {{{authors}}},',
             '  booktitle = {{{book_title}}},',
             '  volume = {{{volume}}},',
@@ -296,7 +296,7 @@ class BibtexFormatBibtexDefault(BibtexFormatBase):
         html = [
             '<pre class="mb-0" >',
             '@article{{{citekey},',
-            '  title = {{{title}}},',
+            '  title = {{<a href="{url_bib}">{title}</a>}},',
             '  author = {{{authors}}},',
             '  journal = {{{book_title}}},',
             '  month = {{{month}}},',
@@ -311,7 +311,7 @@ class BibtexFormatBibtexDefault(BibtexFormatBase):
         html = [
             '<pre class="mb-0" >',
             '@inproceedings{{{citekey},',
-            '  title = {{{title}}},',
+            '  title = {{<a href="{url_bib}">{title}</a>}},',
             '  author = {{{authors}}},',
             '  booktitle = {{{book_title}}},',
             '  month = {{{month}}},',
@@ -325,7 +325,7 @@ class BibtexFormatBibtexDefault(BibtexFormatBase):
         html = [
             '<pre class="mb-0" >',
             '@article{{{citekey},',
-            '  title = {{{title}}},',
+            '  title = {{<a href="{url_bib}">{title}</a>}},',
             '  author = {{{authors}}},',
             '  booktitle = {{{book_title}}},',
             '  pages = {{{page}}},',
@@ -340,7 +340,7 @@ class BibtexFormatBibtexDefault(BibtexFormatBase):
         html = [
             '<pre class="mb-0" >',
             '@article{{{citekey},',
-            '  title = {{{title}}},',
+            '  title = {{<a href="{url_bib}">{title}</a>}},',
             '  author = {{{authors}}},',
             '  journal = {{{book_title}}},',
             '  month = {{{month}}},',
@@ -354,7 +354,7 @@ class BibtexFormatBibtexDefault(BibtexFormatBase):
         html = [
             '<pre class="mb-0" >',
             '@article{{{citekey},',
-            '  title = {{{title}}},',
+            '  title = {{<a href="{url_bib}">{title}</a>}},',
             '  author = {{{authors}}},',
             '  journal = {{{book_title}}},',
             '  month = {{{month}}},',
@@ -368,7 +368,7 @@ class BibtexFormatBibtexDefault(BibtexFormatBase):
         html = [
             '<pre class="mb-0" >',
             '@article{{{citekey},',
-            '  title = {{{title}}},',
+            '  title = {{<a href="{url_bib}">{title}</a>}},',
             '  author = {{{authors}}},',
             '  journal = {{{book_title}}},',
             '  volume = {{{volume}}},',
@@ -385,10 +385,10 @@ class BibtexFormatBibtexDefault(BibtexFormatBase):
         html = [
             '<pre class="mb-0" >',
             '@inproceedings{{{citekey},',
-            '  title = {{{title}},',
+            '  title = {{<a href="{url_bib}">{title}</a>}},',
             '  author = {{{authors}}},',
             '  booktitle = {{{book_title}}},',
-            '  month = {{{month}},',
+            '  month = {{{month}}},',
             '  year = {{{year}}},',
             '}}',
             '</pre>',
@@ -403,7 +403,7 @@ class BibtexFormatLatexDefault(BibtexFormatBase):
     def get_template_DEFAULT(self):
         html = (
             '\item {authors}, '
-            '"{title}", '
+            '<a href="{url_bib}">"{title}"</a>, '
             '{book_title}, '
             '{volume}, {year},'
         )
@@ -414,6 +414,11 @@ class BibtexFormatLatexDefault(BibtexFormatBase):
 # ===================
 #  Filter Func.
 # ===================
+
+@register.filter(name='test_format')
+def test_format(bibtex):
+    return bibtex
+
 @register.filter(name='bibtex_list_format')
 def bibtex_list_format(bibtex, func=BibtexFormatListDefault, *args,**kwargs):
     """
