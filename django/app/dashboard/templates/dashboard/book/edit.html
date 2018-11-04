@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Dashboard | Book Add{% endblock title %}
 
@@ -9,7 +10,12 @@
 				{% if book.id %}
 				<h2>Edit Book Info: {{ book }}</h2>
 				{% else%}
-				<h2>Add New Book</h2>
+				<h2>Add New Book
+					<!-- Button trigger modal -->
+					<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal">
+  						Help
+					</button>
+				</h2>
 				{% endif %}
 				{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
@@ -46,6 +52,42 @@
 						<button type="submit" class="btn btn-primary">{{ submit_text }}</button>
 						{% if book.id %}
 						<a href="{% url 'dashboard:book_detail' book.id %}" class="btn btn-outline-primary btn-sm">戻る</a>
+						{% else %}
+						
+						<!-- Modal -->
+						<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ 		 					<div class="modal-dialog" role="document">
+    							<div class="modal-content">
+      							<div class="modal-header">
+        							<h5 class="modal-title" id="exampleModalLabel">Step 2. </h5>
+		        					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          						<span aria-hidden="true">&times;</span>
+		        					</button>
+      							</div>
+      							<div class="modal-body">
+        							<h4> Register Book Infomation</h4>
+        								<ol>
+											<li>
+												Please fill in the form with the book's information.
+											</li>
+											<li>
+												After press the 'Register' button, you can see the list of all the registered book.
+											</li>
+											<li>
+												Please go back to the Bibtex registration page, and the new-registered book can be chosen from the list now.  
+											</li>
+										</ol>
+										<hr>
+										<img src="{% static 'images/RegistrationFlow2.png' %}" height="500" width="450" alt="Flow2" />
+		      					</div>
+      							<div class="modal-footer">
+        							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+<!--							    	<button type="button" class="btn btn-primary">Save changes</button>   -->
+ 						     	</div>
+    							</div>
+  							</div>
+						</div>
+						<!-- Modal End-->
 						{% endif %}
 				</form>				
 				

@@ -1,4 +1,4 @@
-﻿{% if bib.title_en == null %}{{ bib.title_ja }}
+Title: ﻿{% if bib.title_en == null %}{{ bib.title_ja }}
 {% else %}{{ bib.title_en }}
-{% endif %}{{ book }}
-{% url 'dashborad:bibtex_detail' %}
+Book: {% endif %}{{ book }}
+URL: {% url 'dashboard:bib_detail' bib.id %}
