@@ -155,8 +155,6 @@ EMAIL_HOST_USER = 'bmanbman888'
 EMAIL_HOST_PASSWORD = 'uetskqmsskqhvpco'
 EMAIL_USE_TLS = True
 
-
-
 # REST API Settings
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -178,3 +176,6 @@ REST_FRAMEWORK = {
     # Filter
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
 }
+
+# enable iframe
+X_FRAME_OPTIONS = 'ALLOWALL'
