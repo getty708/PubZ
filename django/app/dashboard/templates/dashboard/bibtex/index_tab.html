@@ -2,6 +2,7 @@
 
 {% block title %}Dashboard | Table View{% endblock title %}
 {% load utils_search %}
+{% load utils_bib_get_data %}
 
 
 {% block content %}
@@ -9,8 +10,12 @@
 <div class="row">
 		<div class="col-12 my-3">
 				<h2>Papers</h2>
-				{% search_box 'table' %}
-				{% if latest_bibtex_list %}
+				{% search_box 'table' query_params %}
+				{% for book_style in book_style_list %}
+				<div class="my-3">
+			  <h4 id="{{book_style}}">{{ book_style|get_display_name }}</h4>
+				</div>
+				{% if latest_bibtex_list|get_booktype_bibtex:book_style %}
 				<table class="table table-sm">
 						<thead>
 								<tr>
@@ -22,7 +27,7 @@
 								</tr>
 						</thead>
 						<tbody>
-								{% for bibtex in latest_bibtex_list %}
+								{% for bibtex in latest_bibtex_list|get_booktype_bibtex:book_style %}
 								<tr>
 										<th scope="row">{{ forloop.counter }}</th>
 										<td>
@@ -33,17 +38,18 @@
 												{% endif %}
 										</td>
 										<td>{{ bibtex.book }}</td>
-										<td>TBA</td>
+										<td>{{ bibtex | bibtex_get:"authors"  }}</td>
 										<td>
 												<a href="{% url 'dashboard:detail' bibtex.id  %}">Detail</a>
 										</td>
 								</tr>
 								{% endfor %}
 						</tbody>
-				</table>				
+				</table>
 				{% else %}
 				<p>No data are available.</p>
 				{% endif %}
+				{% endfor %}
 		</div>
 </div>
 {% endblock content %}

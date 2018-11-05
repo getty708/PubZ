@@ -20,7 +20,7 @@ Bibtex object. All information of your publications are represented as this mode
 + **authors**: Auhtors of this pubilcation. This columns shall be selected from `Author` model. The order is stored in `AuthorOrder` model, which is an intermidiate model for `Bibtex` and `Author`. `ManyToManyField (through='AuthorOrder')`, foreign-key-ristriction(`Author`), required.
 + **book**: A book which this work is published. e.g. {International proceedings, journals, news papers, ...}.`ForeignKey`, foreign-key-ristriction(`Book`), required.
 
-+ **volume**: A volume number (巻). Before published, ingnore this columns. `IntegerField`.
++ **volume**: A volume number (巻). Before published, ingnore this columns. `CharField (max_length=128)`.
 + **number**: A number of the book (号). Before published, ignore this columns. `IntegerField`, null=True,blank=True.
 + **chapter**: A chapter number (章). Before published, ignore this columns. `IntegerField`, null=True,blank=True.
 + **page**: A cpage number (章). Before published, ignore this columns. `TextField`, null=True,blank=True. [Check validation rule](#page).
@@ -153,6 +153,11 @@ If you want to chage these rule, check [TBA page](#)
 !!! Warning
 	We should select whether the information about year etc.. should be placed. If we palce them in `Bibtex` model, `Book` model shall not have such infomation. Otherwise if we place them in the `Book` object, we shall make copy function to make new `Book` obeject from previous year's one with ease.
 
+#### abbr
+TBA
+
+#### institude
+TBA
 
 
 -----------
@@ -167,13 +172,36 @@ Add tags to bibtex's. This model is used in search, web emedding API.
 + **id**: Defined by djnago app automatically. `AutoField`, primary key.
 + **name**: A tag name. `CharField(128)`
 + **description**: A description for this tag.
-+ (**bib**: Specify a publication. `ForeignKey`, foreign-key-ristriction(`Bibtex`), required.)
++ **parent**: Parent Tag of this. `ForeignKey`, foreign-key-ristriction(`Tag`), required.
 + **created**: Datetime which this object is created. This column is automatically filled by django app. `DateTimeField`.
 + **modified**: Datetime which this object is edited last time. This column is automatically filled by django app. `DateTimeField`.
 + **owner**: User who creates this object. This column is automatically filled by django app. `DateTimeField`.
 
 ### Validation Rules
 TBA
+
+----------
+## class **TagChain**
+
+```
+core.models.TagChain
+```
+
+This is a relation schema between Bibtex and Tag.
+
+### Properties
++ **id**: Defined by djnago app automatically. `AutoField`, primary key.
++ **bibtex**: Bibtex id. `ForeignKey()`, foreign-key-ristriction(`Bibtex`), required.
++ **tag**: Bibtex id. `ForeignKey()`, foreign-key-ristriction(`Tag`), required.
++ **created**: Datetime which this object is created. This column is automatically filled by django app. `DateTimeField`.
++ **modified**: Datetime which this object is edited last time. This column is automatically filled by django app. `DateTimeField`.
++ **owner**: User who creates this object. This column is automatically filled by django app. `DateTimeField`.
+
+
+### Validation
+TBA
+
+
 
 
 -----------

@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load static %}
+{% load utils_author %}
 
 {% block title %}Dashboard | Bibtex Add{% endblock title %}
 
@@ -9,43 +11,66 @@
 				{% if book.id %}
 				<h2>Edit Bibtex : {{ bibitex }}</h2>
 				{% else%}
-				<h2>Add New Bibtex</h2>
+				<h2>Add New Bibtex
+					<!-- Button trigger modal -->
+					<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal">
+  						Help
+					</button>
+				</h2>
 				{% endif %}
 				{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
+				
 				<form action="{{ submit_url }}" method="post">
+						{{ form.non_field_errors }}						
 						{% csrf_token %}
 						<div class="form-group row">
+								{{ form.language.errors }}
 								<label for="example-text-input" class="col-2 col-form-label">Language</label>
 								<div class="col-5">{{ form.language }}</div>
 						</div>
 						<div class="form-group row">
+								{{ form.title_en.errors }}								
 								<label for="example-text-input" class="col-2 col-form-label">Title (English)</label>
 								<div class="col-5">{{ form.title_en }}</div>
 						</div>
 						<div class="form-group row">
+								{{ form.title_ja.errors }}								
 								<label for="example-text-input" class="col-2 col-form-label">Title (Japanese)</label>
 								<div class="col-5">{{ form.title_ja }}</div>
 						</div>
 						<div class="form-group row">
-								<label for="example-text-input" class="col-2 col-form-label">Book</label>
-								<div class="col-5">{{ form.book }}</div>
+								<label for="example-text-input" class="col-2 col-form-label">Authors</label>
+								<div class="col-10"> 
+									{{ bibtex | bibtex_author_format }}
+									<a href="{% url 'dashboard:author_order_add' %}?bibtex={{ bibtex.id }}" class="btn btn-sm btn-outline-primary" target="_blank">Add Author</a>
+								</div>
 						</div>
 						<div class="form-group row">
+								{{ form.book.errors }}
+								<label for="example-text-input" class="col-2 col-form-label">Book</label>
+								<div class="col-6">{{ form.book }}</div>
+								<div class="col-3"><a href="{% url 'dashboard:book_add' %}" class="btn btn-sm btn-outline-primary" target="_blank">Add New Book</a></div>
+						</div>
+						<div class="form-group row">
+								{{ form.volume.errors }}
 								<label for="example-text-input" class="col-2 col-form-label">Volume / Number / Chapter</label>
 								<div class="col-3">{{ form.volume }}</div>
 								<div class="col-3">{{ form.number }}</div>
 								<div class="col-3">{{ form.chapter }}</div>
 						</div>
 						<div class="form-group row">
+								{{ form.page.errors }}								
 								<label for="example-text-input" class="col-2 col-form-label">Page</label>
 								<div class="col-5">{{ form.page }}</div>
 						</div>
 						<div class="form-group row">
+								{{ form.edition.errors }}
 								<label for="example-text-input" class="col-2 col-form-label">Edition</label>
 								<div class="col-5">{{ form.edition }}</div>
 						</div>
 						<div class="form-group row">
+								{{ form.pub_date.errors }}
 								<label for="example-text-input" class="col-2 col-form-label">Date of Publish</label>
 								<div class="col-5">{{ form.pub_date }}</div>
 								<div class="col-5">{{ form.use_date_info }}</div>
@@ -86,5 +111,40 @@
 						{% endif %}
 				</form>				
 		</div>
+		<!-- Modal -->
+					<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ 		 				<div class="modal-dialog" role="document">
+    						<div class="modal-content">
+      						<div class="modal-header">
+        						<h5 class="modal-title" id="exampleModalLabel">Step 3. </h5>
+		        				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          					<span aria-hidden="true">&times;</span>
+		        				</button>
+      						</div>
+      						<div class="modal-body">
+        						<h4> Edit detail of Bibtex </h4>
+									<ol>
+										<li>
+												The <font class="p-1 bg-light text-danger">Language</font>, <font class="p-1 bg-light text-danger">Title</font> and <font class="p-1 bg-light text-danger">Book</font> will be filled in automatically.
+										</li>
+										<li>
+												Please fill in the table with other informatin of the Bibtex.
+										</li>
+										<li>
+												Press <font class="p-1 bg-light text-danger">Update</font> button to finish the registration, and then you can see the list of all the regisgered Bibtex.
+										</li>
+									</ol>
+									<hr>
+									<img src="{% static 'images/RegistrationFlow3.png' %}" height="500" width="450" alt="Flow3" />
+		      				</div>
+      						<div class="modal-footer">
+        						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+ 						   	</div>
+    						</div>
+  						</div>
+					</div>
+					<!-- Modal End-->
 </div>
+<script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+{{ form.media }}
 {% endblock content %}

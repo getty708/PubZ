@@ -16,8 +16,8 @@ class Bibtex(models.Model):
     language = models.CharField(
         max_length=2,
         choices=LANGUAGE_CHOICES,)
-    title_en = models.CharField(max_length=512,blank=True)
-    title_ja = models.CharField(max_length=512,blank=True)
+    title_en = models.CharField(max_length=512,null=True,blank=True, default="")
+    title_ja = models.CharField(max_length=512,null=True,blank=True, default="")
     authors = models.ManyToManyField(
         'core.Author',
         through='AuthorOrder',
@@ -26,26 +26,27 @@ class Bibtex(models.Model):
         'core.Book',
         on_delete=models.PROTECT,
     )
-    volume = models.IntegerField(null=True,blank=True)
-    number = models.IntegerField(null=True,blank=True)
+    volume = models.CharField(max_length=128,null=True,blank=True)
+    # volume = models.IntegerField(null=True,blank=True)    
+    number = models.CharField(max_length=128, null=True,blank=True)
+    # number = models.IntegerField(null=True,blank=True)    
     chapter = models.IntegerField(null=True,blank=True)
     page = models.CharField(max_length=32, null=True,blank=True)
     edition = models.TextField(max_length=16,null=True,blank=True)
     pub_date = models.DateField(null=True,blank=True)
-    use_date_info = models.BooleanField(default=False)
+    use_date_info = models.BooleanField(default=False, blank=True)
     acceptance_rate = models.FloatField(null=True,blank=True)
     impact_factor = models.FloatField(null=True,blank=True)
     url = models.URLField(null=True,blank=True)
     note = models.TextField(null=True,blank=True)
     abstruct = models.TextField(null=True,blank=True)
-    image = models.ImageField(null=True,blank=True)
+    image = models.ImageField(null=True,blank=True, upload_to="api")
     tags = models.ManyToManyField(
         'core.Tag',
-        # on_delete=models.SET_NULL,
-        # null=True,
-        # blank=True,
+        through='core.TagChain',
+        blank=True,
     )
-    is_published = models.BooleanField(default=False)
+    is_published = models.BooleanField(default=False, blank=True)
     created = models.DateTimeField(auto_now_add=True, blank=False)
     modified = models.DateTimeField(auto_now=True, blank=False)    
     owner = models.ForeignKey(
@@ -58,7 +59,7 @@ class Bibtex(models.Model):
         if self.language == 'EN':
             return self.title_en
         elif self.language == 'JA':
-            return self.title_en
+            return self.title_ja
         return "Bibtex[{}]".format(self.id)
     
 
@@ -117,7 +118,6 @@ class Book(models.Model):
     )
 
     def __str__(self):
-        print(self.abbr)
         if self.abbr is not None:
             return self.abbr
         return self.title
@@ -127,12 +127,17 @@ class Book(models.Model):
 class Tag(models.Model):
     name = models.CharField(max_length=32)
     description = models.TextField()
+    parent = models.ForeignKey(
+        'core.Tag',
+        null=True,blank=True,
+        on_delete=models.SET_NULL,
+    )
     created = models.DateTimeField(auto_now_add=True, blank=False)
     modified = models.DateTimeField(auto_now=True, blank=False)    
     owner = models.ForeignKey(
         'auth.User',
         null=True,
-        on_delete=models.SET_NULL
+        on_delete=models.SET_NULL,
     )
 
     def __str__(self):
@@ -173,3 +178,24 @@ class AuthorOrder(models.Model):
         else:
             order = "{}th".format(self.order)
         return "Bibtex[{}] {}".format(self.bibtex.id, order)
+
+
+
+# --------------------------------------------------
+
+class TagChain(models.Model):
+    bibtex = models.ForeignKey(
+        'core.Bibtex',
+        on_delete=models.PROTECT,
+    )
+    tag = models.ForeignKey(
+        'core.Tag',
+        on_delete=models.PROTECT,
+    )
+    created = models.DateTimeField(auto_now_add=True, blank=False)
+    modified = models.DateTimeField(auto_now=True, blank=False)    
+    owner = models.ForeignKey(
+        'auth.User',
+        null=True,
+        on_delete=models.SET_NULL
+    )

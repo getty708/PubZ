@@ -41,6 +41,9 @@ cd app
 python manage.py migrate
 # Create Super User
 python manage.py createsuperuser
+# Migrate Bibtex models
+python manage.py makemigrations core
+python manage.py migrate
 ```
 
 For development, use `Username=root, email={any}, pw=password (pwBman88)`
@@ -57,6 +60,8 @@ $ docker-compose exec web bash
 ```
 $ docker-compose exec web python3 manage.py migrate
 ```
+
+
 
 ### Step.3 Check website
 With this setup, we launched 4 containers. You can access to 3 of them with your browser.

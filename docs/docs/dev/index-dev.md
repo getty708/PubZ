@@ -7,6 +7,7 @@ This is the top page of a developer guideline.
 1. [View & Search](./dashboard.md)
 1. [Register new papers](./registration.md)
 1. [Web API](./api.md)
+1. [Notification](./notification.md)
 
 
 ## Additinal Info

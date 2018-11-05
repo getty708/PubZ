@@ -1,0 +1,28 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:'ja' }}">
+		<head>
+			<meta charset="UTF-8">
+			<title>{% block title %}Display Cards{% endblock %}</title>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+			<!-- Javascript -->
+			<script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
+			<script src="{% static 'js/tether/dist/js/tether.min.js' %}"></script>
+			<script src="{% static 'js/moment/moment.min.js' %}"></script>
+			<script src="{% static 'js/chartjs/Chart.min.js' %}"></script>
+			<!-- Bootstrap -->
+			<link href="{% static 'bootstrap/dist/css/bootstrap.css' %}" rel="stylesheet">
+			<script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
+			{% block extrahead %}{% endblock %}
+		</head>
+		<body>
+			<!-- <div class="container top-container"> -->
+				<div class="row">										
+					{% block content %}
+					{{ content }}
+					{% endblock %}
+				</div>
+			<!-- </div> -->
+		</body>
+</html>

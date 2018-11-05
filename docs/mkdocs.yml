@@ -1,6 +1,6 @@
 site_name: BMAN - Bibtex Mangement System
 repo_url: https://github.com/getty708/bman
-dev_addr: 0.0.0.0:8000
+dev_addr: 127.0.0.1:7777
 site_dir: ./site
 theme:
   name: 'material'
@@ -20,6 +20,7 @@ nav:
     - 'Dashboard': './dev/dashboard.md'
     - 'Registration': './dev/registration.md'
     - 'API': './dev/api.md'
+    - 'Notification': './dev/notification.md'
 - User Guide:
     - 'Home': './user/index-user.md'
   

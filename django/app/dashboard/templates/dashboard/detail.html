@@ -1,16 +1,41 @@
 {% extends "base.html" %}
 
 {% block title %}Dashboard | Top{% endblock title %}
+{% load utils_bib_get_data %}
+{% load utils_bib_format %}
 
 {% block content %}
 <div class="row">
 		<div class="col-12 my-3">
-				<h1 class="h3" >{{ bibtex.title_en }}</h1>
-				<ul>
-						{% for choice in bibtex.choice_set.all %}
-						<li>{{ choice.choice_text }}</li>
-						{% endfor %}
-				</ul>
+				<h1 class="h3" >
+					{% if bibtex.title_en %}
+						{{ bibtex.title_en }}
+					{% elif bibtex.title_ja %}
+						{{ bibtex.title_ja }}
+					{% endif %}
+				</h1>
+		</div>
+		<div class="col-12 my-3">
+				<table class="table table-sm table-striped">
+					<tr><td>book_style</td><td>{{ bibtex|bibtex_get:"book_style"|get_display_name }}</td></tr>
+					<tr><td>title(en)</td><td>{{ bibtex.title_en }}</td></tr>
+					<tr><td>title(ja)</td><td>{{ bibtex.title_ja }}</td></tr>
+					<tr><td>authors</td><td>{{ bibtex | bibtex_get:"authors" }}</td></tr>
+					<tr><td>book</td><td>{{ bibtex.book }}</td></tr>
+					<tr><td>volume</td><td>{{ bibtex.volume }}</td></tr>
+					<tr><td>number</td><td>{{ bibtex.number }}</td></tr>
+					<tr><td>chapter</td><td>{{ bibtex.chapter }}</td></tr>
+					<tr><td>page</td><td>{{ bibtex.page }}</td></tr>
+					<tr><td>publication_date</td><td>{{ bibtex.pub_date }}</td></tr>
+					<tr><td>acceptance_rate</td><td>{{ bibtex.acceptance_rate }}</td></tr>
+					<tr><td>impact_factor</td><td>{{ bibtex.impact_factor }}</td></tr>
+					<tr><td>note</td><td>{{ bibtex.note }}</td></tr>
+					<tr><td>tags</td><td>{{ bibtex | bibtex_get:"tags" }}</td></tr>
+					<tr><td>Bibtex</td><td>{{ bibtex | bibtex_bib_format }}</td></tr>
+				</table>
+		</div>
+		<div class="col-12 my-3">
+				<a href="{% url 'dashboard:bibtex_edit' bibtex.id %}" class="btn btn-sm btn-outline-primary"  >Edit</a>
 		</div>
 </div>
 {% endblock content %}

@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from core.models import Author, Bibtex, Book, Tag, AuthorOrder
+from core.models import Author, Bibtex, Book, Tag, AuthorOrder, TagChain
 
 
 # ---------------------------
@@ -26,7 +26,7 @@ class BibtexAdmin(admin.ModelAdmin):
     def get_title(self, obj):
         if obj.language == 'EN':
             return obj.title_en
-        elif self.language == 'JA':
+        elif obj.language == 'JA':
             return obj.title_en
         return "Bibtex[{}]".format(obj.id)
     get_title.short_description = 'Title'
@@ -35,11 +35,18 @@ class BibtexAdmin(admin.ModelAdmin):
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name', 'description', 'parent', 'created')
+    list_display_links = ('name',)
 
 
 @admin.register(AuthorOrder)
 class AuthorOrderAdmin(admin.ModelAdmin):
     list_display = ('id','bibtex','author','order',)
     list_display_links = ('bibtex','author',)
+
+
+@admin.register(TagChain)
+class TagChainAdmin(admin.ModelAdmin):
+    list_display = ('id','tag','bibtex','created',)
+    list_display_links = ('tag', 'bibtex',)
     
