@@ -31,7 +31,7 @@ def val_bibtex_title_en_replace_keywords(title_en):
         "Conf.": ["Conference",],        
     }
     
-    return "CHECKED[{}]".format(title_en)
+    return "{}".format(title_en)
 
 
 
