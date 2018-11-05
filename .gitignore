@@ -672,3 +672,5 @@ ASALocalRun/
 
 django/**/migrations/
 !django/app/static/**/dist/
+django/app/notification/const.py
+move_utils/

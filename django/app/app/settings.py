@@ -25,7 +25,7 @@ SECRET_KEY = 'a10^j@6^2q$y*c&ks29$gnb7*3eodvqp!4!$7h31mlsq0ad3+s'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "192.168.1.123",]
 
 
 # Application definition
@@ -39,6 +39,10 @@ INSTALLED_APPS = [
     # Additional Packages
     'dal',
     'dal_select2',
+    ## REST
+    'django_filters',
+    'rest_framework',
+    'rest_framework.authtoken',
     # Default
     'django.contrib.admin',
     'django.contrib.auth',
@@ -93,7 +97,7 @@ DATABASES = {
         'USER': 'docker',
         'PASSWORD': 'docker',
         'HOST': 'db',
-    }    
+    }
 }
 
 
@@ -138,12 +142,40 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
+# Media files (Pictures)
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 # Mail Settings
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'localhost'
-# EMAIL_PORT = 25
-# EMAIL_HOST_USER = 'apptest'
-# EMAIL_HOST_PASSWORD = 'xxxxxxxx'
-# EMAIL_USE_TLS = False
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'bmanbman888'
+EMAIL_HOST_PASSWORD = 'uetskqmsskqhvpco'
+EMAIL_USE_TLS = True
+
+# REST API Settings
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication', 
+        'rest_framework.authentication.TokenAuthentication',       
+    ),    
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        'rest_framework.permissions.IsAuthenticated',        
+    ],
+    
+    # Paging
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 500,
+
+    # Filter
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
+}
+
+# enable iframe
+X_FRAME_OPTIONS = 'ALLOWALL'

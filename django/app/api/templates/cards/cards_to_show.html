@@ -1,0 +1,37 @@
+{% extends "cards/card_base.html" %}
+{% load staticfiles %}
+
+{% block title %}API | Card View{% endblock title %}
+
+{% block content %}
+
+    {% if papers_to_show %}
+    {% for paper, author in papers_to_show %}
+
+    <div class="col-lg-6 col-sm-6 d-flex align-items-stretch">
+        <div class="card" width="50%">
+            <div class="card-header">Paper</div>
+            <!-- <img class="card-img-top" src="{{ paper.image.url }}" alt="Card image cap"> -->
+            <div class="card-body">
+                <h5 class="card-title">{{ paper.title_en }}</h5>
+                <p>{{ author }}</p>
+                <!-- <p class="card-text">Daichi Amagata, Takahiro Hara, and Makoto Onizuka</p> -->
+                <p class="card-text">{{ paper.book.title }}</p>
+                {% for tag in paper.tags.all %}
+                <span class="badge badge-pill badge-primary">{{ tag }}</span>
+                {% endfor %}
+                <span class="badge badge-pill badge-primary">{{ paper.book }}</span>
+                <span class="badge badge-pill badge-primary">{{ paper.pub_date.year }}</span>
+                <a href="{{ paper.url }}" class="btn btn-primary btn-sm">PDF</a>
+                <!-- <img class="card-img-top" src="{{ paper.image.url }}" alt="Card image cap"> -->
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Last updated 3 mins ago</small>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p>No data are available.</p>
+    {% endif %}
+{% endblock content %}
