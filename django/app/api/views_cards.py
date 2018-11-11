@@ -5,6 +5,7 @@ from django.views import generic
 from core.models import Author, Bibtex, Book, TagChain, Tag
 from dashboard.templatetags import utils_search as utils
 
+
 def render_cards(request):
     bibtex,query_param_dic = utils.perse_get_query_params(request)
     
