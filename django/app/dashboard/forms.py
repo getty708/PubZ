@@ -241,3 +241,65 @@ class BibtexFormStep1(forms.Form):
         return cleaned_data
 
     
+
+"""
+Tag
+"""
+class TagForm(forms.ModelForm):
+    class Meta:
+        model = models.Tag
+        fields = [
+            'name', 'description', 'parent',
+        ]
+        widgets = {
+            'description': forms.Textarea(attrs={'cols': 80, 'rows': 3}),
+        }
+    
+    def __init__(self, *args, **kwargs):
+        super(TagForm, self).__init__(*args, **kwargs)
+        for key in self.Meta.fields:
+            self.fields[key].widget.attrs.update({
+                'class': 'form-control form-control-sm',
+            })
+
+
+    def clean_base(self, key):
+        validator_dict = validators.validation_callback_author_form
+        val = self.cleaned_data[key]
+        if key in validator_dict.keys():
+            callback_funcs = validator_dict[key]
+            for func in callback_funcs:
+                val = func(val)
+        return val
+    
+
+    def clean_name(self):
+        return self.clean_base('name')
+    
+
+    def clean_description(self):
+        return self.clean_base('description')
+    
+
+    def clean(self):
+        cleaned_data = super().clean()        
+        return cleaned_data 
+
+
+class TagChainForm(forms.ModelForm):
+    class Meta:
+        model = models.TagChain
+        fields = [
+            'bibtex', 'tag',
+        ]
+        widgets = {
+
+        }
+    
+    def __init__(self, *args, **kwargs):
+        super(TagChainForm, self).__init__(*args, **kwargs)
+        for key in self.Meta.fields:
+            self.fields[key].widget.attrs.update({
+                'class': 'form-control form-control-sm',
+            })
+
