@@ -3,18 +3,23 @@
 {% block title %}Bman | Login{% endblock title %}
 {% block content %}
 
-<div class="row">
+<div class="row py-3">
 		<div class="col-12">
 				{% if form.errors %}
-				<p>Your username and password didn't match. Please try again.</p>
+				<div class="alert alert-danger" role="alert">
+						Your username and password didn't match. Please try again.
+				</div>				
 				{% endif %}
 
 				{% if next %}
 				{% if user.is_authenticated %}
-				<p>Your account doesn't have access to this page. To proceed,
-						please login with an account that has access.</p>
+				<div class="alert alert-danger" role="alert">
+						Your account doesn't have access to this page. To proceed, please login with an account that has access.						
+				</div>
 				{% else %}
-				<p>Please login to see this page.</p>
+				<div class="alert alert-danger" role="alert">
+						Please login to see this page.						
+				</div>
 				{% endif %}
 				{% endif %}
 		</div>
