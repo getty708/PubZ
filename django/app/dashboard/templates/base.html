@@ -17,13 +17,21 @@
 				{% block extrahead %}{% endblock %}
 		</head>
 		<body style="height: 100vh">
-				<nav class="navbar navbar-expand-md sticky-top navbar-dark bg-dark  w-100" >
+				<nav class="navbar navbar-expand-md sticky-top navbar-dark bg-dark w-100" >
 						<a class="navbar-brand mb-0 h1" href="{% url 'dashboard:index' %}">BMAN Dashboard</a>
 						<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-								<div class="navbar-nav">
+								<div class="navbar-nav mr-auto">
 										<a class="nav-item nav-link" href="{% url 'dashboard:index' %}">Home</a>
 										<a class="nav-item nav-link" href="{% url 'dashboard:bibtex_add_step1' %}">Add New Bib</a>
 								</div>
+								<span class="navbar-text">
+										{% if user.is_authenticated %}
+										<span class="mx-2" >Hello, <span class="text-white font-weight-bold" >{{ user }}</span></span>
+										<a href="/accounts/logout" class="btn btn-sm btn-outline-light" >Logout</a>										
+										{% else %}
+										<a href="/accounts/login"  class="btn bnt-sm btn-outline-light" >Login</a>
+										{% endif %}
+								</span>
 						</div>
 				</nav>
 				<div class="container-fluid w-100 h-100" style="overflow:auto;">
