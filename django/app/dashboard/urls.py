@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import include, path
 
 from dashboard import views, views_edit
 
@@ -34,4 +34,5 @@ urlpatterns = [
          views_edit.author_order_edit, name='author_order_add'),
     path('author/order/edit/<int:author_order_id>/',
          views_edit.author_order_edit, name='author_order_edit'),
+
 ]

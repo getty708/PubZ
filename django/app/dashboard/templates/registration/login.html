@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Bman | Login{% endblock title %}
+{% block content %}
+
+<div class="row">
+		<div class="col-12">
+				{% if form.errors %}
+				<p>Your username and password didn't match. Please try again.</p>
+				{% endif %}
+
+				{% if next %}
+				{% if user.is_authenticated %}
+				<p>Your account doesn't have access to this page. To proceed,
+						please login with an account that has access.</p>
+				{% else %}
+				<p>Please login to see this page.</p>
+				{% endif %}
+				{% endif %}
+		</div>
+</div>
+<div class="row  d-flex justify-content-center">
+		<div class="col-sm-8 my-3">
+				<form class="form-signin" method="post">{% csrf_token %}
+						{{ form.errors }}
+						<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+						<label for="inputEmail" class="sr-only">Email address</label>
+						<input type="text" name="username" autofocus="" required="" id="id_username" class="form-control" placeholder="User Name">						
+						<label for="inputPassword" class="sr-only">Password</label>
+						<input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+						<div class="checkbox mb-3">
+								<label>
+										<input type="checkbox" value="remember-me"> Remember me
+								</label>
+						</div>
+						<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+				</form>				
+		</div>
+</div>
+
+{% endblock %}
