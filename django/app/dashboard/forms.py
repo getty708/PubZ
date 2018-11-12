@@ -263,29 +263,6 @@ class TagForm(forms.ModelForm):
             })
 
 
-    def clean_base(self, key):
-        validator_dict = validators.validation_callback_author_form
-        val = self.cleaned_data[key]
-        if key in validator_dict.keys():
-            callback_funcs = validator_dict[key]
-            for func in callback_funcs:
-                val = func(val)
-        return val
-    
-
-    def clean_name(self):
-        return self.clean_base('name')
-    
-
-    def clean_description(self):
-        return self.clean_base('description')
-    
-
-    def clean(self):
-        cleaned_data = super().clean()        
-        return cleaned_data 
-
-
 class TagChainForm(forms.ModelForm):
     class Meta:
         model = models.TagChain
