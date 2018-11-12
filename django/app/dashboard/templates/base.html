@@ -17,26 +17,45 @@
 				{% block extrahead %}{% endblock %}
 		</head>
 		<body style="height: 100vh">
-				<nav class="navbar navbar-expand-md sticky-top navbar-dark bg-dark w-100" >
-						<a class="navbar-brand mb-0 h1" href="{% url 'dashboard:index' %}">BMAN Dashboard</a>
+				<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark w-100" >
+						<a class="navbar-brand mb-0 h1" href="{% url 'dashboard:index' %}">BMAN</a>
 						<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 								<div class="navbar-nav mr-auto">
 										<a class="nav-item nav-link" href="{% url 'dashboard:index' %}">Home</a>
-										<a class="nav-item nav-link" href="{% url 'dashboard:bibtex_add_step1' %}">Add New Bib</a>
-								</div>
-								<span class="navbar-text">
 										{% if user.is_authenticated %}
-										<span class="mx-2" >Hello, <span class="text-white font-weight-bold" >{{ user }}</span></span>
-										<a href="/accounts/logout" class="btn btn-sm btn-outline-light" >Logout</a>										
+										<a class="nav-item nav-link" href="{% url 'dashboard:bibtex_add_step1' %}">Add New Bibtex</a>										
+										<li class="nav-item dropdown">
+												<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Add New</a>
+												<div class="dropdown-menu">	
+														<a class="dropdown-item" href="{% url 'dashboard:bibtex_add' %}">New Bibtex</a>
+														<a class="dropdown-item" href="{% url 'dashboard:book_add' %}">New Book</a>
+														<a class="dropdown-item" href="{% url 'dashboard:author_add' %}">New Author</a>
+														<div class="dropdown-divider"></div>
+														<a class="dropdown-item" href="#">New Tag</a>
+												</div>
+										</li>
+										{% endif %}										
+								</div>
+								<div class="navbar-nav">
+										{% if user.is_authenticated %}
+										<li class="nav-item dropdown border border-white rounded">
+												<a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Hello, <span class="font-weight-bold" >{{ user }}</span></a>
+												<div class="dropdown-menu dropdown-menu-right">	
+														<a class="dropdown-item" href="{% url 'dashboard:index' %}">My Page</a>
+														<a class="dropdown-item" href="{% url 'admin:index' %}">Admin Page</a>
+														<div class="dropdown-divider"></div>
+														<a class="dropdown-item" href="/accounts/logout">Log out</a>
+												</div>
+										</li>
 										{% else %}
 										<a href="/accounts/login"  class="btn bnt-sm btn-outline-light" >Login</a>
 										{% endif %}
-								</span>
+								</div>
 						</div>
 				</nav>
-				<div class="container-fluid w-100 h-100" style="overflow:auto;">
+				<div class="container-fluid mt-5 w-100 h-100" style="overflow:auto;">
 						<div class="row h-100">
-								<div class="col-sm-2 bg-light h-100" >
+								<div class="col-sm-2 bg-light h-100" style="overflow:auto;">
 										<h3 class="h5 mt-3" >Bibtex Category</h3>
 										<ul class="nav flex-column mb-3">
 												<li class="nav-item">
@@ -78,16 +97,18 @@
 												</li>
 										</ul>
 
+										{% if user.is_authenticated %}
 										<ul class="nav flex-column mb-3">
 												<h3 class="h5" >Add New</h3>
 												<li class="nav-item">
 														<a class="nav-link active" href="{% url 'dashboard:book_add' %}">Add New Book</a>
 														<a class="nav-link active" href="{% url 'dashboard:author_add' %}">Add New Author</a>
-														<a class="btn btn-sm btn-outline-primary" href="{% url 'dashboard:bibtex_add_step1' %}">Add New Bib</a>
+														<a class="nav-link active" href="{% url 'dashboard:bibtex_add_step1' %}">Add New Bibtex</a>
 												</li>
 										</ul>
+										{% endif %}
 								</div>
-								<div class="col-sm-10">
+								<div class="col-sm-10 h-100" style="overflow:auto;">
 										{% block content %}
 										{{ content }}
 										{% endblock %}
