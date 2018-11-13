@@ -26,8 +26,10 @@ class Bibtex(models.Model):
         'core.Book',
         on_delete=models.PROTECT,
     )
-    volume = models.IntegerField(null=True,blank=True)
-    number = models.IntegerField(null=True,blank=True)
+    volume = models.CharField(max_length=128,null=True,blank=True)
+    # volume = models.IntegerField(null=True,blank=True)    
+    number = models.CharField(max_length=128, null=True,blank=True)
+    # number = models.IntegerField(null=True,blank=True)    
     chapter = models.IntegerField(null=True,blank=True)
     page = models.CharField(max_length=32, null=True,blank=True)
     edition = models.TextField(max_length=16,null=True,blank=True)

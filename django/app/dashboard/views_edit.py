@@ -131,10 +131,11 @@ def author_edit(request, author_id=None):
     if request.method == 'POST':
         form = forms.AuthorForm(request.POST, instance=author)
         if form.is_valid():
+            print(form.cleaned_data)            
             author_new = form.save(commit=False)
             author_new.owner = get_login_user(request.user.id)
             author_new.save()
-            return redirect('dashboard:author_index')
+            return redirect('dashboard:author_detail', author.id)
 
     form = forms.AuthorForm(instance=author)    
     return render(request,

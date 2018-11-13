@@ -4,17 +4,18 @@
 
 {% block content %}
 <div class="row">
-		<div class="col-12 my-3">
-				<h1 class="h3" ><small class="text-secondary mr-2" >Author:</small>{{ author.name_en }} / {{ author.name_ja}}</h1>
+	<div class="col-12 my-3">
+		<h1 class="h3" ><small class="text-secondary mr-2" >Author:</small>{{ author.name_en }} / {{ author.name_ja}}</h1>
 		<table class="table table-sm table-striped">
-					<tr><td>name(en)</td><td>{{ author.name_en }}</td></tr>
-					<tr><td>name(ja)</td><td>{{ author.name_ja }}</td></tr>
-					<tr><td>depertment(en)</td><td>{{ author.dep_en }}</td></tr>
-					<tr><td>depertment(ja)</td><td>{{ author.dep_ja }}</td></tr>
-					<tr><td>mail</td><td>{{ author.mail }}</td></tr>
-					<tr><td>join_date</td><td>{{ author.join }}</td></tr>
-					<tr><td>leave_date</td><td>{{ author.leave }}</td></tr>
+			<tr><td>name(en)</td><td>{{ author.name_en }}</td></tr>
+			<tr><td>name(ja)</td><td>{{ author.name_ja }}</td></tr>
+			<tr><td>depertment(en)</td><td>{{ author.dep_en }}</td></tr>
+			<tr><td>depertment(ja)</td><td>{{ author.dep_ja }}</td></tr>
+			<tr><td>mail</td><td>{{ author.mail }}</td></tr>
+			<tr><td>join_date</td><td>{{ author.join }}</td></tr>
+			<tr><td>leave_date</td><td>{{ author.leave }}</td></tr>
 		</table>
-		</div>
+		<a href="{% url 'dashboard:author_edit' author.id %}" class="btn btn-outline-primary btn-sm">Edit</a>
+	</div>
 </div>
 {% endblock content %}

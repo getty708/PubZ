@@ -33,6 +33,7 @@ services:
   django:
     build: ./django
     # command: python /code/app/manage.py runserver 0.0.0.0:8000
+    hostname: django
     volumes:
       - ./django:/code
     ports:
@@ -48,4 +49,13 @@ services:
     ports:
       - "7777:8000"
     tty: true
+  # note:
+  #   image: jupyter/minimal-notebook:latest
+  #   links:
+  #     - django
+  #   ports:
+  #     - "7778:8888"
+  #   volumes:
+  #     - .:/home/jovyan/work
+      
 
