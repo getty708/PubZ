@@ -249,3 +249,42 @@ class BibtexFormStep1(forms.Form):
         return cleaned_data
 
     
+
+"""
+Tag
+"""
+class TagForm(forms.ModelForm):
+    class Meta:
+        model = models.Tag
+        fields = [
+            'name', 'description', 'parent',
+        ]
+        widgets = {
+            'description': forms.Textarea(attrs={'cols': 80, 'rows': 3}),
+        }
+    
+    def __init__(self, *args, **kwargs):
+        super(TagForm, self).__init__(*args, **kwargs)
+        for key in self.Meta.fields:
+            self.fields[key].widget.attrs.update({
+                'class': 'form-control form-control-sm',
+            })
+
+
+class TagChainForm(forms.ModelForm):
+    class Meta:
+        model = models.TagChain
+        fields = [
+            'bibtex', 'tag',
+        ]
+        widgets = {
+
+        }
+    
+    def __init__(self, *args, **kwargs):
+        super(TagChainForm, self).__init__(*args, **kwargs)
+        for key in self.Meta.fields:
+            self.fields[key].widget.attrs.update({
+                'class': 'form-control form-control-sm',
+            })
+

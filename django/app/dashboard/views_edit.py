@@ -4,7 +4,7 @@ from django.views import generic
 from django.contrib.auth.models import User
 
 
-from core.models import Author, AuthorOrder, Bibtex, Book
+from core.models import Author, AuthorOrder, Bibtex, Book, Tag, TagChain
 from dashboard import forms
 
 
@@ -153,7 +153,7 @@ AuthorOrder
 def author_order_edit(request, author_order_id=None):
     msg = False    
     if author_order_id:
-        author_order = get_object_or_404(AuthorOder, pk=author_order_id)
+        author_order = get_object_or_404(AuthorOrder, pk=author_order_id)
         bibtex = author_order.bibtex
         submit_url = reverse("dashboard:author_order_edit",
                              kwargs={'author_order_id':author_order.id})
@@ -189,4 +189,74 @@ def author_order_edit(request, author_order_id=None):
                    'submit_url': submit_url})
 
 
+
+"""
+Tag
+"""
+def tag_edit(request, tag_id=None):
+    msg = False
+    if tag_id:
+        tag = get_object_or_404(Tag, pk=tag_id)
+        submit_url = reverse("dashboard:tag_edit",
+                             kwargs={'tag_id':tag.id})
+    else:
+        tag = Tag()
+        submit_url = reverse("dashboard:tag_add")
+    
+    if request.method == 'POST':
+        form = forms.TagForm(request.POST, instance=tag)
+        if form.is_valid():
+            tag_new = form.save(commit=False)
+            tag_new.owner = get_login_user(request.user.id)
+            tag_new.save()
+            return redirect('dashboard:tag_index')
+    
+    form = forms.TagForm(instance=tag)
+    return render(request,
+                  'dashboard/tag/edit.html',
+                  {'msg': msg,
+                   'form': form,
+                   'tag': tag,
+                   'submit_url': submit_url})
+
+
+
+"""
+TagChain
+"""
+def tagchain_edit(request, tagchain_id=None):
+    msg = False
+    if tagchain_id:
+        tagChain = get_object_or_404(TagChain, pk=tagchain_id)
+        bibtex = tagChain.bibtex
+        submit_url = reverse("dashboard:tagchain_edit",
+                             kwargs={'tagchain_id':tagChain.id})
+    else:
+        tagChain = TagChain()
+        submit_url = reverse("dashboard:tagchain_add")
+        if "bibtex" in request.GET:
+            bibtex_id = request.GET.get("bibtex")
+            bibtex = get_object_or_404(Bibtex, pk=bibtex_id)
+            tagChain.bibtex = bibtex
+        elif request.method == 'POST':
+            pass
+        else:
+            raise Http404("Invalid BibtexID")
+    
+    if request.method == 'POST':
+        form = forms.TagChainForm(request.POST, instance=tagChain)
+        if form.is_valid():
+            tagChain_new = form.save(commit=False)
+            tagChain_new.owner = get_login_user(request.user.id)
+            tagChain_new.save()
+            return redirect('dashboard:tag_index')
+    
+    form = forms.TagChainForm(instance=tagChain)
+    return render(request,
+                  'dashboard/tagChain/edit.html',
+                  {'msg': msg,
+                   'form': form,
+                   'bibtex': bibtex,
+                   'tagChain': tagChain,
+                   'submit_url': submit_url})
 
