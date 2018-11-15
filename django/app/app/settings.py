@@ -171,7 +171,7 @@ REST_FRAMEWORK = {
     
     # Paging
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10,
+    'PAGE_SIZE': 500,
 
     # Filter
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
@@ -179,7 +179,6 @@ REST_FRAMEWORK = {
 
 # enable iframe
 X_FRAME_OPTIONS = 'ALLOWALL'
-
 
 # Login/Logout
 LOGIN_REDIRECT_URL = 'dashboard:index'

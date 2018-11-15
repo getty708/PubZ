@@ -30,7 +30,7 @@ class AuthorViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     authentication_classes = (SessionAuthentication,TokenAuthentication,)
     filter_backends = (filters.SearchFilter,)
-    search_fields = ('^name_en','^name_ja',)
+    search_fields = ('name_en','name_ja',)
 
     
 class AuthorOrderViewSet(viewsets.ModelViewSet):
@@ -64,6 +64,6 @@ class BibtexViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     authentication_classes = (SessionAuthentication, TokenAuthentication,)
     filter_backends = (filters.SearchFilter,)
-    search_fields = ('=title_en','=title_ja')
+    search_fields = ('title_en','title_ja')
     
     
