@@ -6,3 +6,4 @@ Pillow
 djangorestframework
 markdown
 django-filter
+django-autocomplete-light

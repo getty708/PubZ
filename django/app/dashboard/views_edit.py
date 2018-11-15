@@ -2,6 +2,7 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404, render, reverse, redirect
 from django.views import generic
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 
 from core.models import Author, AuthorOrder, Bibtex, Book, Tag, TagChain
@@ -19,6 +20,7 @@ def get_login_user(user_id):
 """
 Bibtex
 """
+@login_required
 def bibtex_edit(request, bibtex_id=None):
     msg = False
     if bibtex_id:
@@ -50,7 +52,7 @@ def bibtex_edit(request, bibtex_id=None):
                    'submit_url': submit_url})
 
 
-
+@login_required
 def bibtex_edit_step1(request):
     msg = False
     bibtex = Bibtex()
@@ -85,6 +87,7 @@ def bibtex_edit_step1(request):
 """
 Book
 """
+@login_required
 def book_edit(request, book_id=None):
     msg = False
     if book_id:
@@ -118,6 +121,7 @@ def book_edit(request, book_id=None):
 """
 Author
 """
+@login_required
 def author_edit(request, author_id=None):
     msg = False
     if author_id:
@@ -150,6 +154,7 @@ def author_edit(request, author_id=None):
 """
 AuthorOrder
 """
+@login_required
 def author_order_edit(request, author_order_id=None):
     msg = False    
     if author_order_id:

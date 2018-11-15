@@ -1,9 +1,13 @@
 # Write functions for sending email here.
 from django.core.mail import send_mail
 from django.template.loader import get_template
+from django.contrib.auth.decorators import login_required
+
 from core.models import Bibtex
 from .const import address
 
+
+@login_required
 def send_email_test():
     # 件名
     subject = "Please update the registration information."
