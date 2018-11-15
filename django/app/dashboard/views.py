@@ -140,6 +140,23 @@ class AuthorDetailView(generic.DetailView):
     template_name = 'dashboard/author/detail.html'
 
 
+
+"""
+Tag
+"""
+class TagIndexView(generic.ListView):
+    template_name = 'dashboard/tag/index.html'
+    context_object_name = 'latest_tag_list'
+
+    def get_queryset(self):
+        return Tag.objects.order_by('name')
+
+
+class TagDetailView(generic.DetailView):
+    model = Tag
+    template_name = 'dashboard/tag/detail.html'
+
+
 """
 Notification
 """

@@ -94,6 +94,7 @@
 												<li class="nav-item">
 														<a class="nav-link active" href="{% url 'dashboard:book_index' %}">Book</a>
 														<a class="nav-link active" href="{% url 'dashboard:author_index' %}">Author</a>
+														<a class="nav-link active" href="{% url 'dashboard:tag_index'%}">Tag</a>
 												</li>
 										</ul>
 
@@ -104,6 +105,7 @@
 														<a class="nav-link active" href="{% url 'dashboard:book_add' %}">Add New Book</a>
 														<a class="nav-link active" href="{% url 'dashboard:author_add' %}">Add New Author</a>
 														<a class="nav-link active" href="{% url 'dashboard:bibtex_add_step1' %}">Add New Bibtex</a>
+														<a class="nav-link active" href="{% url 'dashboard:tag_add' %}">Add New Tag</a>
 												</li>
 										</ul>
 										{% endif %}
