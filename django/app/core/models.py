@@ -55,12 +55,20 @@ class Bibtex(models.Model):
         on_delete=models.SET_NULL
     )
 
+    class Meta:
+        unique_together = (
+            ("title_en", "title_ja","pub_date","note",),
+        )
+    
     def __str__(self):
         if self.language == 'EN':
             return self.title_en
         elif self.language == 'JA':
             return self.title_ja
         return "Bibtex[{}]".format(self.id)
+
+
+
     
 
 # --------------------------------------------------
@@ -80,6 +88,11 @@ class Author(models.Model):
         on_delete=models.SET_NULL
     )
 
+    class Meta:
+        unique_together = (
+            ("name_en", "dep_en", "mail",),
+        )
+        
     def __str__(self):
         return self.name_en
     
@@ -117,6 +130,12 @@ class Book(models.Model):
         on_delete=models.SET_NULL
     )
 
+    
+    class Meta:
+        unique_together = (
+            ("title", "style",),
+        )
+
     def __str__(self):
         if self.abbr is not None:
             return self.abbr
@@ -139,6 +158,12 @@ class Tag(models.Model):
         null=True,
         on_delete=models.SET_NULL,
     )
+
+    
+    class Meta:
+        unique_together = (
+            ("name", "parent",),
+        )
 
     def __str__(self):
         return self.name
@@ -167,6 +192,11 @@ class AuthorOrder(models.Model):
         on_delete=models.SET_NULL
     )
 
+
+    class Meta:
+        unique_together = (
+            ("bibtex", "author",),
+        )    
 
     def __str__(self):
         if self.order == 1:            
@@ -199,3 +229,10 @@ class TagChain(models.Model):
         null=True,
         on_delete=models.SET_NULL
     )
+
+    
+    class Meta:
+        unique_together = (
+            ("bibtex", "tag",),
+        )
+    
