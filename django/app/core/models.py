@@ -27,9 +27,7 @@ class Bibtex(models.Model):
         on_delete=models.PROTECT,
     )
     volume = models.CharField(max_length=128,null=True,blank=True)
-    # volume = models.IntegerField(null=True,blank=True)    
     number = models.CharField(max_length=128, null=True,blank=True)
-    # number = models.IntegerField(null=True,blank=True)    
     chapter = models.IntegerField(null=True,blank=True)
     page = models.CharField(max_length=32, null=True,blank=True)
     edition = models.TextField(max_length=16,null=True,blank=True)
@@ -67,8 +65,42 @@ class Bibtex(models.Model):
             return self.title_ja
         return "Bibtex[{}]".format(self.id)
 
+    @property
+    def title(self,):
+        if self.language == 'EN':
+            return self.title_en
+        elif self.language == 'JA':
+            return self.title_ja
+        
+    @property
+    def date_str(self):
+        if not self.pub_date:
+            return "None"
+        elif self.use_date_info:
+            if self.language == "EN":
+                return self.pub_date.strftime("%B %d, %Y")
+            else:
+                return self.pub_date.strftime("%Y年%m月%d日")
+        else:
+            if self.language == "EN":
+                return self.pub_date.strftime("%B %Y")
+            else:
+                return self.pub_date.strftime("%Y年%m月")
 
-
+    @property
+    def date_dict(self):
+        dict_ret = {
+            "original": self.pub_date,
+        }
+        if self.pub_date:
+            dict_ret["year"]  = self.pub_date.year
+            dict_ret["month"] = self.pub_date.month
+            dict_ret["month_string"] = self.pub_date.strftime("%B")
+        else:
+            dict_ret["year"] = "None"
+            dict_ret["month"] = "None"
+            dict_ret["month_string"] = "None"
+        return dict_ret                
     
 
 # --------------------------------------------------
@@ -95,7 +127,23 @@ class Author(models.Model):
         
     def __str__(self):
         return self.name_en
-    
+
+
+    @property
+    def name(self, lang="EN"):
+        if lang == "EN":
+            return self.name_en
+        else:
+            return self.name_ja
+
+    @property
+    def dep(self, lang="EN"):
+        if lang == "EN":
+            return self.dep_en
+        else:
+            return self.dep_ja
+        
+        
 
 # --------------------------------------------------
 class Book(models.Model):
