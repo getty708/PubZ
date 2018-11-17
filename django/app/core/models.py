@@ -37,6 +37,7 @@ class Bibtex(models.Model):
     impact_factor = models.FloatField(null=True,blank=True)
     url = models.URLField(null=True,blank=True)
     note = models.TextField(null=True,blank=True)
+    memo = models.CharField(max_length=32, null=True,blank=True)
     abstruct = models.TextField(null=True,blank=True)
     image = models.ImageField(null=True,blank=True, upload_to="api")
     tags = models.ManyToManyField(
@@ -55,7 +56,7 @@ class Bibtex(models.Model):
 
     class Meta:
         unique_together = (
-            ("title_en", "title_ja","pub_date","note",),
+            ("title_en", "book", "pub_date","memo",),
         )
     
     def __str__(self):
@@ -107,8 +108,8 @@ class Bibtex(models.Model):
 class Author(models.Model):
     name_en = models.CharField(max_length=128)
     name_ja = models.CharField(max_length=128, null=True, blank=True)
-    dep_en = models.TextField(null=True,blank=True)
-    dep_ja = models.TextField(null=True, blank=True)
+    dep_en = models.TextField(null=True,blank=True,)
+    dep_ja = models.TextField(null=True, blank=True,)
     mail = models.EmailField(null=True, blank=True)
     date_join = models.DateField(null=True, blank=True)
     date_leave = models.DateField(null=True, blank=True)
@@ -122,7 +123,7 @@ class Author(models.Model):
 
     class Meta:
         unique_together = (
-            ("name_en", "dep_en", "mail",),
+            ("name_en", "mail",),
         )
         
     def __str__(self):

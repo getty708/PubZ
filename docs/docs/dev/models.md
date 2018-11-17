@@ -75,10 +75,10 @@ TBA
 Just a number, or double hyphen notation style (e.g. `100--120`).
 
 #### DB: Unique Restriction
-The following set of field shall be unique. 
+The following set of field shall be unique.  If some of us are accepted in the same domestic conference. please use memo feild to avoid unique restriction.
 
 ```
-("title_en", "title_ja","pub_date","note",)
+("title_en", "book", "pub_date","memo")
 ```
 
 !!! Info
