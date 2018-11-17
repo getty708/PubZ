@@ -244,8 +244,8 @@ class AuthorOrder(models.Model):
 
     class Meta:
         unique_together = (
-            ("bibtex", "author",),
-        )    
+            ("bibtex", "order",),
+        )
 
     def __str__(self):
         if self.order == 1:            

@@ -1,0 +1,8 @@
+{% for author in authors %}
+<a href="{% url 'dashboard:author_detail' author.id %}" >{% if language == "EN" %}{{ author }}{% else %}{{ author.name_ja }}{% endif %}</a>,
+{% endfor %}
+"<a href="{{ url_bib }}">{{ title }},</a>" 
+{{ book_title }},
+volume {{ volume }},
+number {{ number }},
+pages {{ page }} {% if language == "EN" %}{{ pub_date|date:"F, Y" }}{% else %}{{ pub_date|date:"Y年n月" }}{% endif %}.

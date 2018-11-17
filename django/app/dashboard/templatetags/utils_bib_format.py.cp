@@ -2,7 +2,6 @@ from django.shortcuts import reverse
 from django.utils.safestring import mark_safe
 
 from django import template
-from django.template.loader import get_template
 register = template.Library()
 
 from core.models import Author, AuthorOrder
@@ -24,11 +23,14 @@ class BibtexFormatBase(object):
         bibtex = self.bibtex
         context = bibtex.__dict__
 
-        context['title'] = bibtex.title
+        if bibtex.language == "EN":
+            context['title'] = bibtex.title_en
+        elif bibtex.language == "JA":
+            context['title'] = bibtex.title_ja
+
         context['citekey'] = "test_id"
         context['url_bib'] = self.url_bib
         context['book_title'] = bibtex.book.title
-        print(bibtex.title)
 
         try:
             context['year'] = bibtex.pub_date.year
@@ -41,23 +43,19 @@ class BibtexFormatBase(object):
         context['publisher'] = bibtex.book.publisher
 
         # Get Authors
-        authors =  AuthorOrder.objects.filter(bibtex=bibtex).order_by('order')
-        context["authors"] = [author.author for author in authors]
-        print(context["authors"])
+        authors = AuthorOrder.objects.filter(bibtex=bibtex).order_by('order')
+        context["authors"] = self.get_html_authors(authors)
         # Fill Placeholders
         html_template = self.get_template()
-        print(context)
-        html = html_template.render(context)
+        html = html_template.format(**context)
         return mark_safe(html)
 
-    
+
     def get_template(self,):
-        print("Test-Temp")
-        template_name = "custom/bibtex/list/intproc.html"
-        html = get_template(template_name,)
-        print(html)
-        print(html.__dict__)
-        print(html.template.source)
+        try:
+            html = eval('self.get_template_{}()'.format(self.style))
+        except AttributeError:
+            html = self.get_template_DEFAULT()
         return html
 
     #
