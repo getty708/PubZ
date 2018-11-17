@@ -74,7 +74,15 @@ TBA
 
 Just a number, or double hyphen notation style (e.g. `100--120`).
 
+#### DB: Unique Restriction
+The following set of field shall be unique. 
 
+```
+("title_en", "title_ja","pub_date","note",)
+```
+
+!!! Info
+	If you regist `Award`, please fill note with your presentation title. Is is neseccary if there are some members who get the same awards.
 
 
 
@@ -103,6 +111,13 @@ This model manages infomation about authors.
 TBA
 
 
+### DB: Unique Restriction
+The following set of field shall be unique. 
+
+```
+("name_en", "deb_en", "mail",)
+```
+
 -----------
 ## class **AuthorOrder**
 ```
@@ -117,6 +132,15 @@ core.models.AuthorOder
 + **created**: Datetime which this object is created. This column is automatically filled by django app. `DateTimeField`.
 + **modified**: Datetime which this object is edited last time. This column is automatically filled by django app. `DateTimeField`.
 + **owner**: User who creates this object. This column is automatically filled by django app. `DateTimeField`.
+
+### Validation Rule
+### DB: Unique Resturiction
+The following set of field shall be unique. 
+
+```
+("bibtex", "author",),
+```
+
 
 -----------
 ## class **Book**
@@ -160,6 +184,16 @@ TBA
 TBA
 
 
+### DB: Unique Resturiction
+The following set of field shall be unique. 
+
+
+```
+("name", "parent",),
+```
+
+
+
 -----------
 ## class **Tag**
 ```
@@ -178,7 +212,14 @@ Add tags to bibtex's. This model is used in search, web emedding API.
 + **owner**: User who creates this object. This column is automatically filled by django app. `DateTimeField`.
 
 ### Validation Rules
-TBA
+### DB: Unique Resturiction
+The following set of field shall be unique. 
+
+```
+("name", "parent",),
+```
+
+
 
 ----------
 ## class **TagChain**
@@ -199,18 +240,11 @@ This is a relation schema between Bibtex and Tag.
 
 
 ### Validation
-TBA
+### DB: Unique Resturiction
+The following set of field shall be unique. 
 
-
-
-
------------
-## class **Meta**
 ```
-TBA
+("name", "parent",),
 ```
-
-TBA
-
 
 
