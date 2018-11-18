@@ -3,6 +3,4 @@
 {% endfor %}
 "<a href="{% url 'dashboard:bib_detail' bib.id %}">{{ bib.title }},</a>" 
 {{ book.title }},
-volume {{ bib.volume }},
-number {{ bib.number }},
 pages {{ bib.page }} {% if bib.language == "EN" %}{{ bib.pub_date|date:"F, Y" }}{% else %}{{ bib.pub_date|date:"Y年n月" }}{% endif %}.
