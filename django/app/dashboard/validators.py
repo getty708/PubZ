@@ -6,7 +6,14 @@ from django import forms
 # Model: Author
 # ===============
 def val_author_title_en_replace_keywords(author):
-    pass
+    if "　" in author:
+        return authort.replace("　", " ")
+
+    elif " " not in author:
+        return error
+
+    else:
+        return author
 
 
 validation_callback_bibtex ={
@@ -28,7 +35,7 @@ def val_bibtex_title_en_replace_keywords(title_en):
     """
     CHECK_DICT ={
         # <Target>: [ <Source1>, <Source2>, ...],
-        "Conf.": ["Conference",],        
+        "Conf.": ["Conference",],
     }
     
     return "{}".format(title_en)
@@ -76,8 +83,3 @@ validation_callback_book_form = {
 validation_callback_author_form = {
 
 }
-
-
-
-
-
