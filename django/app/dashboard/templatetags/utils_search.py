@@ -38,6 +38,19 @@ def perse_get_query_params(req):
         order = req.GET.get("order")
     else:
         order = None
+    if "pubyear" in req.GET:
+        pubyear = req.GET.get("pubyear")
+        if pubyear!="":
+            pubyear_start_field = datetime.date(int(pubyear), 1, 1)
+            pubyear_end_field = datetime.date(int(pubyear), 12, 31)
+        else:
+            pubyear = None
+            pubyear_start_field = None
+            pubyear_end_field = None
+    else:
+        pubyear = None
+        pubyear_start_field = None
+        pubyear_end_field = None
     if "pubdate_start" in req.GET:
         pubdate_start = req.GET.get("pubdate_start")
         if pubdate_start!="":
@@ -64,7 +77,7 @@ def perse_get_query_params(req):
         tags = None
 
     ##query params save
-    query_param_dic = {"keywords":keywords,"book_style":book_style,"order":order,"pubdate_start":pubdate_start,"pubdate_end":pubdate_end, "tags": tags}
+    query_param_dic = {"keywords":keywords,"book_style":book_style,"order":order,"pubdate_start":pubdate_start,"pubdate_end":pubdate_end, "pubyear":pubyear,"tags": tags}
 
     ##filtering
     bibtex_queryset = Bibtex.objects.all()
@@ -81,10 +94,14 @@ def perse_get_query_params(req):
     elif pubdate_end_field!=None:
         bibtex_queryset = bibtex_queryset.filter(pub_date__lte=pubdate_end_field)
 
+    #pubyear
+    if pubyear_start_field!=None and pubyear_end_field!=None:
+        bibtex_queryset = bibtex_queryset.filter(pub_date__gte=pubyear_start_field, pub_date__lte=pubyear_end_field)
+
     #keywords
     if keywords!=None:
         bibtex_queryset = keywords_filtering(bibtex_queryset,keywords)
-    
+
     #tags
     if tags != None:
         bibtex_queryset = tags_filtering(bibtex_queryset, tags)

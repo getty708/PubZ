@@ -16,6 +16,7 @@
 			<tr><td>leave_date</td><td>{{ author.leave }}</td></tr>
 		</table>
 		<a href="{% url 'dashboard:author_edit' author.id %}" class="btn btn-outline-primary btn-sm">Edit</a>
+		<a href="{% url 'dashboard:index_list' %}?keywords={{author.name_en}}" target=”_blank” class="btn btn-outline-primary btn-sm">Publications</a>
 	</div>
 </div>
 {% endblock content %}

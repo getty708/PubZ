@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404, render
 from django.views import generic
 
 import datetime
+from datetime import datetime
 
 from core.models import Author, Bibtex, Book, AuthorOrder, Tag
 from notification import alert
@@ -26,62 +27,15 @@ class IndexView(generic.ListView):
         context = super().get_context_data(**kwargs)
         context["book_style_list"] = ["INTPROC","JOURNAL","CONF_DOMESTIC","CONF_DOMESTIC_NO_REVIEW","CONF_NATIONAL","BOOK","KEYNOTE","NEWS","OTHERS","AWARD"]
         context["query_params"] = self.query_param_dic
+        context["year"] = datetime.now().year
+        print(datetime.now().year)
         return context
 
 class IndexViewList(IndexView):
 
-    template_name = 'dashboard/index.html'
+    template_name = 'dashboard/bibtex/index_list.html'
     context_object_name = 'latest_bibtex_list'
 
-"""class AddTestDatas(generic.TemplateView):###for test
-
-    #add test kanren ha,
-    #urls no add to
-    #kono class to
-    #for_test directory dake
-    #kono 3 tu wo keseba ok
-
-    template_name = 'dashboard/for_test/add_test_datas.html'
-
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        if Bibtex.objects.all().exists():
-            context["exists"] = "Already added"
-        else:
-            context["exists"] = "no data"
-        return context
-
-    ##add Tag
-    tag1 = Tag(name="Clustering",description="for clustering")
-    tag2 = Tag(name="Wikipedia",description="for wikipedia")
-    tag1.save()
-    tag2.save()
-
-    ##add author
-    author_1 = Author(name_en='Tatsuya Nakamura', dep_en='Osaka University',mail="mail@mail.co.jp")
-    author_1.save()
-    author_2 = Author(name_en='Takahiro Hara', dep_en='Osaka University',mail="mail@mail.co.jp")
-    author_2.save()
-
-    ##add book
-    book1 = Book(title="ACM Transactions on Asian and Low-Resource Language Information Processing",style="INTPROC")
-    book2 = Book(title="IEEE",style="JOURNAL")
-    book1.save()
-    book2.save()
-
-    ##add bibtex
-    bibtex1 = Bibtex(language='EN', title_en='Wikipedia-Based Relatedness Measurements for Multilingual Short Text Clustering',book=book1,volume=3,number=5,chapter=1,page="10-20")
-    bibtex2 = Bibtex(language='JA', title_ja='wikipediaのクラスタリング(ジャーナル)',book=book2,volume=2,number=2,chapter=2,page="15-24")
-    bibtex1.save()
-    bibtex2.save()
-
-    ##add AuthorOrder
-    AuthorOrder(bibtex=bibtex1,author=author_1,order=1).save()
-    AuthorOrder(bibtex=bibtex1,author=author_2,order=2).save()
-    #AuthorOrder(bibtex=bibtex2,author=author_1,order=1).save()
-    #AuthorOrder(bibtex=bibtex2,author=author_2,order=2).save()"""
 
 class IndexViewTable(IndexView):
     template_name = 'dashboard/bibtex/index_tab.html'
@@ -139,8 +93,6 @@ class AuthorDetailView(generic.DetailView):
     model = Author
     template_name = 'dashboard/author/detail.html'
 
-
-
 """
 Tag
 """
@@ -150,7 +102,6 @@ class TagIndexView(generic.ListView):
 
     def get_queryset(self):
         return Tag.objects.order_by('name')
-
 
 class TagDetailView(generic.DetailView):
     model = Tag

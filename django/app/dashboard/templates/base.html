@@ -11,6 +11,13 @@
 				<script src="{% static 'js/tether/dist/js/tether.min.js' %}"></script>
 				<script src="{% static 'js/moment/moment.min.js' %}"></script>
 				<script src="{% static 'js/chartjs/Chart.min.js' %}"></script>
+				<script>var now_date=new Date(); var now_year = now_date.getFullYear();
+			    document.addEventListener("DOMContentLoaded", function () {
+			        document.getElementById("BMAN_link").setAttribute("href", document.getElementById("BMAN_link").getAttribute("href") + "?pubyear=" + now_year);
+			    }, false);
+			    document.addEventListener("DOMContentLoaded", function () {
+			        document.getElementById("HOME_link").setAttribute("href", document.getElementById("HOME_link").getAttribute("href") + "?pubyear=" + now_year);
+			    }, false);</script>
 				<!-- Bootstrap -->
 				<link href="{% static 'bootstrap/dist/css/bootstrap.css' %}" rel="stylesheet">
 				<script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
@@ -18,15 +25,15 @@
 		</head>
 		<body style="height: 100vh">
 				<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark w-100" >
-						<a class="navbar-brand mb-0 h1" href="{% url 'dashboard:index' %}">BMAN</a>
+						<a class="navbar-brand mb-0 h1" href="{% url 'dashboard:index' %}" id="BMAN_link">BMAN</a>
 						<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 								<div class="navbar-nav mr-auto">
-										<a class="nav-item nav-link" href="{% url 'dashboard:index' %}">Home</a>
+										<a class="nav-item nav-link" href="{% url 'dashboard:index' %}" id="HOME_link">Home</a>
 										{% if user.is_authenticated %}
-										<a class="nav-item nav-link" href="{% url 'dashboard:bibtex_add_step1' %}">Add New Bibtex</a>										
+										<a class="nav-item nav-link" href="{% url 'dashboard:bibtex_add_step1' %}">Add New Bibtex</a>
 										<li class="nav-item dropdown">
 												<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Add New</a>
-												<div class="dropdown-menu">	
+												<div class="dropdown-menu">
 														<a class="dropdown-item" href="{% url 'dashboard:bibtex_add' %}">New Bibtex</a>
 														<a class="dropdown-item" href="{% url 'dashboard:book_add' %}">New Book</a>
 														<a class="dropdown-item" href="{% url 'dashboard:author_add' %}">New Author</a>
@@ -34,13 +41,13 @@
 														<a class="dropdown-item" href="#">New Tag</a>
 												</div>
 										</li>
-										{% endif %}										
+										{% endif %}
 								</div>
 								<div class="navbar-nav">
 										{% if user.is_authenticated %}
 										<li class="nav-item dropdown border border-white rounded">
 												<a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Hello, <span class="font-weight-bold" >{{ user }}</span></a>
-												<div class="dropdown-menu dropdown-menu-right">	
+												<div class="dropdown-menu dropdown-menu-right">
 														<a class="dropdown-item" href="{% url 'dashboard:index' %}">My Page</a>
 														<a class="dropdown-item" href="{% url 'admin:index' %}">Admin Page</a>
 														<div class="dropdown-divider"></div>
