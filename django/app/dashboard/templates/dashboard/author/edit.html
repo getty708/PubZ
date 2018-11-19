@@ -6,7 +6,7 @@
 
 <div class="row">
 		<div class="col-12 my-3">
-				{% if book.id %}
+				{% if author.id %}
 				<h2>Edit Author Info: {{ author }}</h2>
 				{% else%}
 				<h2>Add New Author</h2>
@@ -39,7 +39,7 @@
 						<a href="{% url 'dashboard:author_detail' author.id %}" class="btn btn-outline-primary btn-sm">Back</a>
 						{% else %}
 						<button type="submit" class="btn btn-sm btn-primary">Add</button>
-						<a href="{% url 'dashboard:author_detail' author.id %}" class="btn btn-outline-primary btn-sm">Back</a>						
+						<a href="{% url 'dashboard:author_index'%}" class="btn btn-outline-primary btn-sm">Back</a>						
 						{% endif %}
 				</form>				
 				
