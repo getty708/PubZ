@@ -44,10 +44,10 @@
 						</div>
 						<div class="col-12 mb-1">
 								<div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-										<a href="{% url 'dashboard:index_list' %}" class="btn btn{% if display_mode != 'list' %}-outline{% endif %}-secondary" >List View</a>
-										<a href="{% url 'dashboard:index_table' %}" class="btn btn{% if display_mode != 'table' %}-outline{% endif %}-secondary" >Table View</a>
-										<a href="{% url 'dashboard:index_bib' %}" class="btn btn{% if display_mode != 'bib' %}-outline{% endif %}-secondary" >Bibtex View</a>
-										<a href="{% url 'dashboard:index_latex' %}" class="btn btn{% if display_mode != 'latex' %}-outline{% endif %}-secondary" >Latex View</a>
+										<a href="{% url 'dashboard:index_list' %}?{% if query_params.keywords %}keywords={{query_params.keywords}}&{% endif %}{% if query_params.book_style %}book_style={{query_params.book_style}}&{% endif %}{% if query_params.order %}order={{query_params.order}}&{% endif %}{% if query_params.pubyear %}pubyear={{query_params.pubyear}}{% endif %}" class="btn btn{% if display_mode != 'list' %}-outline{% endif %}-secondary" >List View</a>
+										<a href="{% url 'dashboard:index_table' %}?{% if query_params.keywords %}keywords={{query_params.keywords}}&{% endif %}{% if query_params.book_style %}book_style={{query_params.book_style}}&{% endif %}{% if query_params.order %}order={{query_params.order}}&{% endif %}{% if query_params.pubyear %}pubyear={{query_params.pubyear}}{% endif %}" class="btn btn{% if display_mode != 'table' %}-outline{% endif %}-secondary" >Table View</a>
+										<a href="{% url 'dashboard:index_bib' %}?{% if query_params.keywords %}keywords={{query_params.keywords}}&{% endif %}{% if query_params.book_style %}book_style={{query_params.book_style}}&{% endif %}{% if query_params.order %}order={{query_params.order}}&{% endif %}{% if query_params.pubyear %}pubyear={{query_params.pubyear}}{% endif %}" class="btn btn{% if display_mode != 'bib' %}-outline{% endif %}-secondary" >Bibtex View</a>
+										<a href="{% url 'dashboard:index_latex' %}?{% if query_params.keywords %}keywords={{query_params.keywords}}&{% endif %}{% if query_params.book_style %}book_style={{query_params.book_style}}&{% endif %}{% if query_params.order %}order={{query_params.order}}&{% endif %}{% if query_params.pubyear %}pubyear={{query_params.pubyear}}{% endif %}" class="btn btn{% if display_mode != 'latex' %}-outline{% endif %}-secondary" >Latex View</a>
 
 								</div>
 						</div>
