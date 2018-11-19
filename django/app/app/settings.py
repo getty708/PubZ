@@ -179,3 +179,7 @@ REST_FRAMEWORK = {
 
 # enable iframe
 X_FRAME_OPTIONS = 'ALLOWALL'
+
+# Login/Logout
+LOGIN_REDIRECT_URL = 'dashboard:index'
+LOGOUT_REDIRECT_URL= 'dashboard:index'

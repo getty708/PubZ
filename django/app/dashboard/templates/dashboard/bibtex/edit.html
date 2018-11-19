@@ -46,6 +46,19 @@
 									<a href="{% url 'dashboard:author_order_add' %}?bibtex={{ bibtex.id }}" class="btn btn-sm btn-outline-primary" target="_blank">Add Author</a>
 								</div>
 						</div>
+
+						<div class="form-group row">
+							<label for="example-text-input" class="col-2 col-form-label">Tags</label>
+							<div class="col-3"> 
+								{% for tag in bibtex.tags.all %}
+								<span class="badge badge-pill badge-primary">{{ tag }}</span>
+                				{% endfor %}
+							</div>
+							<div class="col-5">
+									<a href="{% url 'dashboard:tagchain_add' %}?bibtex={{ bibtex.id }}" class="btn btn-sm btn-outline-primary" target="_blank">Add Tag</a>
+							</div>
+						</div>
+
 						<div class="form-group row">
 								{{ form.book.errors }}
 								<label for="example-text-input" class="col-2 col-form-label">Book</label>
