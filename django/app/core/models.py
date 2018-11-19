@@ -72,6 +72,17 @@ class Bibtex(models.Model):
             return self.title_en
         elif self.language == 'JA':
             return self.title_ja
+
+    @property
+    def authors_list(self,):
+        author_list = []
+        
+        for author in self.authors.all():
+            author_dict = author.__dict__
+            author_dict["name"] = author.name_ja if self.language == "JA" else author.name_en            
+            author_list.append(author_dict)
+        return author_list
+    
         
     @property
     def date_str(self):
