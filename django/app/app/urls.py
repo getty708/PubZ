@@ -19,10 +19,15 @@ from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 
+from django.contrib.auth import views as auth_views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('dashboard/', include('dashboard.urls'), name='dashboard'),
     path('api/', include('api.urls'), name='api'),
+
+    # Accounts [Login/Logout]
+    path('accounts/', include('django.contrib.auth.urls'), name="accounts"),
 ]
 
 if settings.DEBUG:

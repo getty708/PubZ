@@ -27,9 +27,7 @@ class Bibtex(models.Model):
         on_delete=models.PROTECT,
     )
     volume = models.CharField(max_length=128,null=True,blank=True)
-    # volume = models.IntegerField(null=True,blank=True)    
     number = models.CharField(max_length=128, null=True,blank=True)
-    # number = models.IntegerField(null=True,blank=True)    
     chapter = models.IntegerField(null=True,blank=True)
     page = models.CharField(max_length=32, null=True,blank=True)
     edition = models.TextField(max_length=16,null=True,blank=True)
@@ -39,6 +37,7 @@ class Bibtex(models.Model):
     impact_factor = models.FloatField(null=True,blank=True)
     url = models.URLField(null=True,blank=True)
     note = models.TextField(null=True,blank=True)
+    memo = models.CharField(max_length=32, null=True,blank=True)
     abstruct = models.TextField(null=True,blank=True)
     image = models.ImageField(null=True,blank=True, upload_to="api")
     tags = models.ManyToManyField(
@@ -55,20 +54,62 @@ class Bibtex(models.Model):
         on_delete=models.SET_NULL
     )
 
+    class Meta:
+        unique_together = (
+            ("title_en", "book", "pub_date","memo",),
+        )
+    
     def __str__(self):
         if self.language == 'EN':
             return self.title_en
         elif self.language == 'JA':
             return self.title_ja
         return "Bibtex[{}]".format(self.id)
+
+    @property
+    def title(self,):
+        if self.language == 'EN':
+            return self.title_en
+        elif self.language == 'JA':
+            return self.title_ja
+        
+    @property
+    def date_str(self):
+        if not self.pub_date:
+            return "None"
+        elif self.use_date_info:
+            if self.language == "EN":
+                return self.pub_date.strftime("%B %d, %Y")
+            else:
+                return self.pub_date.strftime("%Y年%m月%d日")
+        else:
+            if self.language == "EN":
+                return self.pub_date.strftime("%B %Y")
+            else:
+                return self.pub_date.strftime("%Y年%m月")
+
+    @property
+    def date_dict(self):
+        dict_ret = {
+            "original": self.pub_date,
+        }
+        if self.pub_date:
+            dict_ret["year"]  = self.pub_date.year
+            dict_ret["month"] = self.pub_date.month
+            dict_ret["month_string"] = self.pub_date.strftime("%B")
+        else:
+            dict_ret["year"] = "None"
+            dict_ret["month"] = "None"
+            dict_ret["month_string"] = "None"
+        return dict_ret                
     
 
 # --------------------------------------------------
 class Author(models.Model):
     name_en = models.CharField(max_length=128)
     name_ja = models.CharField(max_length=128, null=True, blank=True)
-    dep_en = models.TextField(null=True,blank=True)
-    dep_ja = models.TextField(null=True, blank=True)
+    dep_en = models.TextField(null=True,blank=True,)
+    dep_ja = models.TextField(null=True, blank=True,)
     mail = models.EmailField(null=True, blank=True)
     date_join = models.DateField(null=True, blank=True)
     date_leave = models.DateField(null=True, blank=True)
@@ -80,9 +121,30 @@ class Author(models.Model):
         on_delete=models.SET_NULL
     )
 
+    class Meta:
+        unique_together = (
+            ("name_en", "mail",),
+        )
+        
     def __str__(self):
         return self.name_en
-    
+
+
+    @property
+    def name(self, lang="EN"):
+        if lang == "EN":
+            return self.name_en
+        else:
+            return self.name_ja
+
+    @property
+    def dep(self, lang="EN"):
+        if lang == "EN":
+            return self.dep_en
+        else:
+            return self.dep_ja
+        
+        
 
 # --------------------------------------------------
 class Book(models.Model):
@@ -117,6 +179,12 @@ class Book(models.Model):
         on_delete=models.SET_NULL
     )
 
+    
+    class Meta:
+        unique_together = (
+            ("title", "style",),
+        )
+
     def __str__(self):
         if self.abbr is not None:
             return self.abbr
@@ -139,6 +207,12 @@ class Tag(models.Model):
         null=True,
         on_delete=models.SET_NULL,
     )
+
+    
+    class Meta:
+        unique_together = (
+            ("name", "parent",),
+        )
 
     def __str__(self):
         return self.name
@@ -167,6 +241,11 @@ class AuthorOrder(models.Model):
         on_delete=models.SET_NULL
     )
 
+
+    class Meta:
+        unique_together = (
+            ("bibtex", "author",),
+        )    
 
     def __str__(self):
         if self.order == 1:            
@@ -199,3 +278,10 @@ class TagChain(models.Model):
         null=True,
         on_delete=models.SET_NULL
     )
+
+    
+    class Meta:
+        unique_together = (
+            ("bibtex", "tag",),
+        )
+    
