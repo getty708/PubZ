@@ -3,4 +3,4 @@
 {% endfor %}
 "<a href="{% url 'dashboard:bib_detail' bib.id %}">{{ bib.title }},</a>" 
 {{ book.title }},
-pages {bib.page} {bib.pub_date|date:"Y年n月"}.
+pages {{ bib.page }} {{bib.pub_date|date:"Y年n月"}}.
