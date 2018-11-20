@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     # Additional Packages
     'dal',
     'dal_select2',
+    'bootstrap_datepicker_plus',
     ## REST
     'django_filters',
     'rest_framework',
@@ -183,3 +184,8 @@ X_FRAME_OPTIONS = 'ALLOWALL'
 # Login/Logout
 LOGIN_REDIRECT_URL = 'dashboard:index'
 LOGOUT_REDIRECT_URL= 'dashboard:index'
+
+
+BOOTSTRAP4 = {
+    'include_jquery': True,
+}
