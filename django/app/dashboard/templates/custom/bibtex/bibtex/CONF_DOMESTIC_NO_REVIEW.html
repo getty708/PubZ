@@ -1,5 +1,5 @@
 <pre class="mb-0" >
-@article{{ cb_left }}{ citekey },
+@inproceedings{{ cb_left }}{ citekey },
   title     = {{ cb_left }}<a href="{% url 'dashboard:bib_detail' bib.id %}">{{ bib.title }}</a>{{ cb_right }},
   author    = {{ cb_left }}{% for author in authors %}<a href="{% url 'dashboard:author_detail' author.id %}" >{% if bib.language == "EN" %}{{ author.name_en }}{% else %}{{ author.name_ja }}{% endif %}</a>,{% endfor %}{{ cb_reght }},
   journal   = {{ cb_left }}{{ book.title }}{{ cb_right }},
