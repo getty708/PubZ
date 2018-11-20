@@ -104,3 +104,4 @@ class User(AbstractBaseUser, PermissionsMixin):
         This method is used by external application.
         """
         return self.email
+
