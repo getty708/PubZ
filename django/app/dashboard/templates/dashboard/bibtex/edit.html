@@ -39,27 +39,26 @@
 						</div>
 						<div class="form-group row">
 								<label for="example-text-input" class="col-2 col-form-label">Authors <b class="text-danger">*</b></label>		
-								<div class="col-3"> 
+								<div class="col-3">
+									<font size="4"> 
 									{% for author in bibtex.authors.all %}
-									<h5><span class="badge badge-pill badge-primary">{{ author }}</span></h5>
-                				{% endfor %}
-								</div>
-								<div class="col-5"> 
-									<a href="{% url 'dashboard:author_order_add' %}?bibtex={{ bibtex.id }}" class="btn btn-sm btn-outline-primary" target="_blank">Add Author</a>
-								</div>
+										<span class="badge badge-pill badge-primary">{{ author }}</span>
+	                					{% endfor %}
+										<a href="{% url 'dashboard:author_order_add' %}?bibtex={{ bibtex.id }}" class="btn btn-sm btn-outline-primary" target="_blank">Add Author</a>
+									</font>
+								</div>	
 						</div>
 						<div class="form-group row">
 							<label for="example-text-input" class="col-2 col-form-label">Tags <b class="text-danger">*</b></label>
 							<div class="col-3"> 
-								{% for tag in bibtex.tags.all %}
-								<h5><span class="badge badge-pill badge-primary">{{ tag }}</span></h5>
-                				{% endfor %}
-							</div>
-							<div class="col-5">
-									<a href="{% url 'dashboard:tagchain_add' %}?bibtex={{ bibtex.id }}" class="btn btn-sm btn-outline-primary" target="_blank">Add Tag</a>
-							</div>
+								<font size="4"> 
+									{% for tag in bibtex.tags.all %}
+									<span class="badge badge-pill badge-primary">{{ tag }}</span>
+                					{% endfor %}
+									<a href="{% url 'dashboard:tagchain_add' %}?bibtex={{ bibtex.id }}" class="btn btn-sm btn-outline-primary" target="_blank">Add Tag</a>	
+									</font>
+							</div>							
 						</div>
-
 						<div class="form-group row">
 								{{ form.book.errors }}
 								<label for="example-text-input" class="col-2 col-form-label">Book <b class="text-danger">*</b></label>
