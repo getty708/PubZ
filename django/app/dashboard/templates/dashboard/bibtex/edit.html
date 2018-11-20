@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% load static %}
-{% load utils_author %}
 
 {% block title %}Dashboard | Bibtex Add{% endblock title %}
 
@@ -42,7 +41,9 @@
 						<div class="form-group row">
 								<label for="example-text-input" class="col-2 col-form-label">Authors</label>
 								<div class="col-10"> 
-									{{ bibtex | bibtex_author_format }}
+										{% for author in bibtex.authors_list %}
+										<a href="{% url 'dashboard:author_detail' author.id %}">{{ author.name }}</a>,
+										{% endfor %}
 									<a href="{% url 'dashboard:author_order_add' %}?bibtex={{ bibtex.id }}" class="btn btn-sm btn-outline-primary" target="_blank">Add Author</a>
 								</div>
 						</div>
@@ -117,10 +118,10 @@
 								<div class="col-5">{{ form.is_published }}</div>
 						</div>
 						{% if bibtex.id %}
-						<button type="submit" class="btn btn-primary">Update</button>
+						<button type="submit" class="btn btn-sm btn-primary">Update</button>
 						<a href="{% url 'dashboard:detail' bibtex.id %}" class="btn btn-outline-primary btn-sm">Back</a>
 						{% else %}
-						<button type="submit" class="btn btn-primary">Add New</button>
+						<button type="submit" class="btn btn-sm btn-primary">Add New</button>
 						{% endif %}
 				</form>				
 		</div>
