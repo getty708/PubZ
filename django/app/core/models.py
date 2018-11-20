@@ -11,6 +11,11 @@ class Bibtex(models.Model):
         ('EN', 'English'),
         ('JA', 'Japanese'),
     )
+    PRIORITY_CHOICES = (
+        ('0', 'Default',),        
+        ('5', 'High',),
+        ('9', 'Super High',),
+    )
     
     """ Fields
     """
@@ -39,6 +44,10 @@ class Bibtex(models.Model):
     url = models.URLField(null=True,blank=True)
     note = models.TextField(null=True,blank=True)
     memo = models.CharField(max_length=32, null=True,blank=True)
+    priority =  models.CharField(
+        max_length=1,
+        default='0',
+        choices=PRIORITY_CHOICES,)
     abstruct = models.TextField(null=True,blank=True)
     image = models.ImageField(null=True,blank=True, upload_to="api")
     tags = models.ManyToManyField(

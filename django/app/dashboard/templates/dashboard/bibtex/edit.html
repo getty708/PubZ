@@ -117,6 +117,12 @@
 								<label for="example-text-input" class="col-2 col-form-label">Published or not</label>
 								<div class="col-5">{{ form.is_published }}</div>
 						</div>
+						{% if user.id == bibtex.owner.id or user.is_superuser %}
+						<div class="form-group row">
+								<label for="example-text-input" class="col-2 col-form-label">Priority</label>
+								<div class="col-5">{{ form.priority }}</div>
+						</div>
+						{% endif %}
 						{% if bibtex.id %}
 						<button type="submit" class="btn btn-sm btn-primary">Update</button>
 						<a href="{% url 'dashboard:detail' bibtex.id %}" class="btn btn-outline-primary btn-sm">Back</a>

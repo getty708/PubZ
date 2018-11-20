@@ -37,6 +37,9 @@ def bibtex_edit(request, bibtex_id=None):
         if form.is_valid():
             bibtex_new = form.save(commit=False)
             bibtex_new.owner = get_login_user(request.user.id)
+            if not bibtex_new.priority == bibtex.priority:
+                if (not bibtex_new.owner == bibtex.owner) or not bibtex_new.owner.is_usperuser:
+                    bibtex_new.priority = bibtex.priority
             bibtex_new.save()
             print("Saved", bibtex)
             return redirect('dashboard:index')
