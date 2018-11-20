@@ -1,6 +1,6 @@
-from django.contrib.auth.models import User, Group
+# from django.contrib.auth.models import User, Group
 from rest_framework import viewsets, permissions, filters
-
+from users.models import User
 
 # Import Serializers
 from api import serializers

@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from users.models import User
 
 
 # --------------------------------------------------
@@ -49,7 +50,7 @@ class Bibtex(models.Model):
     created = models.DateTimeField(auto_now_add=True, blank=False)
     modified = models.DateTimeField(auto_now=True, blank=False)    
     owner = models.ForeignKey(
-        'auth.User',
+        'users.User',
         null=True,
         on_delete=models.SET_NULL
     )
@@ -127,7 +128,7 @@ class Author(models.Model):
     created = models.DateTimeField(auto_now_add=True, blank=False)
     modified = models.DateTimeField(auto_now=True, blank=False)    
     owner = models.ForeignKey(
-        'auth.User',
+        'users.User',
         null=True,blank=False,
         on_delete=models.SET_NULL
     )
@@ -185,7 +186,7 @@ class Book(models.Model):
     created = models.DateTimeField(auto_now_add=True, blank=False)
     modified = models.DateTimeField(auto_now=True, blank=False)    
     owner = models.ForeignKey(
-        'auth.User',
+        'users.User',
         null=True,
         on_delete=models.SET_NULL
     )
@@ -214,7 +215,7 @@ class Tag(models.Model):
     created = models.DateTimeField(auto_now_add=True, blank=False)
     modified = models.DateTimeField(auto_now=True, blank=False)    
     owner = models.ForeignKey(
-        'auth.User',
+        'users.User',
         null=True,
         on_delete=models.SET_NULL,
     )
@@ -247,7 +248,7 @@ class AuthorOrder(models.Model):
     created = models.DateTimeField(auto_now_add=True, blank=False)
     modified = models.DateTimeField(auto_now=True, blank=False)    
     owner = models.ForeignKey(
-        'auth.User',
+        'users.User',
         null=True,
         on_delete=models.SET_NULL
     )
@@ -285,7 +286,7 @@ class TagChain(models.Model):
     created = models.DateTimeField(auto_now_add=True, blank=False)
     modified = models.DateTimeField(auto_now=True, blank=False)    
     owner = models.ForeignKey(
-        'auth.User',
+        'users.User',
         null=True,
         on_delete=models.SET_NULL
     )

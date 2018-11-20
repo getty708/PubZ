@@ -27,11 +27,15 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["localhost", "192.168.1.123",]
 
+# User Model
+AUTH_USER_MODEL = 'users.User'
+
 
 # Application definition
 
 INSTALLED_APPS = [
     # My App
+    'users.apps.UsersConfig',    
     'api.apps.ApiConfig',
     'core.apps.CoreConfig',
     'dashboard.apps.DashboardConfig',
@@ -180,6 +184,9 @@ REST_FRAMEWORK = {
 # enable iframe
 X_FRAME_OPTIONS = 'ALLOWALL'
 
+
 # Login/Logout
 LOGIN_REDIRECT_URL = 'dashboard:index'
 LOGOUT_REDIRECT_URL= 'dashboard:index'
+
+
