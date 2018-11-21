@@ -130,7 +130,10 @@ class BookForm(forms.ModelForm):
         return val
         
     def clean_title(self):
-        return self.clean_base('title')
+        title = self.cleaned_data['title']
+        if '(' in title or ')' in title:
+            raise forms.ValidationError('Do not include "(", ")"')
+        return title
 
     def clean_abbr(self):
         return self.clean_base('abbr')
