@@ -37,13 +37,13 @@ class Bibtex(models.Model):
     chapter = models.IntegerField(null=True,blank=True)
     page = models.CharField(max_length=32, null=True,blank=True)
     edition = models.TextField(max_length=16,null=True,blank=True)
-    pub_date = models.DateField(null=True,blank=True)
+    pub_date = models.DateField(null=True,blank=True,default="1970-01-01")
     use_date_info = models.BooleanField(default=False, blank=True)
     acceptance_rate = models.FloatField(null=True,blank=True)
     impact_factor = models.FloatField(null=True,blank=True)
     url = models.URLField(null=True,blank=True)
     note = models.TextField(null=True,blank=True)
-    memo = models.CharField(max_length=32, null=True,blank=True)
+    memo = models.CharField(max_length=32, null=False,blank=True, default="")
     priority =  models.CharField(
         max_length=1,
         default='0',
@@ -64,6 +64,7 @@ class Bibtex(models.Model):
         on_delete=models.SET_NULL
     )
 
+    
     class Meta:
         unique_together = (
             ("title_en", "book", "pub_date","memo",),
