@@ -17,7 +17,7 @@
 					</button>
 				</h2>
 				{% endif %}
-				{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+				{% if form.errors.title %}<p><strong>{{ form.errors.title }}</strong></p>{% endif %}
 
 				<form action="{{ submit_url}}" method="post">
 						{% csrf_token %}
