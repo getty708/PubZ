@@ -98,16 +98,18 @@ def book_edit(request, book_id=None):
         book = Book()
         submit_text = "登録"
         submit_url = reverse("dashboard:book_add")
-        
+
     if request.method == 'POST':
         form = forms.BookForm(request.POST, instance=book)
         if form.is_valid():
             book_new = form.save(commit=False)
             book_new.owner = get_login_user(request.user.id)
             book_new.save()
-            return redirect('dashboard:book_index')        
-
-    form = forms.BookForm(instance=book)    
+            return redirect('dashboard:book_index')
+        else:
+            print("validation fail")
+    else:
+        form = forms.BookForm(instance=book)
     return render(request,
                   'dashboard/book/edit.html',
                   {'msg': msg,
