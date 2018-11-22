@@ -124,15 +124,12 @@ def create_author(url_base, token, author_dict, logger=getLogger(__name__+'.crea
         logger.info("Success: Create new author.\n")
         return True, "Created"
     else:
-        logger.warning("Failed: Cannot create new author.\n")
-        # Check whether exisiting
-        payload = payload["name_en"] if payload["name_en"] else payload["name_ja"]
-        authors = get_authors(url_base, payload)
-        logger.warning("Search [{}] ==> {}".format(payload, authors))        
-        if len(authors) > 0:
-            logger.warning("This author is already exist")
-            return False, "Exists"
-    return False, "Failed"
+        # if str(data) == "{'non_field_errors': ['The fields name_en, mail must make a unique set.']}":
+        if "non_field_errors" in data.keys():
+            logger.warning("Failed: Already exists (DB internal error.)\n")
+            return True, str(data)
+        logger.warning("Failed: Cannot create new book. {}\n".format(data))
+    return False, str(data)
 
 
 # -----------------------------------------------------------------------

@@ -135,23 +135,18 @@ def create_bibtex(url_base, token, bibtex_dict, logger=getLogger(__name__+'.crea
     r = requests.post(url_post,  headers=headers, data=json.dumps(payload),)
 
     # Check Responce
-    if r.status_code in  [500,]:
-        return False, "ResponceCode=500"
     data = json.loads(r.text)
     logger.debug("Response: status={}, data={}".format(r.status_code, data))
     if r.status_code == 201:
         logger.info("Success: Create new bibtex.\n")
         return True, "Created"
     else:
-        logger.warning("Failed: Cannot create new bibtex.\n")
-        return False, str(data)
-        # # Check whether exisiting
-        # bibtexs = get_bibtexs(url_base, payload["title"])
-        # logger.warning("Search [{}] ==> {}".format(payload, bibtexs))
-        # if len(bibtexs) > 0:
-        #     logger.warning("This bibtex is already exist")
-        #     return False, "Exists"
-    return False, "Failed"
+        if str(data) == "['DB IntegrityError']":
+            return True, str(data)
+        logger.warning("Failed: Cannot create new bibtex. {} - {}\n".format(
+            r.status_code, data))
+    logger.info("\n")
+    return False, str(data)
 
 
 # -----------------------------------------------------------------------
@@ -235,7 +230,7 @@ def main_csv(args):
             "url": row["url"],
             "note": row["note"],
             "memo": row["memo"],
-            "book": {"title": row["key_book"], "style": row["key_book_style"]},
+            "book": {"title": row["book_title"], "style": row["key_book_style"]},
         }
         status, msg = create_bibtex(args.url_base, token, bibtex_dict)
         df.loc[i, "status"] = status

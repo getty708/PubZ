@@ -1,4 +1,6 @@
 # from django.contrib.auth.models import User, Group
+import django
+from django.http import  HttpResponseServerError
 from users.models import User
 from rest_framework import serializers
 from django.shortcuts import get_object_or_404
@@ -36,7 +38,7 @@ class BookSerializer(serializers.ModelSerializer):
 class BibtexSerializer(serializers.ModelSerializer):
     book = BookSerializer(read_only=True)
     book_id = serializers.IntegerField(max_value=None, min_value=None)
-    
+        
     class Meta:
         model = Bibtex
         fields = (
@@ -48,13 +50,13 @@ class BibtexSerializer(serializers.ModelSerializer):
             )
 
     def create(self, validated_data):
-        print(validated_data)
         book_id = validated_data.pop('book_id')
-        book = Book.objects.filter(pk=book_id)
-        if len(book) > 0:
-            bibtex = Bibtex.objects.create(book_id=book[0].id, **validated_data)
-        else:            
-            bibtex =  Bibtex.objects.create(**validated_data)
+        book = get_object_or_404(Book, pk=book_id)
+        
+        try:
+            bibtex = Bibtex.objects.create(book_id=book.id, **validated_data)
+        except django.db.utils.IntegrityError:
+            raise serializers.ValidationError("DB IntegrityError")
         return bibtex
 
         
@@ -76,10 +78,11 @@ class AuthorOrderSerializer(serializers.ModelSerializer):
         # Author
         author_id = validated_data.pop('author_id')
         author    = get_object_or_404(Author, pk=author_id)
-
-        # Create New 
-        author_order = AuthorOrder.objects.create(
-            bibtex=bib,author=author,**validated_data)
+        # Create New
+        try:
+            author_order = AuthorOrder.objects.create(bibtex=bib,author=author,**validated_data)
+        except django.db.utils.IntegrityError:
+            raise serializers.ValidationError("DB IntegrityError")
         return author_order
         
 

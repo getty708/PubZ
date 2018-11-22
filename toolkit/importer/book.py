@@ -122,14 +122,11 @@ def create_book(url_base, token, book_dict, logger=getLogger(__name__+'.create_b
         logger.info("Success: Create new book.\n")
         return True, "Created"
     else:
-        logger.warning("Failed: Cannot create new book.\n")
-        # Check whether exisiting
-        books = get_books(url_base, payload["title"])
-        logger.warning("Search [{}] ==> {}".format(payload, books))
-        if len(books) > 0:
-            logger.warning("This book is already exist")
-            return False, "Exists"
-    return False, "Failed"
+        if str(data) == "{'non_field_errors': ['The fields title, style must make a unique set.']}":
+            logger.warning("Failed: Already exists (DB internal error.)\n")
+            return True, str(data)
+        logger.warning("Failed: Cannot create new book. {}\n".format(data))        
+    return False, str(data)
 
 
 # -----------------------------------------------------------------------

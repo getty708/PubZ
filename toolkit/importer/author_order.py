@@ -119,6 +119,7 @@ def create_author_order(url_base, token, author_order_dict, logger=getLogger(__n
         df_tmp = pd.DataFrame({
             "bibtex_title": [author_order_dict["bibtex"]["title"]],
             "bibtex_id"   : [-1,],
+            "no"          : [0,],
             "author"      : [author_order_dict["authors"],],
             "status"      : [False],
             "msg"         : ["Bibtex not found [Got{}]".format(len(bibtexs)),],
@@ -139,12 +140,14 @@ def create_author_order(url_base, token, author_order_dict, logger=getLogger(__n
     logger.debug("- params : {}".format(author_order_dict))
 
     df_ret = []
-    for no,_author in enumerate(author_order_dict["authors"].split(",")):
-        row = [bibtex["title"],bibtex_id, _author,]
+    authors_list = [a.strip() for a in author_order_dict["authors"].split(",")]
+    for no,_author in enumerate(authors_list):
+        row = [bibtex["title"],bibtex_id, no, _author,]
         # Get Author Data
         url_get_author = url_base + "authors/"
+        _author = _author.strip()
         authors = get_authors(url_base, _author)
-        authors_selected = [author for author in authors if (_author == author["name_en"]) or (_author == author["name_ja"])]
+        authors_selected = [author for author in authors if (_author == author["name_en"].upper()) or (_author == author["name_ja"].upper())]
         if len(authors_selected) == 1:
             author = authors_selected[0]
             author_id = author["id"]
@@ -164,12 +167,7 @@ def create_author_order(url_base, token, author_order_dict, logger=getLogger(__n
         }
         r = requests.post(url_post,  headers=headers, data=json.dumps(payload),)
         ## Check Responce
-        logger.info("Response: status={}".format(r.status_code))
-        if r.status_code in [500,]:
-            row = row + [False, "ResponseCode = {}".format(r.status_code)]
-            df_ret.append(row)
-            continue
-            
+        logger.info("Response: status={}".format(r.status_code))            
         data = json.loads(r.text)
         logger.debug("Response: status={}, data={}".format(r.status_code, data))
         if r.status_code == 201:
@@ -178,11 +176,15 @@ def create_author_order(url_base, token, author_order_dict, logger=getLogger(__n
             df_ret.append(row)
             continue
         else:
+            if str(data) == "['DB IntegrityError']":
+                row = row + [True, str(data)]
+                df_ret.append(row)
+                continue            
             logger.warning("Failed: Cannot create new author_order. {} \n".format(data))
             row = row + [False, str(data)]
             df_ret.append(row)
             continue
-    return pd.DataFrame(df_ret, columns=["bibtex_titele", "bibtex_id", "author", "status", "msg"])
+    return pd.DataFrame(df_ret, columns=["bibtex_titele", "bibtex_id", "no", "author", "status", "msg"])
 
 
 # -----------------------------------------------------------------------
@@ -234,7 +236,7 @@ def main_csv(args):
     df["msg"] = ""
     df_results = pd.DataFrame()
     if args.debug:
-        df = df[200:210].reset_index(drop=True)
+        df = df[1130:1140].reset_index(drop=True)
     for i in range(len(df)):
         row = df.loc[i, :]
         author_order_dict = {
@@ -242,10 +244,8 @@ def main_csv(args):
             "authors": row["keys_author"],
         }
         df_tmp = create_author_order(args.url_base, token, author_order_dict)
-        logger.error(df_tmp.columns)
-        logger.error(df_tmp)
         df_results = pd.concat([df_results, df_tmp], axis=0)
-    # df_results = df_results.reset_index(drop=True)
+    df_results = df_results.reset_index(drop=False)
     print(df_results)
 
     # Results
