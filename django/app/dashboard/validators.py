@@ -41,13 +41,37 @@ def val_bibtex_title_en_replace_keywords(title_en):
     validated_title  = ''
 
     if ':' in title_en:
-        validated_title = title_en
+        colon_separated_list = title_en.split(':')
+        space_separated_list_front = colon_separated_list[0].split()
+        space_separated_list_back = colon_separated_list[1].split()
 
+        need_capitalize_front =True
+        for word in space_separated_list_front:
+            if need_capitalize_front or word not in CHECK_LIST:
+                need_capitalize_front = False
+                if '{' in word:
+                    validated_title = validated_title + word + ' '
+                else:
+                    validated_title = validated_title + word.capitalize() + ' '
+            else:
+                validated_title = validated_title + word + ' '
 
+        validated_title = validated_title[:-1] + ': '
+
+        need_capitalize_back =True
+        for word in space_separated_list_back:
+            if need_capitalize_back or word not in CHECK_LIST:
+                need_capitalize_back = False
+                if '{' in word:
+                    validated_title = validated_title + word + ' '
+                else:
+                    validated_title = validated_title + word.capitalize() + ' '
+            else:
+                validated_title = validated_title + word + ' '
     else:
         space_separated_list = title_en.split()
-
         need_capitalize = True
+
         for word in space_separated_list:
             if need_capitalize or word not in CHECK_LIST:
                 need_capitalize = False
