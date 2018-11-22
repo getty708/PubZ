@@ -51,6 +51,10 @@ def val_bibtex_title_en_replace_keywords(title_en):
                 need_capitalize_front = False
                 if '{' in word:
                     validated_title = validated_title + word + ' '
+                elif '-' in word:
+                    front = word.split('-')[0].capitalize()
+                    back = word.split('-')[1].capitalize()
+                    validated_title = validated_title + front + '-' + back + ' '
                 else:
                     validated_title = validated_title + word.capitalize() + ' '
             else:
@@ -64,6 +68,10 @@ def val_bibtex_title_en_replace_keywords(title_en):
                 need_capitalize_back = False
                 if '{' in word:
                     validated_title = validated_title + word + ' '
+                elif '-' in word:
+                    front = word.split('-')[0].capitalize()
+                    back = word.split('-')[1].capitalize()
+                    validated_title = validated_title + front + '-' + back + ' '
                 else:
                     validated_title = validated_title + word.capitalize() + ' '
             else:
