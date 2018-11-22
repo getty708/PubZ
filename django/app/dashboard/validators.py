@@ -55,11 +55,17 @@ def val_book_title_replace_keywords(title):
     (e.g. Conference => Conf., International => Int'l.)
     """
     CHECK_DICT ={
-        # <Target>: [ <Source1>, <Source2>, ...],
-        "Conf.": ["Conference",],
+        "Conference": ["Conf.",],
+        "Transactions on": ["Trans.",],
+        "in Proceedings of": ["Proc.",],
+        "International": ["Int'l",],
     }
 
-    return "{}".format(title_en)
+    for key, value in CHECK_DICT.items():
+        for v in value:
+            title = title.replace(v, key)
+
+    return title
 
 
 
