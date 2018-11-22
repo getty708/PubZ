@@ -35,7 +35,7 @@ def val_bibtex_title_en_replace_keywords(title_en):
     """
     CHECK_LIST = [
         # <Target>: [ <Source1>, <Source2>, ...],
-        'for', 'on',
+        'for', 'on', 'by', 'of',
     ]
 
     validated_title  = ''
@@ -51,7 +51,10 @@ def val_bibtex_title_en_replace_keywords(title_en):
         for word in space_separated_list:
             if need_capitalize or word not in CHECK_LIST:
                 need_capitalize = False
-                validated_title = validated_title + word.capitalize() + ' '
+                if '{' in word:
+                    validated_title = validated_title + word + ' '
+                else:
+                    validated_title = validated_title + word.capitalize() + ' '
             else:
                 validated_title = validated_title + word + ' '
 
