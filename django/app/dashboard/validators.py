@@ -37,7 +37,7 @@ def val_bibtex_title_en_replace_keywords(title_en):
         # <Target>: [ <Source1>, <Source2>, ...],
         "Conf.": ["Conference",],
     }
-    
+
     return "{}".format(title_en)
 
 
@@ -47,7 +47,19 @@ def val_bibtex_title_en_replace_keywords(title_en):
 # ===============
 # Medel: Book
 # ===============
+def val_book_title_replace_keywords(title):
+    """
+    Return.
+    -------
+    - Title string, some keywords are replaced with registerd format
+    (e.g. Conference => Conf., International => Int'l.)
+    """
+    CHECK_DICT ={
+        # <Target>: [ <Source1>, <Source2>, ...],
+        "Conf.": ["Conference",],
+    }
 
+    return "{}".format(title_en)
 
 
 
@@ -74,7 +86,7 @@ validation_callback_bibtex_form = {
 # BookForm
 # - url: `dashboard:bool_edit`
 validation_callback_book_form = {
-
+    "title": [val_book_title_replace_keywords],
 }
 
 
