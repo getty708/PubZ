@@ -29,7 +29,7 @@ class AuthorForm(forms.ModelForm):
         self.fields["name_ja"].widget.attrs.update({
             'class': 'form-control form-control-sm',
             'placeholder': "日本語",
-        })                
+        })
         self.fields["dep_en"].widget.attrs.update({
             'class': 'form-control form-control-sm',
             'placeholder': "English",
@@ -40,11 +40,11 @@ class AuthorForm(forms.ModelForm):
         })
         self.fields["mail"].widget.attrs.update({
             'class': 'form-control form-control-sm',
-        })        
+        })
         self.fields["date_join"].widget.attrs.update({
             'class': 'form-control form-control-sm',
             'placeholder': "Date of Join",
-        })                
+        })
         self.fields["date_leave"].widget.attrs.update({
             'class': 'form-control form-control-sm',
             'placeholder': "Date of Leave",
@@ -59,7 +59,7 @@ class AuthorForm(forms.ModelForm):
             for func in callback_funcs:
                 val = func(val)
         return val
-        
+
     def clean_name_en(self):
         return self.clean_base('name_en')
 
@@ -70,13 +70,13 @@ class AuthorForm(forms.ModelForm):
         return self.clean_base('dep_en')
 
     def clean_dep_ja(self):
-        return self.clean_base('dep_ja')     
-           
-    def clean(self):
-        cleaned_data = super().clean()        
-        return cleaned_data        
+        return self.clean_base('dep_ja')
 
-        
+    def clean(self):
+        cleaned_data = super().clean()
+        return cleaned_data
+
+
 class AuthorOrderForm(forms.ModelForm):
     class Meta:
         model = models.AuthorOrder
@@ -94,7 +94,7 @@ class AuthorOrderForm(forms.ModelForm):
             self.fields[key].widget.attrs.update({
                 'class': 'form-control form-control-sm',
             })
-        
+
 """
 Book
 """
@@ -122,13 +122,13 @@ class BookForm(forms.ModelForm):
 
     def clean_base(self, key):
         validator_dict = validators.validation_callback_book_form
-        val = self.cleaned_data[key]        
+        val = self.cleaned_data[key]
         if key in validator_dict.keys():
             callback_funcs = validator_dict[key]
             for func in callback_funcs:
                 val = func(val)
         return val
-        
+
     def clean_title(self):
         title = self.cleaned_data['title']
         if '(' in title or ')' in title:
@@ -136,17 +136,20 @@ class BookForm(forms.ModelForm):
         return title
 
     def clean_abbr(self):
-        return self.clean_base('abbr')
-    
+        abbr = self.cleaned_data['abbr']
+        if '1' in abbr:
+            raise forms.ValidationError('Do not include year')
+        return abbr
+
     def clean_institution(self):
         return self.clean_base('institution')
-    
-            
+
+
     def clean(self):
-        cleaned_data = super().clean()        
-        return cleaned_data        
-        
-        
+        cleaned_data = super().clean()
+        return cleaned_data
+
+
 
 """
 Bibtex
@@ -175,32 +178,32 @@ class BibtexForm(forms.ModelForm):
     # Validation
     def clean_base(self, key):
         validator_dict = validators.validation_callback_bibtex_form
-        val = self.cleaned_data[key]        
+        val = self.cleaned_data[key]
         if key in validator_dict.keys():
             callback_funcs = validator_dict[key]
             for func in callback_funcs:
                 val = func(val)
         return val
-    
+
 
     def clean_title_en(self):
         return self.clean_base('title_en')
 
     def clean_title_ja(self):
         return self.clean_base('title_ja')
-    
+
     def clean_page(self):
         return self.clean_base('page')
-    
-            
-    def clean(self):
-        cleaned_data = super().clean()        
-        return cleaned_data
-            
-    
-        
 
-        
+
+    def clean(self):
+        cleaned_data = super().clean()
+        return cleaned_data
+
+
+
+
+
 """
 Registration Form
 """
@@ -226,11 +229,11 @@ class BibtexFormStep1(forms.Form):
         )
     book.widget.attrs.update({
             'class': 'form-control form-control-sm',
-    })   
+    })
 
     def clean_base(self, key):
         validator_dict = validators.validation_callback_bibtex_form_step1
-        val = self.cleaned_data[key]        
+        val = self.cleaned_data[key]
         if key in validator_dict.keys():
             callback_funcs = validator_dict[key]
             for func in callback_funcs:
@@ -240,18 +243,18 @@ class BibtexFormStep1(forms.Form):
 
     def clean_lang(self):
         return self.clean_base('lang')
-        
+
     def clean_title(self):
         return self.clean_base('title')
 
     def clean_book(self):
         return self.clean_base('book')
-    
+
     def clean(self):
-        cleaned_data = super().clean()        
+        cleaned_data = super().clean()
         return cleaned_data
 
-    
+
 
 """
 Tag
@@ -265,7 +268,7 @@ class TagForm(forms.ModelForm):
         widgets = {
             'description': forms.Textarea(attrs={'cols': 80, 'rows': 3}),
         }
-    
+
     def __init__(self, *args, **kwargs):
         super(TagForm, self).__init__(*args, **kwargs)
         for key in self.Meta.fields:
@@ -283,11 +286,10 @@ class TagChainForm(forms.ModelForm):
         widgets = {
 
         }
-    
+
     def __init__(self, *args, **kwargs):
         super(TagChainForm, self).__init__(*args, **kwargs)
         for key in self.Meta.fields:
             self.fields[key].widget.attrs.update({
                 'class': 'form-control form-control-sm',
             })
-
