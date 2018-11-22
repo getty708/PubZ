@@ -1,5 +1,6 @@
 from django import forms
 from dal import autocomplete
+import re
 
 from core import models
 from dashboard import validators
@@ -137,7 +138,7 @@ class BookForm(forms.ModelForm):
 
     def clean_abbr(self):
         abbr = self.cleaned_data['abbr']
-        if '1' in abbr:
+        if abbr is not None and re.search('[0-9]', abbr):
             raise forms.ValidationError('Do not include year')
         return abbr
 
