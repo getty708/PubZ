@@ -34,8 +34,14 @@ def val_bibtex_title_en_replace_keywords(title_en):
     (e.g. Conference => Conf., International => Int'l.)
     """
     CHECK_LIST = [
-        # <Target>: [ <Source1>, <Source2>, ...],
-        'for', 'on', 'by', 'of',
+        # preposition
+        'to', 'for', 'from', 'up', 'down', 'in', 'on', 'at', 'off', 'into', 'around',
+        'among', 'between', 'of', 'over', 'above', 'below', 'under', 'through', 'across',
+        'along', 'near', 'by', 'beside',
+        # article
+        'a', 'an', 'the',
+        # conjunction
+
     ]
 
     validated_title  = ''
