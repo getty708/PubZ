@@ -33,12 +33,31 @@ def val_bibtex_title_en_replace_keywords(title_en):
     - Title string, some keywords are replaced with registerd format
     (e.g. Conference => Conf., International => Int'l.)
     """
-    CHECK_DICT ={
+    CHECK_LIST = [
         # <Target>: [ <Source1>, <Source2>, ...],
-        "Conf.": ["Conference",],
-    }
+        'for', 'on',
+    ]
 
-    return "{}".format(title_en)
+    validated_title  = ''
+
+    if ':' in title_en:
+        validated_title = title_en
+
+
+    else:
+        space_separated_list = title_en.split()
+
+        need_capitalize = True
+        for word in space_separated_list:
+            if need_capitalize or word not in CHECK_LIST:
+                need_capitalize = False
+                validated_title = validated_title + word.capitalize() + ' '
+            else:
+                validated_title = validated_title + word + ' '
+
+        validated_title = validated_title[:-1]
+
+    return validated_title
 
 
 
