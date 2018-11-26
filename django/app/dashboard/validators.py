@@ -5,11 +5,19 @@ from django import forms
 # ===============
 # Model: Author
 # ===============
-def val_author_title_en_replace_keywords(author):
-    if "　" in author:
-        return author.replace("　", " ")
+def val_author_name_en_replace_keywords(name_en):
+    if "　" in name_en:
+        return name_en.replace("　", " ")
     else:
-        return author
+        return name_en
+
+
+def val_author_name_en_replace_keywords(name_ja):
+    if "　" in name_ja:
+        return name_ja.replace("　", " ")
+    else:
+        return name_ja
+
 
 
 
@@ -153,5 +161,6 @@ validation_callback_book_form = {
 # AuthorForm
 # - url: `dashboard:bool_edit`
 validation_callback_author_form = {
-    "name_en": [val_author_title_en_replace_keywords],
+    "name_en": [val_author_name_en_replace_keywords],
+    "name_ja": [val_author_name_ja_replace_keywords],
 }
