@@ -62,10 +62,16 @@ class AuthorForm(forms.ModelForm):
         return val
 
     def clean_name_en(self):
-        return self.clean_base('name_en')
+        name_en = self.clean_base('name_en')
+        if ' ' not in name_en:
+            raise forms.ValidationError('Please separate your first and last name with a space.')
+        return name_en
 
     def clean_name_ja(self):
-        return self.clean_base('name_ja')
+        name_ja = self.clean_base('name_ja')
+        if ' ' not in name_ja:
+            raise forms.ValidationError('Please separate your first and last name with a space.')
+        return name_ja
 
     def clean_dep_en(self):
         return self.clean_base('dep_en')
