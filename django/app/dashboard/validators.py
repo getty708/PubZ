@@ -12,12 +12,28 @@ def val_author_name_en_replace_keywords(name_en):
         return name_en
 
 
-def val_author_name_en_replace_keywords(name_ja):
+def val_author_name_ja_replace_keywords(name_ja):
     if "　" in name_ja:
         return name_ja.replace("　", " ")
     else:
         return name_ja
 
+
+def val_author_name_en_lab_rule(name_en):
+    validated_name_en = ""
+    separated_list = name_en.split()
+    for i in range(len(separated_list)-1):
+        validated_name_en = validated_name_en + separated_list[i][0:1] + "."
+
+    validated_name_en = validated_name_en + "~" + separated_list[-1]
+    return validated_name_en
+
+
+def val_author_name_ja_lab_rule(name_ja):
+    if len(name_ja) <= 4:
+        return name_ja.replace(" ", "~")
+    else:
+        return name_ja.replace(" ", "")
 
 
 
