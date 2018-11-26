@@ -7,18 +7,9 @@ from django import forms
 # ===============
 def val_author_title_en_replace_keywords(author):
     if "　" in author:
-        return authort.replace("　", " ")
-
-    elif " " not in author:
-        return error
-
+        return author.replace("　", " ")
     else:
         return author
-
-
-validation_callback_bibtex ={
-    "tmp": [],
-}
 
 
 
