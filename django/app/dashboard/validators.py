@@ -153,5 +153,5 @@ validation_callback_book_form = {
 # AuthorForm
 # - url: `dashboard:bool_edit`
 validation_callback_author_form = {
-
+    "name_en": [val_author_title_en_replace_keywords],
 }
