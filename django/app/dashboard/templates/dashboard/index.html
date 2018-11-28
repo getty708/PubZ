@@ -39,7 +39,7 @@
 								<ul>
 										{% for bibtex in latest_bibtex_list|get_booktype_bibtex:book_style %}				
 										<li>{{ bibtex|bibtex_list_format }}</li>
-										<div id="{{bibtex}}"> {{ bibtex | bibtex_download_format }}</div>
+										<div id="{{bibtex}}" style="display:none;"> {{ bibtex | bibtex_download_format }}</div>
 										{% endfor %}
 								</ul>
 						{% else %}
