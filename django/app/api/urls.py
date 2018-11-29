@@ -30,5 +30,5 @@ urlpatterns = [
     # REST API
     path('rest/', include((router.urls,'api')),name="rest"),
     # path('rest/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('rest/api-token-auth/', views_rest_auth.obtain_auth_token, name="get_token"),    
+    path('rest/api-token-auth/', views_rest_auth.obtain_auth_token, name="get_token"),
 ]

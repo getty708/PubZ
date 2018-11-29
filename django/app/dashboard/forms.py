@@ -168,7 +168,7 @@ class BibtexForm(forms.ModelForm):
             'language','title_en','title_ja',
             'book','volume','number','chapter','page','edition','pub_date','use_date_info',
             'acceptance_rate','impact_factor','url','note',
-            'abstruct','image','is_published',
+            'abstruct','image','is_published','priority',
         ]
         widgets = {
             'book': autocomplete.ListSelect2(
