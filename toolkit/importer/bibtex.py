@@ -20,13 +20,13 @@ def make_parser():
 
     # single
     single_parser = subparsers.add_parser('SINGLE')
-    single_parser.set_defaults(func=main_single) 
+    single_parser.set_defaults(func=main_single)
     single_parser.add_argument('--url-base', default="http://localhost:7000/api/rest/",
                                 help="URL to get auth token")
     single_parser.add_argument('-u', '--username', required=True,
                                 help="User ID (email)")
 
-    
+
     # CSV
     csv_parser = subparsers.add_parser('CSV')
     csv_parser.set_defaults(func=main_csv)
@@ -39,8 +39,8 @@ def make_parser():
     csv_parser.add_argument('--debug', action='store_true',
                                 help="Debug flag")
 
-    
-    
+
+
     return parser
 
 
@@ -64,7 +64,7 @@ def get_bibtexs(url_base, param, logger=getLogger(__name__+'.get_bibtex')):
     """
     Args.
     -----
-    - url_base : str, End point of Base REST API 
+    - url_base : str, End point of Base REST API
     - param     : str, bibtex (name_en or name_ja)
 
     Return.
@@ -78,7 +78,7 @@ def get_bibtexs(url_base, param, logger=getLogger(__name__+'.get_bibtex')):
     }
     r = requests.get(url_with_param, headers=headers)
     if r.status_code in [200,]:
-        data = json.loads(r.text, "utf-8")
+        data = json.loads(r.text)
         bibtexs = data["results"]
     else:
         bibtexs = []
@@ -119,7 +119,7 @@ def create_bibtex(url_base, token, bibtex_dict, logger=getLogger(__name__+'.crea
         logger.warning("Search [{}] ==> {}".format(bibtex_dict["book"], books))
         return False, "Book is unknow"
 
-    
+
     # Make Post Request
     url_post = url_base + "bibtexs/"
     headers = {
@@ -190,12 +190,12 @@ def main_csv(args):
     Returns.
     --------
     - pd.DataFrame
-    """    
+    """
     # Get Token
     url = args.url_base + "api-token-auth/"
     token = get_auth_token(url, args.username)
     logger.debug("Token [{}]: {}".format(args.username, token))
-    
+
     # Read and Check CSV
     import pandas as pd
     df = pd.read_csv(args.file).fillna("")
@@ -235,7 +235,7 @@ def main_csv(args):
         status, msg = create_bibtex(args.url_base, token, bibtex_dict)
         df.loc[i, "status"] = status
         df.loc[i, "msg"] = msg
-        
+
 
     # Results
     logger.info("=== Results ===")
@@ -256,9 +256,9 @@ def main_csv(args):
     # Write Results
     filename = "".join(str(args.file).split(".")[:-1]) + ".results.csv"
     df.to_csv(filename)
-    
-    
-# -----------------------------------------------------------------------    
+
+
+# -----------------------------------------------------------------------
 if __name__=='__main__':
     parser = make_parser()
     args = parser.parse_args()
@@ -267,4 +267,4 @@ if __name__=='__main__':
     for key in args_dict.keys():
         logger.info(" - {:<15s}= {}".format(key, args_dict[key]))
     print()
-    args.func(args)    
+    args.func(args)
