@@ -61,6 +61,7 @@ class AuthorForm(forms.ModelForm):
                 val = func(val)
         return val
 
+
     def clean_name_en(self):
         name_en = self.clean_base('name_en')
         if ' ' not in name_en:
@@ -69,7 +70,7 @@ class AuthorForm(forms.ModelForm):
 
     def clean_name_ja(self):
         name_ja = self.clean_base('name_ja')
-        if ' ' not in name_ja:
+        if name_ja is not None and ' ' not in name_ja:
             raise forms.ValidationError('Please separate your first and last name with a space.')
         return name_ja
 

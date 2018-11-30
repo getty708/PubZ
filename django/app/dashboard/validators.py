@@ -13,11 +13,12 @@ def val_author_name_en_replace_keywords(name_en):
 
 
 def val_author_name_ja_replace_keywords(name_ja):
-    if "　" in name_ja:
-        return name_ja.replace("　", " ")
-    else:
-        return name_ja
-
+    if name_ja is not None:
+        if "　" in name_ja:
+            return name_ja.replace("　", " ")
+        else:
+            return name_ja
+            
 
 def val_author_name_en_lab_rule(name_en):
     validated_name_en = ""
