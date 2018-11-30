@@ -98,6 +98,7 @@ def val_bibtex_title_en_replace_keywords(title_en):
                     validated_title = validated_title + word.capitalize() + ' '
             else:
                 validated_title = validated_title + word + ' '
+        validated_title = validated_title[:-1]
     else:
         space_separated_list = title_en.split()
         need_capitalize = True
