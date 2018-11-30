@@ -17,11 +17,11 @@
 					</button>
 				</h2>
 				{% endif %}
-				{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+				{% if form.errors %}{%for error in form.errors.values %}<p><strong>{{ error }}</strong></p>{% endfor %}{% endif %}
 
-				
+
 				<form action="{{ submit_url }}" method="post">
-						{{ form.non_field_errors }}						
+						{{ form.non_field_errors }}
 						{% csrf_token %}
 						<div class="form-group row">
 								{{ form.language.errors }}
@@ -29,18 +29,18 @@
 								<div class="col-5">{{ form.language }}</div>
 						</div>
 						<div class="form-group row">
-								{{ form.title_en.errors }}								
+								{{ form.title_en.errors }}
 								<label for="example-text-input" class="col-2 col-form-label">Title (English)</label>
 								<div class="col-5">{{ form.title_en }}</div>
 						</div>
 						<div class="form-group row">
-								{{ form.title_ja.errors }}								
+								{{ form.title_ja.errors }}
 								<label for="example-text-input" class="col-2 col-form-label">Title (Japanese)</label>
 								<div class="col-5">{{ form.title_ja }}</div>
 						</div>
 						<div class="form-group row">
 								<label for="example-text-input" class="col-2 col-form-label">Authors</label>
-								<div class="col-10"> 
+								<div class="col-10">
 										{% for author in bibtex.authors_list %}
 										<a href="{% url 'dashboard:author_detail' author.id %}">{{ author.name }}</a>,
 										{% endfor %}
@@ -50,7 +50,7 @@
 
 						<div class="form-group row">
 							<label for="example-text-input" class="col-2 col-form-label">Tags</label>
-							<div class="col-3"> 
+							<div class="col-3">
 								{% for tag in bibtex.tags.all %}
 								<span class="badge badge-pill badge-primary">{{ tag }}</span>
                 				{% endfor %}
@@ -74,7 +74,7 @@
 								<div class="col-3">{{ form.chapter }}</div>
 						</div>
 						<div class="form-group row">
-								{{ form.page.errors }}								
+								{{ form.page.errors }}
 								<label for="example-text-input" class="col-2 col-form-label">Page</label>
 								<div class="col-5">{{ form.page }}</div>
 						</div>
@@ -129,7 +129,7 @@
 						{% else %}
 						<button type="submit" class="btn btn-sm btn-primary">Add New</button>
 						{% endif %}
-				</form>				
+				</form>
 		</div>
 		<!-- Modal -->
 					<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
