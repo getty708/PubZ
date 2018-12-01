@@ -2,11 +2,11 @@
 @inproceedings{{ cb_left }}{ citekey },
   title     = {{ cb_left }}<a href="{% url 'dashboard:bib_detail' bib.id %}">{{ bib.title }}</a>{{ cb_right }},
   author    = {{ cb_left }}{% for author in authors %}<a href="{% url 'dashboard:author_detail' author.id %}" >{% if bib.language == "EN" %}{{ author.name_en }}{% else %}{{ author.name_ja }}{% endif %}</a>,{% endfor %}{{ cb_reght }},
-  booktitle = {{ cb_left }}{{ book.title }}{{ cb_right }},
-  volume    = {{ cb_left }}{{ bib.volume }}{{ cb_right }},
-  number    = {{ cb_left }}{{ bib.number }}{{ cb_right }},
-  pages     = {{ cb_left }}{{ bib.page }}{{ cb_right}},
+  booktitle = {{ cb_left }}{{ book.title }}{{ cb_right }},{% if bib.volume %}
+  volume    = {{ cb_left }}{{ bib.volume }}{{ cb_right }},{% endif %}{% if bib.number %}
+  number    = {{ cb_left }}{{ bib.number }}{{ cb_right }},{% endif %}{% if bib.page %}
+  pages     = {{ cb_left }}{{ bib.page }}{{ cb_right}},{% endif %}{% if bib.pub_date %}
   month      = {{ cb_left }}{{ bib.pub_date|date:"n" }}{{ cb_right }},
-  year      = {{ cb_left }}{{ bib.pub_date|date:"Y" }}{{ cb_right }},
+  year      = {{ cb_left }}{{ bib.pub_date|date:"Y" }}{{ cb_right }},{% endif %}
 {{ cb_right }}
 </pre>

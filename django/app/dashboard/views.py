@@ -28,7 +28,6 @@ class IndexView(generic.ListView):
         context["book_style_list"] = ["INTPROC","JOURNAL","CONF_DOMESTIC","CONF_DOMESTIC_NO_REVIEW","CONF_NATIONAL","BOOK","KEYNOTE","NEWS","OTHERS","AWARD"]
         context["query_params"] = self.query_param_dic
         context["year"] = datetime.now().year
-        print(datetime.now().year)
         return context
 
 class IndexViewList(IndexView):
