@@ -13,6 +13,6 @@
 		</table>
 		</div>
 		<a href="edit/{{tag.id}}/" class="btn btn-outline-primary btn-sm">Edit</a>
-		<a href="{% url 'dashboard:index_list' %}?keywords={{tag.name}}" target=”_blank” class="btn btn-outline-primary btn-sm">Publications</a>
+		<a href="{% url 'dashboard:index_list' %}?keywords={{tag.name}}&pubyear_all=true" target=”_blank” class="btn btn-outline-primary btn-sm">Publications</a>
 </div>
 {% endblock content %}
