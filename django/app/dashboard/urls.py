@@ -21,8 +21,6 @@ urlpatterns = [
     path('tag/', views.TagIndexView.as_view(), name='tag_index'),
     path('tag/<int:pk>', views.TagDetailView.as_view(), name='tag_detail'),
 
-    #path('add_test_datas/', views.AddTestDatas.as_view(), name='addtestdatas'),##for test
-
     # Edit Function
     path('add',            views_edit.bibtex_edit, name='bibtex_add'),
     path('add/step1/',     views_edit.bibtex_edit_step1, name='bibtex_add_step1'),
@@ -37,9 +35,9 @@ urlpatterns = [
          views_edit.author_order_edit, name='author_order_add'),
     path('author/order/edit/<int:author_order_id>/',
          views_edit.author_order_edit, name='author_order_edit'),
-    path('tag/add', 
+    path('tag/add',
          views_edit.tag_edit, name='tag_add'),
-    path('tag/edit/<int:tag_id>/', 
+    path('tag/edit/<int:tag_id>/',
          views_edit.tag_edit, name='tag_edit'),
     path('tag/tagchain/add',
          views_edit.tagchain_edit, name='tagchain_add'),

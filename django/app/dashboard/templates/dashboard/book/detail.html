@@ -17,5 +17,6 @@
 					<tr><td>address</td><td>{{ book.address }}</td></tr>
 		</table>
 		</div>
+		<a href="{% url 'dashboard:index_list' %}?keywords={{book.title}}" target=”_blank” class="btn btn-outline-primary btn-sm">Publications</a>
 </div>
 {% endblock content %}

@@ -9,10 +9,10 @@ register = template.Library()
 
 
 @register.inclusion_tag('dashboard/components/search_box.html')
-def search_box(display_mode, query_params,*args, **kwargs):
+def search_box(display_mode, query_params, *args, **kwargs):
     return {
         "display_mode": display_mode,
-        "query_params": query_params
+        "query_params": query_params,
     }
 
 def perse_get_query_params(req):
@@ -38,6 +38,18 @@ def perse_get_query_params(req):
         order = req.GET.get("order")
     else:
         order = None
+    if "pubyear" in req.GET:
+        pubyear = req.GET.get("pubyear")
+        if pubyear=="":
+            pubyear = None
+    else:
+        pubyear = None
+    if "pubyear_all" in req.GET:
+        pubyear_all = req.GET.get("pubyear_all")
+    else:
+        pubyear_all = None
+        if pubyear==None:
+            pubyear = datetime.datetime.now().year#now_year
     if "pubdate_start" in req.GET:
         pubdate_start = req.GET.get("pubdate_start")
         if pubdate_start!="":
@@ -64,13 +76,13 @@ def perse_get_query_params(req):
         tags = None
 
     ##query params save
-    query_param_dic = {"keywords":keywords,"book_style":book_style,"order":order,"pubdate_start":pubdate_start,"pubdate_end":pubdate_end, "tags": tags}
+    query_param_dic = {"keywords":keywords,"book_style":book_style,"order":order,"pubdate_start":pubdate_start,"pubdate_end":pubdate_end, "pubyear":pubyear,"pubyear_all": pubyear_all,"tags": tags}
 
     ##filtering
     bibtex_queryset = Bibtex.objects.all()
 
     #book_style
-    if  book_style!=None and book_style!="ALL":
+    if book_style!=None and book_style!="ALL":
         bibtex_queryset = bibtex_queryset.filter(book__style=book_style)
 
     #pubdate
@@ -81,10 +93,15 @@ def perse_get_query_params(req):
     elif pubdate_end_field!=None:
         bibtex_queryset = bibtex_queryset.filter(pub_date__lte=pubdate_end_field)
 
+    #pubyear
+    if pubyear_all==None:
+        if pubyear!=None:
+            bibtex_queryset = bibtex_queryset.filter(pub_date__gte=datetime.date(int(pubyear), 1, 1), pub_date__lte=datetime.date(int(pubyear), 12, 31))
+
     #keywords
     if keywords!=None:
         bibtex_queryset = keywords_filtering(bibtex_queryset,keywords)
-    
+
     #tags
     if tags != None:
         bibtex_queryset = tags_filtering(bibtex_queryset, tags)
