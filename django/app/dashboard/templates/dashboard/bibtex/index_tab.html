@@ -19,12 +19,9 @@
 
 <div class="row">
 		<div class="col-12 my-3">
-				<h2>Papers</h2>
 				{% for book_style in book_style_list %}
-				<div class="my-3">
-			  <h4 id="{{book_style}}">{{ book_style|get_display_name }}</h4>
-				</div>
 				{% if latest_bibtex_list|get_booktype_bibtex:book_style %}
+			  <h4 id="{{book_style}}">{{ book_style|get_display_name }}</h4>
 				<table class="table table-sm">
 						<thead>
 								<tr>
@@ -55,8 +52,6 @@
 								{% endfor %}
 						</tbody>
 				</table>
-				{% else %}
-				<p>No data are available.</p>
 				{% endif %}
 				{% endfor %}
 		</div>

@@ -1,8 +1,13 @@
 <div class="card">
+		<!--<a data-toggle="collapse" data-target="#search_body" aria-expanded="true" aria-controls="search_body" style=":hover {background-color: blue;}"><div class="card-header">
+				Search Box
+		</div></a>
+		<div class="collapse" id="search_body">-->
 		<div class="card-header">
 				Search Box
 		</div>
-		<div class="card-body">
+		<div>
+			<div class="card-body">
 				<div class="row mb-3">
 						<div class="col-12">
 									<form action="" method="get">
@@ -52,7 +57,9 @@
 								</div>
 						</div>
 				</div>
+			</div>
 		</div>
 		<div class="card-footer">
+			<div style="text-align: right;color:#3C3C3C;font-size: 80%;">{{ query_params.hits_num }} hits</div>
 		</div>
 </div>
