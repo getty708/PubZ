@@ -170,3 +170,31 @@ def notification_alert(request):
                       'msg': msg,
                       'status': status,
                   })
+
+""" Download
+@login_required
+def bibtex_edit(request,):
+    msg = False
+
+    query_set,self.query_param_dic = utils.perse_get_query_params(self.request)
+
+    bib_style = bib.book.style    
+    template_name = "custom/bibtex/bibtex/{}.html".format(bib_style)
+    html = get_template(template_name,)
+    html = mark_safe(html.render(context))  
+    
+
+            response = StreamingHttpResponse((writer.writerow(row) for row in rows),
+                                     content_type="text/csv")
+    response['Content-Disposition'] = 'attachment; filename="somefilename.csv"'
+    return response
+
+
+        
+    return render(request,
+                  'dashboard/bibtex/edit.html',
+                  {'msg': msg,
+                   'form':form,
+                   'bibtex': bibtex,
+                   'submit_url': submit_url})
+"""

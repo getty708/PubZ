@@ -173,7 +173,7 @@ class Book(models.Model):
     )
     
     title = models.CharField(max_length=256)
-    abbr  = models.CharField(max_length=256, null=True,blank=True)    
+    abbr  = models.CharField(max_length=256, blank=True, null=False, default="")  
     style = models.CharField(
         max_length=32,
         choices=STYLE_CHOICES,
@@ -197,7 +197,7 @@ class Book(models.Model):
         )
 
     def __str__(self):
-        if self.abbr is not None:
+        if not self.abbr == "":
             return self.abbr
         return self.title
 
