@@ -191,7 +191,7 @@ dashboard.templatetags.utils_bib_format.BibtexFormatListDefault
 
 + Bibtex View
 ```
-@article{<id>,
+@inproceedings{<id>,
          title = {<title_ja>or<title_en>},
         author = {<authors_ja>},
        journal = {<book>},

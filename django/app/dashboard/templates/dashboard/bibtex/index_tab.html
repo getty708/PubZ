@@ -7,15 +7,21 @@
 
 {% block content %}
 
+<div class="row my-3">
+		<div class="col-12">
+		</div>
+</div>
+<div class="row mb-3">
+		<div class="col-12">
+				{% search_box 'table' query_params %}
+		</div>
+</div>
+
 <div class="row">
 		<div class="col-12 my-3">
-				<h2>Papers</h2>
-				{% search_box 'table' query_params %}
 				{% for book_style in book_style_list %}
-				<div class="my-3">
-			  <h4 id="{{book_style}}">{{ book_style|get_display_name }}</h4>
-				</div>
 				{% if latest_bibtex_list|get_booktype_bibtex:book_style %}
+			  <h4 id="{{book_style}}">{{ book_style|get_display_name }}</h4>
 				<table class="table table-sm">
 						<thead>
 								<tr>
@@ -37,7 +43,7 @@
 												{{ bibtex.title_ja }}
 												{% endif %}
 										</td>
-										<td>{{ bibtex.book }}</td>
+										<td>{{ bibtex.book.title }}</td>
 										<td>{{ bibtex | bibtex_get:"authors"  }}</td>
 										<td>
 												<a href="{% url 'dashboard:detail' bibtex.id  %}">Detail</a>
@@ -46,8 +52,6 @@
 								{% endfor %}
 						</tbody>
 				</table>
-				{% else %}
-				<p>No data are available.</p>
 				{% endif %}
 				{% endfor %}
 		</div>

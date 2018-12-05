@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from users.models import User
 
 
 # --------------------------------------------------
@@ -9,6 +10,11 @@ class Bibtex(models.Model):
     LANGUAGE_CHOICES = (
         ('EN', 'English'),
         ('JA', 'Japanese'),
+    )
+    PRIORITY_CHOICES = (
+        ('0', 'Default',),        
+        ('5', 'High',),
+        ('9', 'Super High',),
     )
     
     """ Fields
@@ -31,15 +37,19 @@ class Bibtex(models.Model):
     chapter = models.IntegerField(null=True,blank=True)
     page = models.CharField(max_length=32, null=True,blank=True)
     edition = models.TextField(max_length=16,null=True,blank=True)
-    pub_date = models.DateField(null=True,blank=True)
+    pub_date = models.DateField(null=True,blank=True,default="1970-01-01")
     use_date_info = models.BooleanField(default=False, blank=True)
     acceptance_rate = models.FloatField(null=True,blank=True)
     impact_factor = models.FloatField(null=True,blank=True)
     url = models.URLField(null=True,blank=True)
     note = models.TextField(null=True,blank=True)
-    memo = models.CharField(max_length=32, null=True,blank=True)
+    memo = models.CharField(max_length=32, null=False,blank=True, default="")
+    priority =  models.CharField(
+        max_length=1,
+        default='0',
+        choices=PRIORITY_CHOICES,)
     abstruct = models.TextField(null=True,blank=True)
-    image = models.ImageField(null=True,blank=True, upload_to="api")
+    image = models.ImageField(null=True,blank=True, upload_to="api", default='default.png')
     tags = models.ManyToManyField(
         'core.Tag',
         through='core.TagChain',
@@ -49,11 +59,12 @@ class Bibtex(models.Model):
     created = models.DateTimeField(auto_now_add=True, blank=False)
     modified = models.DateTimeField(auto_now=True, blank=False)    
     owner = models.ForeignKey(
-        'auth.User',
+        'users.User',
         null=True,
         on_delete=models.SET_NULL
     )
 
+    
     class Meta:
         unique_together = (
             ("title_en", "book", "pub_date","memo",),
@@ -127,7 +138,7 @@ class Author(models.Model):
     created = models.DateTimeField(auto_now_add=True, blank=False)
     modified = models.DateTimeField(auto_now=True, blank=False)    
     owner = models.ForeignKey(
-        'auth.User',
+        'users.User',
         null=True,blank=False,
         on_delete=models.SET_NULL
     )
@@ -185,7 +196,7 @@ class Book(models.Model):
     created = models.DateTimeField(auto_now_add=True, blank=False)
     modified = models.DateTimeField(auto_now=True, blank=False)    
     owner = models.ForeignKey(
-        'auth.User',
+        'users.User',
         null=True,
         on_delete=models.SET_NULL
     )
@@ -214,7 +225,7 @@ class Tag(models.Model):
     created = models.DateTimeField(auto_now_add=True, blank=False)
     modified = models.DateTimeField(auto_now=True, blank=False)    
     owner = models.ForeignKey(
-        'auth.User',
+        'users.User',
         null=True,
         on_delete=models.SET_NULL,
     )
@@ -247,7 +258,7 @@ class AuthorOrder(models.Model):
     created = models.DateTimeField(auto_now_add=True, blank=False)
     modified = models.DateTimeField(auto_now=True, blank=False)    
     owner = models.ForeignKey(
-        'auth.User',
+        'users.User',
         null=True,
         on_delete=models.SET_NULL
     )
@@ -285,7 +296,7 @@ class TagChain(models.Model):
     created = models.DateTimeField(auto_now_add=True, blank=False)
     modified = models.DateTimeField(auto_now=True, blank=False)    
     owner = models.ForeignKey(
-        'auth.User',
+        'users.User',
         null=True,
         on_delete=models.SET_NULL
     )
