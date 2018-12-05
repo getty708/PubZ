@@ -118,6 +118,15 @@
 												</li>
 										</ul>
 										{% endif %}
+
+										{% if user.is_authenticated %}
+										<ul class="nav flex-column mb-3">
+												<h3 class="h5" >Alert ALL</h3>
+												<li class="nav-item">
+														<a class="nav-link active" href="{% url 'dashboard:alert_all' %}">Mail to all authors</a>
+												</li>
+										</ul>
+										{% endif %}
 								</div>
 								<div class="col-sm-10 h-100" style="overflow:auto;">
 										{% block content %}

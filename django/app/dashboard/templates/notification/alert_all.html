@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% load utils_search %}
+{% load utils_bib_format %}
+
+
+{% block title %}Dashboard | Notification{% endblock title %}
+
+{% block content %}
+
+<div class="row my-3">
+		<div class="col-12">
+                <p>{{ subject}}</p>
+                {% for bibtex in bibtexs %}
+                <p>{{ bibtex.title }}</p>
+                {% for author in bibtex.authors_list %}
+                <p>{{ author.name }}: {{ author.mail }}</p>
+                {% endfor %}
+                <p>-----------------------------</p>
+				{% endfor %}
+				<p>{{ message }}</p>
+				<p>{{ status }}</p>
+				{% if status %}
+				<h2>Send Alert ... Successed</h2>
+				{% else %}
+				<h2>Send Alert ... Failed</h2>				
+				{% endif %}
+		</div>
+</div>
+{% endblock content %}

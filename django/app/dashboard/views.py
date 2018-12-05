@@ -148,3 +148,21 @@ def notification_alert_author(request, author_id, bibtex_id):
                       'subject': subject,
                       'message': message,
                   })
+
+
+def notification_alert_all(request):
+    msg = False
+    subject = "Please update the registration information."
+    message = "The following papers have missing items.\n\n\n"
+
+    status, not_published_list = alert.send_email_to_all()
+
+    return render(request,
+                  'notification/alert_all.html',
+                  {
+                      'msg': msg,
+                      'status': status,
+                      'bibtexs': not_published_list,
+                      'subject': subject,
+                      'message': message,
+                  })
