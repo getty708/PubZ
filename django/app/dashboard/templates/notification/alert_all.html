@@ -10,9 +10,14 @@
 
 <div class="row my-3">
 		<div class="col-12">
-				<p>{{ subject}}</p>
-				<p>{{ bibtex }}</p>
-				<p>{{ author }}</p>
+                <p>{{ subject}}</p>
+                {% for bibtex in bibtexs %}
+                <p>{{ bibtex.title }}</p>
+                {% for author in bibtex.authors_list %}
+                <p>{{ author.name }}: {{ author.mail }}</p>
+                {% endfor %}
+                <p>-----------------------------</p>
+				{% endfor %}
 				<p>{{ message }}</p>
 				<p>{{ status }}</p>
 				{% if status %}

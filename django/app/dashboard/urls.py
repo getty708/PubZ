@@ -18,6 +18,10 @@ urlpatterns = [
     path('author/<int:pk>/',views.AuthorDetailView.as_view(), name='author_detail'),
     path('notification/alert',views.notification_alert,  name='notification_alert'),
 
+    # email alert
+    path('notification/alert/<str:author_id>/<int:bibtex_id>', views.notification_alert_author, name='alert_by_author'),
+    path('notification/alert_all', views.notification_alert_all, name='alert_all'),
+
     path('tag/', views.TagIndexView.as_view(), name='tag_index'),
     path('tag/<int:pk>', views.TagDetailView.as_view(), name='tag_detail'),
 

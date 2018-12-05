@@ -121,30 +121,48 @@ def notification_alert(request):
                       'status': status,
                   })
 
-""" Download
-@login_required
-def bibtex_edit(request,):
+
+def notification_alert_author(request, author_id, bibtex_id):
     msg = False
+    # Send Email
+    status = False
 
-    query_set,self.query_param_dic = utils.perse_get_query_params(self.request)
+    subject = "Please update the registration information."
+    message = "The following papers have missing items.\n\n\n"
 
-    bib_style = bib.book.style    
-    template_name = "custom/bibtex/bibtex/{}.html".format(bib_style)
-    html = get_template(template_name,)
-    html = mark_safe(html.render(context))  
-    
+    bibtex_queryset = Bibtex.objects.get(id=bibtex_id)
+    bibtex_name = bibtex_queryset.title_en
 
-            response = StreamingHttpResponse((writer.writerow(row) for row in rows),
-                                     content_type="text/csv")
-    response['Content-Disposition'] = 'attachment; filename="somefilename.csv"'
-    return response
+    author_queryset = Author.objects.get(id=author_id)
+    author_mail = author_queryset.mail
 
+    status = alert.send_email_to_appointed_address(author_mail, bibtex_queryset)
 
-        
     return render(request,
-                  'dashboard/bibtex/edit.html',
-                  {'msg': msg,
-                   'form':form,
-                   'bibtex': bibtex,
-                   'submit_url': submit_url})
-"""
+                  'notification/alert.html',
+                  {
+                      'msg': msg,
+                      'status': status,
+                      'author': author_mail,
+                      'bibtex': bibtex_name,
+                      'subject': subject,
+                      'message': message,
+                  })
+
+
+def notification_alert_all(request):
+    msg = False
+    subject = "Please update the registration information."
+    message = "The following papers have missing items.\n\n\n"
+
+    status, not_published_list = alert.send_email_to_all()
+
+    return render(request,
+                  'notification/alert_all.html',
+                  {
+                      'msg': msg,
+                      'status': status,
+                      'bibtexs': not_published_list,
+                      'subject': subject,
+                      'message': message,
+                  })

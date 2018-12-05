@@ -40,6 +40,14 @@
 				<a href="{% url 'dashboard:bibtex_edit' bibtex.id %}" class="btn btn-sm btn-outline-primary"  >Edit</a>
 				<a download="download.bib" onclick="clickDownload(this)" href="#" class="btn btn-sm btn-outline-primary">Download BibTex</a>
 		</div>
+
+		{% if user.is_authenticated %}
+		{% if bibtex.authors.all.0.mail %}
+		<div class="col-12 my-3">
+			<a href="{% url 'dashboard:alert_by_author' bibtex.authors.all.0.id bibtex.id%}" class="btn btn-sm btn-outline-primary">Email Alert</a>
+		</div>
+		{% endif %}
+		{% endif %}
 </div>
 
 <script>
