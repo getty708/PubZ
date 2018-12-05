@@ -4,7 +4,7 @@ from django.template.loader import get_template
 from django.contrib.auth.decorators import login_required
 
 from core.models import Bibtex
-from .const import address
+#from .const import address
 
 
 @login_required
