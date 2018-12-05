@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% load utils_search %}
+{% load utils_bib_format %}
+{% load utils_bib_get_data %}
+
+
+{% block title %}Dashboard | Top{% endblock title %}
+
+{% block content %}
+
+<div class="row my-3">
+		<div class="col-12">
+				<h2>Papers</h2>
+		</div>
+</div>
+<div class="row mb-3">
+		<div class="col-12">
+				{% search_box 'list' query_params %}
+		</div>
+</div>
+
+<div class="col-12 my-3">
+		<a download="download.bib" onclick="clickDownloadAll(this)" href="#" class="btn btn-sm btn-outline-primary">Download All</a>
+</div>
+
+<div id="len" style="display:none;">{{latest_bibtex_list | length}}</div>
+<div id="list" style="display:none;">
+{% for bib in latest_bibtex_list%}
+{{bib.title}}
+{% endfor %}
+</div>
+
+<div class="row mb-3">
+		<div class="col-12">
+				{% for book_style in book_style_list %}
+					  	<h4 id="{{book_style}}">{{ book_style|get_display_name }}</h4>	
+		        		{% if latest_bibtex_list|get_booktype_bibtex:book_style %}
+								<ul>
+										{% for bibtex in latest_bibtex_list|get_booktype_bibtex:book_style %}				
+										<li>{{ bibtex|bibtex_list_format }}</li>
+										<div id="{{bibtex}}" style="display:none;"> {{ bibtex | bibtex_download_format }}</div>
+										{% endfor %}
+								</ul>
+						{% else %}
+								<p>No polls are available.</p>
+						{% endif %}
+		   		{% endfor %}
+		</div>
+</div>
+
+<script>
+	function clickDownloadAll(aLink)  
+	{
+		var str, result;
+		var len = document.getElementById("len").innerHTML;  
+		var list = document.getElementById("list").innerHTML;  
+ 		var temp_list = list.split(/\n+/) 
+		for (var i=0; i<len; i++){
+			str = document.getElementById(temp_list[i+1]).innerHTML;
+    	    str = encodeURIComponent(str);  
+        	result = result + str;  
+        }
+        aLink.href = "data:text;charset=utf-8,"+result;  
+    }  
+</script> 
+
+
+{% endblock content %}
