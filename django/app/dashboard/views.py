@@ -120,3 +120,31 @@ def notification_alert(request):
                       'msg': msg,
                       'status': status,
                   })
+
+
+def notification_alert_author(request, author_id, bibtex_id):
+    msg = False
+    # Send Email
+    status = False
+
+    subject = "Please update the registration information."
+    message = "The following papers have missing items.\n\n\n"
+
+    bibtex_queryset = Bibtex.objects.get(id=bibtex_id)
+    bibtex_name = bibtex_queryset.title_en
+
+    author_queryset = Author.objects.get(id=author_id)
+    author_mail = author_queryset.mail
+
+    status = alert.send_email_to_appointed_address(author_mail, bibtex_queryset)
+
+    return render(request,
+                  'notification/alert.html',
+                  {
+                      'msg': msg,
+                      'status': status,
+                      'author': author_mail,
+                      'bibtex': bibtex_name,
+                      'subject': subject,
+                      'message': message,
+                  })

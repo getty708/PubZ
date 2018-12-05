@@ -34,3 +34,30 @@ def send_email_test():
     recipient_list = address
 
     return send_mail(subject, message, from_email, recipient_list)
+
+
+def send_email_to_appointed_address(address, bibtex):
+    # 件名
+    subject = "Please update the registration information."
+
+    # 本文
+    message = "The following papers have missing items.\n\n\n"
+
+    mail_template = get_template('notification/mail_templates/mail_basic.txt')
+
+    context = {
+            "bib": bibtex,
+            "book": bibtex.book,
+    }
+    
+    message = message + mail_template.render(context) + "\n"
+
+    # 送信元
+    #from_email = "test@test.com"
+
+    from_email = "settings.EMAIL_HOST_USER"
+
+    # あて先
+    recipient_list = [address]
+
+    return send_mail(subject, message, from_email, recipient_list)
