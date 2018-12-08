@@ -51,13 +51,24 @@ def val_bibtex_title_en_replace_keywords(title_en):
     """
     CHECK_LIST = [
         # preposition
-        'to', 'for', 'from', 'up', 'down', 'in', 'on', 'at', 'off', 'into', 'around',
-        'among', 'between', 'of', 'over', 'above', 'below', 'under', 'through', 'across',
-        'along', 'near', 'by', 'beside',
+        'about', 'abroad', 'above', 'across', 'after', 'against', 'along', 'alongside', 'amid',
+        'among', 'anti', 'around', 'as', 'at', 'bar', 'before', 'behind', 'below',
+        'beneath', 'beside', 'besides', 'between', 'beyond', 'but', 'by', 'considering', 'despite',
+        'down', 'during', 'except', 'for', 'from', 'in', 'inside', 'into', 'less',
+        'like', 'minus', 'near', 'notwithstanding', 'of', 'off', 'on', 'onto', 'opposite',
+        'out', 'outside', 'over', 'pace', 'past', 'pending', 'per', 'plus', 're',
+        'regarding', 'round', 'save', 'saving', 'since', 'than', 'through', 'throughout', 'till',
+        'to', 'touching', 'toward', 'under', 'underneath', 'unless', 'unlike', 'until', 'up',
+        'versus', 'via', 'vice', 'with', 'within', 'without',
         # article
         'a', 'an', 'the',
         # conjunction
-
+        'after', 'also', 'although', 'and', 'as', 'because', 'before', 'but',
+        'considering', 'directly', 'except', 'for', 'however', 'if', 'immediately',
+        'lest', 'like', 'nor', 'now', 'notwithstanding', 'once', 'only', 'or', 'plus',
+        'providing', 'save', 'since', 'so', 'than', 'that', 'though', 'till', 'unless',
+        'until', 'when', 'whenever', 'where', 'whereas', 'wherever', 'whether', 'while',
+        'without', 'yet',
     ]
 
     validated_title  = ''
