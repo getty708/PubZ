@@ -157,7 +157,7 @@ def val_book_title_replace_keywords(title):
     CHECK_DICT ={
         "Conference": ["Conf.", "conf.",],
         "Transactions on": ["Trans.", "trans.", "Trans. on", "trans. on", "Transaction on", "transaction on",],
-        "in Proceedings of": ["Proc.", "proc.", "Proc. of", "proc. of","in Proceeding of", "in proceeding of",],
+        "in Proceedings of": ["Proc.", "proc.", "Proc. of", "proc. of","in Proceeding of", "in proceeding of", "in Proc. of", "in proc. of",],
         "International": ["Int'l", "int'l", "Intl", "intl",],
     }
 
