@@ -8,6 +8,10 @@ from django import forms
 def val_author_name_en_replace_keywords(name_en):
     if "　" in name_en:
         return name_en.replace("　", " ").title()
+    elif ", " in name_en:
+        return name_en.replace(", ", " ").title()
+    elif "," in name_en:
+        return name_en.replace(",", " ").title()
     else:
         return name_en.title()
 
@@ -16,6 +20,10 @@ def val_author_name_ja_replace_keywords(name_ja):
     if name_ja is not None:
         if "　" in name_ja:
             return name_ja.replace("　", " ")
+        elif ", " in name_ja:
+            return name_ja.replace(", ", " ")
+        elif "," in name_ja:
+            return name_ja.replace(",", " ")
         else:
             return name_ja
 
