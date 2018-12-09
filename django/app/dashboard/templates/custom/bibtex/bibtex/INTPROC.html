@@ -6,7 +6,7 @@
   volume    = {{ cb_left }}{{ bib.volume }}{{ cb_right }},{% endif %}{% if bib.number %}
   number    = {{ cb_left }}{{ bib.number }}{{ cb_right }},{% endif %}{% if bib.page %}
   pages     = {{ cb_left }}{{ bib.page }}{{ cb_right}},{% endif %}{% if bib.pub_date %}
-  month      = {{ cb_left }}{{ bib.pub_date|date:"n" }}{{ cb_right }},
+  month     = {{ cb_left }}{{ bib.pub_date|date:"n" }}{{ cb_right }},
   year      = {{ cb_left }}{{ bib.pub_date|date:"Y" }}{{ cb_right }},{% endif %}
 {{ cb_right }}
 </pre>
