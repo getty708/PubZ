@@ -27,11 +27,15 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["localhost", "192.168.1.123",]
 
+# User Model
+AUTH_USER_MODEL = 'users.User'
+
 
 # Application definition
 
 INSTALLED_APPS = [
     # My App
+    'users.apps.UsersConfig',    
     'api.apps.ApiConfig',
     'core.apps.CoreConfig',
     'dashboard.apps.DashboardConfig',
@@ -39,6 +43,7 @@ INSTALLED_APPS = [
     # Additional Packages
     'dal',
     'dal_select2',
+    'bootstrap_datepicker_plus',
     ## REST
     'django_filters',
     'rest_framework',
@@ -123,7 +128,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = 'ja'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'Asia/Tokyo'
 
@@ -158,20 +163,18 @@ EMAIL_USE_TLS = True
 # REST API Settings
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication', 
         'rest_framework.authentication.TokenAuthentication',       
     ),    
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
-        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
-        'rest_framework.permissions.IsAuthenticated',        
+        'rest_framework.permissions.IsAdminUser', 
     ],
     
     # Paging
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 500,
+    'PAGE_SIZE': 20,
 
     # Filter
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
@@ -179,3 +182,8 @@ REST_FRAMEWORK = {
 
 # enable iframe
 X_FRAME_OPTIONS = 'ALLOWALL'
+
+
+# Login/Logout
+LOGIN_REDIRECT_URL = 'dashboard:index'
+LOGOUT_REDIRECT_URL= 'dashboard:index'

@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import include, path
 
 from dashboard import views, views_edit
 
@@ -18,7 +18,12 @@ urlpatterns = [
     path('author/<int:pk>/',views.AuthorDetailView.as_view(), name='author_detail'),
     path('notification/alert',views.notification_alert,  name='notification_alert'),
 
-    #path('add_test_datas/', views.AddTestDatas.as_view(), name='addtestdatas'),##for test
+    # email alert
+    path('notification/alert/<str:author_id>/<int:bibtex_id>', views.notification_alert_author, name='alert_by_author'),
+    path('notification/alert_all', views.notification_alert_all, name='alert_all'),
+
+    path('tag/', views.TagIndexView.as_view(), name='tag_index'),
+    path('tag/<int:pk>', views.TagDetailView.as_view(), name='tag_detail'),
 
     # Edit Function
     path('add',            views_edit.bibtex_edit, name='bibtex_add'),
@@ -34,4 +39,13 @@ urlpatterns = [
          views_edit.author_order_edit, name='author_order_add'),
     path('author/order/edit/<int:author_order_id>/',
          views_edit.author_order_edit, name='author_order_edit'),
+    path('tag/add',
+         views_edit.tag_edit, name='tag_add'),
+    path('tag/edit/<int:tag_id>/',
+         views_edit.tag_edit, name='tag_edit'),
+    path('tag/tagchain/add',
+         views_edit.tagchain_edit, name='tagchain_add'),
+    path('tag/tagchain/edit/<int:tagchain_id>/',
+         views_edit.tagchain_edit, name='tagchain_edit')
+
 ]

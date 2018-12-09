@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404, render
 from django.views import generic
 
 import datetime
+from datetime import datetime
 
 from core.models import Author, Bibtex, Book, AuthorOrder, Tag
 from notification import alert
@@ -26,62 +27,14 @@ class IndexView(generic.ListView):
         context = super().get_context_data(**kwargs)
         context["book_style_list"] = ["INTPROC","JOURNAL","CONF_DOMESTIC","CONF_DOMESTIC_NO_REVIEW","CONF_NATIONAL","BOOK","KEYNOTE","NEWS","OTHERS","AWARD"]
         context["query_params"] = self.query_param_dic
+        context["year"] = datetime.now().year
         return context
 
 class IndexViewList(IndexView):
 
-    template_name = 'dashboard/index.html'
+    template_name = 'dashboard/bibtex/index_list.html'
     context_object_name = 'latest_bibtex_list'
 
-"""class AddTestDatas(generic.TemplateView):###for test
-
-    #add test kanren ha,
-    #urls no add to
-    #kono class to
-    #for_test directory dake
-    #kono 3 tu wo keseba ok
-
-    template_name = 'dashboard/for_test/add_test_datas.html'
-
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        if Bibtex.objects.all().exists():
-            context["exists"] = "Already added"
-        else:
-            context["exists"] = "no data"
-        return context
-
-    ##add Tag
-    tag1 = Tag(name="Clustering",description="for clustering")
-    tag2 = Tag(name="Wikipedia",description="for wikipedia")
-    tag1.save()
-    tag2.save()
-
-    ##add author
-    author_1 = Author(name_en='Tatsuya Nakamura', dep_en='Osaka University',mail="mail@mail.co.jp")
-    author_1.save()
-    author_2 = Author(name_en='Takahiro Hara', dep_en='Osaka University',mail="mail@mail.co.jp")
-    author_2.save()
-
-    ##add book
-    book1 = Book(title="ACM Transactions on Asian and Low-Resource Language Information Processing",style="INTPROC")
-    book2 = Book(title="IEEE",style="JOURNAL")
-    book1.save()
-    book2.save()
-
-    ##add bibtex
-    bibtex1 = Bibtex(language='EN', title_en='Wikipedia-Based Relatedness Measurements for Multilingual Short Text Clustering',book=book1,volume=3,number=5,chapter=1,page="10-20")
-    bibtex2 = Bibtex(language='JA', title_ja='wikipediaのクラスタリング(ジャーナル)',book=book2,volume=2,number=2,chapter=2,page="15-24")
-    bibtex1.save()
-    bibtex2.save()
-
-    ##add AuthorOrder
-    AuthorOrder(bibtex=bibtex1,author=author_1,order=1).save()
-    AuthorOrder(bibtex=bibtex1,author=author_2,order=2).save()
-    #AuthorOrder(bibtex=bibtex2,author=author_1,order=1).save()
-    #AuthorOrder(bibtex=bibtex2,author=author_2,order=2).save()"""
 
 class IndexViewTable(IndexView):
     template_name = 'dashboard/bibtex/index_tab.html'
@@ -139,6 +92,20 @@ class AuthorDetailView(generic.DetailView):
     model = Author
     template_name = 'dashboard/author/detail.html'
 
+"""
+Tag
+"""
+class TagIndexView(generic.ListView):
+    template_name = 'dashboard/tag/index.html'
+    context_object_name = 'latest_tag_list'
+
+    def get_queryset(self):
+        return Tag.objects.order_by('name')
+
+class TagDetailView(generic.DetailView):
+    model = Tag
+    template_name = 'dashboard/tag/detail.html'
+
 
 """
 Notification
@@ -152,4 +119,50 @@ def notification_alert(request):
                   {
                       'msg': msg,
                       'status': status,
+                  })
+
+
+def notification_alert_author(request, author_id, bibtex_id):
+    msg = False
+    # Send Email
+    status = False
+
+    subject = "Please update the registration information."
+    message = "The following papers have missing items.\n\n\n"
+
+    bibtex_queryset = Bibtex.objects.get(id=bibtex_id)
+    bibtex_name = bibtex_queryset.title_en
+
+    author_queryset = Author.objects.get(id=author_id)
+    author_mail = author_queryset.mail
+
+    status = alert.send_email_to_appointed_address(author_mail, bibtex_queryset)
+
+    return render(request,
+                  'notification/alert.html',
+                  {
+                      'msg': msg,
+                      'status': status,
+                      'author': author_mail,
+                      'bibtex': bibtex_name,
+                      'subject': subject,
+                      'message': message,
+                  })
+
+
+def notification_alert_all(request):
+    msg = False
+    subject = "Please update the registration information."
+    message = "The following papers have missing items.\n\n\n"
+
+    status, not_published_list = alert.send_email_to_all()
+
+    return render(request,
+                  'notification/alert_all.html',
+                  {
+                      'msg': msg,
+                      'status': status,
+                      'bibtexs': not_published_list,
+                      'subject': subject,
+                      'message': message,
                   })

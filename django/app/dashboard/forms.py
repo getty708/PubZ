@@ -1,10 +1,11 @@
 from django import forms
 from dal import autocomplete
+import re
 
 from core import models
 from dashboard import validators
 
-
+from bootstrap_datepicker_plus import DatePickerInput
 
 """
 Author
@@ -29,7 +30,7 @@ class AuthorForm(forms.ModelForm):
         self.fields["name_ja"].widget.attrs.update({
             'class': 'form-control form-control-sm',
             'placeholder': "日本語",
-        })                
+        })
         self.fields["dep_en"].widget.attrs.update({
             'class': 'form-control form-control-sm',
             'placeholder': "English",
@@ -40,11 +41,11 @@ class AuthorForm(forms.ModelForm):
         })
         self.fields["mail"].widget.attrs.update({
             'class': 'form-control form-control-sm',
-        })        
+        })
         self.fields["date_join"].widget.attrs.update({
             'class': 'form-control form-control-sm',
             'placeholder': "Date of Join",
-        })                
+        })
         self.fields["date_leave"].widget.attrs.update({
             'class': 'form-control form-control-sm',
             'placeholder': "Date of Leave",
@@ -59,24 +60,31 @@ class AuthorForm(forms.ModelForm):
             for func in callback_funcs:
                 val = func(val)
         return val
-        
+
+
     def clean_name_en(self):
-        return self.clean_base('name_en')
+        name_en = self.clean_base('name_en')
+        if ' ' not in name_en:
+            raise forms.ValidationError('Please separate your first and last name with a space.')
+        return name_en
 
     def clean_name_ja(self):
-        return self.clean_base('name_ja')
+        name_ja = self.clean_base('name_ja')
+        if name_ja is not None and ' ' not in name_ja:
+            raise forms.ValidationError('Please separate your first and last name with a space.')
+        return name_ja
 
     def clean_dep_en(self):
         return self.clean_base('dep_en')
 
     def clean_dep_ja(self):
-        return self.clean_base('dep_ja')     
-           
-    def clean(self):
-        cleaned_data = super().clean()        
-        return cleaned_data        
+        return self.clean_base('dep_ja')
 
-        
+    def clean(self):
+        cleaned_data = super().clean()
+        return cleaned_data
+
+
 class AuthorOrderForm(forms.ModelForm):
     class Meta:
         model = models.AuthorOrder
@@ -94,7 +102,7 @@ class AuthorOrderForm(forms.ModelForm):
             self.fields[key].widget.attrs.update({
                 'class': 'form-control form-control-sm',
             })
-        
+
 """
 Book
 """
@@ -122,28 +130,31 @@ class BookForm(forms.ModelForm):
 
     def clean_base(self, key):
         validator_dict = validators.validation_callback_book_form
-        val = self.cleaned_data[key]        
+        val = self.cleaned_data[key]
         if key in validator_dict.keys():
             callback_funcs = validator_dict[key]
             for func in callback_funcs:
                 val = func(val)
         return val
-        
+
     def clean_title(self):
         return self.clean_base('title')
 
     def clean_abbr(self):
-        return self.clean_base('abbr')
-    
+        abbr = self.cleaned_data['abbr']
+        if abbr is not None and re.search('[0-9]', abbr):
+            raise forms.ValidationError('Do not include year')
+        return abbr
+
     def clean_institution(self):
         return self.clean_base('institution')
-    
-            
+
+
     def clean(self):
-        cleaned_data = super().clean()        
-        return cleaned_data        
-        
-        
+        cleaned_data = super().clean()
+        return cleaned_data
+
+
 
 """
 Bibtex
@@ -155,11 +166,12 @@ class BibtexForm(forms.ModelForm):
             'language','title_en','title_ja',
             'book','volume','number','chapter','page','edition','pub_date','use_date_info',
             'acceptance_rate','impact_factor','url','note',
-            'abstruct','image','is_published',
+            'abstruct','image','is_published','priority',
         ]
         widgets = {
             'book': autocomplete.ListSelect2(
                 url='api:autocomplete_book',),
+            'pub_date': DatePickerInput(),
         }
 
     def __init__(self,*args,**kwargs):
@@ -172,32 +184,32 @@ class BibtexForm(forms.ModelForm):
     # Validation
     def clean_base(self, key):
         validator_dict = validators.validation_callback_bibtex_form
-        val = self.cleaned_data[key]        
+        val = self.cleaned_data[key]
         if key in validator_dict.keys():
             callback_funcs = validator_dict[key]
             for func in callback_funcs:
                 val = func(val)
         return val
-    
+
 
     def clean_title_en(self):
         return self.clean_base('title_en')
 
     def clean_title_ja(self):
         return self.clean_base('title_ja')
-    
+
     def clean_page(self):
         return self.clean_base('page')
-    
-            
-    def clean(self):
-        cleaned_data = super().clean()        
-        return cleaned_data
-            
-    
-        
 
-        
+
+    def clean(self):
+        cleaned_data = super().clean()
+        return cleaned_data
+
+
+
+
+
 """
 Registration Form
 """
@@ -223,11 +235,11 @@ class BibtexFormStep1(forms.Form):
         )
     book.widget.attrs.update({
             'class': 'form-control form-control-sm',
-    })   
+    })
 
     def clean_base(self, key):
         validator_dict = validators.validation_callback_bibtex_form_step1
-        val = self.cleaned_data[key]        
+        val = self.cleaned_data[key]
         if key in validator_dict.keys():
             callback_funcs = validator_dict[key]
             for func in callback_funcs:
@@ -237,15 +249,53 @@ class BibtexFormStep1(forms.Form):
 
     def clean_lang(self):
         return self.clean_base('lang')
-        
+
     def clean_title(self):
         return self.clean_base('title')
 
     def clean_book(self):
         return self.clean_base('book')
-    
+
     def clean(self):
-        cleaned_data = super().clean()        
+        cleaned_data = super().clean()
         return cleaned_data
 
-    
+
+
+"""
+Tag
+"""
+class TagForm(forms.ModelForm):
+    class Meta:
+        model = models.Tag
+        fields = [
+            'name', 'description', 'parent',
+        ]
+        widgets = {
+            'description': forms.Textarea(attrs={'cols': 80, 'rows': 3}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(TagForm, self).__init__(*args, **kwargs)
+        for key in self.Meta.fields:
+            self.fields[key].widget.attrs.update({
+                'class': 'form-control form-control-sm',
+            })
+
+
+class TagChainForm(forms.ModelForm):
+    class Meta:
+        model = models.TagChain
+        fields = [
+            'bibtex', 'tag',
+        ]
+        widgets = {
+
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(TagChainForm, self).__init__(*args, **kwargs)
+        for key in self.Meta.fields:
+            self.fields[key].widget.attrs.update({
+                'class': 'form-control form-control-sm',
+            })

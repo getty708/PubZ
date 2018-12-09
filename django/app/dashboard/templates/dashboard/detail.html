@@ -21,6 +21,7 @@
 					<tr><td>title(en)</td><td>{{ bibtex.title_en }}</td></tr>
 					<tr><td>title(ja)</td><td>{{ bibtex.title_ja }}</td></tr>
 					<tr><td>authors</td><td>{{ bibtex | bibtex_get:"authors" }}</td></tr>
+					<tr><td>tags</td><td>{{ bibtex | bibtex_get:"tags" }}</td></tr>
 					<tr><td>book</td><td>{{ bibtex.book }}</td></tr>
 					<tr><td>volume</td><td>{{ bibtex.volume }}</td></tr>
 					<tr><td>number</td><td>{{ bibtex.number }}</td></tr>
@@ -34,8 +35,28 @@
 					<tr><td>Bibtex</td><td>{{ bibtex | bibtex_bib_format }}</td></tr>
 				</table>
 		</div>
+		<div id="bibtex" style="display:none;">{{ bibtex | bibtex_download_format }}</div>
 		<div class="col-12 my-3">
 				<a href="{% url 'dashboard:bibtex_edit' bibtex.id %}" class="btn btn-sm btn-outline-primary"  >Edit</a>
+				<a download="download.bib" onclick="clickDownload(this)" href="#" class="btn btn-sm btn-outline-primary">Download BibTex</a>
 		</div>
+
+		{% if user.is_authenticated %}
+		{% if bibtex.authors.all.0.mail %}
+		<div class="col-12 my-3">
+			<a href="{% url 'dashboard:alert_by_author' bibtex.authors.all.0.id bibtex.id%}" class="btn btn-sm btn-outline-primary">Email Alert</a>
+		</div>
+		{% endif %}
+		{% endif %}
 </div>
+
+<script>
+	function clickDownload(aLink)  
+	{
+		var str = document.getElementById("bibtex").innerHTML;  
+        str =  encodeURIComponent(str);  
+        aLink.href = "data:text;charset=utf-8,"+str;  
+    }  
+</script> 
+
 {% endblock content %}

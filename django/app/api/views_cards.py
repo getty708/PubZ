@@ -10,19 +10,24 @@ def render_cards(request):
     
     bib_to_render = []
     author_to_render = []
+
     for bib in bibtex:
         bib_to_render.append(bib)
-        authors = bib.authors.all()
-        num_of_authors = len(bib.authors.all())
+        authors = bib.authors_list
+        num_of_authors = len(authors)
         author_str = ''
         for i in range(num_of_authors):
             if i == (num_of_authors - 1):
-                author_str += 'and {}'.format(authors[i])
+                author_str += 'and {}'.format(authors[i]['name'])
             else:
-                author_str += '{}, '.format(authors[i])
+                author_str += '{}, '.format(authors[i]['name'])
         author_to_render.append(author_str)
-
+    
+    tags = Tag.objects.all()
+    defaul_img_path = '/media/default.png'
 
     return render(request,
                   'cards/cards_to_show.html',
-                  {'papers_to_show': zip(bib_to_render, author_to_render)})
+                  {'papers_to_show': zip(bib_to_render, author_to_render),
+                   'all_tags': tags,
+                   'default_img': defaul_img_path})

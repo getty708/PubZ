@@ -1,0 +1,1766 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0, mkdocs-material-3.0.3">
+    
+    
+      
+        <title>Dashboard - BMAN - Bibtex Mangement System</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.451f80e5.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="../../#application-dashboard" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="BMAN - Bibtex Mangement System" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                BMAN - Bibtex Mangement System
+              </span>
+              <span class="md-header-nav__topic">
+                Dashboard
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/getty708/bman/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      GitHub
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="BMAN - Bibtex Mangement System" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    BMAN - Bibtex Mangement System
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/getty708/bman/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      GitHub
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      About
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        About
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../license.md" title="License" class="md-nav__link">
+      License
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes.md" title="Release Notes" class="md-nav__link">
+      Release Notes
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Developer Guide
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Developer Guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../index-dev/" title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../code/" title="Coding Policy" class="md-nav__link">
+      Coding Policy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../models/" title="Models" class="md-nav__link">
+      Models
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Dashboard
+      </label>
+    
+    <a href="./" title="Dashboard" class="md-nav__link md-nav__link--active">
+      Dashboard
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#basic-url-structures" title="Basic URL Structures" class="md-nav__link">
+    Basic URL Structures
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-edit-display-style" title="How to Edit Display Style" class="md-nav__link">
+    How to Edit Display Style
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#default-style-examples" title="Default Style Examples" class="md-nav__link">
+    Default Style Examples
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list-style" title="List Style" class="md-nav__link">
+    List Style
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#international-proceedings" title="International Proceedings" class="md-nav__link">
+    International Proceedings
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#journal-paper" title="Journal Paper" class="md-nav__link">
+    Journal Paper
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#domestic-conference" title="Domestic Conference(査読付き)" class="md-nav__link">
+    Domestic Conference(査読付き)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#domestic-conference_1" title="Domestic Conference" class="md-nav__link">
+    Domestic Conference
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#national-conference" title="National Conference" class="md-nav__link">
+    National Conference
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bookrevieweditortranslation" title="Book/Review/Editor/Translation" class="md-nav__link">
+    Book/Review/Editor/Translation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#presentaionpanel-discutionseminer" title="Presentaion/Panel Discution/Seminer" class="md-nav__link">
+    Presentaion/Panel Discution/Seminer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#news-paper-article" title="News Paper article" class="md-nav__link">
+    News Paper article
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#others" title="Others" class="md-nav__link">
+    Others
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#award" title="Award" class="md-nav__link">
+    Award
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#search-function" title="Search Function" class="md-nav__link">
+    Search Function
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#memo" title="memo (東出)" class="md-nav__link">
+    memo (東出)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../registration/" title="Registration" class="md-nav__link">
+      Registration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/" title="API" class="md-nav__link">
+      API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../notification/" title="Notification" class="md-nav__link">
+      Notification
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      User Guide
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        User Guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user/index-user/" title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#basic-url-structures" title="Basic URL Structures" class="md-nav__link">
+    Basic URL Structures
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-edit-display-style" title="How to Edit Display Style" class="md-nav__link">
+    How to Edit Display Style
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#default-style-examples" title="Default Style Examples" class="md-nav__link">
+    Default Style Examples
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list-style" title="List Style" class="md-nav__link">
+    List Style
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#international-proceedings" title="International Proceedings" class="md-nav__link">
+    International Proceedings
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#journal-paper" title="Journal Paper" class="md-nav__link">
+    Journal Paper
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#domestic-conference" title="Domestic Conference(査読付き)" class="md-nav__link">
+    Domestic Conference(査読付き)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#domestic-conference_1" title="Domestic Conference" class="md-nav__link">
+    Domestic Conference
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#national-conference" title="National Conference" class="md-nav__link">
+    National Conference
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bookrevieweditortranslation" title="Book/Review/Editor/Translation" class="md-nav__link">
+    Book/Review/Editor/Translation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#presentaionpanel-discutionseminer" title="Presentaion/Panel Discution/Seminer" class="md-nav__link">
+    Presentaion/Panel Discution/Seminer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#news-paper-article" title="News Paper article" class="md-nav__link">
+    News Paper article
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#others" title="Others" class="md-nav__link">
+    Others
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#award" title="Award" class="md-nav__link">
+    Award
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#search-function" title="Search Function" class="md-nav__link">
+    Search Function
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#memo" title="memo (東出)" class="md-nav__link">
+    memo (東出)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/getty708/bman/edit/master/docs/dev/dashboard.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="application-dashboard">Application Dashboard</h1>
+<p>This application provides all usrs to view and seatch function.</p>
+<h2 id="basic-url-structures">Basic URL Structures</h2>
+<table>
+<thead>
+<tr>
+<th>URI</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>^dashboard/$</code></td>
+<td>Root URI of this application</td>
+</tr>
+<tr>
+<td><code>^/dashboard/view/$</code></td>
+<td>List view</td>
+</tr>
+<tr>
+<td><code>^/dashboard/view/list/$</code></td>
+<td>List view</td>
+</tr>
+<tr>
+<td><code>^/dashboard/view/bibtex/$</code></td>
+<td>Bibtex style view</td>
+</tr>
+<tr>
+<td><code>^/dashboard/view/table/$</code></td>
+<td>Table style view</td>
+</tr>
+<tr>
+<td><code>^/dashboard/view/tile/$</code></td>
+<td>Tile style view</td>
+</tr>
+</tbody>
+</table>
+<h2 id="how-to-edit-display-style">How to Edit Display Style</h2>
+<p>To change display style {List, Table, Bibtex, Latex}, plsease edit the function in <code>dashboard/templatetags/utils_bib_fomrat.py</code>. We provide call back function (implemented as Class Object) for several display formats. When you want to change the style, just overwrite  the <code>get_template_{TEMPLATE STYLE}</code> functions.</p>
+<div class="codehilite"><pre><span></span><span class="c1"># Example of Template tag function.</span>
+<span class="c1"># ---------------------------------</span>
+
+<span class="k">class</span> <span class="nc">BibtexFormatListDefault</span><span class="p">(</span><span class="n">BibtexFormatBase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">get_template_INTPROC</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">html</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s1">&#39;{authors}; &#39;</span>
+            <span class="s1">&#39;&lt;a href=&quot;{url_bib}&quot;&gt;&quot;{title}&quot;&lt;/a&gt;, &#39;</span>
+            <span class="s1">&#39;2017&#39;</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">html</span>    
+
+    <span class="k">def</span> <span class="nf">get_template_JOURNAL</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">html</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s1">&#39;{authors}; &#39;</span>
+            <span class="s1">&#39;&lt;a href=&quot;{url_bib}&quot;&gt;&quot;{title}&quot;&lt;/a&gt;, &#39;</span>
+            <span class="s1">&#39;2017 &#39;</span>
+            <span class="s1">&#39;(JOURNAL)&#39;</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">html</span>
+</pre></div>
+
+
+<h3 id="default-style-examples">Default Style Examples</h3>
+<h4 id="list-style">List Style</h4>
+<div class="codehilite"><pre><span></span>dashboard.templatetags.utils_bib_format.BibtexFormatListDefault
+</pre></div>
+
+
+<h4 id="international-proceedings">International Proceedings</h4>
+<ul>
+<li>Bibtex View</li>
+</ul>
+<div class="codehilite"><pre><span></span>@inproceedings{&lt;id&gt;,
+         title = {&lt;title_en&gt;},
+        author = {&lt;authors_en&gt;},
+     booktitle = {&lt;book&gt;},
+        volume = {&lt;volume&gt;},
+        number = {&lt;number&gt;},
+         pages = {&lt;page&gt;},
+         month = {&lt;pub_date[1]&gt;},
+          year = {&lt;pub_date[0]&gt;},
+}
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>@inproceedings{id2754,
+         title = {Monitoring Range Motif on Streaming Time-Series},
+        author = {Shinya Kato and Daichi Amagata and Shunya Nishio and Takahiro Hara},
+     booktitle = {International Conference on Database and Expert Systems Applications (DEXA 2018)},
+        volume = {1},
+        number = {1},
+         pages = {251-266},
+         month = {9},
+          year = {2018},
+}
+</pre></div>
+
+
+<ul>
+<li>List View</li>
+</ul>
+<div class="codehilite"><pre><span></span>[1] &lt;authors_en&gt;, &quot;&lt;title_en&gt;,&quot; &lt;book&gt;, volume &lt;volume&gt;, number &lt;number&gt;, pages &lt;page&gt; &lt;pub_date[1]&gt; &lt;pub_date[0]&gt;.
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>[1] Shinya Kato and Daichi Amagata and Shunya Nishio and Takahiro Hara, &quot;Monitoring Range Motif on Streaming Time-Series,&quot; International Conference on Database and Expert Systems Applications (DEXA 2018), volume 1, number 1, pages 251-266 September 2018.
+</pre></div>
+
+
+<ul>
+<li>Table View</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>/</th>
+<th>論文誌/会議名</th>
+<th>著者名</th>
+<th>表題</th>
+<th>出版年月</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>book</td>
+<td>authors</td>
+<td>title_en</td>
+<td>pub_date[0]年 pub_date[1]月</td>
+<td>link</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>/</th>
+<th>論文誌/会議名</th>
+<th>著者名</th>
+<th>表題</th>
+<th>出版年月</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>国際会議</td>
+<td>International Conference on Database and Expert Systems Applications (DEXA 2018)</td>
+<td>Shinya Kato and Daichi Amagata and Shunya Nishio and Takahiro Hara</td>
+<td>Monitoring Range Motif on Streaming Time-Series</td>
+<td>2018年9月</td>
+<td>link</td>
+</tr>
+</tbody>
+</table>
+<h4 id="journal-paper">Journal Paper</h4>
+<ul>
+<li>Bibtex View</li>
+</ul>
+<div class="codehilite"><pre><span></span>@article{&lt;id&gt;,
+         title = {&lt;title_en&gt;},
+        author = {&lt;authors_en&gt;},
+       journal = {&lt;book&gt;},
+        volume = {&lt;volume&gt;},
+        number = {&lt;number&gt;},
+         pages = {&lt;page&gt;},
+         month = {&lt;pub_date[1]&gt;},
+          year = {&lt;pub_date[0]&gt;},
+}
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>@article{id2741,
+         title = {Privacy-Preserving Recognition of Object-based Activities Using Near-Infrared Reflective Markers},
+        author = {Joseph Korpela and Takuya Maekawa},
+     journal = {ACM/Springer Personal and Ubiquitous Computing (ACM/Springer PUC)},
+        volume = {22},
+        number = {2},
+         pages = {365-377},
+         month = {4},
+          year = {2018},
+}
+</pre></div>
+
+
+<ul>
+<li>List View</li>
+</ul>
+<div class="codehilite"><pre><span></span>[1] &lt;authors_en&gt;, &quot;&lt;title_en&gt;,&quot; &lt;book&gt;, volume &lt;volume&gt;, number &lt;number&gt;, pages &lt;page&gt; &lt;pub_date[1]&gt; &lt;pub_date[0]&gt;.
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>[1]Joseph Korpela and Takuya Maekawa, &quot;Privacy-Preserving Recognition of Object-Based Activities Using Near-Infrared Reflective Markers,&quot; ACM/Springer Personal and Ubiquitous Computing (ACM/Springer PUC), volume 22, number 2, pages 365-377 April 2018.
+</pre></div>
+
+
+<ul>
+<li>Table View</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>/</th>
+<th>論文誌/会議名</th>
+<th>著者名</th>
+<th>表題</th>
+<th>出版年月</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>book</td>
+<td>authors</td>
+<td>title_en</td>
+<td>pub_date[0]年 pub_date[1]月</td>
+<td>link</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>/</th>
+<th>論文誌/会議名</th>
+<th>著者名</th>
+<th>表題</th>
+<th>出版年月</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>論文誌</td>
+<td>ACM/Springer Personal and Ubiquitous Computing (ACM/Springer PUC)</td>
+<td>J. Korpela and T. Maekawa</td>
+<td>Privacy-Preserving Recognition of Object-Based Activities Using Near-Infrared Reflective Markers</td>
+<td>2018年4月</td>
+<td>link</td>
+</tr>
+</tbody>
+</table>
+<h4 id="domestic-conference">Domestic Conference(査読付き)</h4>
+<ul>
+<li>Bibtex View</li>
+</ul>
+<div class="codehilite"><pre><span></span>@inproceedings{&lt;id&gt;,
+         title = {&lt;title_ja&gt;or&lt;title_en&gt;},
+        author = {&lt;authors_ja&gt;},
+     booktitle = {&lt;book&gt;},
+        volume = {&lt;volume&gt;},
+        number = {&lt;number&gt;},
+         pages = {&lt;page&gt;},
+         month = {&lt;pub_date[1]&gt;},
+          year = {&lt;pub_date[0]&gt;},
+}
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>@inproceedings{id2753,
+         title = {ストリーミング時系列データの効率的なモチーフモニタリングアルゴリズム},
+        author = {加藤 慎也 and 天方 大地 and 西尾 俊哉 and 原 隆浩},
+     booktitle = {情報処理学会マルチメディア，分散，協調とモバイル(DICOMO2018)シンポジウム論文集},
+         pages = {1473-1480},
+         month = {7},
+          year = {2018},
+}
+</pre></div>
+
+
+<ul>
+<li>List View</li>
+</ul>
+<div class="codehilite"><pre><span></span>[1] &lt;authors_ja&gt;, &quot;&lt;title_ja&gt;or&lt;title_en&gt;,&quot; &lt;book&gt;, pages &lt;page&gt; &lt;pub_date[0]&gt;年&lt;pub_date[1]&gt;月 .
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>[1] 加藤 慎也, 天方 大地, 西尾 俊哉, 原 隆浩, &quot;ストリーミング時系列データの効率的なモチーフモニタリングアルゴリズム,&quot; 情報処理学会マルチメディア，分散，協調とモバイル(DICOMO2018)シンポジウム論文集, pages 1473-1480 2018年7月.
+</pre></div>
+
+
+<ul>
+<li>Table View</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>/</th>
+<th>論文誌/会議名</th>
+<th>著者名</th>
+<th>表題</th>
+<th>出版年月</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>book</td>
+<td>authors</td>
+<td>title</td>
+<td>pub_date[0]年 pub_date[1]月</td>
+<td>link</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>/</th>
+<th>論文誌/会議名</th>
+<th>著者名</th>
+<th>表題</th>
+<th>出版年月</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>国内会議(査読あり)</td>
+<td>情報処理学会マルチメディア，分散，協調とモバイル(DICOMO2018)シンポジウム論文集</td>
+<td>加藤 慎也, 天方 大地, 西尾 俊哉, 原 隆浩</td>
+<td>ストリーミング時系列データの効率的なモチーフモニタリングアルゴリズム</td>
+<td>2018年7月</td>
+<td>link</td>
+</tr>
+</tbody>
+</table>
+<h4 id="domestic-conference_1">Domestic Conference</h4>
+<ul>
+<li>Bibtex View</li>
+</ul>
+<div class="codehilite"><pre><span></span>@article{&lt;id&gt;,
+         title = {&lt;title_ja&gt;or&lt;title_en&gt;},
+        author = {&lt;authors_ja&gt;},
+       journal = {&lt;book&gt;},
+         month = {&lt;pub_date[1]&gt;},
+          year = {&lt;pub_date[0]&gt;},
+          note = {&lt;note&gt;},
+}
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>@article{id911,
+         title = {位置情報サービス利用におけるダミーを用いたユーザ位置曖昧化手法の視認性評価},
+        author = {林田 秀平 and 天方 大地 and 原 隆浩 and Xing Xie},
+       journal = {第10回データ工学と情報マネジメントに関するフォーラム（DEIMフォーラム2018）},
+         month = {3},
+          year = {2018},
+          note = {文部科学省科学研究費補助金・基盤研究 (A)(JP26240013),挑戦的萌芽研究(JP16K12429)，開催地：芦原温泉，福井県，開催日程：3/4-3/6，発表日：3/5},
+}
+</pre></div>
+
+
+<ul>
+<li>List View</li>
+</ul>
+<div class="codehilite"><pre><span></span>[1] &lt;authors_ja&gt;, &quot;&lt;title_ja&gt;or&lt;title_en&gt;,&quot; &lt;book&gt;,  &lt;pub_date[0]&gt;年&lt;pub_date[1]&gt;月.
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>[1] 林田 秀平, 天方 大地, 原 隆浩, Xing Xie, &quot;位置情報サービス利用におけるダミーを用いたユーザ位置曖昧化手法の視認性評価,&quot; 第10回データ工学と情報マネジメントに関するフォーラム（DEIMフォーラム2018）, 2018年3月.
+</pre></div>
+
+
+<ul>
+<li>Table View</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>/</th>
+<th>論文誌/会議名</th>
+<th>著者名</th>
+<th>表題</th>
+<th>出版年月</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>book</td>
+<td>authors</td>
+<td>title</td>
+<td>pub_date[0]年 pub_date[1]月</td>
+<td>link</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>/</th>
+<th>論文誌/会議名</th>
+<th>著者名</th>
+<th>表題</th>
+<th>出版年月</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>国内研究会</td>
+<td>情報処理学会マルチメディア，分散，協調とモバイル(DICOMO2018)シンポジウム論文集</td>
+<td>加藤 慎也, 天方 大地, 西尾 俊哉, 原 隆浩</td>
+<td>位置情報サービス利用におけるダミーを用いたユーザ位置曖昧化手法の視認性評価</td>
+<td>2018年7月</td>
+<td>link</td>
+</tr>
+</tbody>
+</table>
+<h4 id="national-conference">National Conference</h4>
+<ul>
+<li>Bibtex View</li>
+</ul>
+<div class="codehilite"><pre><span></span>@inproceedings{&lt;id&gt;,
+         title = {&lt;title_ja&gt;or&lt;title_en&gt;},
+        author = {&lt;authors_ja&gt;},
+     booktitle = {&lt;book&gt;},
+         month = {&lt;pub_date[1]&gt;},
+          year = {&lt;pub_date[0]&gt;},
+}
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>@inproceedings{id914,
+         title = {社会センサデータ生成・共有基盤におけるストリーミングデータ処理機構},
+        author = {中嶋 奎介 and 横山 正浩 and 義久 智樹 and 原 隆浩},
+     booktitle = {IPSJ情報処理学会第80回全国大会},
+         month = {3},
+          year = {2018},
+}
+</pre></div>
+
+
+<ul>
+<li>List View</li>
+</ul>
+<div class="codehilite"><pre><span></span>[1] &lt;authors_ja&gt;, &quot;&lt;title_ja&gt;or&lt;title_en&gt;,&quot; &lt;book&gt;,  &lt;pub_date[0]&gt;年&lt;pub_date[1]&gt;月.
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>[1] 中嶋 奎介, 横山 正浩, 義久 智樹, 原 隆浩, &quot;社会センサデータ生成・共有基盤におけるストリーミングデータ処理機構,&quot; IPSJ情報処理学会第80回全国大会, 2018年3月.
+</pre></div>
+
+
+<ul>
+<li>Table View</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>/</th>
+<th>論文誌/会議名</th>
+<th>著者名</th>
+<th>表題</th>
+<th>出版年月</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>book</td>
+<td>authors</td>
+<td>title</td>
+<td>pub_date[0]年 pub_date[1]月</td>
+<td>link</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>/</th>
+<th>論文誌/会議名</th>
+<th>著者名</th>
+<th>表題</th>
+<th>出版年月</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全国大会</td>
+<td>IPSJ情報処理学会第80回全国大会</td>
+<td>中嶋 奎介, 横山 正浩, 義久 智樹, 原 隆浩</td>
+<td>社会センサデータ生成・共有基盤におけるストリーミングデータ処理機構</td>
+<td>2018年3月</td>
+<td>link</td>
+</tr>
+</tbody>
+</table>
+<h4 id="bookrevieweditortranslation">Book/Review/Editor/Translation</h4>
+<ul>
+<li>Bibtex View</li>
+</ul>
+<div class="codehilite"><pre><span></span>@article{&lt;id&gt;,
+         title = {&lt;title_ja&gt;or&lt;title_en&gt;},
+        author = {&lt;authors_ja&gt;or&lt;authors_en&gt;},
+     booktitle = {&lt;book&gt;},
+         pages = {&lt;page&gt;},
+         month = {&lt;pub_date[1]&gt;},
+          year = {&lt;pub_date[0]&gt;},
+}
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>@article{id921,
+         title = {Fusion of Heterogeneous Mobile Data, Challenges and Solutions},
+        author = {Takahiro Hara},
+     booktitle = {Adaptive Mobile Computing: Advances in Processing Mobile Data Sets (Chapter 3), Elsevier},
+         pages = {47-63},
+         month = {8},
+          year = {2017},
+}
+</pre></div>
+
+
+<ul>
+<li>List View</li>
+</ul>
+<div class="codehilite"><pre><span></span>[1] &lt;authors_ja&gt;or&lt;authors_en&gt;, &quot;&lt;title_ja&gt;or&lt;title_en&gt;,&quot; &lt;book&gt;, pages &lt;page&gt; &lt;pub_date[1]&gt; &lt;pub_date[0]&gt;.
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>[1] Takahiro Hara, &quot;Fusion of Heterogeneous Mobile Data, Challenges and Solutions,&quot; Adaptive Mobile Computing: Advances in Processing Mobile Data Sets (Chapter 3), Elsevier, pages 47-63 August 2017.
+</pre></div>
+
+
+<ul>
+<li>Table View</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>/</th>
+<th>論文誌/会議名</th>
+<th>著者名</th>
+<th>表題</th>
+<th>出版年月</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>book</td>
+<td>authors</td>
+<td>title</td>
+<td>pub_date[0]年 pub_date[1]月</td>
+<td>link</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>/</th>
+<th>論文誌/会議名</th>
+<th>著者名</th>
+<th>表題</th>
+<th>出版年月</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>著書／監修／編集／訳書</td>
+<td>Challenges and Solutions," Adaptive Mobile Computing: Advances in Processing Mobile Data Sets (Chapter 3)</td>
+<td>Takahiro Hara</td>
+<td>Fusion of Heterogeneous Mobile Data, Challenges and Solutions</td>
+<td>2017年8月</td>
+<td>link</td>
+</tr>
+</tbody>
+</table>
+<h4 id="presentaionpanel-discutionseminer">Presentaion/Panel Discution/Seminer</h4>
+<ul>
+<li>Bibtex View</li>
+</ul>
+<div class="codehilite"><pre><span></span>@article{&lt;id&gt;,
+         title = {&lt;title_ja&gt;or&lt;title_en&gt;},
+        author = {&lt;authors_ja&gt;or&lt;authors_en&gt;},
+       journal = {&lt;book&gt;},
+         month = {&lt;pub_date[1]&gt;},
+          year = {&lt;pub_date[0]&gt;},
+}
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>@article{id2749,
+         title = {実世界指向AIが引き起こすイノベーション},
+        author = {前川 卓也},
+       journal = {第一回ビジネスedgeセミナー「AIは経営とビジネスモデルにどんなイノベーションを起こすのか」基調講演},
+         month = {6},
+          year = {2018},
+}
+</pre></div>
+
+
+<ul>
+<li>List View</li>
+</ul>
+<div class="codehilite"><pre><span></span>[1] &lt;authors_ja&gt;or&lt;authors_en&gt;, &quot;&lt;title_ja&gt;or&lt;title_en&gt;,&quot; &lt;book&gt;, &lt;pub_date[0]&gt;年&lt;pub_date[1]&gt;月.
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>[1] 前川 卓也, &quot;実世界指向AIが引き起こすイノベーション,&quot; 第一回ビジネスedgeセミナー「AIは経営とビジネスモデルにどんなイノベーションを起こすのか」基調講演, 2018年6月.
+</pre></div>
+
+
+<ul>
+<li>Table View</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>/</th>
+<th>論文誌/会議名</th>
+<th>著者名</th>
+<th>表題</th>
+<th>出版年月</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>book</td>
+<td>authors</td>
+<td>title</td>
+<td>pub_date[0]年 pub_date[1]月</td>
+<td>link</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>/</th>
+<th>論文誌/会議名</th>
+<th>著者名</th>
+<th>表題</th>
+<th>出版年月</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基調講演/セミナー・パネル討論等</td>
+<td>実世界指向AIが引き起こすイノベーション</td>
+<td>前川 卓也</td>
+<td>第一回ビジネスedgeセミナー「AIは経営とビジネスモデルにどんなイノベーションを起こすのか」基調講演</td>
+<td>2018年6月</td>
+<td>link</td>
+</tr>
+</tbody>
+</table>
+<h4 id="news-paper-article">News Paper article</h4>
+<ul>
+<li>Bibtex View</li>
+</ul>
+<div class="codehilite"><pre><span></span>@article{&lt;id&gt;,
+         title = {&lt;title_ja&gt;or&lt;title_en&gt;},
+        author = {&lt;authors_ja&gt;or&lt;authors_en&gt;},
+       journal = {&lt;book&gt;},
+         month = {&lt;pub_date[1]&gt;},
+          year = {&lt;pub_date[0]&gt;},
+}
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>@article{id902,
+         title = {世界初! AIを使った生き物目線の映像},
+        author = {前川 卓也},
+       journal = {MBSテレビ ちちんぷいぷい},
+         month = {9},
+          year = {2017},
+}
+</pre></div>
+
+
+<ul>
+<li>List View</li>
+</ul>
+<div class="codehilite"><pre><span></span>[1] &lt;authors_ja&gt;or&lt;authors_en&gt;, &quot;&lt;title_ja&gt;or&lt;title_en&gt;,&quot; &lt;book&gt;, &lt;pub_date[0]&gt;年&lt;pub_date[1]&gt;月.
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>[1] 前川 卓也, &quot;世界初! AIを使った生き物目線の映像,&quot; MBSテレビ ちちんぷいぷい, 2017年9月.
+</pre></div>
+
+
+<ul>
+<li>Table View</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>/</th>
+<th>論文誌/会議名</th>
+<th>著者名</th>
+<th>表題</th>
+<th>出版年月</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>book</td>
+<td>authors</td>
+<td>title</td>
+<td>pub_date[0]年 pub_date[1]月</td>
+<td>link</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>/</th>
+<th>論文誌/会議名</th>
+<th>著者名</th>
+<th>表題</th>
+<th>出版年月</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>新聞報道記事</td>
+<td>世界初! AIを使った生き物目線の映像</td>
+<td>前川 卓也</td>
+<td>MBSテレビ ちちんぷいぷい</td>
+<td>2017年9月</td>
+<td>link</td>
+</tr>
+</tbody>
+</table>
+<h4 id="others">Others</h4>
+<ul>
+<li>Bibtex View</li>
+</ul>
+<div class="codehilite"><pre><span></span>@article{&lt;id&gt;,
+         title = {&lt;title_ja&gt;or&lt;title_en&gt;},
+        author = {&lt;authors_ja&gt;or&lt;authors_en&gt;},
+       journal = {&lt;book&gt;},
+        volume = {&lt;volume&gt;},
+        number = {&lt;number&gt;},
+         pages = {&lt;pages&gt;},
+         month = {&lt;pub_date[1]&gt;},
+          year = {&lt;pub_date[0]&gt;},
+}
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>@article{id965,
+         title = {「デジタルコンテンツクリエーション最前線」開催報告},
+        author = {義久 智樹 and 水野 慎士 and 三上 浩司 and 林 洋人 and 楠 房子},
+       journal = {情報処理学会論文誌デジタルコンテンツ (DCON)},
+        volume = {5},
+        number = {2},
+         pages = {1-1},
+         month = {8},
+          year = {2017},
+}
+</pre></div>
+
+
+<ul>
+<li>List View</li>
+</ul>
+<div class="codehilite"><pre><span></span>[1] &lt;authors_ja&gt;or&lt;authors_en&gt;, &quot;&lt;title_ja&gt;or&lt;title_en&gt;,&quot; &lt;book&gt;, volume &lt;volume&gt;, number &lt;number&gt;, &lt;pages&gt; &lt;pub_date[0]&gt;年&lt;pub_date[1]&gt;月.
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>[1] 義久 智樹, 水野 慎士, 三上 浩司, 林 洋人, 楠 房子, &quot;「デジタルコンテンツクリエーション最前線」開催報告,&quot; 情報処理学会論文誌デジタルコンテンツ (DCON), volume 5, number 2, 1-1 2017年8月.
+</pre></div>
+
+
+<ul>
+<li>Table View</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>/</th>
+<th>論文誌/会議名</th>
+<th>著者名</th>
+<th>表題</th>
+<th>出版年月</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>book</td>
+<td>authors</td>
+<td>title</td>
+<td>pub_date[0]年 pub_date[1]月</td>
+<td>link</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>/</th>
+<th>論文誌/会議名</th>
+<th>著者名</th>
+<th>表題</th>
+<th>出版年月</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>その他（一般記事等）</td>
+<td>「デジタルコンテンツクリエーション最前線」開催報告</td>
+<td>義久 智樹, 水野 慎士, 三上 浩司, 林 洋人, 楠 房子</td>
+<td>情報処理学会論文誌デジタルコンテンツ (DCON)</td>
+<td>2017年8月</td>
+<td>link</td>
+</tr>
+</tbody>
+</table>
+<h4 id="award">Award</h4>
+<ul>
+<li>Bibtex View</li>
+</ul>
+<div class="codehilite"><pre><span></span>@inproceedings{&lt;id&gt;,
+         title = {&lt;title_ja&gt;or&lt;title_en&gt;},
+        author = {&lt;authors_ja&gt;or&lt;authors_en&gt;},
+     booktitle = {&lt;book&gt;},
+         month = {&lt;pub_date[1]&gt;},
+          year = {&lt;pub_date[0]&gt;},
+}
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>@inproceedings{id2757,
+         title = {ヤングリサーチャ賞},
+        author = {神谷 俊充 and 中村 達哉 and 前川 卓也 and 天方 大地 and 原 隆浩},
+     booktitle = {情報処理学会マルチメディア，分散，協調とモバイル(DICOMO2018)シンポジウム論文集},
+         month = {7},
+          year = {2018},
+}
+</pre></div>
+
+
+<ul>
+<li>List View</li>
+</ul>
+<div class="codehilite"><pre><span></span>[1] &lt;authors_ja&gt;or&lt;authors_en&gt;, &quot;&lt;title_ja&gt;or&lt;title_en&gt;,&quot; &lt;book&gt;, &lt;pub_date[0]&gt;年&lt;pub_date[1]&gt;月.
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>[1] 神谷 俊充, 中村 達哉, 前川 卓也, 天方 大地, 原 隆浩, &quot;ヤングリサーチャ賞,&quot; 情報処理学会マルチメディア，分散，協調とモバイル(DICOMO2018)シンポジウム論文集, 2018年7月.
+</pre></div>
+
+
+<ul>
+<li>Table View</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>/</th>
+<th>論文誌/会議名</th>
+<th>著者名</th>
+<th>表題</th>
+<th>出版年月</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>book</td>
+<td>authors</td>
+<td>title</td>
+<td>pub_date[0]年 pub_date[1]月</td>
+<td>link</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>/</th>
+<th>論文誌/会議名</th>
+<th>著者名</th>
+<th>表題</th>
+<th>出版年月</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>受賞</td>
+<td>ヤングリサーチャ賞</td>
+<td>神谷 俊充, 中村 達哉, 前川 卓也, 天方 大地, 原 隆浩</td>
+<td>情報処理学会マルチメディア，分散，協調とモバイル(DICOMO2018)シンポジウム論文集</td>
+<td>2018年7月</td>
+<td>link</td>
+</tr>
+</tbody>
+</table>
+<p>-天方さんにBook/Review/...のtypeをどうするか相談！</p>
+<h2 id="search-function">Search Function</h2>
+<p>Use search form.</p>
+<h3 id="memo">memo (東出)</h3>
+<p>クエリをPOSTするのか，get prameterを使うのかは要検討.</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../models/" title="Models" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Models
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../registration/" title="Registration" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Registration
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.583bbe55.js"></script>
+      
+      <script>app.initialize({version:"1.0",url:{base:"../.."}})</script>
+      
+    
+    
+      
+    
+  </body>
+</html>

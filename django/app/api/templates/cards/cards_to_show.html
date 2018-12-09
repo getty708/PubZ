@@ -4,6 +4,62 @@
 {% block title %}API | Card View{% endblock title %}
 
 {% block content %}
+<div class="col-lg-12 col-sm-12 d-flex align-items-stretch">
+    <div class="card">
+        <div class="card-header">
+            Search Box
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <form action="" method="get">
+                        <div class="input-group input-group-sm mb-3">
+                            <input type="text" class="form-control" placeholder="Keyword1 Keyword2 ...(and search)" value="{% if query_params.keywords %}{{query_params.keywords}}{% endif %}" aria-label="Keyword" aria-describedby="basic-addon2" name="keywords">
+                            <div class="input-group-append">
+                                    <button class="btn btn-secondary" type="submit">Search</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-2 col-form-label">book style</label>
+                            <div class="col-2"><select name=book_style  class="form-control form-control-sm">
+                            <option value="ALL" {% if query_params.book_style == "ALL" %}selected{% endif %}>all</option>
+                            <option value="INTPROC" {% if query_params.book_style == "INTPROC" %}selected{% endif %}>Interproceedings</option>
+                            <option value="JOURNAL" {% if query_params.book_style == "JOURNAL" %}selected{% endif %}>Jounals</option>
+                            <option value="CONF_DOMESTIC" {% if query_params.book_style == "CONF_DOMESTIC" %}selected{% endif %}>Domestic Conference</option>
+                            <option value="CONF_DOMESTIC_NO_REVIEW" {% if query_params.book_style == "CONF_DOMESTIC_NO_REVIEW" %}selected{% endif %}>Domestic Conf(NoReview)</option>
+                            <option value="CONF_NATIONAL" {% if query_params.book_style == "CONF_NATIONAL" %}selected{% endif %}>National Conference</option>
+                            <option value="BOOK" {% if query_params.book_style == "BOOK" %}selected{% endif %}>Book/Review/Editor</option>
+                            <option value="KEYNOTE" {% if query_params.book_style == "KEYNOTE" %}selected{% endif %}>Presentaion/Seminer</option>
+                            <option value="NEWS" {% if query_params.book_style == "NEWS" %}selected{% endif %}>New Paper article</option>
+                            <option value="OTHERS" {% if query_params.book_style == "OTHERS" %}selected{% endif %}>others</option>
+                            <option value="AWARD" {% if query_params.book_style == "AWARD" %}selected{% endif %}>Award</option>
+                            </select></div>
+                            <label for="example-text-input" class="col-2 col-form-label">order</label>
+                            <div class="col-3"><select name=order  class="form-control form-control-sm">
+                            <option value="ascending" {% if query_params.order == "ascending" %}selected{% endif %}>ascending(pub_date)</option>
+                            <option value="desending" {% if query_params.order == "desending" %}selected{% endif %}>desending(pub_date)</option>
+                            </select></div>
+                            <label for="example-text-input" class="col-1 col-form-label">Tags</label>
+                            <div class="col-2"><select name=tags  class="form-control form-control-sm">
+                                {% for tag in all_tags %}
+                                <option value="{{ tag.name }}" {% if query_params.tags == "{{ tag.name }}" %}selected{% endif %}>{{ tag.name }}</option>
+                                {% endfor %}
+                            </select></div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="example-text-input" class="col-2 col-form-label">pub year</label>
+							<div class="col-4"><input type="number" min="1000" max="3000" class="form-control form-control-sm" value="{% if query_params.pubyear %}{{query_params.pubyear}}{% endif %}" aria-label="PubYear" aria-describedby="basic-addon2" name="pubyear"></div><div class="col-4"><input type="checkbox" name="pubyear_all" value="checked" {% if query_params.pubyear_all == "checked" %}checked="checked"{% endif %}>all_year</div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
     {% if papers_to_show %}
     {% for paper, author in papers_to_show %}
@@ -13,17 +69,25 @@
             <div class="card-header">Paper</div>
             <!-- <img class="card-img-top" src="{{ paper.image.url }}" alt="Card image cap"> -->
             <div class="card-body">
-                <h5 class="card-title">{{ paper.title_en }}</h5>
+                <h5 class="card-title">{{ paper.title }}</h5>
                 <p>{{ author }}</p>
-                <!-- <p class="card-text">Daichi Amagata, Takahiro Hara, and Makoto Onizuka</p> -->
                 <p class="card-text">{{ paper.book.title }}</p>
+
                 {% for tag in paper.tags.all %}
                 <span class="badge badge-pill badge-primary">{{ tag }}</span>
                 {% endfor %}
+                
                 <span class="badge badge-pill badge-primary">{{ paper.book }}</span>
                 <span class="badge badge-pill badge-primary">{{ paper.pub_date.year }}</span>
                 <a href="{{ paper.url }}" class="btn btn-primary btn-sm">PDF</a>
-                <!-- <img class="card-img-top" src="{{ paper.image.url }}" alt="Card image cap"> -->
+
+                {% if paper.image %}
+                {% if paper.image.url == default_img %}
+                {% else %}
+                <img class="card-img-top" src="{{ paper.image.url }}" alt="Card image cap">
+                {% endif %}
+                {% endif %}
+
             </div>
             <div class="card-footer">
                 <small class="text-muted">Last updated 3 mins ago</small>

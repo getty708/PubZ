@@ -6,3 +6,6 @@ Pillow
 djangorestframework
 markdown
 django-filter
+django-autocomplete-light
+django-bootstrap-datepicker-plus
+jquery >= 1.7.1
