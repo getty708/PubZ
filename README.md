@@ -1,5 +1,5 @@
-# BMAN - Bibtex Management System
-Bibtex mangament system which has rich automation functions.
+# PubZ - Publication Zoo
+Publication management system for your lab.
 
 
 ## Full Document
