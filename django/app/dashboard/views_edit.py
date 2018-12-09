@@ -31,7 +31,7 @@ def bibtex_edit(request, bibtex_id=None):
     else:
         bibtex = Bibtex()
         submit_url = reverse("dashboard:bibtex_add")
-        
+
     if request.method == 'POST':
         form = forms.BibtexForm(request.POST, instance=bibtex)
         if form.is_valid():
@@ -47,7 +47,7 @@ def bibtex_edit(request, bibtex_id=None):
             print("validation fail")
     else:
         form = forms.BibtexForm(instance=bibtex)
-        
+
     return render(request,
                   'dashboard/bibtex/edit.html',
                   {'msg': msg,
@@ -61,7 +61,7 @@ def bibtex_edit_step1(request):
     msg = False
     bibtex = Bibtex()
     submit_url = reverse("dashboard:bibtex_add_step1")
-        
+
     if request.method == 'POST':
         form = forms.BibtexFormStep1(request.POST)
         if form.is_valid():
@@ -79,7 +79,7 @@ def bibtex_edit_step1(request):
             print("validation fail")
     else:
         form = forms.BibtexFormStep1()
-        
+
     return render(request,
                   'dashboard/bibtex/edit_step1.html',
                   {'msg': msg,
@@ -102,16 +102,18 @@ def book_edit(request, book_id=None):
         book = Book()
         submit_text = "登録"
         submit_url = reverse("dashboard:book_add")
-        
+
     if request.method == 'POST':
         form = forms.BookForm(request.POST, instance=book)
         if form.is_valid():
             book_new = form.save(commit=False)
             book_new.owner = get_login_user(request.user.id)
             book_new.save()
-            return redirect('dashboard:book_index')        
-
-    form = forms.BookForm(instance=book)    
+            return redirect('dashboard:book_index')
+        else:
+            print("validation fail")
+    else:
+        form = forms.BookForm(instance=book)
     return render(request,
                   'dashboard/book/edit.html',
                   {'msg': msg,
@@ -119,7 +121,7 @@ def book_edit(request, book_id=None):
                    'book': book,
                    'submit_text': submit_text,
                    'submit_url': submit_url})
-    
+
 
 
 """
@@ -135,17 +137,19 @@ def author_edit(request, author_id=None):
     else:
         author = Author()
         submit_url = reverse("dashboard:author_add")
-        
+
     if request.method == 'POST':
         form = forms.AuthorForm(request.POST, instance=author)
         if form.is_valid():
-            print(form.cleaned_data)            
+            print(form.cleaned_data)
             author_new = form.save(commit=False)
             author_new.owner = get_login_user(request.user.id)
             author_new.save()
             return redirect('dashboard:author_detail', author.id)
-
-    form = forms.AuthorForm(instance=author)    
+        else:
+            print("validation fail")
+    else:
+        form = forms.AuthorForm(instance=author)
     return render(request,
                   'dashboard/author/edit.html',
                   {'msg': msg,
@@ -160,7 +164,7 @@ AuthorOrder
 """
 @login_required
 def author_order_edit(request, author_order_id=None):
-    msg = False    
+    msg = False
     if author_order_id:
         author_order = get_object_or_404(AuthorOrder, pk=author_order_id)
         bibtex = author_order.bibtex
@@ -177,7 +181,7 @@ def author_order_edit(request, author_order_id=None):
             pass
         else:
             raise Http404("Invalid BibtexID")
-        
+
     if request.method == 'POST':
         form = forms.AuthorOrderForm(request.POST, instance=author_order)
         if form.is_valid():
@@ -211,7 +215,7 @@ def tag_edit(request, tag_id=None):
     else:
         tag = Tag()
         submit_url = reverse("dashboard:tag_add")
-    
+
     if request.method == 'POST':
         form = forms.TagForm(request.POST, instance=tag)
         if form.is_valid():
@@ -219,7 +223,7 @@ def tag_edit(request, tag_id=None):
             tag_new.owner = get_login_user(request.user.id)
             tag_new.save()
             return redirect('dashboard:tag_index')
-    
+
     form = forms.TagForm(instance=tag)
     return render(request,
                   'dashboard/tag/edit.html',
@@ -251,7 +255,7 @@ def tagchain_edit(request, tagchain_id=None):
             pass
         else:
             raise Http404("Invalid BibtexID")
-    
+
     if request.method == 'POST':
         form = forms.TagChainForm(request.POST, instance=tagChain)
         if form.is_valid():
@@ -259,7 +263,7 @@ def tagchain_edit(request, tagchain_id=None):
             tagChain_new.owner = get_login_user(request.user.id)
             tagChain_new.save()
             return redirect('dashboard:tag_index')
-    
+
     form = forms.TagChainForm(instance=tagChain)
     return render(request,
                   'dashboard/tagChain/edit.html',
@@ -268,4 +272,3 @@ def tagchain_edit(request, tagchain_id=None):
                    'bibtex': bibtex,
                    'tagChain': tagChain,
                    'submit_url': submit_url})
-

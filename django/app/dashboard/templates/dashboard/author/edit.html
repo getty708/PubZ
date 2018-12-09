@@ -11,7 +11,7 @@
 				{% else%}
 				<h2>Add New Author</h2>
 				{% endif %}
-				{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+				{% if form.errors %}{%for error in form.errors.values %}<p><strong>{{ error }}</strong></p>{% endfor %}{% endif %}
 
 				<form action="{{ submit_url}}" method="post">
 						{% csrf_token %}
@@ -33,16 +33,16 @@
 								<label for="example-text-input" class="col-2 col-form-label">Date</label>
 								<div class="col-5">{{ form.date_join }}</div>
 								<div class="col-5">{{ form.date_leave }}</div>
-						</div>						
+						</div>
 						{% if author.id %}
-						<button type="submit" class="btn btn-sm btn-primary">Update</button>						
+						<button type="submit" class="btn btn-sm btn-primary">Update</button>
 						<a href="{% url 'dashboard:author_detail' author.id %}" class="btn btn-outline-primary btn-sm">Back</a>
 						{% else %}
 						<button type="submit" class="btn btn-sm btn-primary">Add</button>
-						<a href="{% url 'dashboard:author_index'%}" class="btn btn-outline-primary btn-sm">Back</a>						
+						<a href="{% url 'dashboard:author_index' %}" class="btn btn-outline-primary btn-sm">Back</a>
 						{% endif %}
-				</form>				
-				
+				</form>
+
 		</div>
 </div>
 {% endblock content %}
