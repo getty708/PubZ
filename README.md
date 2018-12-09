@@ -3,11 +3,11 @@ Bibtex mangament system which has rich automation functions.
 
 
 ## Full Document
-[Document]()
+[Document](https://getty708.github.io/bman/)
 
 
 ## Description
-See [Offical Documnet](#)
+See [Offical Documnet](https://getty708.github.io/bman/)
 
 ## Requirements
 + Main Host Server

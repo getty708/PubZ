@@ -10,7 +10,6 @@
 
 <div class="row my-3">
 		<div class="col-12">
-				<h2>Papers</h2>
 		</div>
 </div>
 <div class="row mb-3">
@@ -21,8 +20,8 @@
 <div class="row">
 		<div class="col-12 my-3">
 			{% for book_style in book_style_list %}
-			  <h4 id="{{book_style}}">{{ book_style|get_display_name }}</h4>
       	{% if latest_bibtex_list|get_booktype_bibtex:book_style %}
+				  <h4 id="{{book_style}}">{{ book_style|get_display_name }}</h4>
 					{% for bibtex in latest_bibtex_list|get_booktype_bibtex:book_style %}
 						<div class="card mb-3">
 						<div class="card-body">
@@ -33,8 +32,6 @@
 						</div>
 						</div>
 					{% endfor %}
-				{% else %}
-					<p>No data are available.</p>
 				{% endif %}
 			{% endfor %}
 		</div>

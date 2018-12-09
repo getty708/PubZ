@@ -5,7 +5,7 @@ import re
 from core import models
 from dashboard import validators
 
-
+from bootstrap_datepicker_plus import DatePickerInput
 
 """
 Author
@@ -171,6 +171,7 @@ class BibtexForm(forms.ModelForm):
         widgets = {
             'book': autocomplete.ListSelect2(
                 url='api:autocomplete_book',),
+            'pub_date': DatePickerInput(),
         }
 
     def __init__(self,*args,**kwargs):

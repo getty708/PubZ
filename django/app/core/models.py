@@ -49,7 +49,7 @@ class Bibtex(models.Model):
         default='0',
         choices=PRIORITY_CHOICES,)
     abstruct = models.TextField(null=True,blank=True)
-    image = models.ImageField(null=True,blank=True, upload_to="api")
+    image = models.ImageField(null=True,blank=True, upload_to="api", default='default.png')
     tags = models.ManyToManyField(
         'core.Tag',
         through='core.TagChain',
@@ -184,7 +184,7 @@ class Book(models.Model):
     )
     
     title = models.CharField(max_length=256)
-    abbr  = models.CharField(max_length=256, null=True,blank=True)    
+    abbr  = models.CharField(max_length=256, blank=True, null=False, default="")  
     style = models.CharField(
         max_length=32,
         choices=STYLE_CHOICES,
@@ -208,7 +208,7 @@ class Book(models.Model):
         )
 
     def __str__(self):
-        if self.abbr is not None:
+        if not self.abbr == "":
             return self.abbr
         return self.title
 
