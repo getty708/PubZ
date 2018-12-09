@@ -25,7 +25,7 @@ SECRET_KEY = 'a10^j@6^2q$y*c&ks29$gnb7*3eodvqp!4!$7h31mlsq0ad3+s'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "192.168.1.123",]
+ALLOWED_HOSTS = ["*",]
 
 # User Model
 AUTH_USER_MODEL = 'users.User'
@@ -100,8 +100,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'docker',
         'USER': 'docker',
-        'PASSWORD': 'docker',
-        'HOST': 'db',
+        'PASSWORD':  'docker',
+        'HOST': os.getenv('MYSQL_HOST'),
     }
 }
 

@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: pubz-django-service
+spec:
+  selector:
+    app: pubz-django-container
+  ports:
+  - protocol: TCP
+    port: 8000
+    targetPort: 8000
+  type: NodePort
