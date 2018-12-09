@@ -96,11 +96,11 @@ def book_edit(request, book_id=None):
     msg = False
     if book_id:
         book = get_object_or_404(Book, pk=book_id)
-        submit_text = "更新"
+        submit_text = "Update"
         submit_url = reverse("dashboard:book_edit",kwargs={'book_id':book.id})
     else:
         book = Book()
-        submit_text = "登録"
+        submit_text = "Add New"
         submit_url = reverse("dashboard:book_add")
 
     if request.method == 'POST':

@@ -46,7 +46,13 @@
 										<td>{{ bibtex.book.title }}</td>
 										<td>{{ bibtex | bibtex_get:"authors"  }}</td>
 										<td>
-												<a href="{% url 'dashboard:detail' bibtex.id  %}">Detail</a>
+												{% if user.is_authenticated %}
+												<span class="badge badge-warning">Not Completed</span>												
+												{% endif %}												
+												<a href="{% url 'dashboard:detail' bibtex.id  %}" >Detail,</a>
+												{% if user.is_authenticated %}
+												<a href="{% url 'dashboard:bibtex_edit' bibtex.id  %}" >Edit,</a>
+												{% endif %}
 										</td>
 								</tr>
 								{% endfor %}
