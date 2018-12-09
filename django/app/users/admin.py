@@ -43,5 +43,4 @@ class MyUserAdmin(UserAdmin):
     search_fields = ('email', 'first_name', 'last_name')
     ordering = ('email',)
 
-
 admin.site.register(User, MyUserAdmin)

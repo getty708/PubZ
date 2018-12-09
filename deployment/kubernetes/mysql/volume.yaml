@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pubz-pv
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "nfs"
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    server: 192.168.1.37
+    path: /srv/nfsroot/k8s/pubz-mysql

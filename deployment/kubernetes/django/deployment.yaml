@@ -1,0 +1,25 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: pubz-django
+  labels:
+    app: pubz
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pubz-django-container
+  template:
+    metadata:
+      labels:
+        app: pubz-django-container
+    spec:
+      containers:
+        - name: pubz-django
+          image: pubz/django:v0.2.0
+          ports:
+            - containerPort: 8000
+          env:
+            - name: MYSQL_HOST
+              value: pubz-mysql-service
+            
