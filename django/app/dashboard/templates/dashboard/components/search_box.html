@@ -19,9 +19,9 @@
 									</div>
 
 									<div class="form-group row">
-										<label for="example-text-input" class="col-2 col-form-label">book style</label>
-										<div class="col-4"><select name=book_style  class="form-control form-control-sm">
-										<option value="ALL" {% if query_params.book_style == "ALL" %}selected{% endif %}>all</option>
+										<label for="example-text-input" class="col-md-2 col-form-label">Book Style</label>
+										<div class="col-md-4"><select name=book_style  class="form-control form-control-sm">
+										<option value="ALL" {% if query_params.book_style == "ALL" %}selected{% endif %}>All</option>
 										<option value="INTPROC" {% if query_params.book_style == "INTPROC" %}selected{% endif %}>Interproceedings</option>
 										<option value="JOURNAL" {% if query_params.book_style == "JOURNAL" %}selected{% endif %}>Jounals</option>
 										<option value="CONF_DOMESTIC" {% if query_params.book_style == "CONF_DOMESTIC" %}selected{% endif %}>Domestic Conference</option>
@@ -33,16 +33,24 @@
 										<option value="OTHERS" {% if query_params.book_style == "OTHERS" %}selected{% endif %}>others</option>
 										<option value="AWARD" {% if query_params.book_style == "AWARD" %}selected{% endif %}>Award</option>
 										</select></div>
-										<label for="example-text-input" class="col-2 col-form-label">order</label>
-										<div class="col-4"><select name=order  class="form-control form-control-sm">
-										<option value="ascending" {% if query_params.order == "ascending" %}selected{% endif %}>ascending(pub_date)</option>
-										<option value="desending" {% if query_params.order == "desending" %}selected{% endif %}>desending(pub_date)</option>
+										<label for="example-text-input" class="col-md-2 col-form-label">Sort</label>
+										<div class="col-md-4"><select name=order  class="form-control form-control-sm">
+										<option value="ascending" {% if query_params.order == "ascending" %}selected{% endif %}>Ascending by Date</option>
+										<option value="desending" {% if query_params.order == "desending" %}selected{% endif %}>Desending by Date</option>
 										</select></div>
 									</div>
 
 									<div class="form-group row">
-										<label for="example-text-input" class="col-2 col-form-label">pub year</label>
-											<div class="col-4"><input type="number" min="1000" max="3000" class="form-control form-control-sm" value="{% if query_params.pubyear %}{{query_params.pubyear}}{% endif %}" aria-label="PubYear" aria-describedby="basic-addon2" name="pubyear"></div><div class="col-4"><input type="checkbox" name="pubyear_all" value="checked" {% if query_params.pubyear_all == "checked" %}checked="checked"{% endif %}>all_year</div>
+										<label for="example-text-input" class="col-md-2 col-form-label">Year</label>
+										<div class="col-md-4">
+												<input type="number" min="1000" max="3000" class="form-control form-control-sm" value="{% if query_params.pubyear %}{{query_params.pubyear}}{% endif %}" aria-label="PubYear" aria-describedby="basic-addon2" name="pubyear">
+												<div class="form-check">
+														<input class="form-check-input" type="checkbox" id="defaultCheck1" name="pubyear_all" value="checked" {% if query_params.pubyear_all == "checked" %}checked="checked"{% endif %} >
+														<label class="form-check-label" for="defaultCheck1">
+																See All
+														</label>
+												</div>												
+										</div>
 									</div>
 
 		    					</form>
@@ -52,7 +60,7 @@
 										<a href="{% url 'dashboard:index_list' %}?{% if query_params.keywords %}keywords={{query_params.keywords}}&{% endif %}{% if query_params.book_style %}book_style={{query_params.book_style}}&{% endif %}{% if query_params.order %}order={{query_params.order}}&{% endif %}{% if query_params.pubyear %}pubyear={{query_params.pubyear}}{% endif %}{% if query_params.pubyear_all %}&pubyear_all={{query_params.pubyear_all}}{% endif %}" class="btn btn{% if display_mode != 'list' %}-outline{% endif %}-secondary" >List View</a>
 										<a href="{% url 'dashboard:index_table' %}?{% if query_params.keywords %}keywords={{query_params.keywords}}&{% endif %}{% if query_params.book_style %}book_style={{query_params.book_style}}&{% endif %}{% if query_params.order %}order={{query_params.order}}&{% endif %}{% if query_params.pubyear %}pubyear={{query_params.pubyear}}{% endif %}{% if query_params.pubyear_all %}&pubyear_all={{query_params.pubyear_all}}{% endif %}" class="btn btn{% if display_mode != 'table' %}-outline{% endif %}-secondary" >Table View</a>
 										<a href="{% url 'dashboard:index_bib' %}?{% if query_params.keywords %}keywords={{query_params.keywords}}&{% endif %}{% if query_params.book_style %}book_style={{query_params.book_style}}&{% endif %}{% if query_params.order %}order={{query_params.order}}&{% endif %}{% if query_params.pubyear %}pubyear={{query_params.pubyear}}{% endif %}{% if query_params.pubyear_all %}&pubyear_all={{query_params.pubyear_all}}{% endif %}" class="btn btn{% if display_mode != 'bib' %}-outline{% endif %}-secondary" >Bibtex View</a>
-										<a href="{% url 'dashboard:index_latex' %}?{% if query_params.keywords %}keywords={{query_params.keywords}}&{% endif %}{% if query_params.book_style %}book_style={{query_params.book_style}}&{% endif %}{% if query_params.order %}order={{query_params.order}}&{% endif %}{% if query_params.pubyear %}pubyear={{query_params.pubyear}}{% endif %}{% if query_params.pubyear_all %}&pubyear_all={{query_params.pubyear_all}}{% endif %}" class="btn btn{% if display_mode != 'latex' %}-outline{% endif %}-secondary" >Latex View</a>
+										<a href="{% url 'dashboard:index_latex' %}?{% if query_params.keywords %}keywords={{query_params.keywords}}&{% endif %}{% if query_params.book_style %}book_style={{query_params.book_style}}&{% endif %}{% if query_params.order %}order={{query_params.order}}&{% endif %}{% if query_params.pubyear %}pubyear={{query_params.pubyear}}{% endif %}{% if query_params.pubyear_all %}&pubyear_all={{query_params.pubyear_all}}{% endif %}" class="btn btn{% if display_mode != 'latex' %}-outline{% endif %}-secondary d-none d-md-inline" >Latex View</a>
 
 								</div>
 						</div>
