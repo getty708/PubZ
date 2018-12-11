@@ -21,8 +21,7 @@
 					<tr><td>title(en)</td><td>{{ bibtex.title_en }}</td></tr>
 					<tr><td>title(ja)</td><td>{{ bibtex.title_ja }}</td></tr>
 					<tr><td>authors</td><td>{{ bibtex | bibtex_get:"authors" }}</td></tr>
-					<tr><td>tags</td><td>{{ bibtex | bibtex_get:"tags" }}</td></tr>
-					<tr><td>book</td><td>{{ bibtex.book }}</td></tr>
+					<tr><td>book</td><td>{{ bibtex.book.title }}</td></tr>
 					<tr><td>volume</td><td>{{ bibtex.volume }}</td></tr>
 					<tr><td>number</td><td>{{ bibtex.number }}</td></tr>
 					<tr><td>chapter</td><td>{{ bibtex.chapter }}</td></tr>
