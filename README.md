@@ -3,11 +3,11 @@ Publication management system for your lab.
 
 
 ## Full Document
-[Document](https://getty708.github.io/bman/)
+[Document](https://getty708.github.io/PubZ/)
 
 
 ## Description
-See [Offical Documnet](https://getty708.github.io/bman/)
+See [Offical Documnet](https://getty708.github.io/PubZ/)
 
 ## Requirements
 + Main Host Server
