@@ -78,6 +78,5 @@ With this setup, we launched 4 containers. You can access to 3 of them with your
 
 
 ## Licence
-Copyright (c) 2018 Yoshimura Naoya, Kato Shinya, Higashide Daiki, Hanxin Wang, Bunki Cao
 [MIT License](./LICENSE)
 
