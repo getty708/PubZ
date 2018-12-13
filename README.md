@@ -19,18 +19,18 @@ See [Offical Documnet](https://getty708.github.io/bman/)
 
 ## Instlation
 ### Step.1 Build Docker Containers
-Move to the directory which `docker-compose.yml` exists adn issue these command
+Move to the directory which `docker-compose.yml` exists and issue these commands
 ```
-# Create containers with dokcer-compose
+# Create containers with docker-compose
 docker-compose build
-# Start comtainers
+# Start containers
 docker-compose up 
 ```
-Then, you get 3 containers `db, phpmyadmin, django, (strage)` and each containers are connected each others.
+Then, you get 3 containers `db, phpmyadmin, django, (storage)` and each containers are connected each others.
 
 
 ### Step.2 Start Django App
-For starting djangp App., you need to initalize database (this system use `mysql`). Issue these commands,
+For starting djangp App, you need to initalize database (this system use `mysql`). Issue these commands,
 
 ```
 # Enter into the django container
@@ -48,7 +48,7 @@ python manage.py migrate
 
 For development, use `Username=root, email={any}, pw=password (pwBman88)`
 
-After these command, please restart all the conatiners.
+After these commands, please restart all the conatiners.
 
 
 
