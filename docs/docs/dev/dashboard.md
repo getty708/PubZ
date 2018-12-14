@@ -455,5 +455,3 @@ The style template are placed in [`dashbord/templates/custom/`](https://github.c
 |受賞|ヤングリサーチャ賞|神谷 俊充, 中村 達哉, 前川 卓也, 天方 大地, 原 隆浩|情報処理学会マルチメディア，分散，協調とモバイル(DICOMO2018)シンポジウム論文集|2018年7月|link|
 
 
-## Search Function
-Use search form.
