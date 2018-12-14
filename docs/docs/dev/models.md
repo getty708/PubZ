@@ -13,29 +13,20 @@ Bibtex object. All information of your publications are represented as this mode
 + **lang**: A default language setting for this publication.
 + **title_en**: A title of your pubilication (English). `CharField(512)`, unique, required. [Check validation rules](#title), blank=True.
 + **title_ja**: A title of your pubilication (Japanese). `CharField(512)`, unique, required. [Check validation rules](#title), blank=True.
-
-!!! Warning
-	We have to check whether `title_en` or `title_ja` is provided.
-	
 + **authors**: Authors of this publication. This column shall be selected from `Author` model. The order is stored in `AuthorOrder` model, which is an intermediate model for `Bibtex` and `Author`. `ManyToManyField (through='AuthorOrder')`, foreign-key-restriction(`Author`), required.
 + **book**: A book which this work is published. e.g. {International proceedings, journals, newspapers, ...}.`ForeignKey`, foreign-key-restriction(`Book`), required.
-
 + **volume**: A volume number (巻). Before published, ignore this column. `CharField (max_length=128)`.
 + **number**: A number of the book (号). Before published, ignore this column. `IntegerField`, null=True,blank=True.
 + **chapter**: A chapter number (章). Before published, ignore this column. `IntegerField`, null=True,blank=True.
 + **page**: A cpage number (章). Before published, ignore this column. `TextField`, null=True,blank=True. [Check validation rule](#page).
 + **edition**: An Edition (版).  Before published or no longer needed to the format of the publication, ignore this column. `TextField`, null=True,blank=True. Check validation rule.
-+ **pub_date**: A set of {year,month,date} which the book is published. If date-info is no needed, set 01 to the date.
++ **pub_date**: A set of {year,month,date} on which the book is published. If date-info is no needed, set 01 to the date.
 + **use_date_info**: Whether use date-info or not in the `pub_date` column. `BooleanField`, default=`False`.
-+ **acceptance_rate**: If acceptance rate of the book of this time. Set this column when it is available. `FloatField`, default=null.
++ **acceptance_rate**: Acceptance rate of the book. Set this column whent it is available. `FloatField`, default=null.
 + **impact_factor**: Inpact factor (IF). Set the value only when it is available. `FloatField`, default=null.
 + **url**: An URL to PDF or something. `URLField`.
 + **note**: Note. If you need, you can add some text. `TextField`.
 + **abstract**: Abstract of the paper. `TextField`.
-
-!!! Info
-	This abstract is used in tile-style display.
-
 + **image**: A single thumbnail image to represent this publication. This information are used in the [`TileDisplayStyle`](#). `ImageField`.
 + **tags**: Tag for this publication. `ManyToManyField`, foreign-key-restriction(`Tag`), required.
 + **is_published**: Whether it is published or not. `BooleanField`, default=`False`, required.
@@ -65,14 +56,8 @@ Select form followings.
 #### title
 TBA
 
-!!! Warning
-	**Dev**: How to store information about capital letters.
-
-
 #### page
 TBA
-
-Just a number, or double hyphen notation style (e.g. `100--120`).
 
 #### DB: Unique Restriction
 The following set of field shall be unique.  If some of us are accepted in the same domestic conference. please use memo feild to avoid unique restriction.
@@ -82,7 +67,7 @@ The following set of field shall be unique.  If some of us are accepted in the s
 ```
 
 !!! Info
-	If you regist `Award`, please fill note with your presentation title. Is is neseccary if there are some members who get the same awards.
+	When you add `Award`, please fill note with your presentation title. Is is neseccary when there are some members who get the same awards.
 
 
 
@@ -155,27 +140,15 @@ This model stores information about publications.
 + **title**: Book title (full). Some words should be replaced based on the local rules. [See validation](#title). `CharField`, required.
 + **abbr**: Book title (Abbreviation). Some words should be replaced based on the local rules. [See validation](#title). `CharField`, null=True,blank=True.
 + **style**: Publication Type. See [Validation/type](#type) for the avaiable choises. `CharField(64) with choices`.
-
-!!! Warning
-	Double inputs. Select where to place this column, Bibtex or Book
 + **institution**: Institution (). `CharField(256)`, null=True,blank=True.
 + **organizer**: An ornaizer of this Book. `CharField(256)`, null=True,blank=True.
 + **publisher**: A publisher of this Book. `CharField(256)`, null=True,blank=True
 + **address**: An address of this publisher. `CharField(512)`, null=True,blank=True.
 
-!!! Warning
-	Do we really need this column? Check it to Prof.
-
-
 
 ### Validation Rule
 #### title
 TBA
-
-If you want to chage these rule, check [TBA page](#)
-
-!!! Warning
-	We should select whether the information about year etc.. should be placed. If we palce them in `Bibtex` model, `Book` model shall not have such information. Otherwise if we place them in the `Book` object, we shall make copy function to make new `Book` obeject from previous year's one with ease.
 
 #### abbr
 TBA
@@ -183,10 +156,8 @@ TBA
 #### institude
 TBA
 
-
 ### DB: Unique Resturiction
 The following set of field shall be unique. 
-
 
 ```
 ("name", "parent",),
