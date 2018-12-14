@@ -1,7 +1,7 @@
-# BMAN: BibTex Management System (TBD)
-BMAN user/developer guide.
+# PubZ: Paper Management System -- Publication Zoo
+PubZ user/developer guide.
 
-## What is BMAN?
+## What is PubZ?
 TBA
 
 ## How to use it?
