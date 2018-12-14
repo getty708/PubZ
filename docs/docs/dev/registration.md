@@ -1,6 +1,6 @@
 # Appication Registration
 
-This application provides registration form and support function (ex. autocompetion, update, tagging)
+This application provides registration form and support function (ex. autocompletion, update, tagging)
 
 ## Basic URL Structure
 Root URL = `^dashboard/`
@@ -28,7 +28,7 @@ Just provide `language, title, book`. In the next page, our app returns you a fo
 4. Press __`Add New`__ button and continue the registration.  
 
 
-### Step 2. Register Book Infomation (if necessary).
+### Step 2. Register Book Information (if necessary).
 1. Please fill in the form with the book's information.
 2. After press the 'Register' button, you can see the list of all the registered book.
 3. Please go back to the Bibtex registration page, and the new-registered book can be chosen from the list now.   
@@ -40,8 +40,8 @@ Just provide `language, title, book`. In the next page, our app returns you a fo
 -->
 
 1. The __`Language`__, __`Title`__ and __`Book`__ will be filled in automatically.
-2. Please fill in the table with other informatin of the Bibtex.
-3. Press __`Update`__ button to finish the registration, and then you can see the list of all the regisgered Bibtex.
+2. Please fill in the table with other information of the Bibtex.
+3. Press __`Update`__ button to finish the registration, and then you can see the list of all the registered Bibtex.
 
 ![RegisterFLow](images/RegistrationFlow.png)
 
@@ -78,6 +78,6 @@ def val_bibtex_title_en_replace_keywords(val):
 ```
 
 !!! Info
-	Each rule funtion shall check a single rule, not multiple. If you want to apply severel validation rules, you should devide the funtion and register them.
+	Each rule function shall check a single rule, not multiple. If you want to apply several validation rules, you should divide the function and register them.
 
 

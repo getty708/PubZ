@@ -1,6 +1,6 @@
 # Application Dashboard
 
-This application provides all usrs to view and seatch function.
+This application provides all users to view and search function.
 
 
 ## Basic URL Structures
@@ -16,38 +16,9 @@ This application provides all usrs to view and seatch function.
 
 
 ## How to Edit Display Style
-To change display style {List, Table, Bibtex, Latex}, plsease edit the function in `dashboard/templatetags/utils_bib_fomrat.py`. We provide call back function (implemented as Class Object) for several display formats. When you want to change the style, just overwrite  the `get_template_{TEMPLATE STYLE}` functions.
-
-```python
-# Example of Template tag function.
-# ---------------------------------
-
-class BibtexFormatListDefault(BibtexFormatBase):
-
-    def get_template_INTPROC(self):
-        html = (
-            '{authors}; '
-            '<a href="{url_bib}">"{title}"</a>, '
-            '2017'
-        )
-        return html    
-
-    def get_template_JOURNAL(self):
-        html = (
-            '{authors}; '
-            '<a href="{url_bib}">"{title}"</a>, '
-            '2017 '
-            '(JOURNAL)'
-        )
-        return html
-```
+The style template are placed in [`dashbord/templates/custom/`](https://github.com/getty708/PubZ/tree/master/django/app/dashboard/templates/custom/bibtex). You can edit as you like.
 
 ### Default Style Examples
-#### List Style
-```
-dashboard.templatetags.utils_bib_format.BibtexFormatListDefault
-```
-
 #### International Proceedings
 
 + Bibtex View
@@ -483,12 +454,4 @@ dashboard.templatetags.utils_bib_format.BibtexFormatListDefault
 |----|----|----|----|----|----|
 |受賞|ヤングリサーチャ賞|神谷 俊充, 中村 達哉, 前川 卓也, 天方 大地, 原 隆浩|情報処理学会マルチメディア，分散，協調とモバイル(DICOMO2018)シンポジウム論文集|2018年7月|link|
 
--天方さんにBook/Review/...のtypeをどうするか相談！
 
-## Search Function
-Use search form.
-
-
-
-### memo (東出)
-クエリをPOSTするのか，get prameterを使うのかは要検討.

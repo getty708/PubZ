@@ -3,13 +3,10 @@ Publication management system for your lab.
 
 
 ## Full Document
-[Document](https://getty708.github.io/bman/)
+[Document](https://getty708.github.io/PubZ/)
 
 
-## Description
-See [Offical Documnet](https://getty708.github.io/bman/)
-
-## Requirements
+## Requirements for Dev Env
 + Main Host Server
   + docker
   + docker-compose
@@ -51,19 +48,23 @@ For development, use `Username=root, email={any}, pw=password (pwBman88)`
 After these commands, please restart all the conatiners.
 
 
+### Step.3 Use Command in Containers
+To use django commands, you have 2 choice.
 
-djangoのコマンドを実行したい場合は以下のコマンドでコンテナの中に入るか、
 ```
-$ docker-compose exec web bash
+# Pattern 1
+$ docker-compose exec django bash
+(contena) $ <django command>
 ```
-以下のコマンドで直接コマンドを実行することができる.
+
 ```
-$ docker-compose exec web python3 manage.py migrate
+# Pattern 2
+$ docker-compose exec django <django command>
 ```
 
 
 
-### Step.3 Check website
+### Step.4 Check website
 With this setup, we launched 4 containers. You can access to 3 of them with your browser.
 
 | App        | URL              |
@@ -73,11 +74,7 @@ With this setup, we launched 4 containers. You can access to 3 of them with your
 | docs       | `localhost:7777` |
 
 
-## Usage
-[Document](#)を参照.
-
 
 ## Licence
-Copyright (c) 2018 Yoshimura Naoya, Kato Shinya, Higashide Daiki, Hanxin Wang, Bunki Cao
 [MIT License](./LICENSE)
 
