@@ -1,7 +1,7 @@
 # Nofification
 
 ## Email Settings of Django
-Settins are in `app/settings.py`. For more detail, see [here](https://docs.djangoproject.com/ja/2.0/topics/email/).
+Settings are in `app/settings.py`. For more detail, see [here](https://docs.djangoproject.com/ja/2.0/topics/email/).
 
 
 
@@ -25,4 +25,4 @@ EMAIL_USE_TLS = False
 
 
 !!! Info
-	For development, EMAIL_BACKEND is set to `django.core.mail.backends.console.EmailBackend`. If you want to send acutual Email, please modifi `app/settings.py` as above.
+	For development, EMAIL_BACKEND is set to `django.core.mail.backends.console.EmailBackend`. If you want to send acutual Email, please modify `app/settings.py` as above.
