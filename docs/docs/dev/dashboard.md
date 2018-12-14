@@ -1,6 +1,6 @@
 # Application Dashboard
 
-This application provides all usrs to view and seatch function.
+This application provides all users to view and search function.
 
 
 ## Basic URL Structures
@@ -16,7 +16,7 @@ This application provides all usrs to view and seatch function.
 
 
 ## How to Edit Display Style
-To change display style {List, Table, Bibtex, Latex}, plsease edit the function in `dashboard/templatetags/utils_bib_fomrat.py`. We provide call back function (implemented as Class Object) for several display formats. When you want to change the style, just overwrite  the `get_template_{TEMPLATE STYLE}` functions.
+To change display style {List, Table, Bibtex, Latex}, please edit the function in `dashboard/templatetags/utils_bib_fomrat.py`. We provide call back function (implemented as Class Object) for several display formats. When you want to change the style, just overwrite  the `get_template_{TEMPLATE STYLE}` functions.
 
 ```python
 # Example of Template tag function.
@@ -491,4 +491,4 @@ Use search form.
 
 
 ### memo (東出)
-クエリをPOSTするのか，get prameterを使うのかは要検討.
+クエリをPOSTするのか，get parameterを使うのかは要検討.
