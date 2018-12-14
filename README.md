@@ -6,7 +6,7 @@ Publication management system for your lab.
 [Document](https://getty708.github.io/PubZ/)
 
 
-## Requirements
+## Requirements for Dev Env
 + Main Host Server
   + docker
   + docker-compose
