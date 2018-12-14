@@ -6,9 +6,6 @@ Publication management system for your lab.
 [Document](https://getty708.github.io/PubZ/)
 
 
-## Description
-See [Offical Documnet](https://getty708.github.io/PubZ/)
-
 ## Requirements
 + Main Host Server
   + docker
