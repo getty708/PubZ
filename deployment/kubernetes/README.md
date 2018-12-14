@@ -1,4 +1,4 @@
-# Dyployment to Kubernetes
+# Deployment to Kubernetes
 
 ## Before Starting
 Docker images (pubz, mysql) should be loaded in the worker nodes. You can export and load images with following commands.
