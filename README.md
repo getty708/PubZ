@@ -52,13 +52,18 @@ After these commands, please restart all the conatiners.
 
 
 
-djangoのコマンドを実行したい場合は以下のコマンドでコンテナの中に入るか、
+To use django commands, you have 2 choice.
+
+
 ```
-$ docker-compose exec web bash
+# Pattern 1
+$ docker-compose exec django bash
+(contena) $ <django command>
 ```
-以下のコマンドで直接コマンドを実行することができる.
+
 ```
-$ docker-compose exec web python3 manage.py migrate
+# Pattern 2
+$ docker-compose exec django <django command>
 ```
 
 
@@ -72,9 +77,6 @@ With this setup, we launched 4 containers. You can access to 3 of them with your
 | phpmyadmin | `localhost:7070` |
 | docs       | `localhost:7777` |
 
-
-## Usage
-[Document](#)を参照.
 
 
 ## Licence
