@@ -17,9 +17,9 @@ nav:
     - 'Home': './dev/index-dev.md'
     #- 'Coding Policy': './dev/code.md'
     - 'Models': './dev/models.md'
-    # - 'Dashboard': './dev/dashboard.md'
+    - 'Dashboard': './dev/dashboard.md'
     - 'Registration': './dev/registration.md'
-    - 'API': './dev/api.md'
+    # - 'API': './dev/api.md'
     - 'Notification': './dev/notification.md'
 - User Guide:
     # - 'Home': './user/index-user.md'
