@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: django-migrations
+spec:
+  template:
+    spec:
+      containers:
+        - name: django
+          image: pubz/django:v0.2.0
+          command: ['python', './app/manage.py', 'migrate']
+          env:
+            - name: MYSQL_HOST
+              value: pubz-mysql-service
+              
+      restartPolicy: Never
+  backoffLimit: 5

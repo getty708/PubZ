@@ -27,7 +27,7 @@ Then, you get 3 containers `db, phpmyadmin, django, (storage)` and each containe
 
 
 ### Step.2 Start Django App
-For starting djangp App., you need to initalize database (this system use `mysql`). Issue these commands,
+For starting djangp App, you need to initalize database (this system use `mysql`). Issue these commands,
 
 ```
 # Enter into the django container
@@ -48,9 +48,8 @@ For development, use `Username=root, email={any}, pw=password (pwBman88)`
 After these commands, please restart all the conatiners.
 
 
-
+### Step.3 Use Command in Containers
 To use django commands, you have 2 choice.
-
 
 ```
 # Pattern 1
@@ -65,7 +64,7 @@ $ docker-compose exec django <django command>
 
 
 
-### Step.3 Check website
+### Step.4 Check website
 With this setup, we launched 4 containers. You can access to 3 of them with your browser.
 
 | App        | URL              |

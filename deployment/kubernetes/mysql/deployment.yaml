@@ -1,0 +1,44 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: pubz-mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql-container
+  template:
+    metadata:
+      labels:
+        app: mysql-container
+        tier: backend
+    spec:
+      containers:
+        - name: mysql-container
+          image: pubz/mysql:5.7
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: 'docker'
+
+            - name: MYSQL_DATABASE
+              value: 'docker'
+
+            - name: MYSQL_USER
+              value: 'docker'
+              
+            - name: MYSQL_PASSWORD
+              value: 'docker'
+
+          ports:
+            - containerPort: 3306
+              name: mysql
+              
+          volumeMounts:
+            - name: pubz-volume-mount
+              mountPath: /var/lib/mysgql
+              
+      volumes:
+        - name: pubz-volume-mount
+          persistentVolumeClaim:
+            claimName: pubz-pvc
+
