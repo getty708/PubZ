@@ -180,6 +180,9 @@ class BibtexForm(forms.ModelForm):
             self.fields[key].widget.attrs.update({
                 'class': 'form-control form-control-sm',
             })
+        self.fields["is_published"].widget.attrs.update({
+            'class': 'form-check-input',
+        })
 
     # Validation
     def clean_base(self, key):
