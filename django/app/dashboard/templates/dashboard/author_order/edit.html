@@ -12,7 +12,11 @@
 				{% else%}
 				<h2>Add New Author to {{ bibtex }}</h2>
 				{% endif %}
-				{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+				{% if error_message %}
+				<div class="alert alert-danger" role="alert">
+						{{ error_message }}
+				</div>
+				{% endif %}
 
 				<form action="{{ submit_url}}" method="post">
 						{% csrf_token %}
