@@ -11,7 +11,13 @@
 				{% else%}
 				<h2>Add New Author</h2>
 				{% endif %}
-				{% if form.errors %}{%for error in form.errors.values %}<p><strong>{{ error }}</strong></p>{% endfor %}{% endif %}
+				{% if form.errors %}
+				<div class="alert alert-danger" role="alert">				
+						{%for error in form.errors.values %}						
+						{{ error }}						
+						{% endfor %}
+				</div>						
+				{% endif %}
 
 				<form action="{{ submit_url}}" method="post">
 						{% csrf_token %}
