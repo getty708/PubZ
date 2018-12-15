@@ -15,6 +15,13 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('username', 'email',)
 
 
+"""
+User
+"""
+def get_login_user(user_id):
+    return get_object_or_404(User, pk=user_id)
+
+    
 
 # -------------------------------------------------------------------
 # ===========
@@ -27,12 +34,25 @@ class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author        
         fields = ('id','name_en', 'name_ja', 'dep_en', 'dep_ja', 'mail', 'modified')
-
+        
+        
+    def create(self, validated_data):
+        author  = Author.objects.create(**validated_data)
+        author.owner = self.context['request'].user
+        author.save()
+        return author
+    
         
 class BookSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book
         fields = ('id','style','title','abbr','modified')
+
+    def create(self, validated_data):
+        book = Book.objects.create(**validated_data)
+        book.owner = self.context['request'].user
+        book.save()
+        return book
 
         
 class BibtexSerializer(serializers.ModelSerializer):
@@ -55,6 +75,8 @@ class BibtexSerializer(serializers.ModelSerializer):
         
         try:
             bibtex = Bibtex.objects.create(book_id=book.id, **validated_data)
+            bibtex.owner = self.context['request'].user
+            bibtex.save()
         except django.db.utils.IntegrityError:
             raise serializers.ValidationError("DB IntegrityError")
         return bibtex
@@ -81,6 +103,8 @@ class AuthorOrderSerializer(serializers.ModelSerializer):
         # Create New
         try:
             author_order = AuthorOrder.objects.create(bibtex=bib,author=author,**validated_data)
+            author_order.owner = self.context['request'].user
+            author_order.save()
         except django.db.utils.IntegrityError:
             raise serializers.ValidationError("DB IntegrityError")
         return author_order

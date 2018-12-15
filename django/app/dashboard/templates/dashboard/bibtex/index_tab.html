@@ -47,7 +47,9 @@
 										<td>{{ bibtex | bibtex_get:"authors"  }}</td>
 										<td>
 												{% if user.is_authenticated %}
-												<span class="badge badge-warning">Not Completed</span>												
+												{% if not  bibtex.is_published %}
+												<span class="badge badge-warning">Not Completed</span>
+												{% endif %}
 												{% endif %}												
 												<a href="{% url 'dashboard:detail' bibtex.id  %}" >Detail,</a>
 												{% if user.is_authenticated %}

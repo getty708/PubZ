@@ -1,0 +1,15 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pubz-pvc-media
+  labels:
+    app: django
+  annotations:
+    "volume.beta.kubernetes.io/storage-class": "nfs"
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 4Gi
+  volumeName: pubz-pv-media

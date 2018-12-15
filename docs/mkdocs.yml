@@ -1,5 +1,5 @@
-site_name: BMAN - Bibtex Mangement System
-repo_url: https://github.com/getty708/bman
+site_name: PubZ - Publication Zoo
+repo_url: https://github.com/getty708/PubZ
 dev_addr: 127.0.0.1:7777
 site_dir: ./site
 theme:
@@ -12,15 +12,10 @@ nav:
 - Home: './index.md'
 - About:
     - 'License': './license.md'
-    # - 'Release Notes': 'release-notes.md'  
 - Developer Guide:
     - 'Home': './dev/index-dev.md'
-    #- 'Coding Policy': './dev/code.md'
     - 'Models': './dev/models.md'
     - 'Dashboard': './dev/dashboard.md'
     - 'Registration': './dev/registration.md'
-    # - 'API': './dev/api.md'
     - 'Notification': './dev/notification.md'
-- User Guide:
-    # - 'Home': './user/index-user.md'
   

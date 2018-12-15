@@ -18,7 +18,13 @@
 					<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal">Help</button>
 				</h2>
 				{% endif %}
-				{% if form.errors %}{%for error in form.errors.values %}<p><strong>{{ error }}</strong></p>{% endfor %}{% endif %}
+				{% if form.errors %}
+				{%for error in form.errors.values %}
+				<div class="alert alert-danger" role="alert">
+						{{ error }}						
+				</div>				
+				{% endfor %}
+				{% endif %}
 
 				<form action="{{ submit_url }}" method="post">
 						{{ form.non_field_errors }}
@@ -117,16 +123,28 @@
 								<label for="example-text-input" class="col-2 col-form-label">Image</label>
 								<div class="col-5">{{ form.image }}</div>
 						</div>
-						<div class="form-group row">
-								<label for="example-text-input" class="col-2 col-form-label">Published or not</label>
-								<div class="col-1">{{ form.is_published }}</div>
-						</div>
 						{% if user.id == bibtex.owner.id or user.is_superuser %}
 						<div class="form-group row">
 								<label for="example-text-input" class="col-2 col-form-label">Priority</label>
 								<div class="col-5">{{ form.priority }}</div>
 						</div>
-						{% endif %}
+						{% endif %}						
+						<div class="form-group row">
+								{% if bibtex.is_published %}
+								<label for="example-text-input" class="col-2 col-form-label">Completed</label>
+								<div class="col-1">{{ form.is_published }}</div>								
+								{% else %}
+								<div class="alert alert-info col-md-10 mx-3" role="alert">
+										<h5 class="alert-heading">Did you fill all the items?</h5>
+										<p>If you finished, please mark as completed. </p>
+										<hr>
+										<div class="form-group form-check">
+												{{ form.is_published }}												
+												<label class="form-check-label" for="exampleCheck1">Mark as completed!</label>
+										</div>																				
+								</div>															
+								{% endif %}
+						</div>
 						{% if bibtex.id %}
 						<button type="submit" class="btn btn-sm btn-primary">Update</button>
 						<a href="{% url 'dashboard:detail' bibtex.id %}" class="btn btn-outline-primary btn-sm">Back</a>
