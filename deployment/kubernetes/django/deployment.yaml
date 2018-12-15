@@ -16,10 +16,18 @@ spec:
     spec:
       containers:
         - name: pubz-django
-          image: pubz/django:v0.2.0
+          image: pubz/django:v0.3.0
           ports:
             - containerPort: 8000
           env:
             - name: MYSQL_HOST
               value: pubz-mysql-service
             
+          volumeMounts:
+            - name: pubz-media-volume-mount
+              mountPath: /code/app/media/
+              
+      volumes:
+        - name: pubz-media-volume-mount
+          persistentVolumeClaim:
+            claimName: pubz-pvc-media
