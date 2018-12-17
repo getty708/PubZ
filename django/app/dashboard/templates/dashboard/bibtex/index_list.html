@@ -18,6 +18,7 @@
 				{% search_box 'list' query_params %}
 		</div>
 </div>
+
 <div class="row mb-3">
 		<div class="col-12 my-3">
 			{% for book_style in book_style_list %}
@@ -26,6 +27,7 @@
 					<ol>
 							{% for bibtex in latest_bibtex_list|get_booktype_bibtex:book_style %}
 							<li>{{ bibtex|bibtex_list_format }}</li>
+							<div class="bibtexDownload" style="display:none;"> {{ bibtex | bibtex_download_format }}</div>
 							{% endfor %}
 					</ol>
 				{% endif %}
@@ -35,4 +37,24 @@
 
 		</div>
 </div>
+<div class="row mb-3">
+		<div class="col-12 my-3">
+				<a download="download.bib" onclick="clickDownloadAll(this)" href="#" class="btn btn-sm btn-outline-primary">Download All</a>
+		</div>
+</div>
+
+
+<script>
+ function clickDownloadAll(aLink)  
+ {
+		 var bibList = document.getElementsByClassName("bibtexDownload");
+		 var result = "";
+		 for(let bib of bibList){
+    	   let str = encodeURIComponent(bib.innerText);
+         result = result + str;
+		 }
+     aLink.href = "data:text;charset=utf-8,"+result;  
+ }  
+</script> 
+
 {% endblock content %}
