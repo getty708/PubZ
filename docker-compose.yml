@@ -35,7 +35,7 @@ services:
     # command: python /code/app/manage.py runserver 0.0.0.0:8000
     hostname: django
     environment:
-      - MYSQL_HOST=db
+      MYSQL_HOST: db
     volumes:
       - ./django:/code
     ports:

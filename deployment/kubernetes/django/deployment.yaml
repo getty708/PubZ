@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: pubz-django
-          image: pubz/django:v0.3.0
+          image: pubz/django:v0.4.0
           ports:
             - containerPort: 8000
           env:
