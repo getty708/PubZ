@@ -50,6 +50,10 @@ def perse_get_query_params(req):
         pubyear_all = None
         if pubyear==None:
             pubyear = datetime.datetime.now().year#now_year
+    if "pubyear_type" in req.GET:
+        pubyear_type = req.GET.get("pubyear_type")
+    else:
+        pubyear_type = None
     if "tags" in req.GET:
         tags = req.GET.get("tags")
     else:
@@ -65,7 +69,10 @@ def perse_get_query_params(req):
     #pubyear
     if pubyear_all==None:
         if pubyear!=None:
-            bibtex_queryset = bibtex_queryset.filter(pub_date__gte=datetime.date(int(pubyear), 1, 1), pub_date__lte=datetime.date(int(pubyear), 12, 31))
+            if pubyear_type==None:
+                bibtex_queryset = bibtex_queryset.filter(pub_date__gte=datetime.date(int(pubyear), 1, 1), pub_date__lte=datetime.date(int(pubyear), 12, 31))
+            else:
+                bibtex_queryset = bibtex_queryset.filter(pub_date__gte=datetime.date(int(pubyear), 4, 1), pub_date__lte=datetime.date(int(pubyear)+1, 3, 31))
 
     #keywords
     if keywords!=None:
@@ -76,7 +83,7 @@ def perse_get_query_params(req):
         bibtex_queryset = tags_filtering(bibtex_queryset, tags)
 
     ##query params save
-    query_param_dic = {"keywords":keywords,"book_style":book_style,"order":order, "pubyear":pubyear,"pubyear_all": pubyear_all,"tags": tags,"hits_num": str(bibtex_queryset.count()) }
+    query_param_dic = {"keywords":keywords,"book_style":book_style,"order":order, "pubyear":pubyear,"pubyear_all": pubyear_all,"pubyear_type": pubyear_type,"tags": tags,"hits_num": str(bibtex_queryset.count()) }
 
     #order
     if order==None:
