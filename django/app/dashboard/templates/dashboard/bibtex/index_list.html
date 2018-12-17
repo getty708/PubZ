@@ -18,18 +18,6 @@
 				{% search_box 'list' query_params %}
 		</div>
 </div>
-<div class="row mb-3">
-		<div class="col-12 my-3">
-				<a download="download.bib" onclick="clickDownloadAll(this)" href="#" class="btn btn-sm btn-outline-primary">Download All</a>
-		</div>
-
-		<div id="downloadLen" style="display:none;">{{latest_bibtex_list | length}}</div>
-		<div id="downloadList" style="display:none;">
-				{% for bib in latest_bibtex_list%}
-				{{bib.title}}
-				{% endfor %}
-		</div>
-</div>
 
 <div class="row mb-3">
 		<div class="col-12 my-3">
@@ -49,29 +37,22 @@
 
 		</div>
 </div>
+<div class="row mb-3">
+		<div class="col-12 my-3">
+				<a download="download.bib" onclick="clickDownloadAll(this)" href="#" class="btn btn-sm btn-outline-primary">Download All</a>
+		</div>
+</div>
+
+
 <script>
  function clickDownloadAll(aLink)  
  {
-		 console.log(document.getElementById("downloadLen"));
-		 /* 
-				var len = document.getElementById("downloadLen").innerText;
-				var list = document.getElementById("downloadList").innerText;*/
 		 var bibList = document.getElementsByClassName("bibtexDownload");
-		 console.log(bibList);
- 		 /* var temp_list = list.split(/\n+/)*/
-		 /* console.log(temp_list);*/
 		 var result = "";
 		 for(let bib of bibList){
-				 console.log(bib);
     	   let str = encodeURIComponent(bib.innerText);
          result = result + str;
 		 }
-		 /* for (var i=0; i<len; i++){
-				str = document.getElementById(temp_list[i+1]).innerText;
-				console.log(str);
-    	  str = encodeURIComponent(str);  
-			*     result = result + str;  
-			* }*/
      aLink.href = "data:text;charset=utf-8,"+result;  
  }  
 </script> 
