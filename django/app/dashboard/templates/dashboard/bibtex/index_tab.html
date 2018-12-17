@@ -17,6 +17,8 @@
 		</div>
 </div>
 
+
+
 <div class="row">
 		<div class="col-12 my-3">
 				{% for book_style in book_style_list %}
@@ -56,4 +58,20 @@
 				{% endfor %}
 		</div>
 </div>
+<script>
+ function clickDownloadAll(aLink)  
+ {
+		 var str, result;
+		 var len = document.getElementById("len").innerHTML;  
+		 var list = document.getElementById("list").innerHTML;  
+ 		 var temp_list = list.split(/\n+/) 
+		 for (var i=0; i<len; i++){
+				 str = document.getElementById(temp_list[i+1]).innerHTML;
+    	   str = encodeURIComponent(str);  
+         result = result + str;  
+     }
+     aLink.href = "data:text;charset=utf-8,"+result;  
+ }  
+</script> 
+
 {% endblock content %}
