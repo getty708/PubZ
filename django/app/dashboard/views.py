@@ -16,7 +16,9 @@ from dashboard.templatetags import utils_search as utils
 Bibtex
 """
 class IndexView(generic.ListView):
-
+    template_name = 'dashboard/bibtex/index.html'
+    context_object_name = 'latest_bibtex_list'
+    
     def get_queryset(self):
         self.GET_params = utils.parse_GET_params(self.request)
         query_set = utils.get_bibtex_query_set(self.GET_params)
@@ -28,24 +30,6 @@ class IndexView(generic.ListView):
         context['GET_params'] = self.GET_params
         context["year"] = datetime.now().year
         return context
-
-class IndexViewList(IndexView):
-
-    template_name = 'dashboard/bibtex/index.html'
-    context_object_name = 'latest_bibtex_list'
-
-
-class IndexViewTable(IndexView):
-    template_name = 'dashboard/bibtex/index_tab.html'
-    context_object_name = 'latest_bibtex_list'
-
-class IndexViewBib(IndexView):
-    template_name = 'dashboard/bibtex/index_bib.html'
-    context_object_name = 'latest_bibtex_list'
-
-class IndexViewLatex(IndexView):
-    template_name = 'dashboard/bibtex/index_latex.html'
-    context_object_name = 'latest_bibtex_list'
 
 
 class DetailView(generic.DetailView):
