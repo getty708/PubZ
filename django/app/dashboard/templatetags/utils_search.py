@@ -1,5 +1,6 @@
 from django import template
 
+
 from django.db.models import Q
 from core.models import Author, Bibtex, Book, AuthorOrder, Tag
 

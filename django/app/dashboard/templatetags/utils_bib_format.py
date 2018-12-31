@@ -5,7 +5,7 @@ from django import template
 from django.template.loader import get_template
 register = template.Library()
 
-from core.models import Author, AuthorOrder
+from core.models import Author, AuthorOrder, Book
 
 
 # ----------------------------------------------------------------------------
@@ -122,3 +122,13 @@ def bibtex_download_format(bib, *args,**kwargs):
     html = mark_safe(html.render(context))
     return html    
     # return func(bibtex)()
+
+
+# ----------------------------------------------------------------------------
+
+# ===================
+#  Utils.
+# ===================
+@register.filter(name='filter_by_book_style')
+def filter_by_book_style(bibtex, book_style):
+    return bibtex.filter(book__style=book_style)

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% load utils_search %}
+{% load utils_bib_format %}
+{% load utils_bib_get_data %}
+{% load utils_bib_index_page_helper %}
+
+
+{% block title %}Dashboard | Table View{% endblock title %}
+
+{% block content %}
+
+<div class="row my-3">
+		<div class="col-12">
+		</div>
+</div>
+<div class="row mb-3">
+		<div class="col-12">
+				{% search_box 'list' query_params %}
+		</div>
+</div>
+
+<div class="row mb-3">
+		<div class="col-12 my-3">		
+				{% print_bibtexs %}
+		</div>
+</div>
+<div class="row mb-3">
+		<div class="col-12 my-3">
+				<a download="download.bib" onclick="clickDownloadAll(this)" href="#" class="btn btn-sm btn-outline-primary">Download All</a>
+		</div>
+</div>
+
+
+<script>
+ function clickDownloadAll(aLink)  
+ {
+		 var bibList = document.getElementsByClassName("bibtexDownload");
+		 var result = "";
+		 for(let bib of bibList){
+    	   let str = encodeURIComponent(bib.innerText);
+         result = result + str;
+		 }
+     aLink.href = "data:text;charset=utf-8,"+result;  
+ }  
+</script> 
+
+{% endblock content %}

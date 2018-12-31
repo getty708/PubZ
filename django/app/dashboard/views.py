@@ -32,7 +32,7 @@ class IndexView(generic.ListView):
 
 class IndexViewList(IndexView):
 
-    template_name = 'dashboard/bibtex/index_list.html'
+    template_name = 'dashboard/bibtex/index.html'
     context_object_name = 'latest_bibtex_list'
 
 
@@ -51,7 +51,7 @@ class IndexViewLatex(IndexView):
 
 class DetailView(generic.DetailView):
     model = Bibtex
-    template_name = 'dashboard/detail.html'
+    template_name = 'dashboard/bibtex/detail.html'
 
 
 """
