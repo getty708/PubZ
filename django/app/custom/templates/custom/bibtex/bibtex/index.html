@@ -1,0 +1,25 @@
+{% load utils_bib_format %}
+
+<!-- Main -->
+{% for bs_key,bs_value in book_styles.items %}
+{% if latest_bibtex_list|filter_by_book_style:bs_key %}
+
+<!-- Bibtex -->
+<dic class="row">
+		<div class="col-12">
+				<h4 id="{{book_style}}">{{ bs_value }}</h4>		
+				{% for bibtex in latest_bibtex_list|filter_by_book_style:bs_key %}
+				
+				<div class="card mb-3">
+						<div class="card-body">
+								{{ bibtex | bibtex_bib_format }}
+						</div>
+						<div class="card-footer text-right py-1 px-1">
+								<a href="{% url 'dashboard:bib_detail' bibtex.id  %}" class="btn btn-sm btn-outline-primary" >Detail</a>
+						</div>
+				</div>
+				{% endfor %}				
+		</div>
+</dic>
+{% endif %}
+{% endfor %}

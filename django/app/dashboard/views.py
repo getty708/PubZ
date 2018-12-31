@@ -18,15 +18,14 @@ Bibtex
 class IndexView(generic.ListView):
 
     def get_queryset(self):
-
-        query_set,self.query_param_dic = utils.perse_get_query_params(self.request)
-
+        self.GET_params = utils.parse_GET_params(self.request)
+        query_set = utils.get_bibtex_query_set(self.GET_params)
+        self.GET_params["num_hits"] = len(query_set)
         return query_set
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["book_style_list"] = ["INTPROC","JOURNAL","CONF_DOMESTIC","CONF_DOMESTIC_NO_REVIEW","CONF_NATIONAL","BOOK","KEYNOTE","NEWS","OTHERS","AWARD"]
-        context["query_params"] = self.query_param_dic
+        context['GET_params'] = self.GET_params
         context["year"] = datetime.now().year
         return context
 
