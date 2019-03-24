@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% load utils_search %}
+{% load utils_bib_format %}
+{% load utils_bib_get_data %}
+
+
+{% block title %}Dashboard | Table View{% endblock title %}
+
+{% block content %}
+
+<div class="row my-3">
+		<div class="col-12">
+		</div>
+</div>
+<div class="row mb-3">
+		<div class="col-12">
+				{% search_box 'list' query_params %}
+		</div>
+</div>
+
+<div class="row mb-3">
+		<div class="col-12 my-3">
+			{% for book_style in book_style_list %}
+        {% if latest_bibtex_list|get_booktype_bibtex:book_style %}
+				  <h4 id="{{book_style}}">{{ book_style|get_display_name }}</h4>
+					<ol>
+							{% for bibtex in latest_bibtex_list|get_booktype_bibtex:book_style %}
+							<li>{{ bibtex|bibtex_list_format }}</li>
+							<div class="bibtexDownload" style="display:none;"> {{ bibtex | bibtex_download_format }}</div>
+							{% endfor %}
+					</ol>
+				{% endif %}
+
+
+	   	{% endfor %}
+
+		</div>
+</div>
+<div class="row mb-3">
+		<div class="col-12 my-3">
+				<a download="download.bib" onclick="clickDownloadAll(this)" href="#" class="btn btn-sm btn-outline-primary">Download All</a>
+		</div>
+</div>
+
+
+<script>
+ function clickDownloadAll(aLink)  
+ {
+		 var bibList = document.getElementsByClassName("bibtexDownload");
+		 var result = "";
+		 for(let bib of bibList){
+    	   let str = encodeURIComponent(bib.innerText);
+         result = result + str;
+		 }
+     aLink.href = "data:text;charset=utf-8,"+result;  
+ }  
+</script> 
+
+{% endblock content %}
