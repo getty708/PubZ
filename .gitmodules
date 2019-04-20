@@ -1,0 +1,3 @@
+[submodule "django/app/static/bootstrap"]
+	path = django/app/static/bootstrap
+	url = git@github.com:getty708/bootstrap.git
