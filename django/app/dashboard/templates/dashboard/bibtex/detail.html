@@ -20,7 +20,7 @@
 																{{ bibtex.title_ja }}
 																{% endif %}
 												</h2>
-												<div class="col-12">
+												<div class="col-12 table-responsive">
 																<table class="table table-striped w-100" >
 																				<thead class="">
 																								<tr>
@@ -114,7 +114,11 @@
 																								</tr>
 																								<tr>
 																												<th scope="col">Bibtex</th>
-																												<td>{{ bibtex | bibtex_bib_format }}</td>
+																												<td>
+																																<div style="overflow-x: scroll;">
+																																				{{ bibtex | bibtex_bib_format }}
+																																</div>
+																												</td>
 																								</tr>
 																				</tbody>
 																</table>
