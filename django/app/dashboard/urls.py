@@ -9,8 +9,8 @@ urlpatterns = [
     # == Remove in the future ==
     path('tile/', views.IndexView.as_view(), name='index_tile'),
     path('list/', views.IndexView.as_view(), name='index_list'),
-    path('tab/', views.IndexView.as_view(), name='index_table'),
-    path('bib/', views.IndexView.as_view(), name='index_bib'),
+    path('table/', views.IndexView.as_view(), name='index_table'),
+    path('bibtex/', views.IndexView.as_view(), name='index_bibtex'),
     path('latex/', views.IndexView.as_view(), name='index_latex'),
     # ===========================    
     path('<int:pk>/', views.DetailView.as_view(), name='bib_detail'),

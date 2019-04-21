@@ -1,6 +1,7 @@
 from django.http import Http404
 from django.shortcuts import get_object_or_404, render
 from django.views import generic
+from django.urls import resolve
 
 import datetime
 from datetime import datetime
@@ -28,6 +29,9 @@ class IndexView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['GET_params'] = self.GET_params
+        current_url_name = resolve(self.request.path_info).url_name
+        if current_url_name != "index":
+            context["display_style"] = current_url_name.split("_")[-1]
         context["year"] = datetime.now().year
         return context
 

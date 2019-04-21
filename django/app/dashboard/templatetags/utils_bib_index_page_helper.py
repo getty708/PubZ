@@ -12,15 +12,17 @@ register = template.Library()
 @register.simple_tag(takes_context=True)
 def print_bibtexs(context,):
     # GET Params
-    params = context["GET_params"]
-    print(params)
-    display_style = params.get('display_style', 'list')
+    display_style = context.get('display_style', 'tile')
     if not display_style:
-        display_style = 'list'
+        display_style = 'tile'
     
     # Get a template and Render
     template_name = "custom/bibtex/{}/index.html".format(display_style)
-    html = get_template(template_name,)
+    try:
+        html = get_template(template_name,)
+    except IndentationError:
+        template_name = "custom/bibtex/tile/index.html"
+        html = get_template(template_name,)
     html = mark_safe(html.render({
         'latest_bibtex_list': context['latest_bibtex_list'],
         'book_styles': dict(Book.STYLE_CHOICES),
