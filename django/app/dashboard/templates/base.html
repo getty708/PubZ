@@ -23,7 +23,7 @@
 				<script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
 				{% block extrahead %}{% endblock %}
 		</head>
-		<body style="height: 100vh">
+		<body style="height: 100vh" class="bg-light">
 				<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark w-100" >
 						<a class="navbar-brand mb-0 h1" href="{% url 'dashboard:index' %}" id="BMAN_link">PubZ</a>
 						<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -62,73 +62,9 @@
 								</div>
 						</div>
 				</nav>
-				<div class="container-fluid mt-5 w-100 h-100" style="overflow:auto;">
-						<div class="row h-100">
-								<div class="col-sm-2 bg-light h-100 d-none d-md-block" style="overflow:auto;">
-										<h3 class="h5 mt-3" >Bibtex Category</h3>
-										<ul class="nav flex-column mb-3">
-												<li class="nav-item">
-														<a class="nav-link" href="#INTPROC">Internatinal Conference</a>
-												</li>
-												<li class="nav-item">
-														<a class="nav-link active" href="#JOURNAL">Journal</a>
-												</li>
-												<li class="nav-item">
-														<a class="nav-link" href="#CONF_DOMESTIC">Domestic Conference</a>
-												</li>
-												<li class="nav-item">
-														<a class="nav-link" href="#CONF_DOMESTIC_NO_REVIEW">Domestic Conference<br>(NoReview)</a>
-												</li>
-												<li class="nav-item">
-														<a class="nav-link" href="#CONF_NATIONAL">National Conference</a>
-												</li>
-												<li class="nav-item">
-														<a class="nav-link" href="#BOOK">Book/Review/<br>Editor</a>
-												</li>
-												<li class="nav-item">
-														<a class="nav-link" href="#KEYNOTE">Presentaion/<br>Seminer</a>
-												</li>
-												<li class="nav-item">
-														<a class="nav-link" href="#NEWS">NewsPaper</a>
-												</li>
-												<li class="nav-item">
-														<a class="nav-link" href="#OTHERS">Others</a>
-												</li>
-												<li class="nav-item">
-														<a class="nav-link" href="#AWARD">Award</a>
-												</li>
-										</ul>
-										<ul class="nav flex-column mb-3">
-												<h3 class="h5" >Additional Info</h3>
-												<li class="nav-item">
-														<a class="nav-link active" href="{% url 'dashboard:book_index' %}">Book</a>
-														<a class="nav-link active" href="{% url 'dashboard:author_index' %}">Author</a>
-														<a class="nav-link active" href="{% url 'dashboard:tag_index'%}">Tag</a>
-												</li>
-										</ul>
-
-										{% if user.is_authenticated %}
-										<ul class="nav flex-column mb-3">
-												<h3 class="h5" >Add New</h3>
-												<li class="nav-item">
-														<a class="nav-link active" href="{% url 'dashboard:book_add' %}">Add New Book</a>
-														<a class="nav-link active" href="{% url 'dashboard:author_add' %}">Add New Author</a>
-														<a class="nav-link active" href="{% url 'dashboard:bibtex_add_step1' %}">Add New Bibtex</a>
-														<a class="nav-link active" href="{% url 'dashboard:tag_add' %}">Add New Tag</a>
-												</li>
-										</ul>
-										{% endif %}
-
-										{% if user.is_authenticated %}
-										<ul class="nav flex-column mb-3">
-												<h3 class="h5" >Alert ALL</h3>
-												<li class="nav-item">
-														<a class="nav-link active" href="{% url 'dashboard:alert_all' %}">Mail to all authors</a>
-												</li>
-										</ul>
-										{% endif %}
-								</div>
-								<div class="col-12 col-md-10 h-100" style="overflow:auto;">
+				<div class="container-fluid mt-5 w-100 min-vh-100">
+						<div class="row justify-content-md-center">
+								<div class="col-12 col-md-10">
 										{% block content %}
 										{{ content }}
 										{% endblock %}
@@ -136,7 +72,7 @@
 						</div>
 				</div>
 				<!-- Footer -->
-				<div class="container-fluid  w-100 bg-dark" style="overflow:auto;">
+				<div class="container-fluid  w-100 bg-dark">
 						<div class="row bg-inverse py-2">
 								<div class="col-12  text-white d-flex justify-content-end">
 										<span class="px-3" style="font-size: 1em;">Publication Zoo</span>

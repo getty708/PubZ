@@ -1,0 +1,29 @@
+<div class="row  border-bottom border-secondary py-3">
+				<div class="col-12">
+								<div class="row">
+												<div class="col-12">
+																<small class="text-info">
+																				{{ book.title }},
+																				{% if bib.pub_date %} {% if bib.language == "EN" %}{{ bib.pub_date|date:"F Y" }}{% else %}{{ bib.pub_date|date:"Y年n月" }}{% endif %}{% endif %}
+																</small>
+												</div>				
+												<div class="col-12">
+																<a href="{% url 'dashboard:bib_detail' bib.id %}" class="text-primary h5">{{ bib.title }}</a>
+												</div>
+												<div class="col-12">
+																{% for author in authors %}
+																<a href="{% url 'dashboard:author_detail' author.id %}" class="d-inline-flex" >{% if bib.language == "EN" %}{{ author.name_en }}{% else %}{{ author.name_ja }}{% endif %}</a>,
+																{% endfor %}						
+												</div>
+								</div>
+								<div class="row">								
+												<div class="col-md-6">
+																<span class="badge badge-light">Keyword 1</span>
+												</div>
+												<div class="col-md-6 d-flex justify-content-end">
+																<a href="{% url 'dashboard:bib_detail' bib.id %}" class="btn btn-primary mx-1" >Detail</a>
+																<button type="button" class="btn btn-primary mx-1">URL</button>
+												</div>
+								</div>
+				</div>
+</div>

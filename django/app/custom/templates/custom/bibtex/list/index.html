@@ -3,11 +3,15 @@
 <!-- Main -->
 {% for bs_key,bs_value in book_styles.items %}
 {% if latest_bibtex_list|filter_by_book_style:bs_key %}
-<h4 id="{{book_style}}">{{ bs_value }}</h4>
-<ol>
-		{% for bibtex in latest_bibtex_list|filter_by_book_style:bs_key %}
-		<li>{{ bibtex|bibtex_list_format }}</li>
-		{% endfor %}
-</ol>
+<div class="card mb-3">
+		<div class="card-body">
+				<h4 id="{{book_style}}">{{ bs_value }}</h4>
+				<ol>
+						{% for bibtex in latest_bibtex_list|filter_by_book_style:bs_key %}
+						<li>{{ bibtex|bibtex_list_format }}</li>
+						{% endfor %}
+				</ol>
+		</div>
+</div>
 {% endif %}
 {% endfor %}

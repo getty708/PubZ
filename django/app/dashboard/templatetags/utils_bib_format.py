@@ -18,6 +18,30 @@ from core.models import Author, AuthorOrder, Book
 def test_format(bibtex):
     return bibtex
 
+
+@register.filter(name='bibtex_tile_format')
+def bibtex_tile_format(bib, *args,**kwargs):
+    """
+    Args.
+    -----
+    - bibtex: core.Bibtex object
+    """
+    context = {}
+    context["bib"] = bib
+    context["book"] = bib.book
+    
+    # Get Authors
+    authors =  AuthorOrder.objects.filter(bibtex=bib).order_by('order')
+    context["authors"] = [author.author for author in authors]
+
+    # Fill Placeholders
+    bib_style = bib.book.style    
+    template_name = "custom/bibtex/tile/{}.html".format(bib_style)
+    html = get_template(template_name,)
+    html = mark_safe(html.render(context))
+    return html
+
+
 @register.filter(name='bibtex_list_format')
 def bibtex_list_format(bib, *args,**kwargs):
     """

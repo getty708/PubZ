@@ -7,6 +7,7 @@ urlpatterns = [
     # ex: /polls/
     path('', views.IndexView.as_view(), name='index'),
     # == Remove in the future ==
+    path('tile/', views.IndexView.as_view(), name='index_tile'),
     path('list/', views.IndexView.as_view(), name='index_list'),
     path('tab/', views.IndexView.as_view(), name='index_table'),
     path('bib/', views.IndexView.as_view(), name='index_bib'),
