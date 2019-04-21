@@ -6,16 +6,47 @@
 
 {% if latest_author_list %}
 <div class="row">
-		<div class="col-12 my-3">
-				<h2>Authors</h2>
-				<ul>
-						{% for author in latest_author_list %}
-						<li><a href="{% url 'dashboard:author_detail' author.id  %}">{{ author.name_en }}</a></li>
-						{% endfor %}
-				</ul>
-				{% else %}
-				<p>No Authors are available.</p>
-				{% endif %}
-		</div>
+				<div class="col-12 card my-3">
+								<div class="card-body" >
+												<h2>Authors</h2>
+								</div>
+								<div class="card-body" >
+												<table class="table table-sm table-striped">
+																<thead>
+																				<tr>
+																								<th scope="col">#</th>
+																								<th scope="col">Name</th>
+																								<th scope="col">Department</th>
+																								<th scope="col">Options</th>
+																				</tr>
+																</thead>
+																<tbody>
+																				{% for author in latest_author_list %}																				
+																				<tr>
+																								<th>
+																												{{ forloop.counter }}
+																								</th>
+																								<td>
+																												<a href="{% url 'dashboard:author_detail' author.id  %}">
+																																{{ author.name_en }}
+																																{% if author.name_ja %}<sapn class="px-1">/ {{ author.name_ja }}</sapn>{% endif %}
+																												</a>																												
+																								</td>
+																								<td>
+																												{{ author.dep_en }}
+																												{% if author.dep_ja %}<sapn class="px-1">/ {{ author.dep_ja }}</sapn>{% endif %}
+																								</td>
+																								<td>
+																												<a href="{% url 'dashboard:author_detail' author.id  %}" class="btn btn-sm btn-outline-primary">Detail</a>
+																								</td>
+																				</tr>
+																				{% endfor %}																																							
+																</tbody>
+												</table>
+												{% else %}
+												<p>No Authors are available.</p>
+												{% endif %}
+								</div>
+				</div>
 </div>
 {% endblock content %}
