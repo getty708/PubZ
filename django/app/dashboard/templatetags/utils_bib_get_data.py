@@ -84,9 +84,10 @@ def get_display_name(book_style):
     return display_name_list[book_style_list.index(book_style)]
 
 @register.filter(name='get_booktype_bibtex')
-def get_booktype_bibtex(bibtex, book_style):
+def get_booktype_bibtex(bibtex, book_style):    
     return bibtex.filter(book__style=book_style)
 
 @register.filter(name='get_booktype_book')
 def get_booktype_book(book, book_style):
+    print(book)
     return book.filter(style=book_style)

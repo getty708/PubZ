@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}Dashboard | Manage Books{% endblock title %}
-{% load utils_bib_get_data %}
+{% load utils_math %}
 
 {% block content %}
 
@@ -9,31 +9,73 @@
 				<div class="col-12 card my-3">
 								<div class="card-body" >
 												<h2>Books</h2>
+												<div class="d-none d-lg-block">
+																<ul class="nav nav-tabs">
+																				<li class="nav-item visible-lg">
+																								<a class="nav-link active {% if style.1 == 'ALL' %}text-info{% endif %}" href="{{ request.path }}">ALL</a>
+																				</li>	
+																				{% for style_key, style_display in styles %}																
+																				<li class="nav-item">
+																								<a class="nav-link active {% if style_key == style.1 %}text-info{% endif %}" href="{{ request.path }}?style={{ style_key }}">
+																												{{ forloop.counter }}) {{ style_display }}
+																								</a>
+																				</li>																
+																				{% endfor %}
+																</ul>
+												</div>
+												<div class="d-md-none">
+																<ul class="nav nav-tabs">
+																				<li class="nav-item">
+																								<a class="nav-link {% if style.1 == 'ALL' %}text-info active{% endif %}" href="{{ request.path }}">ALL</a>
+																				</li>	
+																				<li class="nav-item dropdown">
+																								<a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+																												Select Book Style
+																								</a>
+																								<div class="dropdown-menu">
+																												{% for style_key, style_display in styles %}																
+																												<a class="dropdown-item small {% if style_key == style.1 %}active{% endif %}" href="{{ request.path }}?style={{ style_key }}">
+																																{{ forloop.counter }}) {{ style_display }}
+																												</a>
+																												{% endfor %}
+																								</div>
+																				</li>
+																</ul>
+												</div>
 								</div>
-								{% for book_style in book_style_list %}								
 								<div class="card-body" >
-												<h4 id="{{book_style}}">{{ forloop.counter }}.{{ book_style|get_display_name }}</h4>
 												
-												{% if latest_book_list|get_booktype_book:book_style %}
-												<table class="table table-sm table-striped">
+												<h4 id="{{book_style}}"><span class="text-muted">{{ style.0 }}.</span>{{ style.2 }}</h4>
+
+
+												<!-- Table -->
+												{% if latest_book_list %}
+												<table class="table table-sm table-striped table-responsive ">
 																<thead>
 																				<tr>
 																								<th scope="col">#</th>
 																								<th scope="col">Book Title</th>
-																								<th scope="col">Abbr.</th>																								
+																								<th scope="col">Abbr.</th>
+																								<th scope="col">Option</th>
 																				</tr>
 																</thead>
 																<tbody>
-																				{% for book in latest_book_list|get_booktype_book:book_style %}
+																				{% substract page_obj.start_index 1 as obj_index_starts %}
+																				{% for book in latest_book_list %}
 																				<tr>
 																								<th>
-																												{{ forloop.counter }}
+																												
+
+																												{{ obj_index_starts|add:forloop.counter }}
 																								</th>
 																								<td>
 																												<a href="{% url 'dashboard:book_detail' book.id  %}">{{ book.title }}</a>
 																								</td>
 																								<td>
 																												<a href="{% url 'dashboard:book_detail' book.id  %}">{{ book.abbr }}</a>
+																								</td>																								
+																								<td>
+																												<a href="{% url 'dashboard:book_detail' book.id  %}" class="btn btn-sm btn-secondary">Detail</a>
 																								</td>																								
 																				</tr>
 																				{% endfor %}																																							
@@ -42,8 +84,48 @@
 												{% else %}
 												<p>No Books are available.</p>
 												{% endif %}
-								</div>												
-								{% endfor %}
+
+
+												<!-- Pagination -->
+												<nav aria-label="Page navigation example">
+																<ul class="pagination justify-content-left">
+																				<!-- Top Page -->
+																				<li class="page-item">
+																								<a href="{{ request.path }}?style={{ style.1 }}&page=1" class="page-link">Top(1)</a>
+																				</li>
+																				<!-- Previous Page -->
+																				{% if page_obj.has_previous %}
+																				<li class="page-item">
+																								<a href="{{ request.path }}?style={{ style.1 }}&page={{ page_obj.previous_page_number }}" class="page-link"> << </a>
+																				</li>
+																				{% else %}
+																				<li class="page-item disabled">
+																								<a href="#" class="page-link"> << </a>
+																				</li>
+																				{% endif %}
+																				<!-- Current Page -->
+																				<li class="page-item active">
+																								<a href="#" class="page-link">{{ page_obj.number }}</a>
+																				</li>
+																				<!-- Next Page -->																				
+																				{% if page_obj.has_next %}
+																				<li class="page-item" {% if page_obj.has_next %}disabled{% endif %}>
+																								<a href="{{ request.path }}?style={{ style.1 }}&page={{ page_obj.next_page_number }}" class="page-link"> >> </a>
+																				</li>
+																				{% else %}
+																				<li class="page-item disabled">
+																								<a href="#" class="page-link"> >> </a>
+																				</li>																			
+																				{% endif %}
+																				<!-- Last Page -->
+																				<li class="page-item">
+																								<a href="{{ request.path }}?style={{ style.1 }}&page={{ page_obj.paginator.num_pages }}" class="page-link">
+																												End({{ page_obj.paginator.num_pages }})
+																								</a>
+																				</li>
+																</ul>
+												</nav>
+								</div>
 				</div>
 </div>
 {% endblock content %}

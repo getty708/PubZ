@@ -47,20 +47,31 @@ Book
 class BookIndexView(generic.ListView):
     template_name = 'dashboard/book/index.html'
     context_object_name = 'latest_book_list'
-
+    paginate_by = 30
+ 
     def get_queryset(self):
+        self.selected_style = self.request.GET.get("style", "ALL")
+        styles = [s[0] for s in Book.STYLE_CHOICES]
+        key = self.selected_style if self.selected_style in styles else False
+        if key:
+            return Book.objects.filter(style=key,).order_by('title')
         return Book.objects.order_by('title')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["book_style_list"] = ["INTPROC","JOURNAL","CONF_DOMESTIC","CONF_DOMESTIC_NO_REVIEW","CONF_NATIONAL","BOOK","KEYNOTE","NEWS","OTHERS","AWARD"]
+        style_active = None
+        for i, style in enumerate(Book.STYLE_CHOICES):
+            if style[0] == self.selected_style:
+                style_active = (i, style[0], style[1],)
+                continue
+        context["style"] = style_active if isinstance(style_active, tuple) else (0, "ALL", "All",)
+        context["styles"] = Book.STYLE_CHOICES
         return context
 
-
+    
 class BookDetailView(generic.DetailView):
     model = Book
     template_name = 'dashboard/book/detail.html'
-
 
 
 
