@@ -6,15 +6,15 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mysql-container
+      app: pubz-mysql-container
   template:
     metadata:
       labels:
-        app: mysql-container
+        app: pubz-mysql-container
         tier: backend
     spec:
       containers:
-        - name: mysql-container
+        - name: pubz-mysql-container
           image: pubz/mysql:5.7
           env:
             - name: MYSQL_ROOT_PASSWORD
@@ -40,5 +40,5 @@ spec:
       volumes:
         - name: pubz-volume-mount
           persistentVolumeClaim:
-            claimName: pubz-pvc
+            claimName: pubz-mysql-pvc
 
