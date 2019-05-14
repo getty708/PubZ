@@ -5,6 +5,7 @@ from django.urls import resolve
 
 import datetime
 from datetime import datetime
+import urllib
 
 from core.models import Author, Bibtex, Book, AuthorOrder, Tag
 from notification import alert
@@ -81,9 +82,24 @@ Author
 class AuthorIndexView(generic.ListView):
     template_name = 'dashboard/author/index.html'
     context_object_name = 'latest_author_list'
+    paginate_by = 30
 
     def get_queryset(self):
+        self.search_keyword = self.request.GET.get("keyword",)
+        if self.search_keyword:
+            self.search_keyword = urllib.parse.unquote(self.search_keyword)
+            return Author.objects.filter(
+                Q(name_en__icontains=self.search_keyword) |
+                Q(name_ja__icontains=self.search_keyword) |
+                Q(dep_en__icontains=self.search_keyword)  |
+                Q(dep_ja__icontains=self.search_keyword)
+            ).order_by('name_en')
         return Author.objects.order_by('name_en')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["search_keyword"] = self.search_keyword
+        return context
 
 
 class AuthorDetailView(generic.DetailView):
