@@ -36,6 +36,26 @@ class IndexView(generic.ListView):
         context["year"] = datetime.now().year
         return context
 
+class IndexViewPagination(generic.ListView):
+    template_name = 'dashboard/bibtex/index2.html'
+    context_object_name = 'latest_bibtex_list'
+    paginate_by = 10
+    
+    def get_queryset(self):
+        self.GET_params = utils.parse_GET_params(self.request)
+        query_set = utils.get_bibtex_query_set(self.GET_params)
+        self.GET_params["num_hits"] = len(query_set)
+        return query_set
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['GET_params'] = self.GET_params
+        current_url_name = resolve(self.request.path_info).url_name
+        if current_url_name != "index":
+            context["display_style"] = current_url_name.split("_")[-1]
+        context["year"] = datetime.now().year
+        return context    
+
 
 class DetailView(generic.DetailView):
     model = Bibtex

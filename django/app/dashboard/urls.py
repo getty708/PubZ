@@ -5,9 +5,10 @@ from dashboard import views, views_edit
 app_name = 'dashboard'
 urlpatterns = [
     # ex: /polls/
-    path('', views.IndexView.as_view(), name='index'),
+    # path('', views.IndexView.as_view(), name='index'),
+    path('', views.IndexViewPagination.as_view(), name='index'),
     # == Remove in the future ==
-    path('tile/', views.IndexView.as_view(), name='index_tile'),
+    path('tile/', views.IndexViewPagination.as_view(), name='index_tile'),
     path('list/', views.IndexView.as_view(), name='index_list'),
     path('table/', views.IndexView.as_view(), name='index_table'),
     path('bibtex/', views.IndexView.as_view(), name='index_bibtex'),

@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% load utils_search %}
+{% load utils_bib_format %}
+{% load utils_bib_get_data %}
+{% load utils_bib_index_page_helper %}
+
+
+{% block title %}Dashboard | Table View{% endblock title %}
+
+{% block content %}
+
+
+<div class="row mb-3 w-100">
+				<div class="col-12 my-3">
+								{% search_box  display_style  GET_params %}
+				</div>
+</div>
+<div class="row mb-3 w-100">
+				<div class="col-12 my-3">
+								<!-- Main Contents: Bibtex List -->
+								{% print_bibtexs %}
+				</div>
+</div>
+<div class="row mb-3 w-100">
+				<div class="col-12">
+								<div class="card">
+												<!-- Pagination -->
+												<nav aria-label="Page navigation example" class="card-body">
+																<ul class="pagination justify-content-left">
+																				<!-- Top Page -->
+																				<li class="page-item">
+																								<a href="{{ request.path }}?page=1" class="page-link">Top(1)</a>
+																				</li>
+																				<!-- Previous Page -->
+																				{% if page_obj.has_previous %}
+
+																				<li class="page-item">
+																								<a href="{{ request.path }}?page={{ page_obj.previous_page_number }}" class="page-link"> << </a>
+																				</li>
+																				{% else %}
+																				<li class="page-item disabled">
+																								<a href="#" class="page-link"> << </a>
+																				</li>
+																				{% endif %}
+																				<!-- Current Page -->
+																				<li class="page-item active">
+																								<a href="#" class="page-link">{{ page_obj.number }}</a>
+																				</li>
+																				<!-- Next Page -->																				
+																				{% if page_obj.has_next %}
+																				<li class="page-item" {% if page_obj.has_next %}disabled{% endif %}>
+																								<a href="{{ request.path }}?page={{ page_obj.next_page_number }}" class="page-link"> >> </a>
+																				</li>
+																				{% else %}
+																				<li class="page-item disabled">
+																								<a href="#" class="page-link"> >> </a>
+																				</li>																			
+																				{% endif %}
+																				<!-- Last Page -->
+																				<li class="page-item">
+																								<a href="{{ request.path }}?style={{ style.1 }}&page={{ page_obj.paginator.num_pages }}" class="page-link">
+																												End({{ page_obj.paginator.num_pages }})
+																								</a>
+																				</li>
+																</ul>
+												</nav>
+
+								</div>
+				</div>
+				<div class="col-12">
+								<div class="card my-3">
+												<div class="card-body">												
+																<a download="download.bib" onclick="clickDownloadAll(this)" href="#" class="btn btn-sm btn-outline-primary">Download All</a>
+												</div>											
+								</div>
+				</div>
+
+</div>
+
+
+<script>
+ function clickDownloadAll(aLink)  
+ {
+		 var bibList = document.getElementsByClassName("bibtexDownload");
+		 var result = "";
+		 for(let bib of bibList){
+    	   let str = encodeURIComponent(bib.innerText);
+         result = result + str;
+		 }
+     aLink.href = "data:text;charset=utf-8,"+result;  
+ }  
+</script> 
+
+{% endblock content %}
