@@ -17,7 +17,17 @@
 												}
 												$(this).attr("href",url);
 								});
-				});				
+				});
+				$(function(){
+								$("#search-period_method").change(function(){
+												console.log($(this).val());
+												if ($(this).val() == "all"){
+																$("#search-period_year").prop("disabled", true);
+												}else{
+																$("#search-period_year").prop("disabled", false);
+												}											
+								});
+				});
 				</script>				
 				<div class="card-header">
 								Search Box
@@ -44,7 +54,7 @@
 																																<label class="input-group-text" for="inputGroupSelect01">Book Type</label>
 																												</div>
 																												<select class="custom-select" id="search-book_style" name="book_style">
-																																<option value="ALL" {% if GET_params.book_style == "ALL" %}selected{% endif %}>All</option>
+																																<option value="ALL" {% if GET_params.book_style == "ALL" or not GET_params.period_method %}selected{% endif %}>All</option>
 																																<option value="INTPROC" {% if GET_params.book_style == "INTPROC" %}selected{% endif %}>Interproceedings</option>
 																																<option value="JOURNAL" {% if GET_params.book_style == "JOURNAL" %}selected{% endif %}>Jounals</option>
 																																<option value="CONF_DOMESTIC" {% if GET_params.book_style == "CONF_DOMESTIC" %}selected{% endif %}>Domestic Conference</option>
@@ -61,7 +71,7 @@
 																																<label class="input-group-text" for="inputGroupSelect01">Sort</label>
 																												</div>
 																												<select class="custom-select" id="search-sort" name="search-sort">
-																																<option value="ascending" {% if GET_params.order == "ascending" %}selected{% endif %}>Date - Ascending</option>
+																																<option value="ascending" {% if GET_params.order == "ascending" or not GET_params.period_method %}selected{% endif %}>Date - Ascending</option>
 																																<option value="desending" {% if GET_params.order == "desending" %}selected{% endif %}>Date - Desending</option>																															
 																												</select>																			
 																								</div>
@@ -73,11 +83,12 @@
 																												</div>																												
 
 																												<select class="custom-select" id="search-period_method">
-																																<option value="all" selected>See All</option>
-																																<option value="year" >Search by Year</option>
-																																<option value="fiscal_year" >Search by Fiscal Year (年度検索)</option>
+																																<option value="all"         {% if GET_params.period_method == "all" or not GET_params.period_method  %}selected{% endif %}>See All</option>
+																																<option value="year"        {% if GET_params.period_method == "year"        %}selected{% endif %}>Search by Year</option>
+																																<option value="fiscal_year" {% if GET_params.period_method == "fiscal_year" %}selected{% endif %}>Search by Fiscal Year (年度検索)</option>
 																												</select>																											
-																												<input type="text" class="form-control" aria-label="Text input with checkbox" id="search-period_year">
+																												<input type="text" class="form-control" aria-label="Text input with checkbox" id="search-period_year"
+																																{% if GET_params.period_year %}value="{{ GET_params.period_year }}"{% endif %} {% if GET_params.period_method == "all" or not GET_params.period_method %}disabled{% endif%}>
 																								</div>
 																				</div>
 																				<div class="col-12">

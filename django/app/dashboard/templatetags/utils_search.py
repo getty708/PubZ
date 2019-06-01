@@ -95,22 +95,24 @@ def get_bibtex_query_set(params):
     if (not book_style == None) and (not book_style == "ALL"):
         bibtex_queryset = bibtex_queryset.filter(book__style=book_style)
 
-    # Pubyear
-    pubyear      = params.get('pubyear')
-    pubyear_all  = params.get('pubyear_all')
-    pubyear_type = params.get('pubyear_type')
-    if pubyear_all == None:
-        if not pubyear == None:
-            if pubyear_type==None:
-                bibtex_queryset = bibtex_queryset.filter(
-                    pub_date__gte=datetime.date(int(pubyear), 1, 1),
-                    pub_date__lte=datetime.date(int(pubyear), 12, 31)
-                )
-            else:
-                bibtex_queryset = bibtex_queryset.filter(
-                    pub_date__gte=datetime.date(int(pubyear), 4, 1),
-                    pub_date__lte=datetime.date(int(pubyear)+1, 3, 31)
-                )
+    # Filter by published year
+    period_method = params.get('period_method', 'all')
+    if period_method == "year":
+        year = params.get('period_year', datetime.datetime.now().year)
+        bibtex_queryset = bibtex_queryset.filter(
+            pub_date__gte=datetime.date(int(year), 1,1),
+            pub_date__lte=datetime.date(int(year), 12,31),
+        )
+    elif period_method == "fiscal_year":
+        year = params.get('period_year', datetime.datetime.now().year)
+        bibtex_queryset = bibtex_queryset.filter(
+            pub_date__gte=datetime.date(int(year), 4,  1),
+            pub_date__lte=datetime.date(int(year)+1, 3, 31),
+        )
+    else:
+        pass
+        
+
                 
     # Keywords
     keywords = params.get('keywords')
