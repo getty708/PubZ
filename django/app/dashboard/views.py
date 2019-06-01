@@ -37,7 +37,7 @@ class IndexView(generic.ListView):
         return context
 
 class IndexViewPagination(generic.ListView):
-    template_name = 'dashboard/bibtex/index2.html'
+    template_name = 'dashboard/bibtex/index_page.html'
     context_object_name = 'latest_bibtex_list'
     paginate_by = 10
     
