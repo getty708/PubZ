@@ -1,12 +1,12 @@
 from django import template
-
+register = template.Library()
 
 from django.db.models import Q
 from core.models import Author, Bibtex, Book, AuthorOrder, Tag
 
 import datetime
 
-register = template.Library()
+
 
 
 @register.inclusion_tag('dashboard/components/search_box.html')
@@ -15,34 +15,6 @@ def search_box(display_mode, query_params, *args, **kwargs):
         "display_mode": display_mode,
         "GET_params": query_params,
     }
-
-def keywords_filtering(bibtex_queryset, keywords):
-
-    keywords_list = keywords.split(" ")
-
-    for one_keyword in keywords_list:
-        bibtex_queryset = bibtex_queryset.filter(
-            Q(title_en__icontains=one_keyword) |
-            Q(title_ja__icontains=one_keyword) |
-            Q(book__title__icontains=one_keyword) |
-            Q(authors__name_en__icontains=one_keyword) |
-            Q(authors__name_ja__icontains=one_keyword) |
-            Q(note__icontains=one_keyword)
-        ).distinct()
-
-    return bibtex_queryset
-
-
-def tags_filtering(bibtex_queryset, tags):
-    tags_list = tags.split(" ")
-
-    for tag in tags_list:
-        bibtex_queryset = bibtex_queryset.filter(
-            Q(tags__name__icontains=tag)
-        ).distinct()
-
-    return bibtex_queryset
-
 
 
 

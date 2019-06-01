@@ -4,18 +4,48 @@
 
 {% block content %}
 
-{% if latest_tag_list %}
 <div class="row">
-		<div class="col-12 my-3">
-				<h2>Tags</h2>
-				<ul>
-						{% for tag in latest_tag_list %}
-						<li><a href="{% url 'dashboard:tag_detail' tag.id  %}">{{ tag.name }}</a></li>
-						{% endfor %}
-				</ul>
-				{% else %}
-				<p>No Tags are available.</p>
-				{% endif %}
-		</div>
+				<div class="col-12 card my-3">
+								<div class="card-body">
+												<h2>Tags</h2>
+								</div>
+								<div class="card-body">
+												{% if latest_tag_list %}												
+												<table class="table table-sm table-striped table-responsive ">
+																<thead>
+																				<tr>
+																								<th scope="col">#</th>
+																								<th scope="col">Tag</th>
+																								<th scope="col">Description</th>
+																								<th scope="col">Option</th>
+																				</tr>
+																</thead>
+																<tbody>
+																				{% for tag in latest_tag_list %}
+																				<tr>
+																								<th>																										
+																												{{ forloop.counter }}
+																								</th>
+																								<td>
+																												<a href="{% url 'dashboard:tag_detail' tag.id  %}">{{ tag.name }}</a>
+																								</td>
+																								<td>
+																												{{ tag.description }}
+																								</td>																								
+																								<td>
+																												<a href="{% url 'dashboard:tag_detail' tag.id  %}" class="btn btn-sm btn-primary">Detail</a>
+																												<a href="{% url 'dashboard:tag_edit' tag.id  %}" class="btn btn-sm btn-primary">Edit</a>
+																								</td>																								
+																				</tr>
+																				{% endfor %}																																							
+																</tbody>
+												</table>
+												{% else %}
+												<p>No Tags are available.</p>
+												{% endif %}
+								</div>								
+				</div>
 </div>
+
 {% endblock content %}
+ 

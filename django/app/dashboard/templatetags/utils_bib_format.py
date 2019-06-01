@@ -144,8 +144,7 @@ def bibtex_download_format(bib, *args,**kwargs):
     template_name = "custom/bibtex/bibdownload/{}.html".format(bib_style)
     html = get_template(template_name,)
     html = mark_safe(html.render(context))
-    return html    
-    # return func(bibtex)()
+    return html
 
 
 # ----------------------------------------------------------------------------
@@ -156,4 +155,3 @@ def bibtex_download_format(bib, *args,**kwargs):
 @register.filter(name='filter_by_book_style')
 def filter_by_book_style(bibtex, book_style):
     return [bib for bib in bibtex if bib.book.style == book_style]
-    #return bibtex.filter(book__style=book_style)

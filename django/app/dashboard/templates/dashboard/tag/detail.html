@@ -4,15 +4,24 @@
 
 {% block content %}
 <div class="row">
-		<div class="col-12 my-3">
-				<h1 class="h3" ><small class="text-secondary mr-2" >Tag:</small>{{ tag.name }}</h1>
-		<table class="table table-sm table-striped">
-					<tr><td>name</td><td>{{ tag.name }}</td></tr>
-                    <tr><td>description</td><td>{{ tag.description }}</td></tr>
-                    <tr><td>parent</td><td>{{ tag.parent }}</td></tr>
-		</table>
-		</div>
-		<a href="edit/{{tag.id}}/" class="btn btn-outline-primary btn-sm">Edit</a>
-		<a href="{% url 'dashboard:index_list' %}?keywords={{tag.name}}&pubyear_all=true" target=”_blank” class="btn btn-outline-primary btn-sm">Publications</a>
+				<div class="col-12 card my-3">
+								<div class="card-body">
+												<h1 class="h3" ><small class="text-secondary mr-2" >Tag:</small>{{ tag.name }}</h1>
+								</div>
+								<div class="card-body">
+												<table class="table table-sm table-striped">
+																<thead class="thead-dark">
+																				<tr><th>Item</th><th>Values</th></tr>
+																</thead>
+																<tbody>
+																				<tr><th>name</th><td>{{ tag.name }}</td></tr>
+																				<tr><th>description</th><td>{{ tag.description }}</td></tr>
+																				<tr><th>parent</th><td>{{ tag.parent }}</td></tr>
+																</tbody>
+												</table>
+								<a href="edit/{{tag.id}}/" class="btn btn-outline-primary">Edit</a>
+								<a href="{% url 'dashboard:index_list' %}?keywords={{tag.name}}&pubyear_all=true" target=”_blank” class="btn btn-outline-primary">Publications</a>
+								</div>								
+				</div>
 </div>
 {% endblock content %}
