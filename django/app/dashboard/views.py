@@ -94,6 +94,14 @@ class BookDetailView(generic.DetailView):
     model = Book
     template_name = 'dashboard/book/detail.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        print(context)
+        print(self.object)
+        context["latest_bibtex_list"] = Bibtex.objects.filter(book=context["book"]).order_by('-pub_date')[:20]
+        return context
+
+
 
 
 """

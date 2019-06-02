@@ -1,16 +1,27 @@
 {% extends "base.html" %}
 
 {% block title %}Dashboard | Book {% endblock title %}
-{% load utils_bib_get_data %}
+{% load utils_bib_index_page_helper %}
 
 {% block content %}
 <div class="row">
 				<div class="col-12 card my-3">
 								<div class="card-body">
-												<h1 class="h3" ><small class="text-secondary mr-2" >Book Title:</small><span class="d-inline-flex">{{ book.title }}</span></h1>
+												<div class="d-inline-block h4">
+																<span class="badge badge-primary">Book</span>
+																<span class="border border-info badge-pill text-info small">{{ book.get_style_display }}</span>
+												</div>
+												<h1 class="h3" >
+																<span class="d-inline-flex">{{ book.title }}</span>
+												</h1>
 								</div>
 								<div class="card-body" >
 												<table class="table table-sm table-striped">
+																<thead>
+																				<tr>
+																								<th></th><th></th>
+																				</tr>
+																</thead>																
 																<tbody>
 																				<tr>
 																								<th>Book Title</th>
@@ -21,61 +32,37 @@
 																				<tr>
 																								<th>Abbreviation</th>
 																								<td>
-																												{% if book.abbr %}
-																												{{ book.abbr }}
-																												{% else %}
-																												No Data
-																												{% endif %}
+																												{{ book.abbr|default:'-' }}
 																								</td>
 																				</tr>
 																				<tr>
 																								<th>Publication Type</th>
 																								<td>
-																												{% if book.style  %}	
-																												{{ book.style|get_display_name }}
-																												{% else %}
-																												No Data
-																												{% endif %}																												
+																												{{ book.get_style_display|default:'-' }}
 																								</td>
 																				</tr>
 																				<tr>
-																								<th>Institution</th>
+																								<th>Institution</th>																							
 																								<td>
-																												{% if book.institution %}
-																												{{ book.institution }}
-																												{% else %}
-																												No Data
-																												{% endif %}																												
+																												{{ book.institution|default:'-' }}
 																								</td>
 																				</tr>
 																				<tr>
 																								<th>Organizer</th>
 																								<td>
-																												{% if book.organizer %}
-																												{{ book.organizer }}
-																												{% else %}
-																												No Data
-																												{% endif %}																												
+																												{{ book.organizer|default:'-' }}
 																								</td>
 																				</tr>
 																				<tr>
 																								<th>Publisher</th>
 																								<td>
-																												{% if book.publisher %}
-																												{{ book.publisher }}
-																												{% else %}
-																												No Data
-																												{% endif %}
+																												{{ book.publisher|default:'-' }}
 																								</td>
 																				</tr>
 																				<tr>
 																								<th>Address</th>
 																								<td>
-																												{% if book.address %}
-																												{{ book.address }}
-																												{% else %}
-																												No Data
-																												{% endif %}
+																												{{ book.address|default:'-' }}
 																								</td>
 																				</tr>
 																</tbody>
@@ -84,6 +71,14 @@
 												{% if user.is_authenticated %}												
 												<a href="{% url 'dashboard:book_edit' book.id %}" class="btn btn-outline-primary">Edit</a>
 												{% endif %}
+								</div>
+				</div>
+				<div class="col-12 card my-3">
+								<div class="card-body border-bottom border-secondary">
+												<h4>Our Publications in This Book</h4>
+								</div>
+								<div class="card-body">
+												{% print_bibtexs %}												
 								</div>
 				</div>
 </div>
