@@ -30,23 +30,14 @@ def parse_GET_params(req):
      - dict: {key:value}
     """
     GET_param_keys = [
-        "keywords",
-        "book_style",
-        "sort",
-        # "pubyear",
-        # "pubyear_all",
-        # "pubyear_type",
-        "period_method",
-        "period_year",
-        "tags",
-        "display_style",
+        "keywords","book_style","sort",
+        "period_method","period_year",
+        "tags","display_style",
     ]
-
     
     params = {}
     for key in GET_param_keys:
-        params[key] = req.GET.get(key, None)
-           
+        params[key] = req.GET.get(key, None)        
     return params
 
 
