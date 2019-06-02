@@ -3,6 +3,7 @@
 				<div class="col-12">
 								<div class="row">
 												<div class="col-12">
+																<span class="border border-info badge-pill text-info small">Int'l Proc.</span>	
 																<small class="text-info">
 																				{{ book.title }},
 																				{% if bib.pub_date %} {% if bib.language == "EN" %}{{ bib.pub_date|date:"F Y" }}{% else %}{{ bib.pub_date|date:"Y年n月" }}{% endif %}{% endif %}
@@ -17,7 +18,7 @@
 																{% endfor %}						
 												</div>
 								</div>
-								<div class="row">								
+								<div class="row">
 												<div class="col-md-6">
 																<span class="badge badge-light">{{ bib.pub_date|date:"Y-m" }}</span>
 																{% for tag in bib.tags.all %}

@@ -171,15 +171,22 @@ class Author(models.Model):
 # --------------------------------------------------
 class Book(models.Model):
     STYLE_CHOICES = (
-        ('INTPROC', 'International Proceedings',),
-        ('JOURNAL', 'Journal Paper',),
-        ('CONF_DOMESTIC', 'Domestic Conference',),
-        ('CONF_DOMESTIC_NO_REVIEW', 'Domestic Conference (No Review)',),
-        ('CONF_NATIONAL', 'National Conference'),
-        ('BOOK', 'Book/Review/Editor/Translation',),
-        ('KEYNOTE', 'Keynote/Panel Discution/Seminer'),
-        ('NEWS', 'New Paper article',),
-        ('OTHERS', 'others',),
+        # ('INTPROC', 'International Proceedings',),
+        ('INTPROC', "Int'l Proc.",),
+        # ('JOURNAL', 'Journal Paper',),
+        ('JOURNAL', 'Journal',),
+        # ('CONF_DOMESTIC', 'Domestic Conference',),
+        ('CONF_DOMESTIC', '国内会議',),
+        # ('CONF_DOMESTIC_NO_REVIEW', 'Domestic Conference (No Review)',),
+        ('CONF_DOMESTIC_NO_REVIEW', '国内研究会',),
+        # ('CONF_NATIONAL', 'National Conference'),
+        ('CONF_NATIONAL', '全国大会'),
+        # ('BOOK', 'Book/Review/Editor/Translation',),
+        ('BOOK', 'Book',),
+        # ('KEYNOTE', 'Keynote/Panel Discution/Seminer'),
+        ('KEYNOTE', 'Keynote'),
+        ('NEWS', 'News Paper',),
+        ('OTHERS', 'Others',),
         ('AWARD', 'Award',),
     )
     
@@ -211,6 +218,10 @@ class Book(models.Model):
         if not self.abbr == "":
             return self.abbr
         return self.title
+
+    # @property
+    # def style_display(self,):
+    #     return 
 
 
 # --------------------------------------------------

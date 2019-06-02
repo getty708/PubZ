@@ -15,6 +15,9 @@
 																				url += "&" + key + "=" + encodeURI($(key_id).val());
 																}
 												}
+												if ($(this).attr("page")){
+																url += "&page="+  encodeURI($(this).attr("page")); 
+												}
 												$(this).attr("href",url);
 								});
 				});
