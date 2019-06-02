@@ -33,8 +33,10 @@
 																												{{ tag.description }}
 																								</td>																								
 																								<td>
-																												<a href="{% url 'dashboard:tag_detail' tag.id  %}" class="btn btn-sm btn-primary">Detail</a>
-																												<a href="{% url 'dashboard:tag_edit' tag.id  %}" class="btn btn-sm btn-primary">Edit</a>
+																												<a href="{% url 'dashboard:tag_detail' tag.id  %}" class="btn btn-sm btn-outline-primary">Detail</a>
+																												{% if user.is_authenticated %}																												
+																												<a href="{% url 'dashboard:tag_edit' tag.id  %}" class="btn btn-sm btn-outline-primary">Edit</a>
+																												{% endif %}
 																								</td>																								
 																				</tr>
 																				{% endfor %}																																							

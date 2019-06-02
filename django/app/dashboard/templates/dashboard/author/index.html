@@ -73,6 +73,9 @@ $(function(){
 																								</td>
 																								<td>
 																												<a href="{% url 'dashboard:author_detail' author.id  %}" class="btn btn-sm btn-outline-primary">Detail</a>
+																												{% if user.is_authenticated %}
+																												<a href="{% url 'dashboard:author_edit' author.id  %}" class="btn btn-sm btn-outline-primary">Edit</a>
+																												{% endif %}
 																								</td>
 																				</tr>
 																				{% endfor %}																																							
