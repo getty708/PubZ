@@ -11,14 +11,7 @@
 								<script src="{% static 'js/tether/dist/js/tether.min.js' %}"></script>
 								<script src="{% static 'js/moment/moment.min.js' %}"></script>
 								<script src="{% static 'js/chartjs/Chart.min.js' %}"></script>
-								<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>				
-								<script>var now_date=new Date(); var now_year = now_date.getFullYear();
-								document.addEventListener("DOMContentLoaded", function () {
-												document.getElementById("BMAN_link").setAttribute("href", document.getElementById("BMAN_link").getAttribute("href") + "?pubyear=" + now_year);
-								}, false);
-								document.addEventListener("DOMContentLoaded", function () {
-												document.getElementById("HOME_link").setAttribute("href", document.getElementById("HOME_link").getAttribute("href") + "?pubyear=" + now_year);
-								}, false);</script>
+								<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 								<!-- Bootstrap -->
 								<link href="{% static 'bootstrap/dist/css/bootstrap.css' %}" rel="stylesheet">
 								<script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
@@ -26,10 +19,10 @@
 				</head>
 				<body style="height: 100vh" class="bg-light">
 								<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark w-100" >
-												<a class="navbar-brand mb-0 h1" href="{% url 'dashboard:index' %}" id="BMAN_link">PubZ</a>
+												<a class="navbar-brand mb-0 h1" href="{% url 'dashboard:index' %}" id="brand_link">PubZ</a>
 												<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 																<div class="navbar-nav mr-auto">
-																				<a class="nav-item nav-link" href="{% url 'dashboard:index' %}" id="HOME_link">Home</a>
+																				<a class="nav-item nav-link" href="{% url 'dashboard:index' %}" id="home_link">Home</a>
 																				<a class="nav-item nav-link" href="{% url 'dashboard:book_index' %}" id="Book_link">Books</a>
 																				<a class="nav-item nav-link" href="{% url 'dashboard:author_index' %}" id="Author_link">Authors</a>
 																				<a class="nav-item nav-link" href="{% url 'dashboard:tag_index' %}" id="Tag_link">Tags</a>
@@ -41,7 +34,7 @@
 																												<a class="dropdown-item" href="{% url 'dashboard:book_add' %}">New Book</a>
 																												<a class="dropdown-item" href="{% url 'dashboard:author_add' %}">New Author</a>
 																												<div class="dropdown-divider"></div>
-																												<a class="dropdown-item" href="#">New Tag</a>
+																												<a class="dropdown-item" href="{% url 'dashboard:tag_add'  %}">New Tag</a>
 																								</div>
 																				</li>
 																				{% endif %}

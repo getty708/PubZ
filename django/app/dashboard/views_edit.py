@@ -206,6 +206,7 @@ def author_order_edit(request, author_order_id=None):
 """
 Tag
 """
+@login_required
 def tag_edit(request, tag_id=None):
     msg = False
     if tag_id:

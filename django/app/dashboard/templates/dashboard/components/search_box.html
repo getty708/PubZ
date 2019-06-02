@@ -47,29 +47,33 @@
 																												<input type="text" aria-label="Search Keyword" class="form-control" id="search-keywords"
 																																value="{% if GET_params.keywords %}{{GET_params.keywords}}{% endif %}"  placeholder="Keywords....">
 																												<div class="input-group-append">
-																																<a href="#" class="btn btn-secondary search-link" id="search-button">Go!</a>
+																																<a href="#" class="btn btn-primary search-link" id="search-button">Go!</a>
 																												</div>
 																								</div>
 																				</div>
-																				<div class="col-md-6">
+																				<div class="col-md-4">
 																								<div class="input-group mb-3">
 																												<div class="input-group-prepend">
 																																<label class="input-group-text" for="inputGroupSelect01">Book Type</label>
 																												</div>
 																												<select class="custom-select" id="search-book_style" name="book_style">
 																																<option value="ALL" {% if GET_params.book_style == "ALL" or not GET_params.period_method %}selected{% endif %}>All</option>
-																																<option value="INTPROC" {% if GET_params.book_style == "INTPROC" %}selected{% endif %}>Interproceedings</option>
+																																<option value="INTPROC" {% if GET_params.book_style == "INTPROC" %}selected{% endif %}>Proceedings</option>
 																																<option value="JOURNAL" {% if GET_params.book_style == "JOURNAL" %}selected{% endif %}>Jounals</option>
-																																<option value="CONF_DOMESTIC" {% if GET_params.book_style == "CONF_DOMESTIC" %}selected{% endif %}>Domestic Conference</option>
-																																<option value="CONF_DOMESTIC_NO_REVIEW" {% if GET_params.book_style == "CONF_DOMESTIC_NO_REVIEW" %}selected{% endif %}>Domestic Conf(NoReview)</option>
-																																<option value="CONF_NATIONAL" {% if GET_params.book_style == "CONF_NATIONAL" %}selected{% endif %}>National Conference</option>
+																																<option value="CONF_DOMESTIC" {% if GET_params.book_style == "CONF_DOMESTIC" %}selected{% endif %}>国内会議</option>
+																																<option value="CONF_DOMESTIC_NO_REVIEW" {% if GET_params.book_style == "CONF_DOMESTIC_NO_REVIEW" %}selected{% endif %}>国内研究会</option>
+																																<option value="CONF_NATIONAL" {% if GET_params.book_style == "CONF_NATIONAL" %}selected{% endif %}>全国大会</option>
 																																<option value="BOOK" {% if GET_params.book_style == "BOOK" %}selected{% endif %}>Book/Review/Editor</option>
 																																<option value="KEYNOTE" {% if GET_params.book_style == "KEYNOTE" %}selected{% endif %}>Presentaion/Seminer</option>
 																																<option value="NEWS" {% if GET_params.book_style == "NEWS" %}selected{% endif %}>New Paper article</option>
 																																<option value="OTHERS" {% if GET_params.book_style == "OTHERS" %}selected{% endif %}>others</option>
 																																<option value="AWARD" {% if GET_params.book_style == "AWARD" %}selected{% endif %}>Award</option>
 																																
-																												</select>
+																												</select>	
+																								</div>
+																				</div>
+																				<div class="col-md-4">
+																								<div class="input-group mb-3">																											
 																												<div class="input-group-prepend">
 																																<label class="input-group-text" for="inputGroupSelect01">Sort</label>
 																												</div>
@@ -79,7 +83,7 @@
 																												</select>																			
 																								</div>
 																				</div>
-																				<div class="col-md-6">
+																				<div class="col-md-4">
 																								<div class="input-group mb-3">
 																												<div class="input-group-prepend">
 																																<label class="input-group-text" for="inputGroupSelect01">Date</label>
@@ -96,11 +100,12 @@
 																				</div>
 																				<div class="col-12">
 																								<div class="btn-group btn-group-sm w-100" role="group" aria-label="Basic example">
-																												<a href="#" class="btn btn{% if display_mode != 'tile' and display_mode %}-outline{% endif %}-secondary search-link" mode="tile" >Tile View</a>
-																												<a href="#" class="btn btn{% if display_mode != 'list'   %}-outline{% endif %}-secondary search-link" mode="list" >List View</a>
-																												<a href="#" class="btn btn{% if display_mode != 'table'  %}-outline{% endif %}-secondary search-link" mode="table" >Table View</a>
-																												<a href="#" class="btn btn{% if display_mode != 'bibtex' %}-outline{% endif %}-secondary search-link" mode="bibtex" >Bibtex View</a>
-																												<a href="#" class="btn btn{% if display_mode != 'latex'  %}-outline{% endif %}-secondary search-link" mode="latex" >Latex View</a>																			
+																												<a href="#" class="btn btn{% if display_mode != 'tile' and display_mode %}-outline{% endif %}-primary search-link" mode="tile" >Tile View</a>																												
+																												<a href="#" class="btn btn{% if display_mode != 'list'   %}-outline{% endif %}-primary search-link" mode="list" >List View</a>
+																												<a href="#" class="btn btn{% if display_mode != 'table'  %}-outline{% endif %}-primary search-link" mode="table" >Table View</a>
+																												<a href="#" class="btn btn{% if display_mode != 'bibtex' %}-outline{% endif %}-primary search-link" mode="bibtex" >Bibtex View</a>
+																												<a href="#" class="btn btn{% if display_mode != 'latex'  %}-outline{% endif %}-primary search-link" mode="latex" >Latex View</a>																			
+
 																								</div>
 																				</div>																			
 																</div>

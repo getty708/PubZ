@@ -83,10 +83,9 @@ class BookIndexView(generic.ListView):
         style_active = None
         for i, style in enumerate(Book.STYLE_CHOICES):
             if style[0] == self.selected_style:
-                style_active = (i, style[0], style[1],)
+                style_active = style[0]
                 continue
-        context["style"] = style_active if isinstance(style_active, tuple) else (0, "ALL", "All",)
-        context["styles"] = Book.STYLE_CHOICES
+        context["book_style"] = style_active #context["style"][1]
         return context
 
     
@@ -131,7 +130,6 @@ class AuthorIndexView(generic.ListView):
 class AuthorDetailView(generic.DetailView):
     model = Author
     template_name = 'dashboard/author/detail.html'
-
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -153,6 +151,11 @@ class TagIndexView(generic.ListView):
 class TagDetailView(generic.DetailView):
     model = Tag
     template_name = 'dashboard/tag/detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["latest_bibtex_list"] = Bibtex.objects.filter(tags=self.object).order_by('-pub_date')[:20]
+        return context
 
 
 """

@@ -31,7 +31,7 @@
 								<div class="card">
 												<!-- Pagination -->
 												<nav aria-label="Page navigation example" class="card-body">
-																<ul class="pagination justify-content-left">
+																<ul class="pagination justify-content-left my-0">
 																				<!-- Top Page -->
 																				<li class="page-item">
 																								<a href="{{ request.path }}" class="page-link search-link" page="1">Top(1)</a>
@@ -72,28 +72,6 @@
 
 								</div>
 				</div>
-				<div class="col-12">
-								<div class="card my-3">
-												<div class="card-body">												
-																<a download="download.bib" onclick="clickDownloadAll(this)" href="#" class="btn btn-sm btn-outline-primary">Download All</a>
-												</div>											
-								</div>
-				</div>
-
 </div>
-
-
-<script>
- function clickDownloadAll(aLink)  
- {
-		 var bibList = document.getElementsByClassName("bibtexDownload");
-		 var result = "";
-		 for(let bib of bibList){
-    	   let str = encodeURIComponent(bib.innerText);
-         result = result + str;
-		 }
-     aLink.href = "data:text;charset=utf-8,"+result;  
- }  
-</script> 
 
 {% endblock content %}

@@ -9,48 +9,52 @@
 				<div class="col-12 card my-3">
 								<div class="card-body" >
 												<h2>Books</h2>
-												<div class="d-none d-lg-block">
-																<ul class="nav nav-tabs">
-																				<li class="nav-item visible-lg">
-																								<a class="nav-link active {% if style.1 == 'ALL' %}text-info{% endif %}" href="{{ request.path }}">ALL</a>
-																				</li>	
-																				{% for style_key, style_display in styles %}																
-																				<li class="nav-item">
-																								<a class="nav-link active {% if style_key == style.1 %}text-info{% endif %}" href="{{ request.path }}?style={{ style_key }}">
-																												{{ forloop.counter }}) {{ style_display }}
-																								</a>
-																				</li>																
-																				{% endfor %}
-																</ul>
-												</div>
-												<div class="d-md-none">
-																<ul class="nav nav-tabs">
-																				<li class="nav-item">
-																								<a class="nav-link {% if style.1 == 'ALL' %}text-info active{% endif %}" href="{{ request.path }}">ALL</a>
-																				</li>	
-																				<li class="nav-item dropdown">
-																								<a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-																												Select Book Style
-																								</a>
-																								<div class="dropdown-menu">
-																												{% for style_key, style_display in styles %}																
-																												<a class="dropdown-item small {% if style_key == style.1 %}active{% endif %}" href="{{ request.path }}?style={{ style_key }}">
-																																{{ forloop.counter }}) {{ style_display }}
-																												</a>
-																												{% endfor %}
-																								</div>
-																				</li>
-																</ul>
-												</div>
 								</div>
 								<div class="card-body" >
-												
-												<h4 id="{{book_style}}"><span class="text-muted">{{ style.0 }}.</span>{{ style.2 }}</h4>
-
+												<script>
+												/* Function to construct URL */
+												$(function(){
+																$(".search-link").click(function(){
+																				if ($('#search-book_style').val()){
+																								var url  = "{% url 'dashboard:book_index' %}?style="+ $('#search-book_style').val();
+																				}else{
+																								var url  = "{% url 'dashboard:index' %}?";
+																				}
+																				if ($(this).attr('page')){
+																								url += "&page=" + $(this).attr('page');
+																				}
+																				$(this).attr("href",url);
+																});
+												});
+												</script>
+												<div class="input-group mb-3">
+																<div class="input-group-prepend">
+																				<label class="input-group-text" for="inputGroupSelect01">Book Type</label>
+																</div>
+																<select class="custom-select" id="search-book_style" name="book_style">
+																				<option value="ALL" {% if book_style == "ALL" or not style %}selected{% endif %}>All</option>
+																				<option value="INTPROC" {% if book_style == "INTPROC" %}selected{% endif %}>Proceedings</option>
+																				<option value="JOURNAL" {% if book_style == "JOURNAL" %}selected{% endif %}>Jounals</option>
+																				<option value="CONF_DOMESTIC" {% if book_style == "CONF_DOMESTIC" %}selected{% endif %}>国内会議</option>
+																				<option value="CONF_DOMESTIC_NO_REVIEW" {% if book_style == "CONF_DOMESTIC_NO_REVIEW" %}selected{% endif %}>国内研究会</option>
+																				<option value="CONF_NATIONAL" {% if book_style == "CONF_NATIONAL" %}selected{% endif %}>全国大会</option>
+																				<option value="BOOK" {% if book_style == "BOOK" %}selected{% endif %}>Book/Review/Editor</option>
+																				<option value="KEYNOTE" {% if book_style == "KEYNOTE" %}selected{% endif %}>Presentaion/Seminer</option>
+																				<option value="NEWS" {% if book_style == "NEWS" %}selected{% endif %}>New Paper article</option>
+																				<option value="OTHERS" {% if book_style == "OTHERS" %}selected{% endif %}>others</option>
+																				<option value="AWARD" {% if book_style == "AWARD" %}selected{% endif %}>Award</option>
+																				
+																</select>
+																<div class="input-group-append">
+																				<a href="#" class="btn btn-primary search-link" id="search-button">Go!</a>
+																</div>
+																
+												</div>
+																						
 
 												<!-- Table -->
 												{% if latest_book_list %}
-												<table class="table table-sm table-striped table-responsive ">
+												<table class="table table-sm table-striped table-responsive">
 																<thead>
 																				<tr>
 																								<th scope="col">#</th>
@@ -95,12 +99,12 @@
 																<ul class="pagination justify-content-left">
 																				<!-- Top Page -->
 																				<li class="page-item">
-																								<a href="{{ request.path }}?style={{ style.1 }}&page=1" class="page-link">Top(1)</a>
+																								<a href="{{ request.path }}" class="page-link search-link" page="1">Top(1)</a>
 																				</li>
 																				<!-- Previous Page -->
 																				{% if page_obj.has_previous %}
 																				<li class="page-item">
-																								<a href="{{ request.path }}?style={{ style.1 }}&page={{ page_obj.previous_page_number }}" class="page-link"> << </a>
+																								<a href="{{ request.path }}" class="page-link search-link" page="{{ page_obj.previous_page_number }}"> << </a>
 																				</li>
 																				{% else %}
 																				<li class="page-item disabled">
@@ -114,7 +118,7 @@
 																				<!-- Next Page -->																				
 																				{% if page_obj.has_next %}
 																				<li class="page-item" {% if page_obj.has_next %}disabled{% endif %}>
-																								<a href="{{ request.path }}?style={{ style.1 }}&page={{ page_obj.next_page_number }}" class="page-link"> >> </a>
+																								<a href="{{ request.path }}" class="page-link search-link" page="{{ page_obj.next_page_number }}"> >> </a>
 																				</li>
 																				{% else %}
 																				<li class="page-item disabled">
@@ -123,7 +127,7 @@
 																				{% endif %}
 																				<!-- Last Page -->
 																				<li class="page-item">
-																								<a href="{{ request.path }}?style={{ style.1 }}&page={{ page_obj.paginator.num_pages }}" class="page-link">
+																								<a href="{{ request.path }}" class="page-link search-link" page="{{ page_obj.paginator.num_pages }}">
 																												End({{ page_obj.paginator.num_pages }})
 																								</a>
 																				</li>

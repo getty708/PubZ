@@ -1,27 +1,59 @@
 {% extends "base.html" %}
 
 {% block title %}Dashboard | Tag {% endblock title %}
+{% load utils_bib_index_page_helper %}
 
 {% block content %}
 <div class="row">
 				<div class="col-12 card my-3">
 								<div class="card-body">
-												<h1 class="h3" ><small class="text-secondary mr-2" >Tag:</small>{{ tag.name }}</h1>
-								</div>
-								<div class="card-body">
-												<table class="table table-sm table-striped">
-																<thead class="thead-dark">
-																				<tr><th>Item</th><th>Values</th></tr>
-																</thead>
-																<tbody>
-																				<tr><th>name</th><td>{{ tag.name }}</td></tr>
-																				<tr><th>description</th><td>{{ tag.description }}</td></tr>
-																				<tr><th>parent</th><td>{{ tag.parent }}</td></tr>
-																</tbody>
-												</table>
-								<a href="edit/{{tag.id}}/" class="btn btn-outline-primary">Edit</a>
-								<a href="{% url 'dashboard:index_list' %}?keywords={{tag.name}}&pubyear_all=true" target=”_blank” class="btn btn-outline-primary">Publications</a>
+												<div class="d-block h4">
+																<span class="badge badge-primary">Tag</span>
+												</div>
+
+												<h1 class="h3">
+																<span class="d-inline-flex">{{ tag.name }}</span>																
+												</h1>
+												<div class="table-responsive">												
+																<table class="table table-sm table-striped w-100">
+																				<thead>
+																								<tr><th></th><th></th></tr>
+																				</thead>
+																				<tbody>
+																								<tr>
+																												<th>name</th>
+																												<td>{{ tag.name }}</td>
+																								</tr>
+																								<tr>
+																												<th>description</th>
+																												<td>{{ tag.description|default:'-' }}</td>
+																								</tr>
+																								<tr>
+																												<th>parent</th>
+																												<td>
+																																{% if tag.parent %}
+																																<a href="{% url 'dashboard:tag_detail' tag.parent.id %}" class="btn btn-sm btn-outline-primary">{{ tag.parent.name }}</a>
+																																{% else%}
+																																-
+																																{% endif %}
+																												</td>
+																								</tr>
+																				</tbody>
+																</table>
+												</div>
+												<a href="{% url 'dashboard:tag_edit' tag.id %}" class="btn btn-outline-primary">Edit</a>
 								</div>								
 				</div>
+				<div class="col-12 card my-3">
+								<div class="card-body border-bottom border-secondary">
+												<h4>Our Publications</h4>
+								</div>
+								<div class="card-body">
+												{% print_bibtexs %}												
+								</div>
+								<div class="card-body">
+												<a href="{% url 'dashboard:index' %}?keywords={{ tag.title }}" class="btn btn-primary btn-block">See More Publications</a>
+								</div>																								
+				</div>				
 </div>
 {% endblock content %}

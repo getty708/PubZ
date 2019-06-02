@@ -13,8 +13,7 @@
 												<h1 class="h3" >
 																<span class="d-inline-block">{{ author.name_en }}
 												</h1>
-								</div>
-								<div class="card-body">
+
 												<table class="table table-sm table-striped">
 																<thead>
 																				<tr>
@@ -24,30 +23,36 @@
 																<tbody>
 																				<tr>
 																								<th>Name(en)</th>
-																								<td>{{ author.name_en }}</td>
+																								<td>{{ author.name_en|default:'-' }}</td>
 																				</tr>
 																				<tr>
 																								<th>Name(ja)</th>
-																								<td>{{ author.name_ja }}</td>
+																								<td>{{ author.name_ja|default:'-' }}</td>
 																				</tr>
 																				<tr>
 																								<th>Depertment(en)</th>
-																								<td>{{ author.dep_en }}</td>
+																								<td>{{ author.dep_en|default:'-' }}</td>
 																				</tr>
 																				<tr>
 																								<th>Depertment(ja)</th>
-																								<td>{{ author.dep_ja }}</td>
+																								<td>{{ author.dep_ja|default:'-' }}</td>
 																				</tr>
 																				<tr>
 																								<th>Mail</th>
-																								<td>{{ author.mail }}</td>
+																								<td>{{ author.mail|default:'-' }}</td>
 																				</tr>
 																				<tr>
 																								<th>Date</th>
 																								<td>
+																												{% if author.join or author.leave %}
+																												{% if author.join %}
 																												<span class="d-block">Join: {% if author.join %}{{ author.join }}{% else %}No Data{% endif %}</span>
+																												{% endif %}
 																												{% if author.leave%}
 																												<span class="d-block">Left: {{ author.leave }}</span>
+																												{% endif%}
+																												{% else %}
+																												-
 																												{% endif%}
 																								</td>
 																				</tr>
