@@ -5,8 +5,6 @@
 
 {% block content %}
 
-<script src="{% static 'js/datepicker/bootstrap-datetimepicker.min.js' %}"></script>
-<script src="{% static 'js/datepicker/datepicker-widget.js' %}"></script>
 
 <div class="row">
 				<div class="col-12 card my-3">
@@ -74,14 +72,30 @@
 																								</tr>
 																								<tr>
 																												<th scope="col">Book</th>
-																												<td class="row">																											
-																																<div class="col-12">
-																																				{{ form.book.errors }}
-																																				<a href="{% url 'dashboard:book_detail' bibtex.book.id %}" class="d-inline-flex mr-3" >
-																																								{{ bibtex.book.title }}
-																																				</a>
-																																				<a href="{% url 'dashboard:book_add' %}" class="btn btn-sm btn-primary" target="_blank">Add New Book</a>
-																																				{{ form.book }}
+																												<td>
+																																<div class="row mb-3">
+																																				<div class="col-md-8">
+																																								{{ form.book.errors }}
+																																								{{ bibtex.book.title }}																																								
+																																				</div>
+																																				<div class="col-md-4">
+																																								<a href="{% url 'dashboard:book_detail' bibtex.book.id %}" class="btn btn-sm btn-outline-primary" >Detail</a>
+																																								<a href="{% url 'dashboard:book_add' %}" class="btn btn-sm btn-outline-primary" target="_blank">Add New Book</a>
+																																				</div>
+																																</div>
+																																<div class="row mb-3">
+																																				<div class="col-12">
+																																								{{ form.book }}
+																																				</div>
+																																</div>
+																																<div class="row">
+																																				<div class="col-12">
+																																								<div class="border rounded  border-secondary p-1">
+																																												<small>If you need to change a title of the book, Please enter here. (e.g. Percom => Percom2018)</small>
+																																												{{ form.book_title.errors }}
+																																												{{ form.book_title }}
+																																								</div>
+																																				</div>
 																																</div>
 																												</td>
 																								</tr>

@@ -36,9 +36,20 @@
 																												<th scope="col">Book</th>
 																												<td class="row">
 																																<span class="col-12" >
+																																				{% if bibtex.book_title %}
+																																				<a href="{% url 'dashboard:book_detail' bibtex.book.id %}" class="d-block" >
+																																								<span class="d-block">
+																																												{{ bibtex.book_title_display }}
+																																								</span>
+																																								<span class="d-block text-muted small">
+																																												(From {{ bibtex.book.title }})
+																																								</span>
+																																				</a>																																				
+																																				{% else %}
 																																				<a href="{% url 'dashboard:book_detail' bibtex.book.id %}" class="d-inline-flex" >
 																																								{{ bibtex.book.title }}
 																																				</a>
+																																				{% endif %}
 																																</span>
 																																<span class="col-12 small">
 																																				{% if bibtex.volume %}Vol.{{ bibtex.volume }}, {% endif %}
@@ -95,7 +106,6 @@
 												<div id="bibtex" style="display:none;">{{ bibtex | bibtex_download_format }}</div>
 												<div class="col-12 my-3">
 																<a href="{% url 'dashboard:bibtex_edit' bibtex.id %}" class="btn btn-outline-primary"  >Edit</a>
-																<a download="download.bib" onclick="clickDownload(this)" href="#" class="btn btn-outline-primary">Download BibTex</a>
 												</div>
 												{% if user.is_authenticated %}
 												{% if bibtex.authors.all.0.mail %}

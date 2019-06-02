@@ -32,6 +32,7 @@ class Bibtex(models.Model):
         'core.Book',
         on_delete=models.PROTECT,
     )
+    book_title = models.CharField(max_length=512,null=True,blank=True, default="")
     volume = models.CharField(max_length=128,null=True,blank=True)
     number = models.CharField(max_length=128, null=True,blank=True)
     chapter = models.IntegerField(null=True,blank=True)
@@ -83,6 +84,20 @@ class Bibtex(models.Model):
             return self.title_en
         elif self.language == 'JA':
             return self.title_ja
+
+    @property
+    def book_title_display(self):
+        if self.book_title:
+            return self.book_title
+        else:
+            return self.book.title
+
+    @property
+    def book_abbr_display(self):
+        if self.book.abbr:
+            return "({abbr} {year})".format(abbr=self.book.abbr, year=self.pub_date.year)
+        else:
+            return None
 
     @property
     def authors_list(self,):
@@ -215,13 +230,10 @@ class Book(models.Model):
         )
 
     def __str__(self):
-        if not self.abbr == "":
-            return self.abbr
+        if self.abbr != "":
+            return "{title} ({abbr})".format(title=self.title, abbr=self.abbr)
         return self.title
 
-    # @property
-    # def style_display(self,):
-    #     return 
 
 
 # --------------------------------------------------

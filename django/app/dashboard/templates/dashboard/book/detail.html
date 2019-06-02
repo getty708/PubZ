@@ -66,7 +66,6 @@
 																				</tr>
 																</tbody>
 												</table>
-												<a href="{% url 'dashboard:index_list' %}?keywords={{book.title}}&pubyear_all=true" target=”_blank” class="btn btn-outline-primary">Publications</a>
 												{% if user.is_authenticated %}												
 												<a href="{% url 'dashboard:book_edit' book.id %}" class="btn btn-outline-primary">Edit</a>
 												{% endif %}
