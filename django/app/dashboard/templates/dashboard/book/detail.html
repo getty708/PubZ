@@ -80,6 +80,9 @@
 								<div class="card-body">
 												{% print_bibtexs %}												
 								</div>
+								<div class="card-body">
+												<a href="{% url 'dashboard:index' %}?keywords={{ book.title }}" class="btn btn-primary btn-block">See More Publications</a>
+								</div>																								
 				</div>
 </div>
 {% endblock content %}

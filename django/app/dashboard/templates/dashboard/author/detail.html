@@ -1,15 +1,26 @@
 {% extends "base.html" %}
 
 {% block title %}Dashboard | Author {% endblock title %}
+{% load utils_bib_index_page_helper %}
 
 {% block content %}
 <div class="row">
 				<div class="col-12 card my-3">
 								<div class="card-body">
-												<h1 class="h3" ><small class="text-secondary mr-2" >Author:</small><span class="d-inline-block">{{ author.name_en }}</h1>
+												<div class="d-block h4">
+																<span class="badge badge-primary">Author</span>
+												</div>												
+												<h1 class="h3" >
+																<span class="d-inline-block">{{ author.name_en }}
+												</h1>
 								</div>
 								<div class="card-body">
 												<table class="table table-sm table-striped">
+																<thead>
+																				<tr>
+																								<th></th><th></th>
+																				</tr>
+																</thead>
 																<tbody>
 																				<tr>
 																								<th>Name(en)</th>
@@ -48,5 +59,16 @@
 												<a href="{% url 'dashboard:index_list' %}?keywords={{author.name_en}}&pubyear_all=true" target=”_blank” class="btn btn-outline-primary btn-sm">Publications</a>
 								</div>
 				</div>
+				<div class="col-12 card my-3">
+								<div class="card-body border-bottom border-secondary">
+												<h4>Works of <span class="font-weight-bold">{{ author }}</span></h4>
+								</div>
+								<div class="card-body">
+												{% print_bibtexs %}												
+								</div>
+								<div class="card-body">
+												<a href="{% url 'dashboard:index' %}?keywords={{author.name_en}}" class="btn btn-primary btn-block">See More Publications of This Author</a>
+								</div>																
+				</div>				
 </div>
 {% endblock content %}

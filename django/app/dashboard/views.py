@@ -96,9 +96,7 @@ class BookDetailView(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        print(context)
-        print(self.object)
-        context["latest_bibtex_list"] = Bibtex.objects.filter(book=context["book"]).order_by('-pub_date')[:20]
+        context["latest_bibtex_list"] = Bibtex.objects.filter(book=self.object).order_by('-pub_date')[:20]
         return context
 
 
@@ -133,6 +131,14 @@ class AuthorIndexView(generic.ListView):
 class AuthorDetailView(generic.DetailView):
     model = Author
     template_name = 'dashboard/author/detail.html'
+
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["latest_bibtex_list"] = Bibtex.objects.filter(authors=self.object).order_by('-pub_date')[:20]
+        return context
+
+    
 
 """
 Tag
