@@ -1,21 +1,132 @@
 {% extends "base.html" %}
 
 {% block title %}Dashboard | Author{% endblock title %}
+{% load utils_math %}
 
 {% block content %}
 
-{% if latest_author_list %}
+<script>
+/* Function to construct URL */
+$(function(){
+				$(".search-button").click(function(){
+								var keyword = $("#search-keyword").val();
+								console.log($(this).attr("page"));
+								if (keyword != ""){
+												keyword = encodeURI(keyword);
+												url = "{{ request.path }}?keyword=" + keyword;
+												if($(this).attr("page")){
+																url += "&page=" + $(this).attr("page");
+												}
+												$(this).attr("href", url);
+								}else{
+												return false;
+								}
+				});
+});
+</script>
 <div class="row">
-		<div class="col-12 my-3">
-				<h2>Authors</h2>
-				<ul>
-						{% for author in latest_author_list %}
-						<li><a href="{% url 'dashboard:author_detail' author.id  %}">{{ author.name_en }}</a></li>
-						{% endfor %}
-				</ul>
-				{% else %}
-				<p>No Authors are available.</p>
-				{% endif %}
-		</div>
+				<div class="col-12 card my-3">
+								<div class="card-body" >
+												<h2>Authors</h2>
+								</div>
+								<div class="card-body" >
+												<div class="row">
+																<div class="input-group mb-3 col-md-6">
+																				<div class="input-group-prepend">
+																								<label class="input-group-text" for="search-type">Search By</label>
+																				</div>
+																				<input type="text" class="form-control" id="search-keyword" 
+																								aria-label="Text input with segmented dropdown button"
+																								value="{% if search_keyword %}{{ search_keyword }}{% endif %}" placeholder="keyword ...">
+																				<div class="input-group-append" id="button-addon4">
+																								<a href="#" id="form-search-button" class="btn btn-primary search-button" >Go!</a>
+																				</div>
+																</div>
+												</div>
+												{% if latest_author_list %}
+												<!-- Table -->
+												<table class="table table-sm table-striped">
+																<thead>
+																				<tr>
+																								<th scope="col">#</th>
+																								<th scope="col">Name</th>
+																								<th scope="col">Department</th>
+																								<th scope="col">Options</th>
+																				</tr>
+																</thead>
+																<tbody>
+																				{% substract page_obj.start_index 1 as obj_index_starts %}
+																				{% for author in latest_author_list %}																				
+																				<tr>
+																								<th>
+																												{{ obj_index_starts|add:forloop.counter }}
+																								</th>
+																								<td>
+																												<a href="{% url 'dashboard:author_detail' author.id  %}">
+																																{{ author.name_en }}
+																																{% if author.name_ja %}<sapn class="px-1">/ {{ author.name_ja }}</sapn>{% endif %}
+																												</a>																												
+																								</td>
+																								<td>
+																												{{ author.dep_en }}
+																												{% if author.dep_ja %}<sapn class="px-1">/ {{ author.dep_ja }}</sapn>{% endif %}
+																								</td>
+																								<td>
+																												<a href="{% url 'dashboard:author_detail' author.id  %}" class="btn btn-sm btn-outline-primary">Detail</a>
+																												{% if user.is_authenticated %}
+																												<a href="{% url 'dashboard:author_edit' author.id  %}" class="btn btn-sm btn-outline-primary">Edit</a>
+																												{% endif %}
+																								</td>
+																				</tr>
+																				{% endfor %}																																							
+																</tbody>
+												</table>
+												{% else %}
+												<p>No data is available.</p>
+												{% endif %}
+
+	
+												<!-- Pagination -->
+												<nav aria-label="Page navigation example">
+																<ul class="pagination justify-content-left">
+																				<!-- Top Page -->
+																				<li class="page-item">
+																								<a href="{{ request.path }}?page=1" class="page-link search-button">Top(1)</a>
+																				</li>
+																				<!-- Previous Page -->
+																				{% if page_obj.has_previous %}
+																				<li class="page-item">
+																								<a href="{{ request.path }}" class="page-link search-button" page="{{ page_obj.previous_page_number }}"> << </a>
+																				</li>
+																				{% else %}
+																				<li class="page-item disabled">
+																								<a href="#" class="page-link"> << </a>
+																				</li>
+																				{% endif %}
+																				<!-- Current Page -->
+																				<li class="page-item active">
+																								<a href="#" class="page-link">{{ page_obj.number }}</a>
+																				</li>
+																				<!-- Next Page -->																				
+																				{% if page_obj.has_next %}
+																				<li class="page-item" {% if page_obj.has_next %}disabled{% endif %}>
+																								<a href="{{ request.path }}" class="page-link search-button" page="{{ page_obj.next_page_number }}"> >> </a>
+																				</li>
+																				{% else %}
+																				<li class="page-item disabled">
+																								<a href="#" class="page-link"> >> </a>
+																				</li>																			
+																				{% endif %}
+																				<!-- Last Page -->
+																				<li class="page-item">
+																								<a href="{{ request.path }}" class="page-link search-button" page="{{ page_obj.paginator.num_pages }}">
+																												End({{ page_obj.paginator.num_pages }})
+																								</a>
+																				</li>
+																</ul>
+												</nav>											
+								</div>
+								
+				</div>
 </div>
 {% endblock content %}

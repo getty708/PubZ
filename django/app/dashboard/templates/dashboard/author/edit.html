@@ -5,50 +5,79 @@
 {% block content %}
 
 <div class="row">
-		<div class="col-12 my-3">
-				{% if author.id %}
-				<h2>Edit Author Info: {{ author }}</h2>
-				{% else%}
-				<h2>Add New Author</h2>
-				{% endif %}
-				{% if form.errors %}
-				<div class="alert alert-danger" role="alert">				
-						{%for error in form.errors.values %}						
-						{{ error }}						
-						{% endfor %}
-				</div>						
-				{% endif %}
+				<div class="col-12 card my-3">
+								<div class="card-body">
+												{% if author.id %}
+												<h1 class="h3" >
+																<small class="text-secondary mr-2" >Edit Author Info:</small>
+																<span class="d-inline-block">{{ author }}</span>
+												</h1>
+												{% else%}												
+												<h1 class="h3" >
+																<span class="d-inline-block">Add New Author</span>
+												</h1>
+												{% endif %}
+												{% if form.errors %}
+												<div class="alert alert-danger" role="alert">				
+																{%for error in form.errors.values %}						
+																{{ error }}						
+																{% endfor %}
+												</div>						
+												{% endif %}
+								</div>
+								<div class="card-body">								
+												<form action="{{ submit_url}}" method="post" class="row">
+																{% csrf_token %}
+																<table class="table table-sm table-striped col-md-7">
+																				<thead>
+																								<tr>
+																												<th>Items</th>
+																												<th>Values</th>
+																								</tr>																							
+																				</thead>
+																				<tbody>
+																								<tr>
+																												<th>Name(en)</th>
+																												<td>{{ form.name_en }}</td>
+																								</tr>
+																								<tr>
+																												<th>Name(ja)</th>
+																												<td>{{ form.name_ja }}</td>
+																								</tr>
+																								<tr>
+																												<th>Depertment(en)</th>
+																												<td>{{ form.dep_en }}</td>
+																								</tr>
+																								<tr>
+																												<th>Depertment(ja)</th>
+																												<td>{{ form.dep_ja }}</td>
+																								</tr>
+																								<tr>
+																												<th>Mail</th>
+																												<td>{{ form.mail }}</td>
+																								</tr>
+																								<tr>
+																												<th>Date</th>
+																												<td>
+																																<span class="d-block">Join: {{ form.date_join }}</span>
+																																<span class="d-block">Left: {{ form.date_leave }}</span>
+																												</td>
+																								</tr>
+																				</tbody>
+																</table>
 
-				<form action="{{ submit_url}}" method="post">
-						{% csrf_token %}
-						<div class="form-group row">
-								<label for="example-text-input" class="col-2 col-form-label">Name</label>
-								<div class="col-5">{{ form.name_en }}</div>
-								<div class="col-5">{{ form.name_ja }}</div>
-						</div>
-						<div class="form-group row">
-								<label for="example-text-input" class="col-2 col-form-label">Department</label>
-								<div class="col-5">{{ form.dep_en }}</div>
-								<div class="col-5">{{ form.dep_ja }}</div>
-						</div>
-						<div class="form-group row">
-								<label for="example-text-input" class="col-2 col-form-label">Mail</label>
-								<div class="col-5">{{ form.mail }}</div>
-						</div>
-						<div class="form-group row">
-								<label for="example-text-input" class="col-2 col-form-label">Date</label>
-								<div class="col-5">{{ form.date_join }}</div>
-								<div class="col-5">{{ form.date_leave }}</div>
-						</div>
-						{% if author.id %}
-						<button type="submit" class="btn btn-sm btn-primary">Update</button>
-						<a href="{% url 'dashboard:author_detail' author.id %}" class="btn btn-outline-primary btn-sm">Back</a>
-						{% else %}
-						<button type="submit" class="btn btn-sm btn-primary">Add</button>
-						<a href="{% url 'dashboard:author_index' %}" class="btn btn-outline-primary btn-sm">Back</a>
-						{% endif %}
-				</form>
-
-		</div>
+																<div class="col-12">
+																				{% if author.id %}
+																				<button type="submit" class="btn btn-primary">Update</button>
+																				<a href="{% url 'dashboard:author_detail' author.id %}" class="btn btn-outline-primary">Back</a>
+																				{% else %}
+																				<button type="submit" class="btn btn-primary">Add</button>
+																				<a href="{% url 'dashboard:author_index' %}" class="btn btn-outline-primary">Back</a>
+																				{% endif %}
+																</div>
+												</form>
+								</div>
+								
+				</div>
 </div>
 {% endblock content %}
