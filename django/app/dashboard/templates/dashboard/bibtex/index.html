@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% load utils_search %}
+{% load utils_bib_format %}
+{% load utils_bib_index_page_helper %}
+
+
+{% block title %}Dashboard | Table View{% endblock title %}
+
+{% block content %}
+
+<div class="row my-3">
+		<div class="col-12">
+		</div>
+</div>
+<div class="row mb-3 w-100">
+				<div class="col-12 my-3">
+								{% search_box  display_style  GET_params %}
+				</div>
+</div>
+
+<div class="row mb-3 w-100">				
+		<div class="col-12 my-3">
+				<!-- Main Contents: Bibtex List -->
+						{% print_bibtexs %}
+		</div>
+</div>
+{% endblock content %}

@@ -1,9 +1,11 @@
 from django.http import Http404
 from django.shortcuts import get_object_or_404, render
 from django.views import generic
+from django.urls import resolve
 
 import datetime
 from datetime import datetime
+import urllib
 
 from core.models import Author, Bibtex, Book, AuthorOrder, Tag
 from notification import alert
@@ -16,42 +18,48 @@ from dashboard.templatetags import utils_search as utils
 Bibtex
 """
 class IndexView(generic.ListView):
-
+    template_name = 'dashboard/bibtex/index.html'
+    context_object_name = 'latest_bibtex_list'
+    
     def get_queryset(self):
-
-        query_set,self.query_param_dic = utils.perse_get_query_params(self.request)
-
+        self.GET_params = utils.parse_GET_params(self.request)
+        query_set = utils.get_bibtex_query_set(self.GET_params)
+        self.GET_params["num_hits"] = len(query_set)
         return query_set
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["book_style_list"] = ["INTPROC","JOURNAL","CONF_DOMESTIC","CONF_DOMESTIC_NO_REVIEW","CONF_NATIONAL","BOOK","KEYNOTE","NEWS","OTHERS","AWARD"]
-        context["query_params"] = self.query_param_dic
+        context['GET_params'] = self.GET_params
+        current_url_name = resolve(self.request.path_info).url_name
+        if current_url_name != "index":
+            context["display_style"] = current_url_name.split("_")[-1]
         context["year"] = datetime.now().year
         return context
 
-class IndexViewList(IndexView):
-
-    template_name = 'dashboard/bibtex/index_list.html'
+class IndexViewPagination(generic.ListView):
+    template_name = 'dashboard/bibtex/index_page.html'
     context_object_name = 'latest_bibtex_list'
+    paginate_by = 10
+    
+    def get_queryset(self):
+        self.GET_params = utils.parse_GET_params(self.request)
+        query_set = utils.get_bibtex_query_set(self.GET_params)
+        self.GET_params["num_hits"] = len(query_set)
+        return query_set
 
-
-class IndexViewTable(IndexView):
-    template_name = 'dashboard/bibtex/index_tab.html'
-    context_object_name = 'latest_bibtex_list'
-
-class IndexViewBib(IndexView):
-    template_name = 'dashboard/bibtex/index_bib.html'
-    context_object_name = 'latest_bibtex_list'
-
-class IndexViewLatex(IndexView):
-    template_name = 'dashboard/bibtex/index_latex.html'
-    context_object_name = 'latest_bibtex_list'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['GET_params'] = self.GET_params
+        current_url_name = resolve(self.request.path_info).url_name
+        if current_url_name != "index":
+            context["display_style"] = current_url_name.split("_")[-1]
+        context["year"] = datetime.now().year
+        return context    
 
 
 class DetailView(generic.DetailView):
     model = Bibtex
-    template_name = 'dashboard/detail.html'
+    template_name = 'dashboard/bibtex/detail.html'
 
 
 """
@@ -60,19 +68,35 @@ Book
 class BookIndexView(generic.ListView):
     template_name = 'dashboard/book/index.html'
     context_object_name = 'latest_book_list'
-
+    paginate_by = 30
+ 
     def get_queryset(self):
+        self.selected_style = self.request.GET.get("style", "ALL")
+        styles = [s[0] for s in Book.STYLE_CHOICES]
+        key = self.selected_style if self.selected_style in styles else False
+        if key:
+            return Book.objects.filter(style=key,).order_by('title')
         return Book.objects.order_by('title')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["book_style_list"] = ["INTPROC","JOURNAL","CONF_DOMESTIC","CONF_DOMESTIC_NO_REVIEW","CONF_NATIONAL","BOOK","KEYNOTE","NEWS","OTHERS","AWARD"]
+        style_active = None
+        for i, style in enumerate(Book.STYLE_CHOICES):
+            if style[0] == self.selected_style:
+                style_active = style[0]
+                continue
+        context["book_style"] = style_active #context["style"][1]
         return context
 
-
+    
 class BookDetailView(generic.DetailView):
     model = Book
     template_name = 'dashboard/book/detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["latest_bibtex_list"] = Bibtex.objects.filter(book=self.object).order_by('-pub_date')[:20]
+        return context
 
 
 
@@ -83,14 +107,36 @@ Author
 class AuthorIndexView(generic.ListView):
     template_name = 'dashboard/author/index.html'
     context_object_name = 'latest_author_list'
+    paginate_by = 30
 
     def get_queryset(self):
+        self.search_keyword = self.request.GET.get("keyword",)
+        if self.search_keyword:
+            self.search_keyword = urllib.parse.unquote(self.search_keyword)
+            return Author.objects.filter(
+                Q(name_en__icontains=self.search_keyword) |
+                Q(name_ja__icontains=self.search_keyword) |
+                Q(dep_en__icontains=self.search_keyword)  |
+                Q(dep_ja__icontains=self.search_keyword)
+            ).order_by('name_en')
         return Author.objects.order_by('name_en')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["search_keyword"] = self.search_keyword
+        return context
 
 
 class AuthorDetailView(generic.DetailView):
     model = Author
     template_name = 'dashboard/author/detail.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["latest_bibtex_list"] = Bibtex.objects.filter(authors=self.object).order_by('-pub_date')[:20]
+        return context
+
+    
 
 """
 Tag
@@ -105,6 +151,11 @@ class TagIndexView(generic.ListView):
 class TagDetailView(generic.DetailView):
     model = Tag
     template_name = 'dashboard/tag/detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["latest_bibtex_list"] = Bibtex.objects.filter(tags=self.object).order_by('-pub_date')[:20]
+        return context
 
 
 """

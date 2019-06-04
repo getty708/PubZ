@@ -32,11 +32,11 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0, mkdocs-material-3.0.3">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.0.3">
     
     
       
-        <title>Notification - BMAN - Bibtex Mangement System</title>
+        <title>Notification - PubZ - Publication Zoo</title>
       
     
     
@@ -99,7 +99,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../.." title="BMAN - Bibtex Mangement System" class="md-header-nav__button md-logo">
+        <a href="../.." title="PubZ - Publication Zoo" class="md-header-nav__button md-logo">
           
             <i class="md-icon"></i>
           
@@ -113,7 +113,7 @@
           
             
               <span class="md-header-nav__topic">
-                BMAN - Bibtex Mangement System
+                PubZ - Publication Zoo
               </span>
               <span class="md-header-nav__topic">
                 Notification
@@ -161,7 +161,7 @@
   
 
 
-  <a href="https://github.com/getty708/bman/" title="Go to repository" class="md-source" data-md-source="github">
+  <a href="https://github.com/getty708/PubZ/" title="Go to repository" class="md-source" data-md-source="github">
     
       <div class="md-source__icon">
         <svg viewBox="0 0 24 24" width="24" height="24">
@@ -195,12 +195,12 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="../.." title="BMAN - Bibtex Mangement System" class="md-nav__button md-logo">
+    <a href="../.." title="PubZ - Publication Zoo" class="md-nav__button md-logo">
       
         <i class="md-icon"></i>
       
     </a>
-    BMAN - Bibtex Mangement System
+    PubZ - Publication Zoo
   </label>
   
     <div class="md-nav__source">
@@ -210,7 +210,7 @@
   
 
 
-  <a href="https://github.com/getty708/bman/" title="Go to repository" class="md-source" data-md-source="github">
+  <a href="https://github.com/getty708/PubZ/" title="Go to repository" class="md-source" data-md-source="github">
     
       <div class="md-source__icon">
         <svg viewBox="0 0 24 24" width="24" height="24">
@@ -270,18 +270,6 @@
   </li>
 
         
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../release-notes.md" title="Release Notes" class="md-nav__link">
-      Release Notes
-    </a>
-  </li>
-
-        
       </ul>
     </nav>
   </li>
@@ -326,18 +314,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../code/" title="Coding Policy" class="md-nav__link">
-      Coding Policy
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
     <a href="../models/" title="Models" class="md-nav__link">
       Models
     </a>
@@ -364,18 +340,6 @@
   <li class="md-nav__item">
     <a href="../registration/" title="Registration" class="md-nav__link">
       Registration
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../api/" title="API" class="md-nav__link">
-      API
     </a>
   </li>
 
@@ -455,42 +419,6 @@
   </li>
 
     
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
-    
-    <label class="md-nav__link" for="nav-4">
-      User Guide
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-4">
-        User Guide
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../user/index-user/" title="Home" class="md-nav__link">
-      Home
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
   </ul>
 </nav>
                   </div>
@@ -554,12 +482,12 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/getty708/bman/edit/master/docs/dev/notification.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/getty708/PubZ/edit/master/docs/dev/notification.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
                 <h1 id="nofification">Nofification</h1>
 <h2 id="email-settings-of-django">Email Settings of Django</h2>
-<p>Settins are in <code>app/settings.py</code>. For more detail, see <a href="https://docs.djangoproject.com/ja/2.0/topics/email/">here</a>.</p>
+<p>Settings are in <code>app/settings.py</code>. For more detail, see <a href="https://docs.djangoproject.com/ja/2.0/topics/email/">here</a>.</p>
 <h4 id="for-development">For development</h4>
 <div class="codehilite"><pre><span></span><span class="n">EMAIL_BACKEND</span> <span class="o">=</span> <span class="s1">&#39;django.core.mail.backends.console.EmailBackend&#39;</span>
 </pre></div>
@@ -577,7 +505,7 @@
 
 <div class="admonition info">
 <p class="admonition-title">Info</p>
-<p>For development, EMAIL_BACKEND is set to <code>django.core.mail.backends.console.EmailBackend</code>. If you want to send acutual Email, please modifi <code>app/settings.py</code> as above.</p>
+<p>For development, EMAIL_BACKEND is set to <code>django.core.mail.backends.console.EmailBackend</code>. If you want to send acutual Email, please modify <code>app/settings.py</code> as above.</p>
 </div>
                 
                   
@@ -599,7 +527,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../api/" title="API" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../registration/" title="Registration" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -608,25 +536,11 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                API
+                Registration
               </span>
             </div>
           </a>
         
-        
-          <a href="../../user/index-user/" title="Home" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                Home
-              </span>
-            </div>
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-            </div>
-          </a>
         
       </nav>
     </div>
@@ -652,7 +566,7 @@
     
       <script src="../../assets/javascripts/application.583bbe55.js"></script>
       
-      <script>app.initialize({version:"1.0",url:{base:"../.."}})</script>
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       
     
     

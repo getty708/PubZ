@@ -32,6 +32,7 @@ class Bibtex(models.Model):
         'core.Book',
         on_delete=models.PROTECT,
     )
+    book_title = models.CharField(max_length=512,null=True,blank=True, default="")
     volume = models.CharField(max_length=128,null=True,blank=True)
     number = models.CharField(max_length=128, null=True,blank=True)
     chapter = models.IntegerField(null=True,blank=True)
@@ -83,6 +84,20 @@ class Bibtex(models.Model):
             return self.title_en
         elif self.language == 'JA':
             return self.title_ja
+
+    @property
+    def book_title_display(self):
+        if self.book_title:
+            return self.book_title
+        else:
+            return self.book.title
+
+    @property
+    def book_abbr_display(self):
+        if self.book.abbr:
+            return "({abbr} {year})".format(abbr=self.book.abbr, year=self.pub_date.year)
+        else:
+            return None
 
     @property
     def authors_list(self,):
@@ -171,15 +186,22 @@ class Author(models.Model):
 # --------------------------------------------------
 class Book(models.Model):
     STYLE_CHOICES = (
-        ('INTPROC', 'International Proceedings',),
-        ('JOURNAL', 'Journal Paper',),
-        ('CONF_DOMESTIC', 'Domestic Conference',),
-        ('CONF_DOMESTIC_NO_REVIEW', 'Domestic Conference (No Review)',),
-        ('CONF_NATIONAL', 'National Conference'),
-        ('BOOK', 'Book/Review/Editor/Translation',),
-        ('KEYNOTE', 'Keynote/Panel Discution/Seminer'),
-        ('NEWS', 'New Paper article',),
-        ('OTHERS', 'others',),
+        # ('INTPROC', 'International Proceedings',),
+        ('INTPROC', "Int'l Proc.",),
+        # ('JOURNAL', 'Journal Paper',),
+        ('JOURNAL', 'Journal',),
+        # ('CONF_DOMESTIC', 'Domestic Conference',),
+        ('CONF_DOMESTIC', '国内会議',),
+        # ('CONF_DOMESTIC_NO_REVIEW', 'Domestic Conference (No Review)',),
+        ('CONF_DOMESTIC_NO_REVIEW', '国内研究会',),
+        # ('CONF_NATIONAL', 'National Conference'),
+        ('CONF_NATIONAL', '全国大会'),
+        # ('BOOK', 'Book/Review/Editor/Translation',),
+        ('BOOK', 'Book',),
+        # ('KEYNOTE', 'Keynote/Panel Discution/Seminer'),
+        ('KEYNOTE', 'Keynote'),
+        ('NEWS', 'News Paper',),
+        ('OTHERS', 'Others',),
         ('AWARD', 'Award',),
     )
     
@@ -208,9 +230,10 @@ class Book(models.Model):
         )
 
     def __str__(self):
-        if not self.abbr == "":
-            return self.abbr
+        if self.abbr != "":
+            return "{title} ({abbr})".format(title=self.title, abbr=self.abbr)
         return self.title
+
 
 
 # --------------------------------------------------

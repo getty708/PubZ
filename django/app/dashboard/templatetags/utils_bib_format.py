@@ -5,7 +5,7 @@ from django import template
 from django.template.loader import get_template
 register = template.Library()
 
-from core.models import Author, AuthorOrder
+from core.models import Author, AuthorOrder, Book
 
 
 # ----------------------------------------------------------------------------
@@ -17,6 +17,30 @@ from core.models import Author, AuthorOrder
 @register.filter(name='test_format')
 def test_format(bibtex):
     return bibtex
+
+
+@register.filter(name='bibtex_tile_format')
+def bibtex_tile_format(bib, *args,**kwargs):
+    """
+    Args.
+    -----
+    - bibtex: core.Bibtex object
+    """
+    context = {}
+    context["bib"] = bib
+    context["book"] = bib.book
+    
+    # Get Authors
+    authors =  AuthorOrder.objects.filter(bibtex=bib).order_by('order')
+    context["authors"] = [author.author for author in authors]
+
+    # Fill Placeholders
+    bib_style = bib.book.style    
+    template_name = "custom/bibtex/tile/{}.html".format(bib_style)
+    html = get_template(template_name,)
+    html = mark_safe(html.render(context))
+    return html
+
 
 @register.filter(name='bibtex_list_format')
 def bibtex_list_format(bib, *args,**kwargs):
@@ -120,5 +144,14 @@ def bibtex_download_format(bib, *args,**kwargs):
     template_name = "custom/bibtex/bibdownload/{}.html".format(bib_style)
     html = get_template(template_name,)
     html = mark_safe(html.render(context))
-    return html    
-    # return func(bibtex)()
+    return html
+
+
+# ----------------------------------------------------------------------------
+
+# ===================
+#  Utils.
+# ===================
+@register.filter(name='filter_by_book_style')
+def filter_by_book_style(bibtex, book_style):
+    return [bib for bib in bibtex if bib.book.style == book_style]

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'dashboard.apps.DashboardConfig',
     'notification.apps.NotificationConfig',
+    'custom.apps.CustomConfig',
     # Additional Packages
     'dal',
     'dal_select2',

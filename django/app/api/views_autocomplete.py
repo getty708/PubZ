@@ -1,4 +1,5 @@
 from dal import autocomplete
+from django.db.models import Q
 
 from core.models import Author, Book
 
@@ -10,8 +11,10 @@ class AutocompleteAuthor(autocomplete.Select2QuerySetView):
 
         qs = Author.objects.all()
         if self.q:
-            qs = qs.filter(name_en__istartswith=self.q)
-
+            qs = qs.filter(
+                Q(name_en__icontains=self.q) |
+                Q(name_ja__icontains=self.q)
+            )
         return qs
 
 class AutocompleteBook(autocomplete.Select2QuerySetView):
@@ -22,8 +25,9 @@ class AutocompleteBook(autocomplete.Select2QuerySetView):
 
         qs = Book.objects.all()
         if self.q:
-            qs = qs.filter(title__istartswith=self.q)
-
+            qs = qs.filter(
+                Q(title__icontains=self.q) |
+                Q(abbr__istartswith=self.q)
+            )
         return qs
-
 
