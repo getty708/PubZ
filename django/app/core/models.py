@@ -102,14 +102,16 @@ class Bibtex(models.Model):
     @property
     def authors_list(self,):
         author_list = []
-        
         for author in self.authors.all():
             author_dict = author.__dict__
             author_dict["name"] = author.name_ja if self.language == "JA" else author.name_en            
             author_list.append(author_dict)
         return author_list
+
+    @property
+    def author_order_list(self,):
+        return self.authororder_set.all().order_by('order')
     
-        
     @property
     def date_str(self):
         if not self.pub_date:

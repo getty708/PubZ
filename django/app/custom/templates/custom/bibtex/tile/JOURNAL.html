@@ -13,7 +13,12 @@
 																</small>
 												</div>				
 												<div class="col-12">
-																<a href="{% url 'dashboard:bib_detail' bib.id %}" class="text-primary h5">{{ bib.title|remove_brace }}</a>
+																<a href="{% url 'dashboard:bib_detail' bib.id %}" class="text-primary h5">
+																				{{ bib.title|remove_brace }}
+																				{% if not bib.is_published %}
+																				<span class="text-danger">*</span>
+																				{% endif %}																				
+																</a>
 												</div>
 												<div class="col-12">
 																{% for author in authors %}
