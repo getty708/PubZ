@@ -1,4 +1,5 @@
 {% load utils_bib_format %}
+{% load utils_bib_style_helper %}
 
 <!-- Main -->
 {% for bs_key,bs_value in book_styles.items %}
@@ -31,7 +32,7 @@
 																				<td>
 																								{% for author in bibtex.authors_list %}
 																								<a href="{% url 'dashboard:author_detail' author.id %}" class="text-primary d-inline-block" >
-																												{% if bibtex.language == "EN" %}{{ author.name_en }}{% else %}{{ author.name_ja }}{% endif %}
+																												{% if bibtex.language == "EN" %}{{ author.name_en|author_en_google }}{% else %}{{ author.name_ja }}{% endif %}
 																								</a>,
 																								{% endfor%}
 																				</td>
