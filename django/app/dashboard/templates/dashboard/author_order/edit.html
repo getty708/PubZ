@@ -35,12 +35,12 @@
 																				<label for="example-text-input" class="col-2 col-form-label">Order</label>
 																				<div class="col-5">{{ form.order }}</div>
 																</div>
-																{% if book.id %}
+																{% if author_order.id %}
 																<button type="submit" class="btn btn-primary">Update</button>						
-																<a href="{% url 'dashboard:bibtex_detail' book.id %}" class="btn btn-outline-primary btn-sm">Back</a>
+																<a href="{% url 'dashboard:bib_detail' bibtex.id %}" class="btn btn-outline-primary">Back</a>
 																{% else %}
-																<button type="submit" class="btn btn-sm btn-primary">Add</button>
-																<a href="{% url 'dashboard:index' %}" class="btn btn-outline-primary btn-sm">Back to Top</a>
+																<button type="submit" class="btn btn-primary">Add</button>
+																<a href="{% url 'dashboard:index' %}" class="btn btn-outline-primary">Back to Top</a>
 																{% endif %}
 												</form>				
 								</div>				

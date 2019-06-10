@@ -6,26 +6,15 @@ from django import forms
 # Model: Author
 # ===============
 def val_author_name_en_replace_keywords(name_en):
-    if "　" in name_en:
-        return name_en.replace("　", " ").title()
-    elif ", " in name_en:
-        return name_en.replace(", ", " ").title()
-    elif "," in name_en:
-        return name_en.replace(",", " ").title()
-    else:
-        return name_en.title()
+    val = [s.strip().title() for s in name_en.split()]
+    return " ".join(val)
 
 
 def val_author_name_ja_replace_keywords(name_ja):
-    if name_ja is not None:
-        if "　" in name_ja:
-            return name_ja.replace("　", " ")
-        elif ", " in name_ja:
-            return name_ja.replace(", ", " ")
-        elif "," in name_ja:
-            return name_ja.replace(",", " ")
-        else:
-            return name_ja
+    if name_ja:
+        val = [s.strip().replace(",", "").title() for s in name_ja.split()]
+        return " ".join(val)
+    return name_ja
 
 
 def val_author_name_en_lab_rule(name_en):

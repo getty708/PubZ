@@ -1,11 +1,28 @@
 {% extends "base.html" %}
 {% load static %}
+{% load utils_bib_style_helper %}
 
 {% block title %}Dashboard | Bibtex Add{% endblock title %}
 
+
 {% block content %}
-
-
+{{ form.media }} <!-- JS for form (date-picker and autocomplete) -->
+<script>
+$(function () {
+				$('[data-toggle="popover"]').popover()
+});
+$(function(){
+				$("#check_change_book_title").change(function(){
+								console.log($(this), $(this).is(':checked'));
+								
+								if ($(this).is(':checked')){
+												$("#id_book_title").prop("disabled", false);
+								}else{
+												$("#id_book_title").prop("disabled", true);
+								}											
+				});
+});
+</script>
 <div class="row">
 				<div class="col-12 card my-3">
 								<div class="card-body">
@@ -28,6 +45,7 @@
 								</div>
 								
 								<div class="card-body">
+												<span class="text-danger"><b>*</b>: Required Fields</span>												
 												<form action="{{ submit_url }}" method="post">
 																{{ form.non_field_errors }}
 																{% csrf_token %}
@@ -40,14 +58,21 @@
 																				</thead>
 																				<tbody>
 																								<tr>
-																												<th>Language</th>
+																												<th>Language<b class="text-danger">*</b></th>
 																												<th>
 																																{{ form.language.errors }}
 																																{{ form.language }}
 																												</th>
 																								</tr>
 																								<tr>																								
-																												<th scope="col">Title(en)</th>
+																												<th scope="col">
+																																Title(en)<b class="text-danger">*</b>
+																																<button type="button" class="btn btn-sm btn-outline-info rounded-circle" data-container="body" data-toggle="popover" data-placement="bottom"
+																																				title="Title(en)"
+																																				data-content="Please enter an English Title.">
+																																				?
+																																</button>
+																												</th>
 																												<td>		
 																																{{ form.title_en.errors }}
 																																{{ form.title_en }}
@@ -55,23 +80,41 @@
 
 																								</tr>
 																								<tr>
-																												<th scope="col">Title(en)</th>
+																												<th scope="col">
+																																Title(ja)
+																																<button type="button" class="btn btn-sm btn-outline-info rounded-circle" data-container="body" data-toggle="popover" data-placement="bottom"
+																																				title="Title (ja)"
+																																				data-content="日本語タイトルを入力してください.">
+																																				?
+																																</button>																																
+																												</th>
 																												<td>
 																																{{ form.title_ja.errors }}
 																																{{ form.title_ja }}																											
 																												</td>
 																								</tr>
 																								<tr>
-																												<th scope="col">Authors</th>
+																												<th scope="col">
+																																Authors
+																																<button type="button" class="btn btn-sm btn-outline-info rounded-circle" data-container="body" data-toggle="popover" data-placement="bottom"
+																																				title="Author"
+																																				data-content="Click the name to edit the relation between the author and the bibtex.">
+																																				?
+																																</button>
+																												</th>
 																												<td>
-																																{% for author in bibtex.authors_list %}
-																																<a href="{% url 'dashboard:author_detail' author.id %}">{{ author.name }}</a>,
+																																{% for author_order in bibtex.author_order_list %}
+																																<a href="{% url 'dashboard:author_order_edit' author_order.id %}" target="_blank">
+																																				{% if bibtex.language == 'EN' %}{{ author_order.author.name_en|author_en_default }}{% else %}{{ author_order.author.name_en }}{% endif %}({{ author_order.order }})
+																																</a>,
 																																{% endfor %}
-																																<a href="{% url 'dashboard:author_order_add' %}?bibtex={{ bibtex.id }}" class="btn btn-sm btn-outline-primary" target="_blank">Add Author</a>
+																																<a href="{% url 'dashboard:author_order_add' %}?bibtex={{ bibtex.id }}" class="btn btn-sm btn-outline-primary" target="_blank">Add Author</a>																																
 																												</td>
 																								</tr>
 																								<tr>
-																												<th scope="col">Book</th>
+																												<th scope="col">
+																																Book<b class="text-danger">*</b>																																
+																												</th>
 																												<td>
 																																<div class="row mb-3">
 																																				<div class="col-md-8">
@@ -90,11 +133,27 @@
 																																</div>
 																																<div class="row">
 																																				<div class="col-12">
-																																								<div class="border rounded  border-secondary p-1">
-																																												<small>If you need to change a title of the book, Please enter here. (e.g. Percom => Percom2018)</small>
-																																												{{ form.book_title.errors }}
+																																								{{ form.book_title.errors }}
+																																								<div class="input-group input-group-sm mb-3">
+																																												<div class="input-group-prepend">
+																																																<span class="input-group-text" id="inputGroup-sizing-sm">
+																																																				Overwrite Book Title
+																																																</span>
+																																												</div>
+																																												<div class="input-group-prepend">
+																																																<div class="input-group-text" >
+																																																				<input type="checkbox" id="check_change_book_title" aria-label="Checkbox for following text input" {% if bibtex.book_title %}checked="checked"{% endif %}>
+																																																</div>
+																																												</div>																																																
 																																												{{ form.book_title }}
-																																								</div>
+																																												<div class="input-group-prepend px-2">																																																
+																																																<button type="button" class="btn btn-sm btn-outline-info rounded-circle" data-container="body" data-toggle="popover" data-placement="bottom"
+																																																				title="Overwrite Book Title"
+																																																				data-content="If you need to overwrite a title of the book, Please enter here. (e.g. Percom => Percom2018).">
+																																																				?
+																																																</button>
+																																												</div>
+																																								</div>																																												
 																																				</div>
 																																</div>
 																												</td>
@@ -128,13 +187,21 @@
 																												</td>
 																								</tr>
 																								<tr>
-																												<th scope="col">Published</th>
+																												<th scope="col">
+																																Published Date<b class="text-danger">*</b>
+																																<button type="button" class="btn btn-sm btn-outline-info rounded-circle" data-container="body" data-toggle="popover" data-placement="bottom"
+																																				title="Published Data"
+																																				data-content="Set the date of published. If the date is unknow, please set 1st, otherwise check the `Use date info`.">
+																																				?
+																																</button>																																
+																												</th>
 																								<td>
 																												<div class="form-group row">
 																																{{ form.pub_date.errors }}
-																																<label for="example-text-input" class="col-2 col-form-label">Date of Publish <b class="text-danger">*</b></label>
 																																<div class="col-5">{{ form.pub_date }}</div>
-																																<div class="col-2">{{ form.use_date_info }}</div>
+																																<div class="col-5">																	
+																																				Use date info: {{ form.use_date_info }}
+																																</div>
 																												</div>
 																								</td>
 																								</tr>
@@ -151,13 +218,27 @@
 																												</td>
 																								</tr>
 																								<tr>
-																												<th scope="col">URL</th>
+																												<th scope="col">
+																																URL
+																																<button type="button" class="btn btn-sm btn-outline-info rounded-circle" data-container="body" data-toggle="popover" data-placement="bottom"
+																																				title="URL"
+																																				data-content="URL to arXiv, AMC degital library, IEEE, etc... ">
+																																				?
+																																</button>																																
+																												</th>
 																												<td>
 																																{{ form.url }}
 																												</td>
 																								</tr>
 																								<tr>
-																												<th scope="col">Note</th>
+																												<th scope="col">
+																																Note
+																																<button type="button" class="btn btn-sm btn-outline-info rounded-circle" data-container="body" data-toggle="popover" data-placement="bottom"
+																																				title="Memo"
+																																				data-content="If there are some same bibtexs with titles, please use this field to distinguish. ">
+																																				?
+																																</button>
+																												</th>
 																												<td>
 																																{{ form.note }}
 																												</td>
@@ -185,11 +266,15 @@
 
 																<div class="form-group row">
 																				{% if bibtex.is_published %}
-																				<label for="example-text-input" class="col-2 col-form-label">Completed</label>
-																				<div class="col-1">{{ form.is_published }}</div>								
-																				{% else %}
 																				<div class="alert alert-info col-md-10 mx-3" role="alert">
-																								<h5 class="alert-heading">Did you fill all the items?</h5>
+																								<div class="form-group form-check">
+																												{{ form.is_published }}												
+																												<label class="form-check-label" for="exampleCheck1">Good! You already marked this entry as completed.</label>
+																								</div>																				
+																				</div>																				
+																				{% else %}
+																				<div class="alert alert-warning col-md-10 mx-3" role="alert">
+																								<h5 class="alert-heading">Did you fill all items?</h5>
 																								<p>If you finished, please mark as completed. </p>
 																								<hr>
 																								<div class="form-group form-check">
@@ -242,9 +327,5 @@
 				</div>
 				<!-- Modal End-->
 </div>
-<script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
 
-
-
-{{ form.media }}
 {% endblock content %}
