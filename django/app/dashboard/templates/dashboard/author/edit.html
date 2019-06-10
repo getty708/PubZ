@@ -3,7 +3,14 @@
 {% block title %}Dashboard | Author Add{% endblock title %}
 
 {% block content %}
-
+<script>
+$(function () {
+				$('[data-toggle="popover"]').popover()
+});	
+$('.popover-dismiss').popover({
+				trigger: 'focus'
+});
+</script>
 <div class="row">
 				<div class="col-12 card my-3">
 								<div class="card-body">
@@ -37,7 +44,14 @@
 																				</thead>
 																				<tbody>
 																								<tr>
-																												<th>Name(en)</th>
+																												<th>
+																																Name(en)
+																																<button type="button" class="btn btn-sm btn-outline-info rounded-circle" data-container="body" data-toggle="popover" data-placement="bottom"
+																																				title="Name (en)"
+																																				data-content="A comma is needed after a family name!. (e.g. Handai, Taro)">
+																																				?
+																																</button>
+																												</th>
 																												<td>{{ form.name_en }}</td>
 																								</tr>
 																								<tr>

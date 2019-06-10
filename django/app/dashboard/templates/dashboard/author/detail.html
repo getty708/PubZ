@@ -2,6 +2,7 @@
 
 {% block title %}Dashboard | Author {% endblock title %}
 {% load utils_bib_index_page_helper %}
+{% load utils_bib_style_helper %}
 
 {% block content %}
 <div class="row">
@@ -11,7 +12,7 @@
 																<span class="badge badge-primary">Author</span>
 												</div>												
 												<h1 class="h3" >
-																<span class="d-inline-block">{{ author.name_en }}
+																<span class="d-inline-block">{{ author.name_en|author_en_default }}
 												</h1>
 
 												<table class="table table-sm table-striped">
@@ -23,7 +24,7 @@
 																<tbody>
 																				<tr>
 																								<th>Name(en)</th>
-																								<td>{{ author.name_en|default:'-' }}</td>
+																								<td>{{ author.name_en|author_en_default }}</td>
 																				</tr>
 																				<tr>
 																								<th>Name(ja)</th>

@@ -158,7 +158,6 @@ def author_edit(request, author_id=None):
                    'submit_url': submit_url})
 
 
-
 """
 AuthorOrder
 """
@@ -190,8 +189,6 @@ def author_order_edit(request, author_order_id=None):
             author_order_new.save()
             return redirect('dashboard:author_index')
 
-    print(author_order.__dict__)
-    print(bibtex.__dict__)
     form = forms.AuthorOrderForm(instance=author_order)
     return render(request,
                   'dashboard/author_order/edit.html',
