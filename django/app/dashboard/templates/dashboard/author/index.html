@@ -11,20 +11,19 @@
 /* Function to construct URL */
 $(function(){
 				$(".search-button").click(function(){
-								var keyword = $("#search-keyword").val();
-								console.log($(this).attr("page"));
-								if (keyword != ""){
-												keyword = encodeURI(keyword);
-												url = "{{ request.path }}?keyword=" + keyword;
-												if($(this).attr("page")){
-																url += "&page=" + $(this).attr("page");
-												}
-												$(this).attr("href", url);
-								}else{
-												return false;
-								}
+						var keyword = $("#search-keyword").val();
+						console.log($(this).attr("page"));
+						url = "{{ request.path }}?"
+						if (keyword != ""){
+								keyword = encodeURI(keyword);
+								url += "keyword=" + keyword;
+						}
+						if($(this).attr("page")){
+								url += "&page=" + encodeURI($(this).attr("page"));
+						}						
+						$(this).attr("href", url);						
 				});
-});
+ });
 </script>
 <div class="row">
 				<div class="col-12 card my-3">

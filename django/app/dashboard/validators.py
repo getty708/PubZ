@@ -141,7 +141,7 @@ def val_book_title_replace_keywords(title):
     Return.
     -------
     - Title string, some keywords are replaced with registerd format
-    (e.g. Conference => Conf., International => Int'l.)
+    (e.g. Conf. ==> Conference, Int'l ==> International,)
     """
     CHECK_DICT ={
         "Conference": ["conference", "Conf.", "conf.",],
