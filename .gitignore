@@ -675,3 +675,5 @@ django/**/migrations/
 django/app/notification/const.py
 move_utils/
 toolkit/importer/csv/*.csv
+toolkit/importer/csv/*.tsv
+toolkit/importer/csv/keep/

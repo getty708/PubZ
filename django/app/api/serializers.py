@@ -65,7 +65,7 @@ class BibtexSerializer(serializers.ModelSerializer):
             'id','language',
             'pub_date','title_en', 'title_ja',
             "volume","number","page", "pub_date",
-            'book','modified',"book_id",
+            'book','book_title','modified',"book_id",
             'url','note',
             )
 

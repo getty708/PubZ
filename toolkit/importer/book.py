@@ -67,7 +67,7 @@ def get_books(url_base, param, logger=getLogger(__name__+'.get_book')):
     -------
     - list
     """
-    url_with_param = os.join(url_base, "books/?search={}".format(param))
+    url_with_param = os.path.join(url_base, "books/?search={}".format(param))
     headers = {
         "Accept": "application/json",
         "Content-type": "application/json",

@@ -1,3 +1,4 @@
+import os
 import json
 import requests
 from getpass import getpass
@@ -52,7 +53,7 @@ KEYS_CREATE_BIBTEX = [
     "language","title_en","title_ja",
     "volume","number","chapter","page","edition",
     "pub_date","use_data_info",
-    "url","note","memo","book",
+    "url","note","memo","book","book_title",
 ]
 
 
@@ -71,7 +72,7 @@ def get_bibtexs(url_base, param, logger=getLogger(__name__+'.get_bibtex')):
     -------
     - list
     """
-    url_with_param = url_base + "bibtexs/?search={}".format(param)
+    url_with_param = os.path.join(url_base, "bibtexs/?search={}".format(param))
     headers = {
         "Accept": "application/json",
         "Content-type": "application/json",
@@ -100,28 +101,39 @@ def create_bibtex(url_base, token, bibtex_dict, logger=getLogger(__name__+'.crea
     --------
     - True/False
     """
-    # Check payload
-    key_expected, key_actual = set(KEYS_CREATE_BIBTEX), set(bibtex_dict.keys())
-    if not key_expected == key_actual:
-        logger.warning("Check bibtex_dict. some keys are missing or it contains unsed keys. [diff={}]".format(key_expected - key_actual))
-        return False
+    def _validate(bibtex_dic):
+        # Check payload
+        key_expected, key_actual = set(KEYS_CREATE_BIBTEX), set(bibtex_dict.keys())
+        if not key_expected == key_actual:
+            logger.warning("Check bibtex_dict. some keys are missing or it contains unsed keys. [diff={}]".format(
+                key_expected - key_actual))
+            return False
+        return True
 
-    # Get Book Data
-    url_get_book = url_base + "books/"
-    books = get_books(url_base, bibtex_dict["book"]["title"])
-    books_selected = [book for book in books if (book["style"] == bibtex_dict["book"]["style"]) and (book["title"] == bibtex_dict["book"]["title"])]
-    if len(books_selected) == 1:
-        book = books_selected[0]
-        bibtex_dict["book_id"] = book["id"]
-        logger.info("Get Book data: {}".format(book))
-    else:
-        logger.warning("There is some anbiguity to selected book. [got {}]".format(len(books)))
-        logger.warning("Search [{}] ==> {}".format(bibtex_dict["book"], books))
-        return False, "Book is unknow"
+    def _get_book_data(bibtex_dict):
+        url_get_book = os.path.join(url_base, "books/")
+        books = get_books(url_base, bibtex_dict["book"]["title"])
+        books_selected = [book for book in books if (book["style"] == bibtex_dict["book"]["style"]) and (book["title"] == bibtex_dict["book"]["title"])]
+        if len(books_selected) == 1:
+            book = books_selected[0]
+            bibtex_dict["book_id"] = book["id"]
+            logger.info("Get Book data: {}".format(book))
+        else:
+            logger.warning("There is some anbiguity to selected book. [got {}]".format(len(books)))
+            logger.warning("Search [{}] ==> {}".format(bibtex_dict["book"], books))
+            return False, "Book is unknow"
+        return True, bibtex_dict
 
 
+    # Setup
+    if not _validate(bibtex_dict):
+        return False, "Failed: Key missmatch."
+    status, bibtex_dict = _get_book_data(bibtex_dict)    
+    if not status:
+        return False, str(bibtex_dict)
+    
     # Make Post Request
-    url_post = url_base + "bibtexs/"
+    url_post = os.path.join(url_base, "bibtexs/")
     headers = {
         "Accept": "application/json",
         "Content-type": "application/json",
@@ -132,18 +144,18 @@ def create_bibtex(url_base, token, bibtex_dict, logger=getLogger(__name__+'.crea
     logger.debug("- url    : {}".format(url_post))
     logger.debug("- headers: {}".format(headers))
     logger.debug("- params : {}".format(payload))
-    r = requests.post(url_post,  headers=headers, data=json.dumps(payload),)
+    r = requests.post(url_post,  headers=headers, data=json.dumps(payload), verify=False)
 
     # Check Responce
     data = json.loads(r.text)
     logger.debug("Response: status={}, data={}".format(r.status_code, data))
     if r.status_code == 201:
-        logger.info("Success: Create new bibtex.\n")
+        logger.info("Success: Create new bibtex. [{}]".format(bibtex_dict["title_en"]))
         return True, "Created"
     else:
         if str(data) == "['DB IntegrityError']":
             return True, str(data)
-        logger.warning("Failed: Cannot create new bibtex. {} - {}\n".format(
+        logger.warning("Failed: Cannot create new bibtex. {} - {}".format(
             r.status_code, data))
     logger.info("\n")
     return False, str(data)
@@ -191,52 +203,63 @@ def main_csv(args):
     --------
     - pd.DataFrame
     """
-    # Get Token
-    url = args.url_base + "api-token-auth/"
-    token = get_auth_token(url, args.username)
-    logger.debug("Token [{}]: {}".format(args.username, token))
+    def _auth_token():        
+        url = os.path.join(args.url_base, "api-token-auth/")
+        token = get_auth_token(url, args.username)
+        logger.debug("Token [{}]: {}".format(args.username, token))
+        return token
 
-    # Read and Check CSV
-    import pandas as pd
-    df = pd.read_csv(args.file).fillna("")
-    df = df.rename(columns={"bib_{}".format(c):c for c in KEYS_CREATE_BIBTEX+["title"]})
-    df["book"] = df["key_book"]
-    df["language"] = df["language"].str.replace("en", "EN")
-    df["language"] = df["language"].str.replace("ja", "JA")
-    print(df.head())
-    key_expected, key_actual = set(KEYS_CREATE_BIBTEX), set(list(df.columns)+["title_en","title_ja"])
-    if not key_expected <= key_actual:
-        raise ValueError("Check CSV some keys are missing [diff={}]".format(key_expected - key_actual))
+    def _load_csv():
+        import pandas as pd
+        df = pd.read_csv(args.file).fillna("")
+        df = df.rename(columns={"bib_{}".format(c):c for c in KEYS_CREATE_BIBTEX+["title"]})
+        #df["book"] = df["key_book"]
+        df["language"] = df["language"].str.replace("en", "EN")
+        df["language"] = df["language"].str.replace("ja", "JA")
+        print(df.head())
+        key_expected, key_actual = set(KEYS_CREATE_BIBTEX), set(list(df.columns)+["title_en","title_ja"])
+        if not key_expected <= key_actual:
+            raise ValueError("Check CSV some keys are missing [diff={}]".format(key_expected - key_actual))
+        return df
+
+    def _create_bibtexs(df):
+        df["status"] = "None"
+        df["msg"] = ""
+        if args.debug:
+            df = df[200:210].reset_index(drop=True)
+        for i in range(len(df)):
+            row = df.loc[i, :]
+            bibtex_dict = {
+                "language": row["language"],
+                "title_en": row["title"] if row["language"] == "EN" else "",
+                "title_ja": row["title"] if row["language"] == "JA" else "",
+                "volume":   row["volume"],
+                "number":   row["number"],
+                "chapter":  row["chapter"],
+                "page":     row["page"],
+                "edition":  row["edition"],
+                "pub_date": row["pub_date"],
+                "use_data_info": False if row["use_data_info"] == 0 else True,
+                "url": row["url"],
+                "note": row["note"],
+                "memo": row["memo"],
+                "book": {"title": row["book"], "style": row["key_book_style"]},
+                "book_title": row["book_title"],
+            }
+            #raise NotImplementedError("OK!")
+            status, msg = create_bibtex(args.url_base, token, bibtex_dict)
+            df.loc[i, "status"] = status
+            df.loc[i, "msg"] = msg
+        return df
 
 
-    # Create New Bibtexs
-    df["status"] = "None"
-    df["msg"] = ""
-    if args.debug:
-        df = df[200:210].reset_index(drop=True)
-    for i in range(len(df)):
-        row = df.loc[i, :]
-        bibtex_dict = {
-            "language": row["language"],
-            "title_en": row["title"] if row["language"] == "EN" else "",
-            "title_ja": row["title"] if row["language"] == "JA" else "",
-            "volume":   row["volume"],
-            "number":   row["number"],
-            "chapter":  row["chapter"],
-            "page":     row["page"],
-            "edition":  row["edition"],
-            "pub_date": row["pub_date"],
-            "use_data_info": False if row["use_data_info"] == 0 else True,
-            "url": row["url"],
-            "note": row["note"],
-            "memo": row["memo"],
-            "book": {"title": row["book_title"], "style": row["key_book_style"]},
-        }
-        status, msg = create_bibtex(args.url_base, token, bibtex_dict)
-        df.loc[i, "status"] = status
-        df.loc[i, "msg"] = msg
 
+    # == Main == 
+    token = _auth_token()
+    df = _load_csv()
+    df = _create_bibtexs(df)
 
+    
     # Results
     logger.info("=== Results ===")
     df_tried = df[df["status"].isin([True, False])]
@@ -254,7 +277,7 @@ def main_csv(args):
     logger.info("==============")
 
     # Write Results
-    filename = "".join(str(args.file).split(".")[:-1]) + ".results.csv"
+    filename = str(args.file) + ".results.csv"
     df.to_csv(filename)
 
 
