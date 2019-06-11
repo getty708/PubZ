@@ -11,13 +11,13 @@ then
     python auth_token.py --url ${URL} -u ${USER}
 elif [ ${mode} == "author" ]; then
     CSV="./csv/PubZ_Authors.csv"
-    python authors.py CSV \
+    python3 authors.py CSV \
 	   --url-base ${URL_BASE} \
 	   -u ${USER} \
-	   -f ${CSV} < passwd
+	   -f ${CSV}
 elif [ ${mode} == "book" ]; then
     CSV="./csv/PubZ_Books.csv"
-    python book.py CSV \
+    python3 book.py CSV \
 	   --url-base ${URL_BASE} \
 	   -u ${USER} \
 	   -f ${CSV} 

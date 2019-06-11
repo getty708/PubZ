@@ -121,7 +121,7 @@ def create_author(url_base, token, author_dict, logger=getLogger(__name__+'.crea
     data = json.loads(r.text)
     logger.debug("Response: status={}, data={}".format(r.status_code, data))
     if r.status_code == 201:
-        logger.info("Success: Create new author. []")
+        logger.info("Success: Create new author. [{}]".format(author_dict["name_en"]))
         return True, "Created"
     else:
         if "non_field_errors" in data.keys():
@@ -223,7 +223,7 @@ def main_csv(args):
     logger.info("==============")
 
     # Write Results
-    filename = "".join(str(args.file).split(".")[:-1]) + ".results.csv"
+    filename = str(args.file) + ".results"
     df.to_csv(filename)
 
 
