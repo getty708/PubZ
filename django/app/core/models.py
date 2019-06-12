@@ -16,6 +16,19 @@ class Bibtex(models.Model):
         ('5', 'High',),
         ('9', 'Super High',),
     )
+    BIBSTYLE_CHOICES = (
+        ('INTPROC', "Int'l Proc.",), # In the future this will be `INPROC` `in Proc.`
+        ('JOURNAL', 'Journal',),
+        ('CONF_DOMESTIC', '国内会議',),
+        ('CONF_DOMESTIC_NO_REVIEW', '国内研究会',),
+        ('CONF_NATIONAL', '全国大会'),
+        ('BOOK', 'Book',),
+        ('KEYNOTE', 'Keynote'),
+        ('NEWS', 'News Paper',),
+        ('OTHERS', 'Others',),
+        ('AWARD', 'Award',),
+        ('SAMEASBOOK','Same as the Book'),
+    )
     
     """ Fields
     """
@@ -31,6 +44,11 @@ class Bibtex(models.Model):
     book = models.ForeignKey(
         'core.Book',
         on_delete=models.PROTECT,
+    )
+    bib_type = models.CharField(
+        max_length=32,
+        choices=BIBSTYLE_CHOICES,
+        default="SAMEASBOOK",
     )
     book_title = models.CharField(max_length=512,null=True,blank=True, default="")
     volume = models.CharField(max_length=128,null=True,blank=True)
@@ -188,23 +206,33 @@ class Author(models.Model):
 # --------------------------------------------------
 class Book(models.Model):
     STYLE_CHOICES = (
-        # ('INTPROC', 'International Proceedings',),
-        ('INTPROC', "Int'l Proc.",),
-        # ('JOURNAL', 'Journal Paper',),
-        ('JOURNAL', 'Journal',),
-        # ('CONF_DOMESTIC', 'Domestic Conference',),
+        # These options are removed in the feature
+        ('INTPROC', "Int'l Proc.",), 
+        ('JOURNAL', 'Journal',), # = Article
         ('CONF_DOMESTIC', '国内会議',),
-        # ('CONF_DOMESTIC_NO_REVIEW', 'Domestic Conference (No Review)',),
         ('CONF_DOMESTIC_NO_REVIEW', '国内研究会',),
-        # ('CONF_NATIONAL', 'National Conference'),
         ('CONF_NATIONAL', '全国大会'),
-        # ('BOOK', 'Book/Review/Editor/Translation',),
         ('BOOK', 'Book',),
-        # ('KEYNOTE', 'Keynote/Panel Discution/Seminer'),
         ('KEYNOTE', 'Keynote'),
         ('NEWS', 'News Paper',),
-        ('OTHERS', 'Others',),
+        ('OTHERS', 'Others',), # = Misc
         ('AWARD', 'Award',),
+
+        # Official bibtex entries (New)
+        ('ARTICLE','Article'),
+        #('BOOK', 'Book'),
+        ('BOOKLET','Booklet'),
+        #('CONFERENCE','Conference'),
+        ('INBOOK','In Book'),
+        ('INCOLLECTION', 'In Collection'),
+        ('INPROCEEDINGS', 'in Proceedings'),
+        ('MANUAL', 'Manual'),
+        ('MASTERTHESIS','Master Thesis'),
+        # ('MISC','misc'),
+        ('PHDTHESIS','Ph.D Thesis'),
+        ('PROCEEDINGS','Proceedings'),
+        ('TECHREPORT', 'Tech Report'),
+        ('UNPUBLISHED','Unpublished'),
     )
     
     title = models.CharField(max_length=256)
