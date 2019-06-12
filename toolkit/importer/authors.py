@@ -1,3 +1,4 @@
+import os
 import json
 import requests
 from getpass import getpass
@@ -25,7 +26,6 @@ def make_parser():
                                 help="URL to get auth token")
     single_parser.add_argument('-u', '--username', required=True,
                                 help="User ID (email)")
-
 
     # CSV
     csv_parser = subparsers.add_parser('CSV')
@@ -66,13 +66,13 @@ def get_authors(url_base, param, logger=getLogger(__name__+'.get_authot')):
     -------
     - list
     """
-    url_with_param = url_base + "authors/?search={}".format(param)
+    url_with_param = os.path.join(url_base, "authors/?search={}".format(param))
     headers = {
         "Accept": "application/json",
         "Content-type": "application/json",
         # "Authorization": "Token {}".format(token),
     }
-    r = requests.get(url_with_param, headers=headers)
+    r = requests.get(url_with_param, headers=headers, verify=False)
     logger.debug(r.status_code)
     if r.status_code in [200,]:
         data = json.loads(r.text)
@@ -104,7 +104,7 @@ def create_author(url_base, token, author_dict, logger=getLogger(__name__+'.crea
         return False
 
     # Make Post Request
-    url_post = url_base + "authors/"
+    url_post = os.path.join(url_base, "authors/")
     headers = {
         "Accept": "application/json",
         "Content-type": "application/json",
@@ -115,20 +115,19 @@ def create_author(url_base, token, author_dict, logger=getLogger(__name__+'.crea
     logger.debug("- url    : {}".format(url_post))
     logger.debug("- headers: {}".format(headers))
     logger.debug("- params : {}".format(payload))
-    r = requests.post(url_post,  headers=headers, data=json.dumps(payload),)
+    r = requests.post(url_post,  headers=headers, data=json.dumps(payload),  verify=False)
 
     # Check Responce
     data = json.loads(r.text)
     logger.debug("Response: status={}, data={}".format(r.status_code, data))
     if r.status_code == 201:
-        logger.info("Success: Create new author.\n")
+        logger.info("Success: Create new author. [{}]".format(author_dict["name_en"]))
         return True, "Created"
     else:
-        # if str(data) == "{'non_field_errors': ['The fields name_en, mail must make a unique set.']}":
         if "non_field_errors" in data.keys():
-            logger.warning("Failed: Already exists (DB internal error.)\n")
+            logger.warning("Failed: Already exists (DB internal error.)")
             return True, str(data)
-        logger.warning("Failed: Cannot create new book. {}\n".format(data))
+        logger.warning("Failed: Cannot create new book. {}".format(data))
     return False, str(data)
 
 
@@ -166,38 +165,46 @@ def main_csv(args):
     --------
     - pd.DataFrame
     """
-    # Get Token
-    url = args.url_base + "api-token-auth/"
-    token = get_auth_token(url, args.username)
-    logger.debug("Token [{}]: {}".format(args.username, token))
-
-    # Read and Check CSV
-    import pandas as pd
-    df = pd.read_csv(args.file).fillna("")
-    print(df.head())
-    key_expected, key_actual = set(KEYS_CREATE_AUTHOR), set(df.columns)
-    if not key_expected <= key_actual:
-        raise ValueError("Check CSV some keys are missing [diff={}]".format(key_expected - key_actual))
+    def _auth_token():        
+        url = os.path.join(args.url_base, "api-token-auth/")
+        token = get_auth_token(url, args.username)
+        logger.debug("Token [{}]: {}".format(args.username, token))
+        return token
 
 
-    # Create New Authors
-    df["status"] = "None"
-    df["msg"] = ""
-    if args.debug:
-        df = df[:10].reset_index(drop=True)
-    for i in range(len(df)):
-        row = df.loc[i, :]
-        author_dict = {
-            "name_en": row["name_en"],
-            "name_ja": row["name_ja"],
-            "dep_en":  row["dep_en"],
-            "dep_ja":  row["dep_ja"],
-            "mail":    row["mail"],
-        }
-        status, msg = create_author(args.url_base, token, author_dict)
-        df.loc[i, "status"] = status
-        df.loc[i, "msg"] = msg
+    def _load_csv():
+        import pandas as pd
+        df = pd.read_csv(args.file).fillna("")
+        print(df.head())
+        key_expected, key_actual = set(KEYS_CREATE_AUTHOR), set(df.columns)
+        if not key_expected <= key_actual:
+            raise ValueError("Check CSV some keys are missing [diff={}]".format(key_expected - key_actual))
+        return df
 
+
+    def _create_users(df):
+        df["status"] = "None"
+        df["msg"] = ""
+        if args.debug:
+            df = df[:10].reset_index(drop=True)
+        for i in range(len(df)):
+            row = df.loc[i, :]
+            author_dict = {
+                "name_en": row["name_en"],
+                "name_ja": row["name_ja"],
+                "dep_en":  row["dep_en"],
+                "dep_ja":  row["dep_ja"],
+                "mail":    row["mail"],
+            }
+            status, msg = create_author(args.url_base, token, author_dict)
+            df.loc[i, "status"] = status
+            df.loc[i, "msg"] = msg
+        return df
+
+    # == Main == 
+    token = _auth_token()
+    df = _load_csv()
+    df = _create_users(df)
 
     # Results
     logger.info("=== Results ===")
@@ -216,7 +223,7 @@ def main_csv(args):
     logger.info("==============")
 
     # Write Results
-    filename = "".join(str(args.file).split(".")[:-1]) + ".results.csv"
+    filename = str(args.file) + ".results"
     df.to_csv(filename)
 
 

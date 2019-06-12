@@ -38,7 +38,7 @@ def get_auth_token(url, user, logger=getLogger(__name__+'.get_auth_token')):
     logger.debug("- url    : {}".format(url))
     logger.debug("- headers: {}".format(headers))
     logger.debug("- params : {}".format(payload))
-    r = requests.post(url,  headers=headers, data=json.dumps(payload),)
+    r = requests.post(url,  headers=headers, data=json.dumps(payload), verify=False)
 
     # Check Responce
     data = json.loads(r.text)

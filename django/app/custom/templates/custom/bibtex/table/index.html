@@ -22,11 +22,11 @@
 																<tr>
 																				<th scope="row">{{ forloop.counter }}</th>
 																				<td>
-																								{% if bibtex.title_en %}
-																								{{ bibtex.title_en}}
-																								{% else %}
-																								{{ bibtex.title_ja }}
-																								{% endif %}
+																						{% if bibtex.title_en  or not author.name_ja %}
+																						{{ bibtex.title_en}}
+																						{% else %}
+																						{{ bibtex.title_ja }}
+																						{% endif %}
 																				</td>
 																				<td>{{ bibtex.book.title }}</td>
 																				<td>

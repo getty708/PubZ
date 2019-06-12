@@ -1,3 +1,4 @@
+import os
 import json
 import requests
 from getpass import getpass
@@ -86,106 +87,124 @@ def get_author_orders(url_base, param, logger=getLogger(__name__+'.get_author_or
 """
 POST
 """
-def create_author_order(url_base, token, author_order_dict, logger=getLogger(__name__+'.create_author_order')):
+def create_author_order(url_base, token, data, logger=getLogger(__name__+'.create_author_order')):
     """
     Args.
     -----
     - url         : str, API Endpoint
     - token       : str, Authentication Token
-    - author_order_dict : dict object which contains ["bibtex_title", "authors",]
+    - data : dict object which contains ["bibtex_title", "authors",]
 
     Returns.
     --------
     - True/False
     """
-    # Check payload
-    key_expected, key_actual = set(["bibtex", "authors"]), set(author_order_dict.keys())
-    if not key_expected == key_actual:
-        logger.warning("Check author_order_dict. some keys are missing or it contains unsed keys. [diff={}]".format(key_expected - key_actual))
-        raise ValueError("Check author_order_dict")
-
-    # Get Bibtex Data
-    url_get_bibtex = url_base + "bibtexs/"
-    bibtexs = get_bibtexs(url_base, author_order_dict["bibtex"]["title"])
-    bibtexs_selected = [bibtex for bibtex in bibtexs if (bibtex["title_en"] == author_order_dict["bibtex"]["title"]) or (bibtex["title_ja"] == author_order_dict["bibtex"]["title"])]
-    if len(bibtexs_selected) == 1:
-        bibtex = bibtexs_selected[0]
-        bibtex["title"] = author_order_dict["bibtex"]["title"]
-        bibtex_id = bibtex["id"]
-        logger.info("Get Bibtex data: {}".format(bibtex))
-    else:
-        logger.warning("There is some anbiguity to selected bibtex. [got {}]".format(len(bibtexs)))
-        logger.warning("Search [{}] ==> {}".format(author_order_dict["bibtex"], bibtexs))
-        df_tmp = pd.DataFrame({
-            "bibtex_title": [author_order_dict["bibtex"]["title"]],
-            "bibtex_id"   : [-1,],
-            "no"          : [0,],
-            "author"      : [author_order_dict["authors"],],
-            "status"      : [False],
-            "msg"         : ["Bibtex not found [Got{}]".format(len(bibtexs)),],
-        })
-        return df_tmp
-
-    
     # Make Post Request
-    url_post = url_base + "author-orders/"
-    headers = {
+    URL_POST = os.path.join(url_base, "author-orders/")
+    HEADERS = {
         "Accept": "application/json",
         "Content-type": "application/json",
         "Authorization": "Token {}".format(token),
     }
-    logger.debug("Make Requests:")
-    logger.debug("- url    : {}".format(url_post))
-    logger.debug("- headers: {}".format(headers))
-    logger.debug("- params : {}".format(author_order_dict))
+    
+    def _validate():
+        key_expected, key_actual = set(["bibtex","book","pub_date","page","authors"]), set(data.keys())
+        if not key_expected == key_actual:
+            logger.warning("Check `data`. some keys are missing or it contains unsed keys. [diff={}]".format(
+                key_expected - key_actual))
+            raise ValueError("Check author_order_dict")
 
-    df_ret = []
-    authors_list = [a.strip() for a in author_order_dict["authors"].split(",")]
-    for no,_author in enumerate(authors_list):
-        row = [bibtex["title"],bibtex_id, no, _author,]
+    # Get Bibtex Data
+    def _get_bibtex(bib_title, book, pub_date, page,):
+        def _check(bibtexs):
+            ret = []
+            for bib in bibtexs:
+                if (bib["title_en"] == bib_title) or (bib["title_ja"] == bib_title):
+                    if (bib["book"]["title"] == book) and (bib["pub_date"] == pub_date) and (bib["page"] == page):
+                        return bib
+            raise ValueError("No bibtex entry was found. [Search Results={}]".format(len(bibtexs)))
+        
+        bibtexs = get_bibtexs(url_base, bib_title)
+        bibtex = _check(bibtexs)
+        logger.info("Get Bibtex data: {}".format(bibtex))
+        return bibtex
+
+    def _get_author(author_name):
+        def _check_name(author_name, author_db):
+            name_en = author_db["name_en"].upper()
+            name_ja = "".join(author_db["name_ja"].split())
+            #print(author_name, "=>", name_en, name_ja)
+            if author_name.upper() == name_en:
+                return True
+            elif len(name_ja) > 0 and (name_ja == "".join(author_name.split())):
+                # Japanene Version
+                return True
+            elif len(name_en.split(",")) == 2 and len(author_name.split()) == 2:
+                _name1 = [s.upper() for s in author_name.split()]
+                _name2 = [s.strip() for s in name_en.split(",")]
+                #print(_name1, _name2, _name1[0] == _name2[0], _name1[1] == _name2[1], _name1[0] == _name2[1], _name1[1] == _name2[0],)
+                if (_name1[0] == _name2[0]) and (_name1[1] == _name2[1]):   # FamilyName + FirstName
+                    return True
+                elif (_name1[0] == _name2[1]) and (_name1[1] == _name2[0]): # FirstName + FamilyName
+                    return True
+            return False
+                
+        for _author in [s.strip() for s in author_name.split()]:
+            for author_db in get_authors(url_base, _author):
+                if  _check_name(author_name, author_db, ):
+                    return author_db
+        return None
+
+    # == Main ==
+    _validate()
+    bibtex = _get_bibtex(
+        data["bibtex"],
+        data["book"],
+        data["pub_date"],
+        data["page"],
+    )
+
+    
+    authors_list = [a.strip() for a in data["authors"].split(",")]
+    authors_success, authors_fail = [], []
+    for no, author_name in enumerate(authors_list):
+        #print(author_name)
         # Get Author Data
-        url_get_author = url_base + "authors/"
-        _author = _author.strip()
-        authors = get_authors(url_base, _author)
-        authors_selected = [author for author in authors if (_author == author["name_en"].upper()) or (_author == author["name_ja"].upper())]
-        if len(authors_selected) == 1:
-            author = authors_selected[0]
-            author_id = author["id"]
-            logger.info("Get Author data: {}".format(author))
-        else:
-            logger.warning("There is some anbiguity to selected author. [got {}]".format(len(authors)))
-            logger.warning("Search [{}] ==> {}".format(_author, authors))
-            row = row + [False, "Author is unknow [Got {}]".format(len(authors))]
-            df_ret.append(row)
+        author = _get_author(author_name)
+        if author == None:
+            authors_fail.append("{}[AuthorNotFound]".format(author_name))
             continue
-            
+        
         # Post
         payload = {
-            "bibtex_id": bibtex_id,
-            "author_id": author_id,
+            "bibtex_id": bibtex["id"],
+            "author_id": author["id"],
             "order":     no+1,
         }
-        r = requests.post(url_post,  headers=headers, data=json.dumps(payload),)
+        r = requests.post(URL_POST,  headers=HEADERS, data=json.dumps(payload),)
         ## Check Responce
-        logger.info("Response: status={}".format(r.status_code))            
-        data = json.loads(r.text)
-        logger.debug("Response: status={}, data={}".format(r.status_code, data))
+        logger.info("Response: status={} [{}]".format(r.status_code,author_name))
+        _data = json.loads(r.text)
         if r.status_code == 201:
-            logger.info("Success: Create new author_order.\n")
-            row = row + [True, "Created"]
-            df_ret.append(row)
+            logger.info("Success: Create new author_order. [Bib{} - {} ({})]".format(bibtex["id"],author_name,no+1))
+            authors_success.append(author_name)
             continue
         else:
-            if str(data) == "['DB IntegrityError']":
-                row = row + [True, str(data)]
-                df_ret.append(row)
-                continue            
-            logger.warning("Failed: Cannot create new author_order. {} \n".format(data))
-            row = row + [False, str(data)]
-            df_ret.append(row)
-            continue
-    return pd.DataFrame(df_ret, columns=["bibtex_titele", "bibtex_id", "no", "author", "status", "msg"])
+            if str(_data) == "['DB IntegrityError']":
+                authors_success.append("{}[{}]".format(author_name,"DB IntegrityError"))
+                continue
+            logger.warning("Failed: Cannot create new author_order. {} \n".format(_data))
+            authors_fail.append("{}[{}]".format(author_name, _data))
 
+    # Summry
+    ret = {
+        "bib_title": data["bibtex"],
+        "bib_id": bibtex["id"],
+        "author_success": authors_success,
+        "author_fail": authors_fail,
+        "status": True,
+    }
+    return ret
 
 # -----------------------------------------------------------------------
 """
@@ -219,35 +238,59 @@ def main_csv(args):
     - pd.DataFrame
     """    
     # Get Token
-    url = args.url_base + "api-token-auth/"
-    token = get_auth_token(url, args.username)
-    logger.debug("Token [{}]: {}".format(args.username, token))
+    def _get_auth_token():
+        url = os.path.join(args.url_base, "api-token-auth/")
+        token = get_auth_token(url, args.username)
+        logger.debug("Token [{}]: {}".format(args.username, token))
+        return token
     
-    # Read and Check CSV
-    import pandas as pd
-    df = pd.read_csv(args.file).fillna("")
-    print(df.head())
-    key_expected, key_actual = set(["bib_title","keys_author",]), set(list(df.columns))
-    if not key_expected <= key_actual:
-        raise ValueError("Check CSV some keys are missing [diff={}]".format(key_expected - key_actual))
+    def _load_csv():
+        import pandas as pd
+        df = pd.read_csv(args.file).fillna("")
+        print(df.head())
+        key_expected, key_actual = set(["bib_title","keys_author",]), set(list(df.columns))
+        if not key_expected <= key_actual:
+            raise ValueError("Check CSV some keys are missing [diff={}]".format(key_expected - key_actual))
+        return df
 
-    # Create New Author_Orders
-    df["status"] = "None"
-    df["msg"] = ""
-    df_results = pd.DataFrame()
-    if args.debug:
-        df = df[1130:1140].reset_index(drop=True)
-    for i in range(len(df)):
-        row = df.loc[i, :]
-        author_order_dict = {
-            "bibtex" : {"title": row["bib_title"]},
-            "authors": row["keys_author"],
-        }
-        df_tmp = create_author_order(args.url_base, token, author_order_dict)
-        df_results = pd.concat([df_results, df_tmp], axis=0)
-    df_results = df_results.reset_index(drop=False)
-    print(df_results)
+    def _create_author_orders(df):
+        df["status"] = "None"
+        df["msg"] = ""
+        df_ret = []
+        if args.debug:
+            df = df[:10].reset_index(drop=True)
+        for i in range(len(df)):
+            row = df.loc[i, :]
+            author_order_dict = {
+                "bibtex"  : row["bib_title"],
+                "book"    : row["book"],
+                "pub_date": row["bib_pub_date"],
+                "page"    : row["bib_page"],
+                "authors" : row["keys_author"],
+            }
+            try:                
+                status = create_author_order(args.url_base, token, author_order_dict)
+                df_ret.append(status)                
+            except ValueError as e:
+                logger.warning("ValueError: {}".format(e))
+                status = {
+                    "bib_title":row["bib_title"],
+                    "bib_id": -1,
+                    "author_success": None,
+                    "author_fail": row["keys_author"],
+                    "status": False,
+                    "Error": e,
+                }
+                df_ret.append(status)
+            #raise NotImplementedError("OK!")
+        df_ret = pd.DataFrame(df_ret)
+        return df_ret
 
+    # == Main ==
+    token = _get_auth_token()
+    df = _load_csv()
+    df_results = _create_author_orders(df)
+    
     # Results
     logger.info("=== Results ===")
     df_tried = df_results[df_results["status"].isin([True, False])]
@@ -260,7 +303,7 @@ def main_csv(args):
     for no,idx in enumerate(df_error.index):
         logger.info("- No.{}: {}".format(
             no,
-            df_error.loc[idx, ["status", "msg", "bibtex_id", "author"]].values,))
+            df_error.loc[idx, ["status", "Error", "bib_id", "author_fail"]].values,))
     logger.info("==============")
 
     # Write Results

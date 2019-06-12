@@ -21,13 +21,13 @@ class BookAdmin(admin.ModelAdmin):
 @admin.register(Bibtex)
 class BibtexAdmin(admin.ModelAdmin):
     list_display = ('id','pub_date','get_title','book','created','modified','owner')
-    list_display_links = ('get_title',)
+    list_display_links = ('id', 'get_title',)
 
     def get_title(self, obj):
         if obj.language == 'EN':
             return obj.title_en
         elif obj.language == 'JA':
-            return obj.title_en
+            return obj.title_ja
         return "Bibtex[{}]".format(obj.id)
     get_title.short_description = 'Title'
         
