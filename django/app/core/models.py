@@ -68,7 +68,7 @@ class Bibtex(models.Model):
     
     class Meta:
         unique_together = (
-            ("title_en", "book", "pub_date","memo",),
+            ("title_en", "book", "pub_date","memo", "page",),
         )
     
     def __str__(self):

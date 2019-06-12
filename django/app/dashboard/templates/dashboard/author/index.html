@@ -64,7 +64,7 @@ $(function(){
 																								</th>
 																								<td>
 																												<a href="{% url 'dashboard:author_detail' author.id  %}">
-																																{{ author.name_en|author_en_default }}
+																																{{ author.name_en }}
 																																{% if author.name_ja %}<sapn class="px-1">/ {{ author.name_ja }}</sapn>{% endif %}
 																												</a>																												
 																								</td>
