@@ -2,6 +2,7 @@
 
 {% block title %}Bibtex| {{ bibtex }}{% endblock title %}
 {% load utils_bib_format %}
+{% load utils_bib_style_helper %}
 
 {% block content %}
 <div class="row">
@@ -28,7 +29,12 @@
 																												<th scope="col">Authors</th>
 																												<td>
 																																{% for author in bibtex.authors.all %}
-																																<a href="{% url 'dashboard:author_detail' author.id %}" class="btn btn-sm btn-outline-primary d-inline-flex" >{% if bibtex.language == "EN" %}{{ author.name_en }}{% else %}{{ author.name_ja }}{% endif %}</a>
+																														<a href="{% url 'dashboard:author_detail' author.id %}" class="btn btn-sm btn-outline-primary d-inline-flex" >
+																																{% if bibtex.language == "EN" or not author.name_ja %}
+																																{{ author.name_en|author_en_default }}
+																																{% else %}
+																																{{ author.name_ja }}
+																																{% endif %}</a>
 																																{% endfor %}
 																												</td>
 																								</tr>
