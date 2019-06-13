@@ -162,8 +162,30 @@ $(function(){
 																												<th scope="col">(Detail)</th>
 																												<td class="row">
 																																<div class="col-12">
+																																				<div class="form-group row">
+																																								{{ form.page.errors }}
+																																								<label for="example-text-input" class="col-2 col-form-label">
+																																												Bibtex Type
+																																								</label>
+																																								<div class="col-5">
+																																												<div class="d-inline-block">
+																																																{{ form.bib_type }}
+																																												</div>
+																																												<div class="d-inline-block">
+																																																<button type="button" class="btn btn-sm btn-outline-info rounded-circle" data-container="body" data-toggle="popover" data-placement="bottom"
+																																																				title="Bibtex Type"
+																																																				data-content="If this entry is for an award, select `Award`. Otherwize, select `Same as the Book`">
+																																																				?
+																																																</button>
+																																												</div>
+																																												<div class="d-inline-block small text-muted">
+																																																Bibtex type of the selected book:
+																																																<span class="border border-info badge-pill text-info small">{{ bibtex.book.get_style_display|default:'-' }}</span>
+																																												</div>																																												
+																																								</div>
+																																				</div>																																				
 																																				{% if bibtex.book.style != 'KEYNOTE' %}
-																																				{% if bibtex.book.style != 'AWARD' %}
+																																				{% if bibtex.book.style != 'AWARD' %}																																				
 																																				<div class="form-group row">
 																																								{{ form.volume.errors }}
 																																								<label for="example-text-input" class="col-2 col-form-label">Volume / Number / Chapter</label>

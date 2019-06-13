@@ -56,7 +56,10 @@ def get_bibtex_query_set(params):
     # Book_style
     book_style = params.get('book_style')
     if (not book_style == None) and (not book_style == "ALL"):
-        bibtex_queryset = bibtex_queryset.filter(book__style=book_style)
+        bibtex_queryset = bibtex_queryset.filter(
+            Q(bib_type=book_style) |
+            Q(book__style=book_style)
+        )
 
     # Filter by published year
     period_method = params.get('period_method', 'all')

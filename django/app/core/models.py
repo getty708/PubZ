@@ -17,15 +17,6 @@ class Bibtex(models.Model):
         ('9', 'Super High',),
     )
     BIBSTYLE_CHOICES = (
-        ('INTPROC', "Int'l Proc.",), # In the future this will be `INPROC` `in Proc.`
-        ('JOURNAL', 'Journal',),
-        ('CONF_DOMESTIC', '国内会議',),
-        ('CONF_DOMESTIC_NO_REVIEW', '国内研究会',),
-        ('CONF_NATIONAL', '全国大会'),
-        ('BOOK', 'Book',),
-        ('KEYNOTE', 'Keynote'),
-        ('NEWS', 'News Paper',),
-        ('OTHERS', 'Others',),
         ('AWARD', 'Award',),
         ('SAMEASBOOK','Same as the Book'),
     )
@@ -118,6 +109,18 @@ class Bibtex(models.Model):
             return None
 
     @property
+    def bib_type_key(self,):
+        if self.bib_type == "SAMEASBOOK":
+            return self.book.style
+        return self.bib_type
+
+    @property
+    def bib_type_display(self,):
+        if self.bib_type == "SAMEASBOOK":
+            return self.book.get_style_display()
+        return self.get_bib_type_display()
+
+    @property
     def authors_list(self,):
         author_list = []
         for author in self.authors.all():
@@ -207,32 +210,50 @@ class Author(models.Model):
 class Book(models.Model):
     STYLE_CHOICES = (
         # These options are removed in the feature
-        ('INTPROC', "Int'l Proc.",), 
-        ('JOURNAL', 'Journal',), # = Article
-        ('CONF_DOMESTIC', '国内会議',),
-        ('CONF_DOMESTIC_NO_REVIEW', '国内研究会',),
-        ('CONF_NATIONAL', '全国大会'),
-        ('BOOK', 'Book',),
-        ('KEYNOTE', 'Keynote'),
-        ('NEWS', 'News Paper',),
-        ('OTHERS', 'Others',), # = Misc
-        ('AWARD', 'Award',),
-
+        #('INTPROC', "Int'l Proc.",),  # Alias of `in Proceedings`
+        #('JOURNAL', 'Journal',), # Alias of `Article`
+        # ('CONF_DOMESTIC', '国内会議',),
+        # ('CONF_DOMESTIC_NO_REVIEW', '国内研究会',),
+        # ('CONF_NATIONAL', '全国大会'),
+        # ('BOOK', 'Book',),        
+        #('KEYNOTE', 'Keynote'),  # Alias of `Misc`
+        # ('NEWS', 'News Paper',), # Alias of `in Book`
+        #('OTHERS', 'Others',),   # Alias of `Misc`
+        #('AWARD', 'Award',),     # This will be remobed in the future.
+        
         # Official bibtex entries (New)
-        ('ARTICLE','Article'),
-        #('BOOK', 'Book'),
+        #('ARTICLE','Article'),
+        ('ARTICLE',(
+            ('ARTICLE', "Article"),
+            ('JOURNAL', 'Journal'),
+        ),),
+        ('INPROCEEDINGS', (
+            ('INTPROC', "Int'l Proc.",),
+            ('INPROCEEDINGS', 'in Proceedings'),            
+            ('CONF_DOMESTIC', '国内会議',),
+            ('CONF_DOMESTIC_NO_REVIEW', '国内研究会',),
+            ('CONF_NATIONAL', '全国大会'),
+        ),),
+        ('BOOK', 'Book',),
+        ('INBOOK',(
+            ('INBOOK', 'in Book'),
+            ('NEWS', 'News Paper',),            
+        ),),
+        ('MISC', (
+            ('MISC', 'Misc'),
+            ('KEYNOTE', 'Keynote'),            
+            ('OTHERS', 'Others',),
+        ),),
+        ('TECHREPORT', 'Tech Report'),
+
         ('BOOKLET','Booklet'),
-        #('CONFERENCE','Conference'),
-        ('INBOOK','In Book'),
-        ('INCOLLECTION', 'In Collection'),
-        ('INPROCEEDINGS', 'in Proceedings'),
+        ('INCOLLECTION', 'in Collection'),
         ('MANUAL', 'Manual'),
         ('MASTERTHESIS','Master Thesis'),
-        # ('MISC','misc'),
         ('PHDTHESIS','Ph.D Thesis'),
         ('PROCEEDINGS','Proceedings'),
-        ('TECHREPORT', 'Tech Report'),
         ('UNPUBLISHED','Unpublished'),
+        ('AWARD', 'Award',),
     )
     
     title = models.CharField(max_length=256)
@@ -263,6 +284,10 @@ class Book(models.Model):
         if self.abbr != "":
             return "{title} ({abbr})".format(title=self.title, abbr=self.abbr)
         return self.title
+
+            
+        
+        
 
 
 

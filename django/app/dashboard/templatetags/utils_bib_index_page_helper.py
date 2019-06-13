@@ -23,9 +23,10 @@ def print_bibtexs(context,):
     except IndentationError:
         template_name = "custom/bibtex/tile/index.html"
         html = get_template(template_name,)
+
     html = mark_safe(html.render({
         'latest_bibtex_list': context['latest_bibtex_list'],
-        'book_styles': dict(Book.STYLE_CHOICES),
+        'book_styles': get_style_keys()
     }))
     return html
 
@@ -33,3 +34,14 @@ def print_bibtexs(context,):
 # # -----------------------------------------------------------
 # def parse_GET_query_params(request):
 #     pass
+
+
+def get_style_keys():
+    ret = []
+    for t in Book.STYLE_CHOICES:
+        if isinstance(t[1], tuple):
+            for t2 in t[1]:
+                ret.append(t2)
+        else:
+            ret.append(t)
+    return dict(ret)
