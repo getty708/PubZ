@@ -79,11 +79,23 @@
 																												<a href="{% url 'dashboard:tag_detail' tag.id %}" class="btn btn-sm btn-outline-primary d-inline-flex" >{{ tag.name }}</a>
 																												{% endfor %}
 																										</td>
-																								</tr>																								
+																								</tr>
 																								<tr>
 																										<th scope="col">Abstruct</th>
 																										<td>
 																												{{ bibtex.abstruct|default:'-' }}
+																										</td>
+																								</tr>																								
+																								<tr>
+																										<th scope="col">Acceptance Rate</th>
+																										<td>
+																												{{ bibtex.acceptance_rate|default:'-' }}
+																										</td>
+																								</tr>
+																								<tr>
+																										<th scope="col">Impact Factor</th>
+																										<td>
+																												{{ bibtex.impact_factor|default:'-' }}
 																										</td>
 																								</tr>
 																								<tr>
@@ -99,17 +111,15 @@
 																										</td>
 																								</tr>
 																								<tr>
-																										<th scope="col">Acceptance Rate</th>
+																										<th scope="col">URL</th>
 																										<td>
-																												{{ bibtex.acceptance_rate|default:'-' }}
+																												{% if bibtex.url %}
+																												<a href="{{ bibtex.url }}" >{{ bibtex.url|default:'-' }}</a>
+																												{% else %}
+																												-
+																												{% endif %}
 																										</td>
-																								</tr>
-																								<tr>
-																										<th scope="col">Impact Factor</th>
-																										<td>
-																												{{ bibtex.impact_factor|default:'-' }}
-																										</td>
-																								</tr>																								
+																								</tr>																																																
 																								<tr>
 																												<th scope="col">Bibtex</th>
 																												<td>

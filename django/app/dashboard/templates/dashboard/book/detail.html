@@ -64,6 +64,12 @@
 																												{{ book.address|default:'-' }}
 																								</td>
 																				</tr>
+																				<tr>
+																						<th>Note</th>
+																						<td>
+																								{{ book.note|default:'-' }}
+																						</td>
+																				</tr>																				
 																</tbody>
 												</table>
 												{% if user.is_authenticated %}												

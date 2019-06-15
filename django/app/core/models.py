@@ -18,7 +18,7 @@ class Bibtex(models.Model):
     )
     BIBSTYLE_CHOICES = (
         ('AWARD', 'Award',),
-        ('Keynote', 'Keynote',),
+        ('KEYNOTE', 'Keynote',),
         ('SAMEASBOOK','Same as the Book'),
     )
     

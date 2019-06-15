@@ -110,7 +110,7 @@ class BookForm(forms.ModelForm):
     class Meta:
         model = models.Book
         fields = [
-            'title','abbr','style','institution','organizer','publisher','address',
+            'title','abbr','style','institution','organizer','publisher','address','note',
         ]
 
 

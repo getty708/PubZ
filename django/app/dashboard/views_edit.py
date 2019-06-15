@@ -41,8 +41,7 @@ def bibtex_edit(request, bibtex_id=None):
                 if (not bibtex_new.owner == bibtex.owner) or not bibtex_new.owner.is_usperuser:
                     bibtex_new.priority = bibtex.priority
             bibtex_new.save()
-            print("Saved", bibtex)
-            return redirect('dashboard:index')
+            return redirect('dashboard:bib_detail', pk=bibtex.id,)
         else:
             print("validation fail")
     else:
@@ -109,7 +108,7 @@ def book_edit(request, book_id=None):
             book_new = form.save(commit=False)
             book_new.owner = get_login_user(request.user.id)
             book_new.save()
-            return redirect('dashboard:book_index')
+            return redirect('dashboard:book_detail', book.id)
         else:
             print("validation fail")
     else:
@@ -181,13 +180,16 @@ def author_order_edit(request, author_order_id=None):
         else:
             raise Http404("Invalid BibtexID")
 
+    print(request.method)
     if request.method == 'POST':
         form = forms.AuthorOrderForm(request.POST, instance=author_order)
         if form.is_valid():
             author_order_new = form.save(commit=False)
             author_order_new.owner = get_login_user(request.user.id)
             author_order_new.save()
-            return redirect('dashboard:author_index')
+            return redirect('dashboard:detail', author_order.bibtex.id)
+        else:
+            raise Http404("Valiation Failed")        
 
     form = forms.AuthorOrderForm(instance=author_order)
     return render(request,
