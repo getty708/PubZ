@@ -112,18 +112,21 @@ class AuthorIndexView(generic.ListView):
     def get_queryset(self):
         self.search_keyword = self.request.GET.get("keyword",)
         if self.search_keyword:
-            self.search_keyword = urllib.parse.unquote(self.search_keyword)
-            return Author.objects.filter(
-                Q(name_en__icontains=self.search_keyword) |
-                Q(name_ja__icontains=self.search_keyword) |
-                Q(dep_en__icontains=self.search_keyword)  |
-                Q(dep_ja__icontains=self.search_keyword)
-            ).order_by('name_en')
+            queryset = Author.objects.order_by('name_en')
+            self.search_keyword = urllib.parse.unquote(self.search_keyword).split()
+            for q in self.search_keyword:
+                queryset =  queryset.filter(
+                    Q(name_en__icontains=q) |
+                    Q(name_ja__icontains=q) |
+                    Q(dep_en__icontains=q)  |
+                    Q(dep_ja__icontains=q)
+                )
+            return queryset.order_by('name_en')
         return Author.objects.order_by('name_en')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["search_keyword"] = self.search_keyword
+        context["search_keyword"] = " ".join(self.search_keyword) if isinstance(self.search_keyword, list) else ""
         return context
 
 

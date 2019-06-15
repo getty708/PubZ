@@ -26,7 +26,7 @@ def print_bibtexs(context,):
 
     html = mark_safe(html.render({
         'latest_bibtex_list': context['latest_bibtex_list'],
-        'book_styles': get_style_keys()
+        # 'book_styles': get_style_keys()
     }))
     return html
 
@@ -36,12 +36,3 @@ def print_bibtexs(context,):
 #     pass
 
 
-def get_style_keys():
-    ret = []
-    for t in Book.STYLE_CHOICES:
-        if isinstance(t[1], tuple):
-            for t2 in t[1]:
-                ret.append(t2)
-        else:
-            ret.append(t)
-    return dict(ret)

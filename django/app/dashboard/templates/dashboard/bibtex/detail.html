@@ -73,31 +73,43 @@
 																												</td>
 																								</tr>
 																								<tr>
-																												<th scope="col">Acceptance Rate</th>
-																												<td>
-																																{{ bibtex.acceptance_rate|default:'-' }}
-																												</td>
+																										<th scope="col">Tags</th>
+																										<td>
+																												{% for tag in bibtex.tags.all %}
+																												<a href="{% url 'dashboard:tag_detail' tag.id %}" class="btn btn-sm btn-outline-primary d-inline-flex" >{{ tag.name }}</a>
+																												{% endfor %}
+																										</td>
+																								</tr>																								
+																								<tr>
+																										<th scope="col">Abstruct</th>
+																										<td>
+																												{{ bibtex.abstruct|default:'-' }}
+																										</td>
 																								</tr>
 																								<tr>
-																												<th scope="col">Impact Factor</th>
-																												<td>
-																																{{ bibtex.impact_factor|default:'-' }}
-																												</td>
+																										<th scope="col">Note</th>
+																										<td>
+																												{{ bibtex.note|default:'-' }}
+																										</td>
+																								</tr>																								
+																								<tr>
+																										<th scope="col">Memo</th>
+																										<td>
+																												{{ bibtex.memo|default:'-' }}
+																										</td>
 																								</tr>
 																								<tr>
-																												<th scope="col">Note</th>
-																												<td>
-																																{{ bibtex.note|default:'-' }}
-																												</td>
+																										<th scope="col">Acceptance Rate</th>
+																										<td>
+																												{{ bibtex.acceptance_rate|default:'-' }}
+																										</td>
 																								</tr>
 																								<tr>
-																												<th scope="col">Tags</th>
-																												<td>
-																																{% for tag in bibtex.tags.all %}
-																																<a href="{% url 'dashboard:tag_detail' tag.id %}" class="btn btn-sm btn-outline-primary d-inline-flex" >{{ tag.name }}</a>
-																																{% endfor %}
-																												</td>
-																								</tr>
+																										<th scope="col">Impact Factor</th>
+																										<td>
+																												{{ bibtex.impact_factor|default:'-' }}
+																										</td>
+																								</tr>																								
 																								<tr>
 																												<th scope="col">Bibtex</th>
 																												<td>

@@ -18,6 +18,7 @@ class Bibtex(models.Model):
     )
     BIBSTYLE_CHOICES = (
         ('AWARD', 'Award',),
+        ('Keynote', 'Keynote',),
         ('SAMEASBOOK','Same as the Book'),
     )
     
@@ -224,36 +225,36 @@ class Book(models.Model):
         # Official bibtex entries (New)
         #('ARTICLE','Article'),
         ('ARTICLE',(
-            ('ARTICLE', "Article"),
             ('JOURNAL', 'Journal'),
         ),),
         ('INPROCEEDINGS', (
-            ('INTPROC', "Int'l Proc.",),
             ('INPROCEEDINGS', 'in Proceedings'),            
             ('CONF_DOMESTIC', '国内会議',),
             ('CONF_DOMESTIC_NO_REVIEW', '国内研究会',),
             ('CONF_NATIONAL', '全国大会'),
         ),),
-        ('BOOK', 'Book',),
-        ('INBOOK',(
-            ('INBOOK', 'in Book'),
-            ('NEWS', 'News Paper',),            
+        ('BOOK',(
+            ('BOOK', 'Book',),
+            ('NEWS', 'News Paper',),
+            ('TECHREPORT', 'Tech Report'),
         ),),
-        ('MISC', (
-            ('MISC', 'Misc'),
-            ('KEYNOTE', 'Keynote'),            
-            ('OTHERS', 'Others',),
+        ('Removed in the future', (
+            ('INTPROC', "Int'l Proc.",),            
+            ('KEYNOTE', '[Warning!]Keynote'),            
+            ('AWARD', '[Warning!]Award',),
         ),),
-        ('TECHREPORT', 'Tech Report'),
-
-        ('BOOKLET','Booklet'),
-        ('INCOLLECTION', 'in Collection'),
-        ('MANUAL', 'Manual'),
-        ('MASTERTHESIS','Master Thesis'),
-        ('PHDTHESIS','Ph.D Thesis'),
-        ('PROCEEDINGS','Proceedings'),
-        ('UNPUBLISHED','Unpublished'),
-        ('AWARD', 'Award',),
+        ('Othres', (
+            ('MISC', 'Others'),
+            ('ARTICLE', "Article"),            
+            ('INBOOK', 'in Book'),            
+            ('BOOKLET','Booklet'),
+            ('INCOLLECTION', 'in Collection'),
+            ('MANUAL', 'Manual'),
+            ('MASTERTHESIS','Master Thesis'),
+            ('PHDTHESIS','Ph.D Thesis'),
+            ('PROCEEDINGS','Proceedings'),
+            ('UNPUBLISHED','Unpublished'),
+        ),),
     )
     
     title = models.CharField(max_length=256)
@@ -266,6 +267,7 @@ class Book(models.Model):
     organizer = models.CharField(max_length=256, null=True,blank=True)
     publisher = models.CharField(max_length=256,null=True,blank=True)
     address = models.TextField(null=True,blank=True)
+    note = models.TextField(null=True,blank=True)    
     created = models.DateTimeField(auto_now_add=True, blank=False)
     modified = models.DateTimeField(auto_now=True, blank=False)    
     owner = models.ForeignKey(
