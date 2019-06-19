@@ -2,6 +2,8 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404, render
 from django.views import generic
 from django.urls import resolve
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 import datetime
 from datetime import datetime
@@ -17,13 +19,14 @@ from dashboard.templatetags import utils_search as utils
 """
 Bibtex
 """
+@method_decorator(login_required, name='dispatch')
 class IndexView(generic.ListView):
     template_name = 'dashboard/bibtex/index.html'
     context_object_name = 'latest_bibtex_list'
     
     def get_queryset(self):
         self.GET_params = utils.parse_GET_params(self.request)
-        query_set = utils.get_bibtex_query_set(self.GET_params)
+        query_set = utils.get_bibtex_query_set(self.GET_params).order_by('book__style','-pub_date')
         self.GET_params["num_hits"] = len(query_set)
         return query_set
 
@@ -35,6 +38,7 @@ class IndexView(generic.ListView):
             context["display_style"] = current_url_name.split("_")[-1]
         context["year"] = datetime.now().year
         return context
+
 
 class IndexViewPagination(generic.ListView):
     template_name = 'dashboard/bibtex/index_page.html'
