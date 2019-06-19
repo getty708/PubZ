@@ -1,5 +1,6 @@
 from django.shortcuts import reverse
 from django.utils.safestring import mark_safe
+from django.template.exceptions import TemplateDoesNotExist
 
 from django import template
 from django.template.loader import get_template
@@ -36,8 +37,12 @@ def bibtex_tile_format(bib, *args,**kwargs):
 
     # Fill Placeholders
     bib_style = bib.bib_type_key
-    template_name = "custom/bibtex/tile/{}.html".format(bib_style)
-    html = get_template(template_name,)
+    try:
+        template_name = "custom/bibtex/tile/{}.html".format(bib_style)
+        html = get_template(template_name,)
+    except TemplateDoesNotExist:
+        template_name = "custom/bibtex/tile/{}.html".format("DEFAULT")
+        html = get_template(template_name,)
     html = mark_safe(html.render(context))
     return html
 
@@ -58,8 +63,12 @@ def bibtex_list_format(bib, *args,**kwargs):
 
     # Fill Placeholders
     bib_style = bib.bib_type_key
-    template_name = "custom/bibtex/list/{}.html".format(bib_style)
-    html = get_template(template_name,)
+    try:
+        template_name = "custom/bibtex/list/{}.html".format(bib_style)
+        html = get_template(template_name,)
+    except TemplateDoesNotExist:
+        template_name = "custom/bibtex/list/{}.html".format("DEFAULT")
+        html = get_template(template_name,)
     html = mark_safe(html.render(context))
     return html
 
@@ -84,8 +93,12 @@ def bibtex_bib_format(bib, *args,**kwargs):
 
     # Fill Placeholders
     bib_style = bib.bib_type_key
-    template_name = "custom/bibtex/bibtex/{}.html".format(bib_style)
-    html = get_template(template_name,)
+    try:
+        template_name = "custom/bibtex/bibtex/{}.html".format(bib_style)
+        html = get_template(template_name,)
+    except TemplateDoesNotExist:
+        template_name = "custom/bibtex/bibtex/{}.html".format("DEFAULT")
+        html = get_template(template_name,)
     html = mark_safe(html.render(context))
     return html    
     # return func(bibtex)()
@@ -111,8 +124,12 @@ def bibtex_latex_format(bib, *args,**kwargs):
 
     # Fill Placeholders
     bib_style = bib.bib_type_key
-    template_name = "custom/bibtex/latex/DEFAULT.html"
-    html = get_template(template_name,)
+    try:
+        template_name = "custom/bibtex/latex/{}.html".format(bib_style)
+        html = get_template(template_name,)
+    except TemplateDoesNotExist:
+        template_name = "custom/bibtex/latex/DEFAULT.html"
+        html = get_template(template_name,)
     html = mark_safe(html.render(context))
     return html
 
@@ -137,7 +154,11 @@ def bibtex_download_format(bib, *args,**kwargs):
 
     # Fill Placeholders
     bib_style = bib.bib_type_key
-    template_name = "custom/bibtex/bibdownload/{}.html".format(bib_style)
+    try:
+        template_name = "custom/bibtex/bibdownload/{}.html".format(bib_style)        
+        html = get_template(template_name,)
+    except TemplateDoesNotExist:
+        template_name = "custom/bibtex/latex/DEFAULT.html"    
     html = get_template(template_name,)
     html = mark_safe(html.render(context))
     return html
