@@ -1,14 +1,14 @@
 {% load utils_bib_format %}
 
 <!-- Main -->
-{% if latest_bibtex_list %}
-{% for bibtex in latest_bibtex_list %}
-{{ bibtex|bibtex_tile_format }}
-{% endfor %}
-{% else%}
-<span>No Data ...</span>
-{% endif %}
-
-
-
-
+<div class="card mb-3">
+	<div class="card-body">
+		{% if latest_bibtex_list %}
+		{% for bibtex in latest_bibtex_list %}
+		{{ bibtex|bibtex_tile_format }}
+		{% endfor %}
+		{% else%}
+		<span>No Data ...</span>
+		{% endif %}
+	</div>
+</div>

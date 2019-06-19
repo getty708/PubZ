@@ -7,6 +7,7 @@ from django.template.loader import get_template
 register = template.Library()
 
 from django.db.models import Q
+from django.db.models.query import QuerySet
 from core.models import Author, AuthorOrder, Book
 
 
@@ -171,18 +172,26 @@ def bibtex_download_format(bib, *args,**kwargs):
 # ===================
 @register.filter(name='filter_by_book_style')
 def filter_by_book_style(bibtex, book_style):
-    print(book_style, )
     return [bib for bib in bibtex if bib.bib_type_key == book_style]
 
 
 @register.filter(name='divide_by_book_style')
 def divide_by_book_style(bibtexs,):
+    def _filter(bibtexs, _q):
+        if isinstance(bibtexs, QuerySet):
+            bibs = bibtexs.filter(
+                Q(bib_type=_q) |
+                Q(book__style=_q)
+            )
+        elif isinstance(bibtexs, list):
+            bibs = [b for b in bibtexs if (b.bib_type == _q) or (b.book.style == _q)]
+        else:
+            raise ValueError("Unexpected bibtex type. expected QuerySet or list, but got {}".format(type(bibtex)))
+        return bibs
+                
     def _search(t, ret):
         if isinstance(t[0], str) and isinstance(t[1], str):
-            bibs = bibtexs.filter(
-                Q(bib_type=t[0]) |
-                Q(book__style=t[0])
-            )
+            bibs = _filter(bibtexs, t[0])
             if len(bibs) > 0:
                 ret.append((t[0],t[1],bibs))
         elif isinstance(t[0], str):

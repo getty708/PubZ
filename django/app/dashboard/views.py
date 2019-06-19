@@ -39,7 +39,7 @@ class IndexView(generic.ListView):
 class IndexViewPagination(generic.ListView):
     template_name = 'dashboard/bibtex/index_page.html'
     context_object_name = 'latest_bibtex_list'
-    paginate_by = 10
+    paginate_by = 30
     
     def get_queryset(self):
         self.GET_params = utils.parse_GET_params(self.request)

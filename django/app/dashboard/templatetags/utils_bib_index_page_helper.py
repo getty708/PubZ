@@ -12,9 +12,7 @@ register = template.Library()
 @register.simple_tag(takes_context=True)
 def print_bibtexs(context,):
     # GET Params
-    display_style = context.get('display_style', 'tile')
-    # if not display_style:
-    #     display_style = 'tile'
+    display_style = context.get('display_style', 'tile')    
     
     # Get a template and Render
     template_name = "custom/bibtex/{}/index.html".format(display_style)
