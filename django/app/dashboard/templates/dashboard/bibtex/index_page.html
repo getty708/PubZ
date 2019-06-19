@@ -19,7 +19,7 @@
 	<div class="col-12 my-3">
 		<!-- Main Contents: Bibtex List (with Pagination) -->
 		{% if display_style == 'tile' or not display_style %}
-		<div class="card mb-3">
+		<div class="card mb-3 shadow">
 			<div class="card-body">				
 				{% print_bibtexs %}
 			</div>
@@ -33,7 +33,7 @@
 {% if latest_bibtex_list %}
 <div class="row mb-3">
 	<div class="col-12">
-		<div class="card">
+		<div class="card shadow">
 			<!-- Pagination -->
 			<nav aria-label="Page navigation example" class="card-body">
 				<ul class="pagination justify-content-center my-0">

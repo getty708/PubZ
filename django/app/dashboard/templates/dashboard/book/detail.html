@@ -6,7 +6,7 @@
 {% block content %}
 <div class="row">
 		<div class="col-12 my-3">
-				<div Class="card">
+				<div Class="card shadow">
 						<div class="card-body">
 								<div class="d-inline-block h4">
 										<span class="badge badge-primary">Book</span>
@@ -79,17 +79,19 @@
 								{% endif %}
 						</div>
 				</div>
-				<div class="col-12 card my-3">
-						<div class="card-body border-bottom border-secondary">
-								<h4>Our Publications in This Book</h4>
-						</div>
-						<div class="card-body">
-								{% print_bibtexs %}												
-						</div>
-						<div class="card-body">
-								<a href="{% url 'dashboard:index' %}?keywords={{ book.title }}" class="btn btn-primary btn-block">See More Publications</a>
-						</div>																								
+		</div>
+		<div class="col-12 my-3">
+			<div class="card shadow">
+				<div class="card-body border-bottom border-secondary">
+					<h4>Our Publications in This Book</h4>
 				</div>
+				<div class="card-body">
+					{% print_bibtexs %}												
+				</div>
+				<div class="card-body">
+					<a href="{% url 'dashboard:index' %}?keywords={{ book.title }}" class="btn btn-primary btn-block">See More Publications</a>
+				</div>																								
+			</div>
 		</div>
 </div>
 {% endblock content %}

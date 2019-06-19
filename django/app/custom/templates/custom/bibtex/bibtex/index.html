@@ -4,7 +4,7 @@
 <!-- Bibtex -->
 {% if latest_bibtex_list %}
 {% for bs_key, bs_value, bibtexs in latest_bibtex_list|divide_by_book_style %}
-<dic class="card mb-3">
+<dic class="card mb-3 shadow">
 				<div class="card-body">
 								<h4 id="{{book_style}}">{{ bs_value }}</h4>		
 								{% for bibtex in bibtexs %}

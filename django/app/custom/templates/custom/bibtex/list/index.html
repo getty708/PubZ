@@ -3,7 +3,7 @@
 <!-- Main List -->
 {% if latest_bibtex_list %}
 {% for bs_key, bs_value, bibs in latest_bibtex_list|divide_by_book_style %}
-<div class="card mb-3">
+<div class="card mb-3 shadow">
 				<div class="card-body">
 								<h4 id="{{book_style}}">{{ bs_value }}</h4>
 								<ol>

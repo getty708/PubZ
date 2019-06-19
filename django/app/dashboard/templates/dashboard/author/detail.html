@@ -7,7 +7,7 @@
 {% block content %}
 <div class="row">
 		<div class="col-12 my-3">
-				<div class="card">
+				<div class="card shadow">
 						<div class="card-body">
 								<div class="d-block h4">
 										<span class="badge badge-primary">Author</span>
@@ -67,17 +67,19 @@
 								<a href="{% url 'dashboard:index_list' %}?keywords={{author.name_en}}&pubyear_all=true" target=”_blank” class="btn btn-outline-primary btn-sm">Publications</a>
 						</div>
 				</div>
-				<div class="col-12 card my-3">
-						<div class="card-body border-bottom border-secondary">
-								<h4>Works of <span class="font-weight-bold">{{ author.name_en|author_en_default }}</span></h4>
-						</div>
-						<div class="card-body">
-								{% print_bibtexs %}												
-						</div>
-						<div class="card-body">
-								<a href="{% url 'dashboard:index' %}?keywords={{author.name_en}}" class="btn btn-primary btn-block">See More Publications of This Author</a>
-						</div>																
-				</div>				
+		</div>
+		<div class="col-12  my-3">
+			<div class="card shadow">
+				<div class="card-body border-bottom border-secondary">
+					<h4>Works of <span class="font-weight-bold">{{ author.name_en|author_en_default }}</span></h4>
+				</div>
+				<div class="card-body">
+					{% print_bibtexs %}												
+				</div>
+				<div class="card-body">
+					<a href="{% url 'dashboard:index' %}?keywords={{author.name_en}}" class="btn btn-primary btn-block">See More Publications of This Author</a>
+				</div>																
+			</div>
 		</div>
 </div>		
 {% endblock content %}
