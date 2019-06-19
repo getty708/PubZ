@@ -65,14 +65,16 @@ class DetailView(generic.DetailView):
 """
 Book
 """
+from dashboard.templatetags.utils_search import get_bib_style_keys
 class BookIndexView(generic.ListView):
     template_name = 'dashboard/book/index.html'
     context_object_name = 'latest_book_list'
     paginate_by = 30
+    styles = get_bib_style_keys()    
  
     def get_queryset(self):
         self.selected_style = self.request.GET.get("style", "ALL")
-        styles = [s[0] for s in Book.STYLE_CHOICES]
+        styles = [s[0] for s in self.styles]
         key = self.selected_style if self.selected_style in styles else False
         if key:
             return Book.objects.filter(style=key,).order_by('title')
@@ -81,7 +83,7 @@ class BookIndexView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         style_active = None
-        for i, style in enumerate(Book.STYLE_CHOICES):
+        for style in self.styles:
             if style[0] == self.selected_style:
                 style_active = style[0]
                 continue
