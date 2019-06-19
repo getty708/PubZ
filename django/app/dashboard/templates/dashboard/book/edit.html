@@ -6,134 +6,140 @@
 {% block content %}
 
 <div class="row">
-				<div class="col-12 card my-3">
-								<div class="card-body">
+		<div class="col-12 my-3">
+				<div class="card">
+						<div class="card-body">
+								{% if book.id %}
+								<h2>
+										<small class="text-secondary mr-2" >Edit Book Info:</small>
+										<span class="d-inline-flex">{{ book }}</span>
+								</h2>
+								{% else%}
+								<h2>Add New Book
+										<!-- Button trigger modal -->
+										<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal">
+  											Help
+										</button>
+								</h2>
+								{% endif %}
+								{% if form.errors %}
+								<div class="alert alert-danger" role="alert">
+										{%for error in form.errors.values %}
+										{{ error }}
+										{% endfor %}
+								</div>
+								{% endif %}
+						</div>
+						<div class="card-body">
+								<!-- New  -->
+								<form action="{{ submit_url}}" method="post" class="row">
+										{% csrf_token %}
+										<div class="col-12">
+												<div class="table-responsive-md">
+														<table class="table table-sm table-striped">
+																<thead>
+																		<tr>
+																				<th>Item</th>
+																				<th>Value</th>
+																		</tr>																								
+																</thead>
+																<tbody>
+																		<tr>
+																				<th>Book Title</th>
+																				<td>
+																						{{ form.title }}
+																				</td>
+																		</tr>																				
+																		<tr>
+																				<th>Abbreviation</th>
+																				<td>
+																						{{ form.abbr }}
+																				</td>
+																		</tr>
+																		<tr>
+																				<th>Publication Type</th>
+																				<td>
+																						{{ form.style }}
+																				</td>
+																		</tr>
+																		<tr>
+																				<th>Institution</th>
+																				<td>
+																						{{ form.institution }}
+																				</td>
+																		</tr>
+																		<tr>
+																				<th>Organizer</th>
+																				<td>
+																						{{ form.organizer }}																												
+																				</td>
+																		</tr>
+																		<tr>
+																				<th>Publisher</th>
+																				<td>
+																						{{ form.publisher }}	
+																				</td>
+																		</tr>
+																		<tr>
+																				<th>Address</th>
+																				<td>
+																						{{ form.address }}
+																				</td>
+																		</tr>
+																		<tr>
+																				<th>Note</th>
+																				<td>
+																						{{ form.note }}
+																				</td>
+																		</tr>																								
+																</tbody>
+														</table>
+												</div>
+										</div>
+										<div class="col-12">
+												<button type="submit" class="btn btn-primary">{{ submit_text }}</button>
 												{% if book.id %}
-												<h2>
-																<small class="text-secondary mr-2" >Edit Book Info:</small>
-																<span class="d-inline-flex">{{ book }}</span>
-												</h2>
-												{% else%}
-												<h2>Add New Book
-																<!-- Button trigger modal -->
-																<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal">
-  																			Help
-																</button>
-												</h2>
+												<a href="{% url 'dashboard:book_detail' book.id %}" class="btn btn-outline-primary">Back</a>
 												{% endif %}
-												{% if form.errors %}
-												<div class="alert alert-danger" role="alert">
-																{%for error in form.errors.values %}
-																{{ error }}
-																{% endfor %}
-												</div>
-												{% endif %}
+										</div>
+								</form>
+								
+								<!-- Modal -->
+								<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ 		 								<div class="modal-dialog" role="document">
+    										<div class="modal-content">
+      											<div class="modal-header">
+        												<h5 class="modal-title" id="exampleModalLabel">Step 2. </h5>
+		        										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          											<span aria-hidden="true">&times;</span>
+		        										</button>
+      											</div>
+      											<div class="modal-body">
+        												<h4> Register Book Infomation</h4>
+        												<ol>
+																		<li>
+																				Please fill in the form with the book's information.
+																		</li>
+																		<li>
+																				After press the 'Register' button, you can see the list of all the registered book.
+																		</li>
+																		<li>
+																				Please go back to the Bibtex registration page, and the new-registered book can be chosen from the list now.
+																		</li>
+																</ol>
+																<hr>
+																<img src="{% static 'images/RegistrationFlow2.png' %}" height="500" width="450" alt="Flow2" />
+		      									</div>
+      											<div class="modal-footer">
+        												<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+																<!--							    	<button type="button" class="btn btn-primary">Save changes</button>   -->
+ 						     						</div>
+    										</div>
+  									</div>
 								</div>
-								<div class="card-body">
-												<!-- New  -->
-												<form action="{{ submit_url}}" method="post" class="row">
-																{% csrf_token %}
-																<table class="table table-sm table-striped col-md-7">
-																				<thead>
-																								<tr>
-																												<th>Item</th>
-																												<th>Value</th>
-																								</tr>																								
-																				</thead>
-																				<tbody>
-																								<tr>
-																												<th>Book Title</th>
-																												<td>
-																																{{ form.title }}
-																												</td>
-																								</tr>																				
-																								<tr>
-																												<th>Abbreviation</th>
-																												<td>
-																																{{ form.abbr }}
-																												</td>
-																								</tr>
-																								<tr>
-																												<th>Publication Type</th>
-																												<td>
-																																{{ form.style }}
-																												</td>
-																								</tr>
-																								<tr>
-																												<th>Institution</th>
-																												<td>
-																																{{ form.institution }}
-																												</td>
-																								</tr>
-																								<tr>
-																												<th>Organizer</th>
-																												<td>
-																																{{ form.organizer }}																												
-																												</td>
-																								</tr>
-																								<tr>
-																												<th>Publisher</th>
-																												<td>
-																																{{ form.publisher }}	
-																												</td>
-																								</tr>
-																								<tr>
-																												<th>Address</th>
-																												<td>
-																																{{ form.address }}
-																												</td>
-																								</tr>
-																								<tr>
-																										<th>Note</th>
-																										<td>
-																												{{ form.note }}
-																										</td>
-																								</tr>																								
-																				</tbody>
-																</table>
-																<div class="col-12">
-																				<button type="submit" class="btn btn-primary">{{ submit_text }}</button>
-																				{% if book.id %}
-																				<a href="{% url 'dashboard:book_detail' book.id %}" class="btn btn-outline-primary">Back</a>
-																				{% endif %}
-																</div>
-												</form>
-												
-												<!-- Modal -->
-												<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
- 		 														<div class="modal-dialog" role="document">
-    																		<div class="modal-content">
-      																					<div class="modal-header">
-        																								<h5 class="modal-title" id="exampleModalLabel">Step 2. </h5>
-		        																						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          																									<span aria-hidden="true">&times;</span>
-		        																						</button>
-      																					</div>
-      																					<div class="modal-body">
-        																								<h4> Register Book Infomation</h4>
-        																								<ol>
-																																<li>
-																																				Please fill in the form with the book's information.
-																																</li>
-																																<li>
-																																				After press the 'Register' button, you can see the list of all the registered book.
-																																</li>
-																																<li>
-																																				Please go back to the Bibtex registration page, and the new-registered book can be chosen from the list now.
-																																</li>
-																												</ol>
-																												<hr>
-																												<img src="{% static 'images/RegistrationFlow2.png' %}" height="500" width="450" alt="Flow2" />
-		      																			</div>
-      																					<div class="modal-footer">
-        																								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-																												<!--							    	<button type="button" class="btn btn-primary">Save changes</button>   -->
- 						     																</div>
-    																		</div>
-  															</div>
-												</div>
-												<!-- Modal End-->
-								</div>
+								<!-- Modal End-->
+						</div>
 				</div>				
+		</div>
 </div>
 {% endblock content %}

@@ -5,37 +5,38 @@
 {% block content %}
 
 <div class="row">
-				<div class="col-12 card my-3">
-								<div class="card-body">
-												<h2>Add New Author</h2>
-								</div>
-								<div class="card-body">
-												{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-												<form action="{{ submit_url }}" method="post">
-																{% csrf_token %}
-																<div class="form-group row">
-																				<label for="example-text-input" class="col-2 col-form-label">Name</label>
-																				<div class="col-5">{{ form.name }}</div>
-																</div>
-																<div class="form-group row">
-																				<label for="example-text-input" class="col-2 col-form-label">Description</label>
-																				<div class="col-5">{{ form.description }}</div>
-																</div>	
-																<div class="form-group row">
-																				<label for="example-text-input" class="col-2 col-form-label">Parent</label>
-																				<div class="col-5">{{ form.parent }}</div>
-																</div>				
+		<div class="col-12 my-3">
+				<div class="card">
+						<div class="card-body">
+								<h2>Add New Author</h2>
+						</div>
+						<div class="card-body">
+								{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+								<form action="{{ submit_url }}" method="post">
+										{% csrf_token %}
+										<div class="form-group row">
+												<label for="example-text-input" class="col-12 col-md-2 col-form-label">Name</label>
+												<div class="col-12 col-md-10">{{ form.name }}</div>
+										</div>
+										<div class="form-group row">
+												<label for="example-text-input" class="col-12 col-md-2 col-form-label">Description</label>
+												<div class="col-12 col-md-10">{{ form.description }}</div>
+										</div>	
+										<div class="form-group row">
+												<label for="example-text-input" class="col-12 col-md-2 col-form-label">Parent</label>
+												<div class="col-12 col-md-10">{{ form.parent }}</div>
+										</div>				
 
-																<button type="submit" class="btn btn-primary">
-																				{% if tag %}Update{% else %}Add{% endif %}
-																</button>
-																{% if tag.id %}
-																<a href="{% url 'dashboard:tag_index' %}{{ tag.id }}" class="btn btn-outline-primary">Back</a>
-																{% else %}
-																<a href="{% url 'dashboard:tag_index' %}" class="btn btn-outline-primary">Back</a>
-																{% endif %}
-												</form>				
-								</div>
+										{% if tag.id %}
+										<button type="submit" class="btn btn-primary">Update</button>
+										<a href="{% url 'dashboard:tag_index' %}{{ tag.id }}" class="btn btn-outline-primary">Back</a>
+										{% else %}
+										<button type="submit" class="btn btn-primary">Add</button>										
+										<a href="{% url 'dashboard:tag_index' %}" class="btn btn-outline-primary">Back</a>
+										{% endif %}
+								</form>				
+						</div>
 				</div>
+		</div>
 </div>
 {% endblock content %}

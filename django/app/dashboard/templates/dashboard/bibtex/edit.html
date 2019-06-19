@@ -24,330 +24,331 @@ $(function(){
 });
 </script>
 <div class="row">
-				<div class="col-12 card my-3">
-								<div class="card-body">
-												{% if book.id %}
-												<h2>Edit Bibtex : {{ bibitex }}</h2>
-												{% else%}
-												<h2>Add New Bibtex
-																<!-- Button trigger modal -->
-																<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal">Help</button>
-												</h2>
-												{% endif %}
-												{% if form.errors %}
-												{%for error in form.errors.values %}
-												<div class="alert alert-danger" role="alert">
-																{{ error }}						
-												</div>				
-												{% endfor %}
-												{% endif %}
+		<div class="col-12 my-3">
+				<div class="card">
+						<div class="card-body">
+								{% if book.id %}
+								<h2>Edit Bibtex : {{ bibitex }}</h2>
+								{% else%}
+								<h2>Add New Bibtex
+										<!-- Button trigger modal -->
+										<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal">Help</button>
+								</h2>
+								{% endif %}
+								{% if form.errors %}
+								{%for error in form.errors.values %}
+								<div class="alert alert-danger" role="alert">
+										{{ error }}						
+								</div>				
+								{% endfor %}
+								{% endif %}
 
-								</div>
-								
-								<div class="card-body">
-												<span class="text-danger"><b>*</b>: Required Fields</span>												
-												<form action="{{ submit_url }}" method="post">
-																{{ form.non_field_errors }}
-																{% csrf_token %}
-																<table class="table table-striped w-100" >
-																				<thead class="">
-																								<tr>
-																												<th scope="col"></th>
-																												<th scope="col"></th>
-																								</tr>
-																				</thead>
-																				<tbody>
-																								<tr>
-																												<th>Language<b class="text-danger">*</b></th>
-																												<th>
-																																{{ form.language.errors }}
-																																{{ form.language }}
-																												</th>
-																								</tr>
-																								<tr>																								
-																												<th scope="col">
-																																Title(en)<b class="text-danger">*</b>
-																																<button type="button" class="btn btn-sm btn-outline-info rounded-circle" data-container="body" data-toggle="popover" data-placement="bottom"
-																																				title="Title(en)"
-																																				data-content="Please enter an English Title.">
-																																				?
-																																</button>
-																												</th>
-																												<td>		
-																																{{ form.title_en.errors }}
-																																{{ form.title_en }}
-																												</td>																												
+						</div>
+						
+						<div class="card-body">
+								<span class="text-danger"><b>*</b>: Required Fields</span>												
+								<form action="{{ submit_url }}" method="post" class="table-responsive-md">
+										{{ form.non_field_errors }}
+										{% csrf_token %}
+										<table class="table table-striped w-100" >
+												<thead class="">
+														<tr>
+																<th scope="col"></th>
+																<th scope="col"></th>
+														</tr>
+												</thead>
+												<tbody>
+														<tr>
+																<th>Language<b class="text-danger">*</b></th>
+																<th>
+																		{{ form.language.errors }}
+																		{{ form.language }}
+																</th>
+														</tr>
+														<tr>																								
+																<th scope="col">
+																		Title(en)<b class="text-danger">*</b>
+																		<button type="button" class="btn btn-sm btn-outline-info rounded-circle" data-container="body" data-toggle="popover" data-placement="bottom"
+title="Title(en)"
+data-content="Please enter an English Title.">
+																				?
+																		</button>
+																</th>
+																<td>		
+																		{{ form.title_en.errors }}
+																		{{ form.title_en }}
+																</td>																												
 
-																								</tr>
-																								<tr>
-																												<th scope="col">
-																																Title(ja)
-																																<button type="button" class="btn btn-sm btn-outline-info rounded-circle" data-container="body" data-toggle="popover" data-placement="bottom"
-																																				title="Title (ja)"
-																																				data-content="日本語タイトルを入力してください.">
-																																				?
-																																</button>																																
-																												</th>
-																												<td>
-																																{{ form.title_ja.errors }}
-																																{{ form.title_ja }}																											
-																												</td>
-																								</tr>
-																								<tr>
-																												<th scope="col">
-																																Authors
-																																<button type="button" class="btn btn-sm btn-outline-info rounded-circle" data-container="body" data-toggle="popover" data-placement="bottom"
-																																				title="Author"
-																																				data-content="Click the name to edit the relation between the author and the bibtex.">
-																																				?
-																																</button>
-																												</th>
-																												<td>
-																																{% for author_order in bibtex.author_order_list %}
-																																<a href="{% url 'dashboard:author_order_edit' author_order.id %}" target="_blank">
-																																				{% if bibtex.language == 'EN' %}{{ author_order.author.name_en|author_en_default }}{% else %}{{ author_order.author.name_en }}{% endif %}({{ author_order.order }})
-																																</a>,
-																																{% endfor %}
-																																<a href="{% url 'dashboard:author_order_add' %}?bibtex={{ bibtex.id }}" class="btn btn-sm btn-outline-primary" target="_blank">Add Author</a>																																
-																												</td>
-																								</tr>
-																								<tr>
-																												<th scope="col">
-																																Book<b class="text-danger">*</b>																																
-																												</th>
-																												<td>
-																																<div class="row mb-3">
-																																				<div class="col-md-8">
-																																								{{ form.book.errors }}
-																																								{{ bibtex.book.title }}																																								
-																																				</div>
-																																				<div class="col-md-4">
-																																								<a href="{% url 'dashboard:book_detail' bibtex.book.id %}" class="btn btn-sm btn-outline-primary" >Detail</a>
-																																								<a href="{% url 'dashboard:book_add' %}" class="btn btn-sm btn-outline-primary" target="_blank">Add New Book</a>
-																																				</div>
-																																</div>
-																																<div class="row mb-3">
-																																				<div class="col-12">
-																																								{{ form.book }}
-																																				</div>
-																																</div>
-																																<div class="row">
-																																				<div class="col-12">
-																																								{{ form.book_title.errors }}
-																																								<div class="input-group input-group-sm mb-3">
-																																												<div class="input-group-prepend">
-																																																<span class="input-group-text" id="inputGroup-sizing-sm">
-																																																				Overwrite Book Title
-																																																</span>
-																																												</div>
-																																												<div class="input-group-prepend">
-																																																<div class="input-group-text" >
-																																																				<input type="checkbox" id="check_change_book_title" aria-label="Checkbox for following text input" {% if bibtex.book_title %}checked="checked"{% endif %}>
-																																																</div>
-																																												</div>																																																
-																																												{{ form.book_title }}
-																																												<div class="input-group-prepend px-2">																																																
-																																																<button type="button" class="btn btn-sm btn-outline-info rounded-circle" data-container="body" data-toggle="popover" data-placement="bottom"
-																																																				title="Overwrite Book Title"
-																																																				data-content="If you need to overwrite a title of the book, Please enter here. (e.g. Percom => Percom2018).">
-																																																				?
-																																																</button>
-																																												</div>
-																																								</div>																																												
-																																				</div>
-																																</div>
-																												</td>
-																								</tr>
-																								<tr>
-																												<th scope="col">(Detail)</th>
-																												<td class="row">
-																																<div class="col-12">
-																																				<div class="form-group row">
-																																								{{ form.page.errors }}
-																																								<label for="example-text-input" class="col-2 col-form-label">
-																																												Bibtex Type
-																																								</label>
-																																								<div class="col-5">
-																																												<div class="d-inline-block">
-																																																{{ form.bib_type }}
-																																												</div>
-																																												<div class="d-inline-block">
-																																																<button type="button" class="btn btn-sm btn-outline-info rounded-circle" data-container="body" data-toggle="popover" data-placement="bottom"
-																																																				title="Bibtex Type"
-																																																				data-content="If this entry is for an award, select `Award`. Otherwize, select `Same as the Book`">
-																																																				?
-																																																</button>
-																																												</div>
-																																												<div class="d-inline-block small text-muted">
-																																																Bibtex type of the selected book:
-																																																<span class="border border-info badge-pill text-info small">{{ bibtex.book.get_style_display|default:'-' }}</span>
-																																												</div>																																												
-																																								</div>
-																																				</div>																																				
-																																				{% if bibtex.book.style != 'KEYNOTE' %}
-																																				{% if bibtex.book.style != 'AWARD' %}																																				
-																																				<div class="form-group row">
-																																								{{ form.volume.errors }}
-																																								<label for="example-text-input" class="col-2 col-form-label">Volume / Number / Chapter</label>
-																																								<div class="col-3">{{ form.volume }}</div>
-																																								<div class="col-3">{{ form.number }}</div>
-																																								<div class="col-3">{{ form.chapter }}</div>
-																																				</div>
-																																				<div class="form-group row">
-																																								{{ form.page.errors }}
-																																								<label for="example-text-input" class="col-2 col-form-label">Page</label>
-																																								<div class="col-5">{{ form.page }}</div>
-																																				</div>
-																																				<div class="form-group row">
-																																								{{ form.edition.errors }}
-																																								<label for="example-text-input" class="col-2 col-form-label">Edition</label>
-																																								<div class="col-5">{{ form.edition }}</div>
-																																				</div>
-																																				{% endif %}
-																																				{% endif %}																																
-																																</div>
-																												</td>
-																								</tr>
-																								<tr>
-																												<th scope="col">
-																																Published Date<b class="text-danger">*</b>
-																																<button type="button" class="btn btn-sm btn-outline-info rounded-circle" data-container="body" data-toggle="popover" data-placement="bottom"
-																																				title="Published Data"
-																																				data-content="Set the date of published. If the date is unknow, please set 1st, otherwise check the `Use date info`.">
-																																				?
-																																</button>																																
-																												</th>
-																								<td>
-																												<div class="form-group row">
-																																{{ form.pub_date.errors }}
-																																<div class="col-5">{{ form.pub_date }}</div>
-																																<div class="col-5">																	
-																																				Use date info: {{ form.use_date_info }}
-																																</div>
-																												</div>
-																								</td>
-																								</tr>
-																								<tr>
-																												<th scope="col">Acceptance Rate</th>
-																												<td>
-																																{{ form.acceptance_rate }}
-																												</td>
-																								</tr>
-																								<tr>
-																												<th scope="col">Impact Factor</th>
-																												<td>
-																																{{ form.impact_factor }}
-																												</td>
-																								</tr>
-																								<tr>
-																												<th scope="col">
-																																URL
-																																<button type="button" class="btn btn-sm btn-outline-info rounded-circle" data-container="body" data-toggle="popover" data-placement="bottom"
-																																				title="URL"
-																																				data-content="URL to arXiv, AMC degital library, IEEE, etc... ">
-																																				?
-																																</button>																																
-																												</th>
-																												<td>
-																																{{ form.url }}
-																												</td>
-																								</tr>
-																								<tr>
-																												<th scope="col">
-																																Note
-																																<button type="button" class="btn btn-sm btn-outline-info rounded-circle" data-container="body" data-toggle="popover" data-placement="bottom"
-																																				title="Memo"
-																																				data-content="If there are some same bibtexs with titles, please use this field to distinguish. ">
-																																				?
-																																</button>
-																												</th>
-																												<td>
-																																{{ form.note }}
-																												</td>
-																								</tr>
-																								<tr>
-																												<th scope="col">Abstract</th>
-																												<td>
-																																{{ form.abstruct }}
-																												</td>
-																								</tr>
-																								<tr>
-																												<th scope="col">Image</th>
-																												<td>
-																																{{ form.image }}
-																												</td>
-																								</tr>
-																								<tr>
-																												<th scope="col">Priority</th>
-																												<td>
-																																{{ form.priority }}
-																												</td>																								
-																								</tr>
-																				</tbody>
-																</table>
-
-																<div class="form-group row">
-																				{% if bibtex.is_published %}
-																				<div class="alert alert-info col-md-10 mx-3" role="alert">
-																								<div class="form-group form-check">
-																												{{ form.is_published }}												
-																												<label class="form-check-label" for="exampleCheck1">Good! You already marked this entry as completed.</label>
-																								</div>																				
-																				</div>																				
-																				{% else %}
-																				<div class="alert alert-warning col-md-10 mx-3" role="alert">
-																								<h5 class="alert-heading">Did you fill all items?</h5>
-																								<p>If you finished, please mark as completed. </p>
-																								<hr>
-																								<div class="form-group form-check">
-																												{{ form.is_published }}												
-																												<label class="form-check-label" for="exampleCheck1">Mark as completed!</label>
-																								</div>																				
-																				</div>															
+														</tr>
+														<tr>
+																<th scope="col">
+																		Title(ja)
+																		<button type="button" class="btn btn-sm btn-outline-info rounded-circle" data-container="body" data-toggle="popover" data-placement="bottom"
+title="Title (ja)"
+data-content="日本語タイトルを入力してください.">
+																				?
+																		</button>																																
+																</th>
+																<td>
+																		{{ form.title_ja.errors }}
+																		{{ form.title_ja }}																											
+																</td>
+														</tr>
+														<tr>
+																<th scope="col">
+																		Authors
+																		<button type="button" class="btn btn-sm btn-outline-info rounded-circle" data-container="body" data-toggle="popover" data-placement="bottom"
+title="Author"
+data-content="Click the name to edit the relation between the author and the bibtex.">
+																				?
+																		</button>
+																</th>
+																<td>
+																		{% for author_order in bibtex.author_order_list %}
+																		<a href="{% url 'dashboard:author_order_edit' author_order.id %}" target="_blank">
+																				{% if bibtex.language == 'EN' %}{{ author_order.author.name_en|author_en_default }}{% else %}{{ author_order.author.name_en }}{% endif %}({{ author_order.order }})
+																		</a>,
+																		{% endfor %}
+																		<a href="{% url 'dashboard:author_order_add' %}?bibtex={{ bibtex.id }}" class="btn btn-sm btn-outline-primary" target="_blank">Add Author</a>																																
+																</td>
+														</tr>
+														<tr>
+																<th scope="col">
+																		Book<b class="text-danger">*</b>																																
+																</th>
+																<td>
+																		<div class="row mb-3">
+																				<div class="col-md-8">
+																						{{ form.book.errors }}
+																						{{ bibtex.book.title }}																																								
+																				</div>
+																				<div class="col-md-4">
+																						<a href="{% url 'dashboard:book_detail' bibtex.book.id %}" class="btn btn-sm btn-outline-primary" >Detail</a>
+																						<a href="{% url 'dashboard:book_add' %}" class="btn btn-sm btn-outline-primary" target="_blank">Add New Book</a>
+																				</div>
+																		</div>
+																		<div class="row mb-3">
+																				<div class="col-12">
+																						{{ form.book }}
+																				</div>
+																		</div>
+																		<div class="row">
+																				<div class="col-12">
+																						{{ form.book_title.errors }}
+																						<div class="input-group input-group-sm mb-3">
+																								<div class="input-group-prepend">
+																										<span class="input-group-text" id="inputGroup-sizing-sm">
+																												Overwrite Book Title
+																										</span>
+																								</div>
+																								<div class="input-group-prepend">
+																										<div class="input-group-text" >
+																												<input type="checkbox" id="check_change_book_title" aria-label="Checkbox for following text input" {% if bibtex.book_title %}checked="checked"{% endif %}>
+																										</div>
+																								</div>																																																
+																								{{ form.book_title }}
+																								<div class="input-group-prepend px-2">																																																
+																										<button type="button" class="btn btn-sm btn-outline-info rounded-circle" data-container="body" data-toggle="popover" data-placement="bottom"
+title="Overwrite Book Title"
+data-content="If you need to overwrite a title of the book, Please enter here. (e.g. Percom => Percom2018).">
+																												?
+																										</button>
+																								</div>
+																						</div>																																												
+																				</div>
+																		</div>
+																</td>
+														</tr>
+														<tr>
+																<th scope="col">(Detail)</th>
+																<td class="row">
+																		<div class="col-12">
+																				<div class="form-group row">
+																						{{ form.page.errors }}
+																						<label for="example-text-input" class="col-2 col-form-label">
+																								Bibtex Type
+																						</label>
+																						<div class="col-5">
+																								<div class="d-inline-block">
+																										{{ form.bib_type }}
+																								</div>
+																								<div class="d-inline-block">
+																										<button type="button" class="btn btn-sm btn-outline-info rounded-circle" data-container="body" data-toggle="popover" data-placement="bottom"
+title="Bibtex Type"
+data-content="If this entry is for an award, select `Award`. Otherwize, select `Same as the Book`">
+																												?
+																										</button>
+																								</div>
+																								<div class="d-inline-block small text-muted">
+																										Bibtex type of the selected book:
+																										<span class="border border-info badge-pill text-info small">{{ bibtex.book.get_style_display|default:'-' }}</span>
+																								</div>																																												
+																						</div>
+																				</div>																																				
+																				{% if bibtex.book.style != 'KEYNOTE' %}
+																				{% if bibtex.book.style != 'AWARD' %}																																				
+																				<div class="form-group row">
+																						{{ form.volume.errors }}
+																						<label for="example-text-input" class="col-2 col-form-label">Volume / Number / Chapter</label>
+																						<div class="col-3">{{ form.volume }}</div>
+																						<div class="col-3">{{ form.number }}</div>
+																						<div class="col-3">{{ form.chapter }}</div>
+																				</div>
+																				<div class="form-group row">
+																						{{ form.page.errors }}
+																						<label for="example-text-input" class="col-2 col-form-label">Page</label>
+																						<div class="col-5">{{ form.page }}</div>
+																				</div>
+																				<div class="form-group row">
+																						{{ form.edition.errors }}
+																						<label for="example-text-input" class="col-2 col-form-label">Edition</label>
+																						<div class="col-5">{{ form.edition }}</div>
+																				</div>
 																				{% endif %}
-																</div>
-																{% if bibtex.id %}
-																<button type="submit" class="btn btn-sm btn-primary">Update</button>
-																<a href="{% url 'dashboard:detail' bibtex.id %}" class="btn btn-outline-primary btn-sm">Back</a>
-																{% else %}
-																<button type="submit" class="btn btn-sm btn-primary">Add New</button>
-																{% endif %}
-												</form>
-								</div>
+																				{% endif %}																																
+																		</div>
+																</td>
+														</tr>
+														<tr>
+																<th scope="col">
+																		Published Date<b class="text-danger">*</b>
+																		<button type="button" class="btn btn-sm btn-outline-info rounded-circle" data-container="body" data-toggle="popover" data-placement="bottom"
+title="Published Data"
+data-content="Set the date of published. If the date is unknow, please set 1st, otherwise check the `Use date info`.">
+																				?
+																		</button>																																
+																</th>
+																<td>
+																		<div class="form-group row">
+																				{{ form.pub_date.errors }}
+																				<div class="col-5">{{ form.pub_date }}</div>
+																				<div class="col-5">																	
+																						Use date info: {{ form.use_date_info }}
+																				</div>
+																		</div>
+																</td>
+														</tr>
+														<tr>
+																<th scope="col">Acceptance Rate</th>
+																<td>
+																		{{ form.acceptance_rate }}
+																</td>
+														</tr>
+														<tr>
+																<th scope="col">Impact Factor</th>
+																<td>
+																		{{ form.impact_factor }}
+																</td>
+														</tr>
+														<tr>
+																<th scope="col">
+																		URL
+																		<button type="button" class="btn btn-sm btn-outline-info rounded-circle" data-container="body" data-toggle="popover" data-placement="bottom"
+title="URL"
+data-content="URL to arXiv, AMC degital library, IEEE, etc... ">
+																				?
+																		</button>																																
+																</th>
+																<td>
+																		{{ form.url }}
+																</td>
+														</tr>
+														<tr>
+																<th scope="col">
+																		Note
+																		<button type="button" class="btn btn-sm btn-outline-info rounded-circle" data-container="body" data-toggle="popover" data-placement="bottom"
+title="Memo"
+data-content="If there are some same bibtexs with titles, please use this field to distinguish. ">
+																				?
+																		</button>
+																</th>
+																<td>
+																		{{ form.note }}
+																</td>
+														</tr>
+														<tr>
+																<th scope="col">Abstract</th>
+																<td>
+																		{{ form.abstruct }}
+																</td>
+														</tr>
+														<tr>
+																<th scope="col">Image</th>
+																<td>
+																		{{ form.image }}
+																</td>
+														</tr>
+														<tr>
+																<th scope="col">Priority</th>
+																<td>
+																		{{ form.priority }}
+																</td>																								
+														</tr>
+												</tbody>
+										</table>
+
+										<div class="form-group row">
+												{% if bibtex.is_published %}
+												<div class="alert alert-info col-md-10 mx-3" role="alert">
+														<div class="form-group form-check">
+																{{ form.is_published }}												
+																<label class="form-check-label" for="exampleCheck1">Good! You already marked this entry as completed.</label>
+														</div>																				
+												</div>																				
+												{% else %}
+												<div class="alert alert-warning col-md-10 mx-3" role="alert">
+														<h5 class="alert-heading">Did you fill all items?</h5>
+														<p>If you finished, please mark as completed. </p>
+														<hr>
+														<div class="form-group form-check">
+																{{ form.is_published }}												
+																<label class="form-check-label" for="exampleCheck1">Mark as completed!</label>
+														</div>																				
+												</div>															
+												{% endif %}
+										</div>
+										{% if bibtex.id %}
+										<button type="submit" class="btn btn-sm btn-primary">Update</button>
+										<a href="{% url 'dashboard:detail' bibtex.id %}" class="btn btn-outline-primary btn-sm">Back</a>
+										{% else %}
+										<button type="submit" class="btn btn-sm btn-primary">Add New</button>
+										{% endif %}
+								</form>
+						</div>
 				</div>
 				<!-- Modal -->
 				<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
- 		 						<div class="modal-dialog" role="document">
-    										<div class="modal-content">
-      													<div class="modal-header">
-        																<h5 class="modal-title" id="exampleModalLabel">Step 3. </h5>
-		        														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          																	<span aria-hidden="true">&times;</span>
-		        														</button>
-      													</div>
-      													<div class="modal-body">
-        																<h4> Edit detail of Bibtex </h4>
-																				<ol>
-																								<li>
-																												The <font class="p-1 bg-light text-danger">Language</font>, <font class="p-1 bg-light text-danger">Title</font> and <font class="p-1 bg-light text-danger">Book</font> will be filled in automatically.
-																								</li>
-																								<li>
-																												Please fill in the table with other informatin of the Bibtex.
-																								</li>
-																								<li>
-																												Press <font class="p-1 bg-light text-danger">Update</font> button to finish the registration, and then you can see the list of all the regisgered Bibtex.
-																								</li>
-																				</ol>
-																				<hr>
-																				<img src="{% static 'images/RegistrationFlow3.png' %}" height="500" width="450" alt="Flow3" />
-		      											</div>
-      													<div class="modal-footer">
-        																<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
- 						   									</div>
-    										</div>
-  							</div>
+ 		 				<div class="modal-dialog" role="document">
+    						<div class="modal-content">
+      							<div class="modal-header">
+        								<h5 class="modal-title" id="exampleModalLabel">Step 3. </h5>
+		        						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          							<span aria-hidden="true">&times;</span>
+		        						</button>
+      							</div>
+      							<div class="modal-body">
+        								<h4> Edit detail of Bibtex </h4>
+												<ol>
+														<li>
+																The <font class="p-1 bg-light text-danger">Language</font>, <font class="p-1 bg-light text-danger">Title</font> and <font class="p-1 bg-light text-danger">Book</font> will be filled in automatically.
+														</li>
+														<li>
+																Please fill in the table with other informatin of the Bibtex.
+														</li>
+														<li>
+																Press <font class="p-1 bg-light text-danger">Update</font> button to finish the registration, and then you can see the list of all the regisgered Bibtex.
+														</li>
+												</ol>
+												<hr>
+												<img src="{% static 'images/RegistrationFlow3.png' %}" height="500" width="450" alt="Flow3" />
+		      					</div>
+      							<div class="modal-footer">
+        								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+ 						   			</div>
+    						</div>
+  					</div>
 				</div>
 				<!-- Modal End-->
+		</div>
 </div>
-
 {% endblock content %}

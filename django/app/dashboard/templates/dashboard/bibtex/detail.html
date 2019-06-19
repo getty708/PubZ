@@ -6,151 +6,153 @@
 
 {% block content %}
 <div class="row">
-				<div class="col-12 my-3 card">
-								<div class="card-body">								
-												<div class="d-block h4">
-																<span class="badge badge-primary">Bibtex</span>
-																<span class="border border-info badge-pill text-info small">{{ bibtex.book.get_style_display }}</span>
-												</div>
-												<h1 class="h3" >
-																<span class="d-inline-flex">{{ bibtex.title|remove_brace }}</span>
-												</h1>
-												
-												<div class="table-responsive">
-																<table class="table table-sm table-striped w-100" >
-																				<thead>
-																								<tr>
-																												<th></th>
-																												<th></th>
-																								</tr>
-																				</thead>
-																				<tbody>
-																								<tr>
-																												<th scope="col">Authors</th>
-																												<td>
-																																{% for author in bibtex.authors.all %}
-																														<a href="{% url 'dashboard:author_detail' author.id %}" class="btn btn-sm btn-outline-primary d-inline-flex" >
-																																{% if bibtex.language == "EN" or not author.name_ja %}
-																																{{ author.name_en|author_en_default }}
-																																{% else %}
-																																{{ author.name_ja }}
-																																{% endif %}</a>
-																																{% endfor %}
-																												</td>
-																								</tr>
-																								<tr>
-																												<th scope="col">Book</th>
-																												<td class="row">
-																																<span class="col-12" >
-																																				{% if bibtex.book_title %}
-																																				<a href="{% url 'dashboard:book_detail' bibtex.book.id %}" class="d-block" >
-																																								<span class="d-block">
-																																												{{ bibtex.book_title_display }}
-																																								</span>
-																																								<span class="d-block text-muted small">
-																																												(From {{ bibtex.book.title }})
-																																								</span>
-																																				</a>																																				
-																																				{% else %}
-																																				<a href="{% url 'dashboard:book_detail' bibtex.book.id %}" class="d-inline-flex" >
-																																								{{ bibtex.book.title }}
-																																				</a>
-																																				{% endif %}
-																																</span>
-																																<span class="col-12 small">
-																																				{% if bibtex.volume %}Vol.{{ bibtex.volume }}, {% endif %}
-																																				{% if bibtex.number %}Number.{{ bibtex.number }}, {% endif %}
-																																				{% if bibtex.chapter %}Chapter.{{ bibtex.chapter }}, {% endif %}
-																																				{% if bibtex.page %}Page.{{ bibtex.page }}, {% endif %}
-																																				{% if bibtex.pub_date %} {% if bibtex.language == "EN" %}{{ bib.pub_date|date:"F Y" }}{% else %}{{ bib.pub_date|date:"Y年n月" }}{% endif %}{% endif %}
-																																</span>
-																												</td>
-																								</tr>
-																								<tr>
-																												<th scope="col">Published</th>
-																												<td>
-																																{{ bibtex.pub_date|default:"-" }}
-																												</td>
-																								</tr>
-																								<tr>
-																										<th scope="col">Tags</th>
-																										<td>
-																												{% for tag in bibtex.tags.all %}
-																												<a href="{% url 'dashboard:tag_detail' tag.id %}" class="btn btn-sm btn-outline-primary d-inline-flex" >{{ tag.name }}</a>
-																												{% endfor %}
-																										</td>
-																								</tr>
-																								<tr>
-																										<th scope="col">Abstract</th>
-																										<td>
-																												{{ bibtex.abstruct|default:'-' }}
-																										</td>
-																								</tr>																								
-																								<tr>
-																										<th scope="col">Acceptance Rate</th>
-																										<td>
-																												{{ bibtex.acceptance_rate|default:'-' }}
-																										</td>
-																								</tr>
-																								<tr>
-																										<th scope="col">Impact Factor</th>
-																										<td>
-																												{{ bibtex.impact_factor|default:'-' }}
-																										</td>
-																								</tr>
-																								<tr>
-																										<th scope="col">Note</th>
-																										<td>
-																												{{ bibtex.note|default:'-' }}
-																										</td>
-																								</tr>																								
-																								<tr>
-																										<th scope="col">Memo</th>
-																										<td>
-																												{{ bibtex.memo|default:'-' }}
-																										</td>
-																								</tr>
-																								<tr>
-																										<th scope="col">URL</th>
-																										<td>
-																												{% if bibtex.url %}
-																												<a href="{{ bibtex.url }}" >{{ bibtex.url|default:'-' }}</a>
-																												{% else %}
-																												-
-																												{% endif %}
-																										</td>
-																								</tr>																																																
-																								<tr>
-																												<th scope="col">Bibtex</th>
-																												<td>
-																																<div style="overflow-x: scroll;">
-																																				{{ bibtex | bibtex_bib_format }}
-																																</div>
-																												</td>
-																								</tr>
-																				</tbody>
-																</table>
-												</div>
-												<div id="bibtex" style="display:none;">{{ bibtex | bibtex_download_format }}</div>
-												<div class="col-12 my-3">
-																<a href="{% url 'dashboard:bibtex_edit' bibtex.id %}" class="btn btn-outline-primary"  >Edit</a>
-												</div>
-												{% if user.is_authenticated %}
-												{% if bibtex.authors.all.0.mail %}
-												<div class="col-12 my-3">
-																<a href="{% url 'dashboard:alert_by_author' bibtex.authors.all.0.id bibtex.id%}" class="btn btn-outline-primary">Email Alert</a>
-												</div>
-												{% endif %}
-												{% endif %}
-								</div>								
+		<div class="col-12 my-3">
+				<div class="card">
+						<div class="card-body">								
+								<div class="d-block h4">
+										<span class="badge badge-primary">Bibtex</span>
+										<span class="border border-info badge-pill text-info small">{{ bibtex.book.get_style_display }}</span>
+								</div>
+								<h1 class="h3" >
+										<span class="d-inline-flex">{{ bibtex.title|remove_brace }}</span>
+								</h1>
+								
+								<div class="table-responsive">
+										<table class="table table-sm table-striped w-100" >
+												<thead>
+														<tr>
+																<th></th>
+																<th></th>
+														</tr>
+												</thead>
+												<tbody>
+														<tr>
+																<th scope="col">Authors</th>
+																<td>
+																		{% for author in bibtex.authors.all %}
+																		<a href="{% url 'dashboard:author_detail' author.id %}" class="btn btn-sm btn-outline-primary d-inline-flex" >
+																				{% if bibtex.language == "EN" or not author.name_ja %}
+																				{{ author.name_en|author_en_default }}
+																				{% else %}
+																				{{ author.name_ja }}
+																				{% endif %}</a>
+																		{% endfor %}
+																</td>
+														</tr>
+														<tr>
+																<th scope="col">Book</th>
+																<td class="row">
+																		<span class="col-12" >
+																				{% if bibtex.book_title %}
+																				<a href="{% url 'dashboard:book_detail' bibtex.book.id %}" class="d-block" >
+																						<span class="d-block">
+																								{{ bibtex.book_title_display }}
+																						</span>
+																						<span class="d-block text-muted small">
+																								(From {{ bibtex.book.title }})
+																						</span>
+																				</a>																																				
+																				{% else %}
+																				<a href="{% url 'dashboard:book_detail' bibtex.book.id %}" class="d-inline-flex" >
+																						{{ bibtex.book.title }}
+																				</a>
+																				{% endif %}
+																		</span>
+																		<span class="col-12 small">
+																				{% if bibtex.volume %}Vol.{{ bibtex.volume }}, {% endif %}
+																				{% if bibtex.number %}Number.{{ bibtex.number }}, {% endif %}
+																				{% if bibtex.chapter %}Chapter.{{ bibtex.chapter }}, {% endif %}
+																				{% if bibtex.page %}Page.{{ bibtex.page }}, {% endif %}
+																				{% if bibtex.pub_date %} {% if bibtex.language == "EN" %}{{ bib.pub_date|date:"F Y" }}{% else %}{{ bib.pub_date|date:"Y年n月" }}{% endif %}{% endif %}
+																		</span>
+																</td>
+														</tr>
+														<tr>
+																<th scope="col">Published</th>
+																<td>
+																		{{ bibtex.pub_date|default:"-" }}
+																</td>
+														</tr>
+														<tr>
+																<th scope="col">Tags</th>
+																<td>
+																		{% for tag in bibtex.tags.all %}
+																		<a href="{% url 'dashboard:tag_detail' tag.id %}" class="btn btn-sm btn-outline-primary d-inline-flex" >{{ tag.name }}</a>
+																		{% endfor %}
+																</td>
+														</tr>
+														<tr>
+																<th scope="col">Abstract</th>
+																<td>
+																		{{ bibtex.abstruct|default:'-' }}
+																</td>
+														</tr>																								
+														<tr>
+																<th scope="col">Acceptance Rate</th>
+																<td>
+																		{{ bibtex.acceptance_rate|default:'-' }}
+																</td>
+														</tr>
+														<tr>
+																<th scope="col">Impact Factor</th>
+																<td>
+																		{{ bibtex.impact_factor|default:'-' }}
+																</td>
+														</tr>
+														<tr>
+																<th scope="col">Note</th>
+																<td>
+																		{{ bibtex.note|default:'-' }}
+																</td>
+														</tr>																								
+														<tr>
+																<th scope="col">Memo</th>
+																<td>
+																		{{ bibtex.memo|default:'-' }}
+																</td>
+														</tr>
+														<tr>
+																<th scope="col">URL</th>
+																<td>
+																		{% if bibtex.url %}
+																		<a href="{{ bibtex.url }}" >{{ bibtex.url|default:'-' }}</a>
+																		{% else %}
+																		-
+																		{% endif %}
+																</td>
+														</tr>																																																
+														<tr>
+																<th scope="col">Bibtex</th>
+																<td>
+																		<div style="overflow-x: scroll;">
+																				{{ bibtex | bibtex_bib_format }}
+																		</div>
+																</td>
+														</tr>
+												</tbody>
+										</table>
+								</div>
+								<div id="bibtex" style="display:none;">{{ bibtex | bibtex_download_format }}</div>
+								<div class="col-12 my-3">
+										<a href="{% url 'dashboard:bibtex_edit' bibtex.id %}" class="btn btn-outline-primary"  >Edit</a>
+								</div>
+								{% if user.is_authenticated %}
+								{% if bibtex.authors.all.0.mail %}
+								<div class="col-12 my-3">
+										<a href="{% url 'dashboard:alert_by_author' bibtex.authors.all.0.id bibtex.id%}" class="btn btn-outline-primary">Email Alert</a>
+								</div>
+								{% endif %}
+								{% endif %}
+						</div>								
 				</div>
+		</div>
 </div>
 <script>
-	function clickDownload(aLink)  
-	{
-		var str = document.getElementById("bibtex").innerHTML;  
-        str =  encodeURIComponent(str);  
-        aLink.href = "data:text;charset=utf-8,"+str;  
-    }  
+ function clickDownload(aLink)  
+ {
+		 var str = document.getElementById("bibtex").innerHTML;  
+     str =  encodeURIComponent(str);  
+     aLink.href = "data:text;charset=utf-8,"+str;  
+ }  
 </script> 
 {% endblock content %}
