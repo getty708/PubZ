@@ -2,6 +2,7 @@
 {% load utils_bib_style_helper %}
 
 <!-- Main -->
+{% if latest_bibtex_list %}
 {% for bs_key, bs_value, bibtexs in latest_bibtex_list|divide_by_book_style %}
 <div class="card mb-3">
 				<div class="card-body">
@@ -54,3 +55,10 @@
 				</div>
 </div>
 {% endfor %}
+{% else%}
+<div class="card mb-3">
+		<div class="card-body">												
+				<span>No Data ...</span>
+		</div>
+</div>
+{% endif %}

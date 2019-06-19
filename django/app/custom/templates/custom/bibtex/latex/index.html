@@ -1,17 +1,25 @@
 {% load utils_bib_format %}
 
 <!-- Main -->
+{% if latest_bibtex_list %}
 {% for bs_key, bs_value, bibtexs in latest_bibtex_list|divide_by_book_style %}
 <div class="card mb-3">
-				<div class="card-body">												
-								<h4 id="{{book_style}}">{{ bs_value }}</h4>
-								<!-- Bibtex -->		
-								{% for bibtex in bibtexs %}
-								<div class="border-top py-2">
-												{{ bibtex | bibtex_latex_format }}
-								</div>
-								{% endfor %}
-								<div class="border-top"></div>								
+		<div class="card-body">												
+				<h4 id="{{book_style}}">{{ bs_value }}</h4>
+				<!-- Bibtex -->		
+				{% for bibtex in bibtexs %}
+				<div class="border-top py-2">
+						{{ bibtex | bibtex_latex_format }}
 				</div>
+				{% endfor %}
+				<div class="border-top"></div>								
+		</div>
 </div>
 {% endfor %}
+{% else%}
+<div class="card mb-3">
+		<div class="card-body">												
+				<span>No Data ...</span>
+		</div>
+</div>
+{% endif %}

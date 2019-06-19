@@ -25,12 +25,14 @@
 								</div>
 				</div>
 </div>
+
+{% if latest_bibtex_list %}
 <div class="row mb-3 w-100">
 				<div class="col-12">
 								<div class="card">
 												<!-- Pagination -->
 												<nav aria-label="Page navigation example" class="card-body">
-																<ul class="pagination justify-content-left my-0">
+																<ul class="pagination justify-content-center my-0">
 																				<!-- Top Page -->
 																				<li class="page-item">
 																								<a href="{{ request.path }}" class="page-link search-link" page="1">Top(1)</a>
@@ -72,5 +74,6 @@
 								</div>
 				</div>
 </div>
+{% endif %}
 
 {% endblock content %}

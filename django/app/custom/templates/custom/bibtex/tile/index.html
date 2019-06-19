@@ -1,9 +1,13 @@
 {% load utils_bib_format %}
 
 <!-- Main -->
+{% if latest_bibtex_list %}
 {% for bibtex in latest_bibtex_list %}
 {{ bibtex|bibtex_tile_format }}
 {% endfor %}
+{% else%}
+<span>No Data ...</span>
+{% endif %}
 
 
 
