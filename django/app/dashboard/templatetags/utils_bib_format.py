@@ -134,9 +134,9 @@ def bibtex_latex_format(bib, *args,**kwargs):
     html = mark_safe(html.render(context))
     return html
 
-# Used for download format
-@register.filter(name='bibtex_download_format')
-def bibtex_download_format(bib, *args,**kwargs):
+
+@register.filter(name='bibtex_custom1_format')
+def bibtex_custom1_format(bib, *args,**kwargs):
     """
     Args.
     -----
@@ -156,10 +156,10 @@ def bibtex_download_format(bib, *args,**kwargs):
     # Fill Placeholders
     bib_style = bib.bib_type_key
     try:
-        template_name = "custom/bibtex/bibdownload/{}.html".format(bib_style)        
+        template_name = "custom/bibtex/custom1/{}.html".format(bib_style)
         html = get_template(template_name,)
     except TemplateDoesNotExist:
-        template_name = "custom/bibtex/latex/DEFAULT.html"    
+        template_name = "custom/bibtex/custom1/DEFAULT.html"    
     html = get_template(template_name,)
     html = mark_safe(html.render(context))
     return html

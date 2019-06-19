@@ -10,10 +10,11 @@ import datetime
 
 
 @register.inclusion_tag('dashboard/components/search_box.html')
-def search_box(display_mode, query_params, *args, **kwargs):
+def search_box(display_mode, query_params, user,  *args, **kwargs):
     return {
         "display_mode": display_mode,
         "GET_params": query_params,
+        "user": user,
     }
 
 

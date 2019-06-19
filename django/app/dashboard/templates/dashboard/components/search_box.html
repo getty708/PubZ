@@ -102,9 +102,9 @@
 																								<div class="btn-group btn-group-sm w-100" role="group" aria-label="Basic example">
 																												<a href="#" class="btn btn{% if display_mode != 'tile' and display_mode %}-outline{% endif %}-primary search-link" mode="tile" >Tile View</a>																												
 																												<a href="#" class="btn btn{% if display_mode != 'list'   %}-outline{% endif %}-primary search-link" mode="list" >List View</a>
-																												<a href="#" class="btn btn{% if display_mode != 'table'  %}-outline{% endif %}-primary search-link" mode="table" >Table View<span class="text-danger">*</span></a>
-																												<a href="#" class="btn btn{% if display_mode != 'bibtex' %}-outline{% endif %}-primary search-link" mode="bibtex" >Bibtex View<span class="text-danger">*</span></a>
-																												<a href="#" class="btn btn{% if display_mode != 'latex'  %}-outline{% endif %}-primary search-link" mode="latex" >Latex View<span class="text-danger">*</span></a>
+																												<a href="#" class="btn btn{% if display_mode != 'table'  %}-outline{% endif %}-primary search-link {% if not user.is_authenticated %} disabled{% endif %}" mode="table" >Table View<span class="text-danger">*</span></a>
+																												<a href="#" class="btn btn{% if display_mode != 'bibtex' %}-outline{% endif %}-primary search-link {% if not user.is_authenticated %} disabled{% endif %}" mode="bibtex" >Bibtex View<span class="text-danger">*</span></a>
+																												<a href="#" class="btn btn{% if display_mode != 'latex'  %}-outline{% endif %}-primary search-link {% if not user.is_authenticated %} disabled{% endif %}" mode="latex" >Latex View<span class="text-danger">*</span></a>
 																								</div>
 																								<div class="d-flex justify-content-end">
 																									<span class="text-danger">* Login Required</span>

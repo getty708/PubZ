@@ -12,13 +12,21 @@
 
 <div class="row mb-3">
 	<div class="col-12 my-3">
-		{% search_box  display_style  GET_params %}
+		{% search_box  display_style  GET_params  user %}
 	</div>
 </div>
 <div class="row mb-3">
 	<div class="col-12 my-3">
 		<!-- Main Contents: Bibtex List (with Pagination) -->
+		{% if display_style == 'tile' or not display_style %}
+		<div class="card mb-3">
+			<div class="card-body">				
+				{% print_bibtexs %}
+			</div>
+		</div>
+		{% else %}
 		{% print_bibtexs %}
+		{% endif %}
 	</div>
 </div>
 
