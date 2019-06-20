@@ -1,86 +1,89 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE|default:'ja' }}">
-				<head>
-								<meta charset="UTF-8">
-								<title>{% block title %}Dashboard{% endblock %}</title>
-								<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<head>
+				<meta charset="UTF-8">
+				<title>{% block title %}Dashboard{% endblock %}</title>
+				<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-								<!-- Javascript -->
-								<script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
-								<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>								
-								<script src="{% static 'js/tether/dist/js/tether.min.js' %}"></script>
-								<script src="{% static 'js/moment/moment.min.js' %}"></script>
-								<script src="{% static 'js/chartjs/Chart.min.js' %}"></script>
-								<script src="{% static 'js/datepicker/datepicker-widget.js' %}"></script>								
-								<script src="{% static 'js/datepicker/bootstrap-datetimepicker.min.js' %}"></script>
-																
-								<!-- Bootstrap -->
-								<link href="{% static 'bootstrap/dist/css/bootstrap.css' %}" rel="stylesheet">
-								<script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
+				<!-- Javascript -->
+				<script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>								
+				<script src="{% static 'js/tether/dist/js/tether.min.js' %}"></script>
+				<script src="{% static 'js/moment/moment.min.js' %}"></script>
+				<script src="{% static 'js/chartjs/Chart.min.js' %}"></script>
+				<script src="{% static 'js/datepicker/datepicker-widget.js' %}"></script>								
+				<script src="{% static 'js/datepicker/bootstrap-datetimepicker.min.js' %}"></script>
+				
+				<!-- Bootstrap -->
+				<link href="{% static 'bootstrap/dist/css/bootstrap.css' %}" rel="stylesheet">
+				<script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
 
-								<!-- Javascript 2-->								
+				<!-- Javascript 2-->								
 
-								
-								{% block extrahead %}{% endblock %}
-				</head>
-				<body style="height: 100vh" class="bg-light">
-								<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark w-100" >
-												<a class="navbar-brand mb-0 h1" href="{% url 'dashboard:index' %}" id="brand_link">PubZ</a>
-												<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-																<div class="navbar-nav mr-auto">
-																				<a class="nav-item nav-link" href="{% url 'dashboard:index' %}" id="home_link">Home</a>
-																				<a class="nav-item nav-link" href="{% url 'dashboard:book_index' %}" id="Book_link">Books</a>
-																				<a class="nav-item nav-link" href="{% url 'dashboard:author_index' %}" id="Author_link">Authors</a>
-																				<a class="nav-item nav-link" href="{% url 'dashboard:tag_index' %}" id="Tag_link">Tags</a>
-																				{% if user.is_authenticated %}
-																				<li class="nav-item dropdown">
-																								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Add New</a>
-																								<div class="dropdown-menu">
-																												<a class="dropdown-item" href="{% url 'dashboard:bibtex_add_step1' %}">New Bibtex</a>
-																												<a class="dropdown-item" href="{% url 'dashboard:book_add' %}">New Book</a>
-																												<a class="dropdown-item" href="{% url 'dashboard:author_add' %}">New Author</a>
-																												<div class="dropdown-divider"></div>
-																												<a class="dropdown-item" href="{% url 'dashboard:tag_add'  %}">New Tag</a>
-																								</div>
-																				</li>
-																				{% endif %}
-																</div>
-																<div class="navbar-nav">
-																				{% if user.is_authenticated %}
-																				<li class="nav-item dropdown border border-white rounded">
-																								<a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Hello, <span class="font-weight-bold" >{{ user.get_full_name }}</span></a>
-																								<div class="dropdown-menu dropdown-menu-right">
-																												<a class="dropdown-item" href="{% url 'dashboard:index' %}">My Page</a>
-																												{% if user.is_staff %}
-																												<a class="dropdown-item" href="{% url 'admin:index' %}">Admin Page</a>
-																												{% endif %}
-																												<div class="dropdown-divider"></div>
-																												<a class="dropdown-item" href="/accounts/logout">Log out</a>
-																								</div>
-																				</li>
-																				{% else %}
-																				<a href="/accounts/login"  class="btn bnt-sm btn-outline-light" >Login</a>
-																				{% endif %}
-																</div>
+				
+				{% block extrahead %}{% endblock %}
+		</head>
+		<body style="height: 100vh" class="bg-light">
+				<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark w-100" >
+						<a class="navbar-brand mb-0 h1" href="{% url 'dashboard:index' %}" id="brand_link">PubZ</a>	
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+								<span class="navbar-toggler-icon"></span>
+						</button>
+						<div class="collapse navbar-collapse" id="navbarNav">
+								<div class="navbar-nav mr-auto">
+										<a class="nav-item nav-link" href="{% url 'dashboard:index' %}" id="home_link">Home</a>
+										<a class="nav-item nav-link" href="{% url 'dashboard:book_index' %}" id="Book_link">Books</a>
+										<a class="nav-item nav-link" href="{% url 'dashboard:author_index' %}" id="Author_link">Authors</a>
+										<a class="nav-item nav-link" href="{% url 'dashboard:tag_index' %}" id="Tag_link">Tags</a>
+										{% if user.is_authenticated %}
+										<li class="nav-item dropdown">
+												<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Add New</a>
+												<div class="dropdown-menu">
+														<a class="dropdown-item" href="{% url 'dashboard:bibtex_add_step1' %}">New Bibtex</a>
+														<a class="dropdown-item" href="{% url 'dashboard:book_add' %}">New Book</a>
+														<a class="dropdown-item" href="{% url 'dashboard:author_add' %}">New Author</a>
+														<div class="dropdown-divider"></div>
+														<a class="dropdown-item" href="{% url 'dashboard:tag_add'  %}">New Tag</a>
 												</div>
-								</nav>
-								<div class="container-fluid mt-5 w-100 min-vh-100">
-												<div class="row justify-content-md-center py-3">
-																<div class="col-12 col-md-10">
-																				{% block content %}
-																				{{ content }}
-																				{% endblock %}
-																</div>
-												</div>
+										</li>
+										{% endif %}
 								</div>
-								<!-- Footer -->
-								<div class="container-fluid  w-100 bg-dark">
-												<div class="row bg-inverse py-2">
-																<div class="col-12  text-white d-flex justify-content-end">
-																				<span class="px-3" style="font-size: 1em;">Publication Zoo</span>
-																</div>
+								<div class="navbar-nav">
+										{% if user.is_authenticated %}
+										<li class="nav-item dropdown border border-white rounded">
+												<a class="nav-link dropdown-toggle text-white" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Hello, <span class="font-weight-bold" >{{ user.get_full_name }}</span></a>
+												<div class="dropdown-menu dropdown-menu-right">
+														<a class="dropdown-item" href="{% url 'dashboard:index' %}">My Page</a>
+														{% if user.is_staff %}
+														<a class="dropdown-item" href="{% url 'admin:index' %}">Admin Page</a>
+														{% endif %}
+														<div class="dropdown-divider"></div>
+														<a class="dropdown-item" href="/accounts/logout">Log out</a>
 												</div>
+										</li>
+										{% else %}
+										<a href="/accounts/login"  class="btn bnt-sm btn-outline-light" >Login</a>
+										{% endif %}
 								</div>
-				</body>
+						</div>
+				</nav>
+				<div class="container-fluid mt-5 min-vh-100">
+						<div class="row justify-content-md-center py-3">
+								<div class="col-12 col-md-10">
+										{% block content %}
+										{{ content }}
+										{% endblock %}
+								</div>
+						</div>
+				</div>
+				<!-- Footer -->
+				<div class="container-fluid  bg-dark">
+						<div class="row bg-inverse py-2">
+								<div class="col-12 col-md-10  text-white d-flex justify-content-end">
+										<span class="px-3" style="font-size: 1em;">Publication Zoo</span>
+								</div>
+						</div>
+				</div>
+		</body>
 </html>

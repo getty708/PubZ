@@ -16,6 +16,11 @@ class Bibtex(models.Model):
         ('5', 'High',),
         ('9', 'Super High',),
     )
+    BIBSTYLE_CHOICES = (
+        ('AWARD', 'Award',),
+        ('KEYNOTE', 'Keynote',),
+        ('SAMEASBOOK','Same as the Book'),
+    )
     
     """ Fields
     """
@@ -31,6 +36,11 @@ class Bibtex(models.Model):
     book = models.ForeignKey(
         'core.Book',
         on_delete=models.PROTECT,
+    )
+    bib_type = models.CharField(
+        max_length=32,
+        choices=BIBSTYLE_CHOICES,
+        default="SAMEASBOOK",
     )
     book_title = models.CharField(max_length=512,null=True,blank=True, default="")
     volume = models.CharField(max_length=128,null=True,blank=True)
@@ -98,6 +108,18 @@ class Bibtex(models.Model):
             return "({abbr} {year})".format(abbr=self.book.abbr, year=self.pub_date.year)
         else:
             return None
+
+    @property
+    def bib_type_key(self,):
+        if self.bib_type == "SAMEASBOOK":
+            return self.book.style
+        return self.bib_type
+
+    @property
+    def bib_type_display(self,):
+        if self.bib_type == "SAMEASBOOK":
+            return self.book.get_style_display()
+        return self.get_bib_type_display()
 
     @property
     def authors_list(self,):
@@ -188,23 +210,51 @@ class Author(models.Model):
 # --------------------------------------------------
 class Book(models.Model):
     STYLE_CHOICES = (
-        # ('INTPROC', 'International Proceedings',),
-        ('INTPROC', "Int'l Proc.",),
-        # ('JOURNAL', 'Journal Paper',),
-        ('JOURNAL', 'Journal',),
-        # ('CONF_DOMESTIC', 'Domestic Conference',),
-        ('CONF_DOMESTIC', '国内会議',),
-        # ('CONF_DOMESTIC_NO_REVIEW', 'Domestic Conference (No Review)',),
-        ('CONF_DOMESTIC_NO_REVIEW', '国内研究会',),
-        # ('CONF_NATIONAL', 'National Conference'),
-        ('CONF_NATIONAL', '全国大会'),
-        # ('BOOK', 'Book/Review/Editor/Translation',),
-        ('BOOK', 'Book',),
-        # ('KEYNOTE', 'Keynote/Panel Discution/Seminer'),
-        ('KEYNOTE', 'Keynote'),
-        ('NEWS', 'News Paper',),
-        ('OTHERS', 'Others',),
-        ('AWARD', 'Award',),
+        # These options are removed in the feature
+        #('INTPROC', "Int'l Proc.",),  # Alias of `in Proceedings`
+        #('JOURNAL', 'Journal',), # Alias of `Article`
+        # ('CONF_DOMESTIC', '国内会議',),
+        # ('CONF_DOMESTIC_NO_REVIEW', '国内研究会',),
+        # ('CONF_NATIONAL', '全国大会'),
+        # ('BOOK', 'Book',),        
+        #('KEYNOTE', 'Keynote'),  # Alias of `Misc`
+        # ('NEWS', 'News Paper',), # Alias of `in Book`
+        #('OTHERS', 'Others',),   # Alias of `Misc`
+        #('AWARD', 'Award',),     # This will be remobed in the future.
+        
+        # Official bibtex entries (New)
+        #('ARTICLE','Article'),
+        ('ARTICLE',(
+            ('JOURNAL', 'Journal'),
+        ),),
+        ('INPROCEEDINGS', (
+            ('INPROCEEDINGS', 'in Proceedings'),            
+            ('CONF_DOMESTIC', '国内会議',),
+            ('CONF_DOMESTIC_NO_REVIEW', '国内研究会',),
+            ('CONF_NATIONAL', '全国大会'),
+        ),),
+        ('BOOK',(
+            ('BOOK', 'Book',),
+            ('NEWS', 'News Paper',),
+            ('TECHREPORT', 'Tech Report'),
+        ),),
+        ('Removed in the future', (
+            ('INTPROC', "Int'l Proc.",),            
+            ('KEYNOTE', '[Warning!]Keynote'),            
+            ('AWARD', '[Warning!]Award',),
+        ),),
+        ('Othres', (
+            ('MISC', 'Others'),
+            ('ARTICLE', "Article"),            
+            ('INBOOK', 'in Book'),            
+            ('BOOKLET','Booklet'),
+            ('INCOLLECTION', 'in Collection'),
+            ('MANUAL', 'Manual'),
+            ('MASTERTHESIS','Master Thesis'),
+            ('PHDTHESIS','Ph.D Thesis'),
+            ('PROCEEDINGS','Proceedings'),
+            ('UNPUBLISHED','Unpublished'),
+        ),),
     )
     
     title = models.CharField(max_length=256)
@@ -217,6 +267,7 @@ class Book(models.Model):
     organizer = models.CharField(max_length=256, null=True,blank=True)
     publisher = models.CharField(max_length=256,null=True,blank=True)
     address = models.TextField(null=True,blank=True)
+    note = models.TextField(null=True,blank=True)    
     created = models.DateTimeField(auto_now_add=True, blank=False)
     modified = models.DateTimeField(auto_now=True, blank=False)    
     owner = models.ForeignKey(
@@ -235,6 +286,10 @@ class Book(models.Model):
         if self.abbr != "":
             return "{title} ({abbr})".format(title=self.title, abbr=self.abbr)
         return self.title
+
+            
+        
+        
 
 
 

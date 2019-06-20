@@ -6,75 +6,80 @@
 
 {% block content %}
 <div class="row">
-				<div class="col-12 card my-3">
-								<div class="card-body">
-												<div class="d-block h4">
-																<span class="badge badge-primary">Author</span>
-												</div>												
-												<h1 class="h3" >
-																<span class="d-inline-block">{{ author.name_en|author_en_default }}
-												</h1>
-
-												<table class="table table-sm table-striped">
-																<thead>
-																				<tr>
-																								<th></th><th></th>
-																				</tr>
-																</thead>
-																<tbody>
-																				<tr>
-																								<th>Name(en)</th>
-																								<td>{{ author.name_en|author_en_default }}</td>
-																				</tr>
-																				<tr>
-																								<th>Name(ja)</th>
-																								<td>{{ author.name_ja|default:'-' }}</td>
-																				</tr>
-																				<tr>
-																								<th>Depertment(en)</th>
-																								<td>{{ author.dep_en|default:'-' }}</td>
-																				</tr>
-																				<tr>
-																								<th>Depertment(ja)</th>
-																								<td>{{ author.dep_ja|default:'-' }}</td>
-																				</tr>
-																				<tr>
-																								<th>Mail</th>
-																								<td>{{ author.mail|default:'-' }}</td>
-																				</tr>
-																				<tr>
-																								<th>Date</th>
-																								<td>
-																												{% if author.join or author.leave %}
-																												{% if author.join %}
-																												<span class="d-block">Join: {% if author.join %}{{ author.join }}{% else %}No Data{% endif %}</span>
-																												{% endif %}
-																												{% if author.leave%}
-																												<span class="d-block">Left: {{ author.leave }}</span>
-																												{% endif%}
-																												{% else %}
-																												-
-																												{% endif%}
-																								</td>
-																				</tr>
-																</tbody>
-												</table>
+		<div class="col-12 my-3">
+				<div class="card shadow">
+						<div class="card-body">
+								<div class="d-block h4">
+										<span class="badge badge-primary">Author</span>
+								</div>												
+								<h1 class="h3" >
+										<span class="d-inline-block">{{ author.name_en|author_en_default }}</span>
+								</h1>
+								<div class="table-responsive-md">
+										<table class="table table-sm table-striped">
+												<thead>
+														<tr>
+																<th></th><th></th>
+														</tr>
+												</thead>
+												<tbody>
+														<tr>
+																<th>Name(en)</th>
+																<td>{{ author.name_en|author_en_default }}</td>
+														</tr>
+														<tr>
+																<th>Name(ja)</th>
+																<td>{{ author.name_ja|default:'-' }}</td>
+														</tr>
+														<tr>
+																<th>Depertment(en)</th>
+																<td>{{ author.dep_en|default:'-' }}</td>
+														</tr>
+														<tr>
+																<th>Depertment(ja)</th>
+																<td>{{ author.dep_ja|default:'-' }}</td>
+														</tr>
+														<tr>
+																<th>Mail</th>
+																<td>{{ author.mail|default:'-' }}</td>
+														</tr>
+														<tr>
+																<th>Date</th>
+																<td>
+																		{% if author.join or author.leave %}
+																		{% if author.join %}
+																		<span class="d-block">Join: {% if author.join %}{{ author.join }}{% else %}No Data{% endif %}</span>
+																		{% endif %}
+																		{% if author.leave%}
+																		<span class="d-block">Left: {{ author.leave }}</span>
+																		{% endif%}
+																		{% else %}
+																		-
+																		{% endif%}
+																</td>
+														</tr>
+												</tbody>
+										</table>
 								</div>
-								<div class="card-body">
-												<a href="{% url 'dashboard:author_edit' author.id %}" class="btn btn-outline-primary btn-sm">Edit</a>
-												<a href="{% url 'dashboard:index_list' %}?keywords={{author.name_en}}&pubyear_all=true" target=”_blank” class="btn btn-outline-primary btn-sm">Publications</a>
-								</div>
+						</div>
+						<div class="card-body">
+								<a href="{% url 'dashboard:author_edit' author.id %}" class="btn btn-outline-primary btn-sm">Edit</a>
+								<a href="{% url 'dashboard:index_list' %}?keywords={{author.name_en}}&pubyear_all=true" target=”_blank” class="btn btn-outline-primary btn-sm">Publications</a>
+						</div>
 				</div>
-				<div class="col-12 card my-3">
-								<div class="card-body border-bottom border-secondary">
-												<h4>Works of <span class="font-weight-bold">{{ author.name_en|author_en_default }}</span></h4>
-								</div>
-								<div class="card-body">
-												{% print_bibtexs %}												
-								</div>
-								<div class="card-body">
-												<a href="{% url 'dashboard:index' %}?keywords={{author.name_en}}" class="btn btn-primary btn-block">See More Publications of This Author</a>
-								</div>																
-				</div>				
-</div>
+		</div>
+		<div class="col-12  my-3">
+			<div class="card shadow">
+				<div class="card-body border-bottom border-secondary">
+					<h4>Works of <span class="font-weight-bold">{{ author.name_en|author_en_default }}</span></h4>
+				</div>
+				<div class="card-body">
+					{% print_bibtexs %}												
+				</div>
+				<div class="card-body">
+					<a href="{% url 'dashboard:index' %}?keywords={{author.name_en}}" class="btn btn-primary btn-block">See More Publications of This Author</a>
+				</div>																
+			</div>
+		</div>
+</div>		
 {% endblock content %}

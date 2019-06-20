@@ -70,7 +70,10 @@ def val_bibtex_title_en_replace_keywords(title_en):
 
     validated_title  = ''
 
-    if ':' in title_en:
+    
+    if title_en == None:
+        return ''
+    elif ':' in title_en:
         colon_separated_list = title_en.split(':')
         space_separated_list_front = colon_separated_list[0].split()
         space_separated_list_back = colon_separated_list[1].split()
