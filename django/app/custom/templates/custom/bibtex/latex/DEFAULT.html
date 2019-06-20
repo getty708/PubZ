@@ -1,5 +1,5 @@
 {% load utils_bib_style_helper %}
-\item {% for author in authors %}<a href="{% url 'dashboard:author_detail' author.id %}" >{% if bib.language == "EN" %}{{ author.name_en|author_en_default }}{% else %}{{ author.name_ja }}{% endif %}</a>,{% endfor %}
-<a href="{% url 'dashboard:bib_detail' bib.id %}">"{{ bib.title }}"</a>
-{% if bib.volume %}, volume {{ bib.volume }}{% endif %}
-{% if bib.pub_date %}, {{ bib.pub_date|date:"Y" }},{% endif %}
+\item {% for author in authors %}<a href="{% url 'dashboard:author_detail' author.id %}" >{% if bib.language == "EN"  or not author.name_ja %}{{ author.name_en|author_en_default }}{% else %}{{ author.name_ja }}{% endif %}</a>,{% endfor %}
+<a href="{% url 'dashboard:bib_detail' bib.id %}">"{{ bib.title }},"</a>
+{% if bib.volume %} volume {{ bib.volume }},{% endif %}
+{% if bib.pub_date %} {{ bib.pub_date|date:"Y" }},{% endif %}

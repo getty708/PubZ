@@ -1,18 +1,24 @@
 {% load utils_bib_format %}
 
 <!-- Main -->
-{% for bs_key,bs_value in book_styles.items %}
-{% if latest_bibtex_list|filter_by_book_style:bs_key %}
 <!-- Bibtex -->
-<dic class="card mb-3">
+{% if latest_bibtex_list %}
+{% for bs_key, bs_value, bibtexs in latest_bibtex_list|divide_by_book_style %}
+<dic class="card mb-3 shadow">
 				<div class="card-body">
 								<h4 id="{{book_style}}">{{ bs_value }}</h4>		
-								{% for bibtex in latest_bibtex_list|filter_by_book_style:bs_key %}
+								{% for bibtex in bibtexs %}
 								<div class="border-top border-bottom py-2" style="overflow-x: scroll;">
 												{{ bibtex | bibtex_bib_format }}
 								</div>
 								{% endfor %}				
 				</div>
 </dic>
-{% endif %}
 {% endfor %}
+{% else%}
+<div class="card mb-3">
+		<div class="card-body">												
+				<span>No Data ...</span>
+		</div>
+</div>
+{% endif %}

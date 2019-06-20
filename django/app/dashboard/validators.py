@@ -70,7 +70,10 @@ def val_bibtex_title_en_replace_keywords(title_en):
 
     validated_title  = ''
 
-    if ':' in title_en:
+    
+    if title_en == None:
+        return ''
+    elif ':' in title_en:
         colon_separated_list = title_en.split(':')
         space_separated_list_front = colon_separated_list[0].split()
         space_separated_list_back = colon_separated_list[1].split()
@@ -141,7 +144,7 @@ def val_book_title_replace_keywords(title):
     Return.
     -------
     - Title string, some keywords are replaced with registerd format
-    (e.g. Conference => Conf., International => Int'l.)
+    (e.g. Conf. ==> Conference, Int'l ==> International,)
     """
     CHECK_DICT ={
         "Conference": ["conference", "Conf.", "conf.",],

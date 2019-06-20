@@ -6,45 +6,51 @@
 {% block content %}
 
 <div class="row">
-				<div class="col-12 card my-3">
-								<div class="card-body">
-												{% if author_order.id %}
-												<h2>Edit Author Info: {{ author_order }}</h2>
-												{% else%}
-												<h2>Add New Author to {{ bibtex }}</h2>
-												{% endif %}
-												{% if error_message %}
-												<div class="alert alert-danger" role="alert">
-																{{ error_message }}
-												</div>
-												{% endif %}
+		<div class="col-12 my-3">
+				<div class="card shadow">
+						<div class="card-body">
+								{% if author_order.id %}
+								<h2>Edit Author Info: {{ author_order }}</h2>
+								{% else%}
+								<h2>Add New Author to {{ bibtex }}</h2>
+								{% endif %}
+								{% if error_message %}
+								<div class="alert alert-danger" role="alert">
+										{{ error_message }}
 								</div>
-								<div class="card-body">
-												<form action="{{ submit_url}}" method="post">
-																{% csrf_token %}
-																<div class="form-group row">
-																				<label for="example-text-input" class="col-2 col-form-label">Bibtex</label>
-																				<div class="col-5">{{ form.bibtex }}</div>
-																</div>
-																<div class="form-group row">
-																				<label for="example-text-input" class="col-2 col-form-label">Author</label>
-																				<div class="col-5">{{ form.author }}</div>
-																				<div class="col-3"><a href="{% url 'dashboard:author_add' %}" class="btn btn-sm btn-outline-primary"  target="_blank">Add New Author</a></div>
-																</div>
-																<div class="form-group row">
-																				<label for="example-text-input" class="col-2 col-form-label">Order</label>
-																				<div class="col-5">{{ form.order }}</div>
-																</div>
-																{% if author_order.id %}
-																<button type="submit" class="btn btn-primary">Update</button>						
-																<a href="{% url 'dashboard:bib_detail' bibtex.id %}" class="btn btn-outline-primary">Back</a>
-																{% else %}
-																<button type="submit" class="btn btn-primary">Add</button>
-																<a href="{% url 'dashboard:index' %}" class="btn btn-outline-primary">Back to Top</a>
-																{% endif %}
-												</form>				
-								</div>				
+								{% endif %}
+						</div>
+						<div class="card-body">
+								<form action="{{ submit_url}}" method="post">
+										{% csrf_token %}
+										<div class="form-group row">
+												<label for="example-text-input" class="col-12 col-md-2 col-form-label">Bibtex</label>
+												<div class="col-12 col-md-10">{{ form.bibtex }}</div>
+										</div>
+										<div class="form-group row">
+												<label for="example-text-input" class="col-12 col-md-2 col-form-label">Author</label>
+												<div class="col-12 col-md-10">
+														{{ form.author }}
+														<div class="py-2">
+																<a href="{% url 'dashboard:author_add' %}" class="btn btn-sm btn-outline-primary"  target="_blank">Add New Author</a>
+														</div>														
+												</div>
+										</div>
+										<div class="form-group row">
+												<label for="example-text-input" class="col-12 col-md-2 col-form-label">Order</label>
+												<div class="col-12 col-md-10">{{ form.order }}</div>
+										</div>
+										{% if author_order.id %}
+										<button type="submit" class="btn btn-primary">Update</button>						
+										<a href="{% url 'dashboard:bib_detail' bibtex.id %}" class="btn btn-outline-primary">Back</a>
+										{% else %}
+										<button type="submit" class="btn btn-primary">Add</button>
+										<a href="{% url 'dashboard:index' %}" class="btn btn-outline-primary">Back to Top</a>
+										{% endif %}
+								</form>				
+						</div>				
 				</div>
+		</div>
 </div>
 <script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
 {{ form.media }}

@@ -2,6 +2,8 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404, render
 from django.views import generic
 from django.urls import resolve
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 import datetime
 from datetime import datetime
@@ -17,13 +19,14 @@ from dashboard.templatetags import utils_search as utils
 """
 Bibtex
 """
+@method_decorator(login_required, name='dispatch')
 class IndexView(generic.ListView):
     template_name = 'dashboard/bibtex/index.html'
     context_object_name = 'latest_bibtex_list'
     
     def get_queryset(self):
         self.GET_params = utils.parse_GET_params(self.request)
-        query_set = utils.get_bibtex_query_set(self.GET_params)
+        query_set = utils.get_bibtex_query_set(self.GET_params).order_by('book__style','-pub_date')
         self.GET_params["num_hits"] = len(query_set)
         return query_set
 
@@ -36,10 +39,11 @@ class IndexView(generic.ListView):
         context["year"] = datetime.now().year
         return context
 
+
 class IndexViewPagination(generic.ListView):
     template_name = 'dashboard/bibtex/index_page.html'
     context_object_name = 'latest_bibtex_list'
-    paginate_by = 10
+    paginate_by = 30
     
     def get_queryset(self):
         self.GET_params = utils.parse_GET_params(self.request)
@@ -65,14 +69,16 @@ class DetailView(generic.DetailView):
 """
 Book
 """
+from dashboard.templatetags.utils_search import get_bib_style_keys
 class BookIndexView(generic.ListView):
     template_name = 'dashboard/book/index.html'
     context_object_name = 'latest_book_list'
     paginate_by = 30
+    styles = get_bib_style_keys()    
  
     def get_queryset(self):
         self.selected_style = self.request.GET.get("style", "ALL")
-        styles = [s[0] for s in Book.STYLE_CHOICES]
+        styles = [s[0] for s in self.styles]
         key = self.selected_style if self.selected_style in styles else False
         if key:
             return Book.objects.filter(style=key,).order_by('title')
@@ -81,7 +87,7 @@ class BookIndexView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         style_active = None
-        for i, style in enumerate(Book.STYLE_CHOICES):
+        for style in self.styles:
             if style[0] == self.selected_style:
                 style_active = style[0]
                 continue
@@ -112,18 +118,21 @@ class AuthorIndexView(generic.ListView):
     def get_queryset(self):
         self.search_keyword = self.request.GET.get("keyword",)
         if self.search_keyword:
-            self.search_keyword = urllib.parse.unquote(self.search_keyword)
-            return Author.objects.filter(
-                Q(name_en__icontains=self.search_keyword) |
-                Q(name_ja__icontains=self.search_keyword) |
-                Q(dep_en__icontains=self.search_keyword)  |
-                Q(dep_ja__icontains=self.search_keyword)
-            ).order_by('name_en')
+            queryset = Author.objects.order_by('name_en')
+            self.search_keyword = urllib.parse.unquote(self.search_keyword).split()
+            for q in self.search_keyword:
+                queryset =  queryset.filter(
+                    Q(name_en__icontains=q) |
+                    Q(name_ja__icontains=q) |
+                    Q(dep_en__icontains=q)  |
+                    Q(dep_ja__icontains=q)
+                )
+            return queryset.order_by('name_en')
         return Author.objects.order_by('name_en')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["search_keyword"] = self.search_keyword
+        context["search_keyword"] = " ".join(self.search_keyword) if isinstance(self.search_keyword, list) else ""
         return context
 
 

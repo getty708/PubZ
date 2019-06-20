@@ -12,86 +12,90 @@ $('.popover-dismiss').popover({
 });
 </script>
 <div class="row">
-				<div class="col-12 card my-3">
-								<div class="card-body">
-												{% if author.id %}
-												<h1 class="h3" >
-																<small class="text-secondary mr-2" >Edit Author Info:</small>
-																<span class="d-inline-block">{{ author }}</span>
-												</h1>
-												{% else%}												
-												<h1 class="h3" >
-																<span class="d-inline-block">Add New Author</span>
-												</h1>
-												{% endif %}
-												{% if form.errors %}
-												<div class="alert alert-danger" role="alert">				
-																{%for error in form.errors.values %}						
-																{{ error }}						
-																{% endfor %}
-												</div>						
-												{% endif %}
-								</div>
-								<div class="card-body">								
-												<form action="{{ submit_url}}" method="post" class="row">
-																{% csrf_token %}
-																<table class="table table-sm table-striped col-md-7">
-																				<thead>
-																								<tr>
-																												<th>Items</th>
-																												<th>Values</th>
-																								</tr>																							
-																				</thead>
-																				<tbody>
-																								<tr>
-																												<th>
-																																Name(en)
-																																<button type="button" class="btn btn-sm btn-outline-info rounded-circle" data-container="body" data-toggle="popover" data-placement="bottom"
-																																				title="Name (en)"
-																																				data-content="A comma is needed after a family name!. (e.g. Handai, Taro)">
-																																				?
-																																</button>
-																												</th>
-																												<td>{{ form.name_en }}</td>
-																								</tr>
-																								<tr>
-																												<th>Name(ja)</th>
-																												<td>{{ form.name_ja }}</td>
-																								</tr>
-																								<tr>
-																												<th>Depertment(en)</th>
-																												<td>{{ form.dep_en }}</td>
-																								</tr>
-																								<tr>
-																												<th>Depertment(ja)</th>
-																												<td>{{ form.dep_ja }}</td>
-																								</tr>
-																								<tr>
-																												<th>Mail</th>
-																												<td>{{ form.mail }}</td>
-																								</tr>
-																								<tr>
-																												<th>Date</th>
-																												<td>
-																																<span class="d-block">Join: {{ form.date_join }}</span>
-																																<span class="d-block">Left: {{ form.date_leave }}</span>
-																												</td>
-																								</tr>
-																				</tbody>
-																</table>
+		<div class="col-12 my-3">
+				<div class="card shadow">
+						<div class="card-body">
+								{% if author.id %}
+								<h1 class="h3" >
+										<small class="text-secondary mr-2" >Edit Author Info:</small>
+										<span class="d-inline-block">{{ author }}</span>
+								</h1>
+								{% else%}												
+								<h1 class="h3" >
+										<span class="d-inline-block">Add New Author</span>
+								</h1>
+								{% endif %}
+								{% if form.errors %}
+								<div class="alert alert-danger" role="alert">				
+										{%for error in form.errors.values %}						
+										{{ error }}						
+										{% endfor %}
+								</div>						
+								{% endif %}
+						</div>
+						<div class="card-body">								
+								<form action="{{ submit_url}}" method="post" class="row">
+										{% csrf_token %}
 
-																<div class="col-12">
-																				{% if author.id %}
-																				<button type="submit" class="btn btn-primary">Update</button>
-																				<a href="{% url 'dashboard:author_detail' author.id %}" class="btn btn-outline-primary">Back</a>
-																				{% else %}
-																				<button type="submit" class="btn btn-primary">Add</button>
-																				<a href="{% url 'dashboard:author_index' %}" class="btn btn-outline-primary">Back</a>
-																				{% endif %}
-																</div>
-												</form>
-								</div>
-								
+										<div class="col-12 table-responsive-md">
+												<table class="table table-sm table-striped">
+														<thead>
+																<tr>
+																		<th>Items</th>
+																		<th>Values</th>
+																</tr>																							
+														</thead>
+														<tbody>
+																<tr>
+																		<th>
+																				Name(en)
+																				<button type="button" class="btn btn-sm btn-outline-info rounded-circle" data-container="body" data-toggle="popover" data-placement="bottom"
+																								title="Name (en)"
+																								data-content="A comma is needed after a family name!. (e.g. Handai, Taro)">
+																						?
+																				</button>
+																		</th>
+																		<td>{{ form.name_en }}</td>
+																</tr>
+																<tr>
+																		<th>Name(ja)</th>
+																		<td>{{ form.name_ja }}</td>
+																</tr>
+																<tr>
+																		<th>Depertment(en)</th>
+																		<td>{{ form.dep_en }}</td>
+																</tr>
+																<tr>
+																		<th>Depertment(ja)</th>
+																		<td>{{ form.dep_ja }}</td>
+																</tr>
+																<tr>
+																		<th>Mail</th>
+																		<td>{{ form.mail }}</td>
+																</tr>
+																<tr>
+																		<th>Date</th>
+																		<td>
+																				<span class="d-block">Join: {{ form.date_join }}</span>
+																				<span class="d-block">Left: {{ form.date_leave }}</span>
+																		</td>
+																</tr>
+														</tbody>
+												</table>
+										</div>
+										<div class="col-12">
+												{% if author.id %}
+												<button type="submit" class="btn btn-primary">Update</button>
+												<a href="{% url 'dashboard:author_detail' author.id %}" class="btn btn-outline-primary">Back</a>
+												{% else %}
+												<button type="submit" class="btn btn-primary">Add</button>
+												<a href="{% url 'dashboard:author_index' %}" class="btn btn-outline-primary">Back</a>
+												{% endif %}
+										</div>
+								</form>
+						</div>
+						
 				</div>
+		</div>
 </div>
-{% endblock content %}
+		{% endblock content %}

@@ -21,9 +21,15 @@
 																</a>
 												</div>
 												<div class="col-12">
-																{% for author in authors %}
-																<a href="{% url 'dashboard:author_detail' author.id %}" class="d-inline-flex" >{% if bib.language == "EN" %}{{ author.name_en|author_en_default }}{% else %}{{ author.name_ja }}{% endif %}</a>,
-																{% endfor %}						
+														{% for author in authors %}
+														<a href="{% url 'dashboard:author_detail' author.id %}" class="d-inline-flex" >
+																{% if bib.language == "EN" or not author.name_ja %}
+																{{ author.name_en|author_en_default }}
+																{% else %}
+																{{ author.name_ja }}
+																{% endif %}
+														</a>,
+														{% endfor %}						
 												</div>
 								</div>
 								<div class="row">								

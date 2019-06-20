@@ -10,13 +10,33 @@ import datetime
 
 
 @register.inclusion_tag('dashboard/components/search_box.html')
-def search_box(display_mode, query_params, *args, **kwargs):
+def search_box(display_mode, query_params, user,  *args, **kwargs):
     return {
         "display_mode": display_mode,
         "GET_params": query_params,
+        "user": user,
     }
 
 
+@register.simple_tag()
+def get_bib_style_keys():
+    def _parse(t, ret):
+        if len(t) > 1 and isinstance(t[0], str) and isinstance(t[1], str):
+            if t[0] != "SAMEASBOOK":
+                ret.append((t[0],t[1],))
+        elif isinstance(t[0], str) and isinstance(t[1], tuple):
+            ret.append((t[0],'header',))
+            ret = _parse(t[1], ret)
+        else:
+            for t2 in t:
+                ret = _parse(t2, ret)
+                
+        return ret
+
+    ret = _parse(Book.STYLE_CHOICES, [])
+    ret.append(("Others", "header",))
+    ret = _parse(Bibtex.BIBSTYLE_CHOICES, ret)
+    return ret
 
 # -------------------
 def parse_GET_params(req):
@@ -56,7 +76,10 @@ def get_bibtex_query_set(params):
     # Book_style
     book_style = params.get('book_style')
     if (not book_style == None) and (not book_style == "ALL"):
-        bibtex_queryset = bibtex_queryset.filter(book__style=book_style)
+        bibtex_queryset = bibtex_queryset.filter(
+            Q(bib_type=book_style) |
+            Q(book__style=book_style)
+        )
 
     # Filter by published year
     period_method = params.get('period_method', 'all')
@@ -87,6 +110,7 @@ def get_bibtex_query_set(params):
                 Q(title_en__icontains=keyword) |
                 Q(title_ja__icontains=keyword) |
                 Q(book__title__icontains=keyword) |
+                Q(book__abbr__icontains=keyword) |
                 Q(authors__name_en__icontains=keyword) |
                 Q(authors__name_ja__icontains=keyword) |
                 Q(note__icontains=keyword)

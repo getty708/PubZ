@@ -1,3 +1,4 @@
+import os
 import json
 import requests
 from getpass import getpass
@@ -66,12 +67,12 @@ def get_books(url_base, param, logger=getLogger(__name__+'.get_book')):
     -------
     - list
     """
-    url_with_param = url_base + "books/?search={}".format(param)
+    url_with_param = os.path.join(url_base, "books/?search={}".format(param))
     headers = {
         "Accept": "application/json",
         "Content-type": "application/json",
     }
-    r = requests.get(url_with_param, headers=headers)
+    r = requests.get(url_with_param, headers=headers, verify=False)
     if r.status_code in [200,]:
         data = json.loads(r.text)
         books = data["results"]
@@ -102,7 +103,7 @@ def create_book(url_base, token, book_dict, logger=getLogger(__name__+'.create_b
         return False
 
     # Make Post Request
-    url_post = url_base + "books/"
+    url_post = os.path.join(url_base, "books/")
     headers = {
         "Accept": "application/json",
         "Content-type": "application/json",
@@ -113,19 +114,19 @@ def create_book(url_base, token, book_dict, logger=getLogger(__name__+'.create_b
     logger.debug("- url    : {}".format(url_post))
     logger.debug("- headers: {}".format(headers))
     logger.debug("- params : {}".format(payload))
-    r = requests.post(url_post,  headers=headers, data=json.dumps(payload),)
+    r = requests.post(url_post,  headers=headers, data=json.dumps(payload),verify=False)
 
     # Check Responce
     data = json.loads(r.text)
     logger.debug("Response: status={}, data={}".format(r.status_code, data))
     if r.status_code == 201:
-        logger.info("Success: Create new book.\n")
+        logger.info("Success: Create new book.")
         return True, "Created"
     else:
         if str(data) == "{'non_field_errors': ['The fields title, style must make a unique set.']}":
             logger.warning("Failed: Already exists (DB internal error.)\n")
             return True, str(data)
-        logger.warning("Failed: Cannot create new book. {}\n".format(data))
+        logger.warning("Failed: Cannot create new book. {}".format(data))
     return False, str(data)
 
 
@@ -162,55 +163,66 @@ def main_csv(args):
     - pd.DataFrame
     """
     # Get Token
-    url = args.url_base + "api-token-auth/"
-    token = get_auth_token(url, args.username)
-    logger.debug("Token [{}]: {}".format(args.username, token))
+    def _auth_token():
+        url = os.path.join(args.url_base, "api-token-auth/")
+        token = get_auth_token(url, args.username)
+        logger.debug("Token [{}]: {}".format(args.username, token))
+        return token
 
-    # Read and Check CSV
-    import pandas as pd
-    df = pd.read_csv(args.file).fillna("")
-    print(df.head())
-    key_expected, key_actual = set(KEYS_CREATE_BOOK), set(df.columns)
-    if not key_expected <= key_actual:
-        raise ValueError("Check CSV some keys are missing [diff={}]".format(key_expected - key_actual))
+    def _load_csv():
+        # Read and Check CSV
+        import pandas as pd
+        df = pd.read_csv(args.file).fillna("")
+        print(df.head())
+        key_expected, key_actual = set(KEYS_CREATE_BOOK), set(df.columns)
+        if not key_expected <= key_actual:
+            raise ValueError("Check CSV some keys are missing [diff={}]".format(key_expected - key_actual))
+        return df
 
+    def _create_books(df):
+        df["status"] = "None"
+        df["msg"] = ""
+        if args.debug:
+            df = df[:10].reset_index(drop=True)
+        for i in range(len(df)):
+            row = df.loc[i, :]
+            book_dict = {
+                "title": row["title"],
+                "abbr":  row["abbr"],
+                "style": row["style"],
+            }
+            status, msg = create_book(args.url_base, token, book_dict)
+            df.loc[i, "status"] = status
+            df.loc[i, "msg"] = msg
+        return df
 
-    # Create New Books
-    df["status"] = "None"
-    df["msg"] = ""
-    if args.debug:
-        df = df[:10].reset_index(drop=True)
-    for i in range(len(df)):
-        row = df.loc[i, :]
-        book_dict = {
-            "title": row["title"],
-            "abbr":  row["abbr"],
-            "style": row["style"],
-        }
-        status, msg = create_book(args.url_base, token, book_dict)
-        df.loc[i, "status"] = status
-        df.loc[i, "msg"] = msg
+    def _print_results(df):
+        logger.info("=== Results ===")
+        df_tried = df[df["status"].isin([True, False])]
+        df_success, df_error = df[df["status"] == True], df[df["status"] == False]
+        logger.info("Total  : {}".format(len(df_tried)))
+        logger.info("Success: {} [{}%]".format(
+            len(df_success), len(df_success)/len(df_tried)*100))
+        logger.info("Errors : {} [{}%]".format(
+            len(df_error), len(df_error)/len(df_tried)*100))
+        for no,idx in enumerate(df_error.index):
+            logger.info("- No.{}: {} {}".format(
+                no,
+                df_error.loc[idx, ["status", "msg"]].values,
+                df_error.loc[idx, ["style", "title", "abbr",]].values))
+            logger.info("==============")
 
+        # Write Results
+        filename = "".join(str(args.file).split(".")[:-1]) + ".results.csv"
+        if args.file[0] != "/":
+            filename = "." + filename
+        df.to_csv(filename)
 
-    # Results
-    logger.info("=== Results ===")
-    df_tried = df[df["status"].isin([True, False])]
-    df_success, df_error = df[df["status"] == True], df[df["status"] == False]
-    logger.info("Total  : {}".format(len(df_tried)))
-    logger.info("Success: {} [{}%]".format(
-        len(df_success), len(df_success)/len(df_tried)*100))
-    logger.info("Errors : {} [{}%]".format(
-        len(df_error), len(df_error)/len(df_tried)*100))
-    for no,idx in enumerate(df_error.index):
-        logger.info("- No.{}: {} {}".format(
-            no,
-            df_error.loc[idx, ["status", "msg"]].values,
-            df_error.loc[idx, ["style", "title", "abbr",]].values))
-    logger.info("==============")
-
-    # Write Results
-    filename = "".join(str(args.file).split(".")[:-1]) + ".results.csv"
-    df.to_csv(filename)
+    # == Main == 
+    token = _auth_token()
+    df = _load_csv()
+    df = _create_books(df)
+    _print_results(df)
 
 
 # -----------------------------------------------------------------------

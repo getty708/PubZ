@@ -1,4 +1,6 @@
-<div class="card w-100">
+{% load utils_search %}
+
+<div class="card w-100 shadow">
 				<script>
 				/* Function to construct URL */
 				$(function(){
@@ -52,25 +54,23 @@
 																								</div>
 																				</div>
 																				<div class="col-md-4">
-																								<div class="input-group mb-3">
-																												<div class="input-group-prepend">
-																																<label class="input-group-text" for="inputGroupSelect01">Book Type</label>
-																												</div>
-																												<select class="custom-select" id="search-book_style" name="book_style">
-																																<option value="ALL" {% if GET_params.book_style == "ALL" or not GET_params.period_method %}selected{% endif %}>All</option>
-																																<option value="INTPROC" {% if GET_params.book_style == "INTPROC" %}selected{% endif %}>Proceedings</option>
-																																<option value="JOURNAL" {% if GET_params.book_style == "JOURNAL" %}selected{% endif %}>Jounals</option>
-																																<option value="CONF_DOMESTIC" {% if GET_params.book_style == "CONF_DOMESTIC" %}selected{% endif %}>国内会議</option>
-																																<option value="CONF_DOMESTIC_NO_REVIEW" {% if GET_params.book_style == "CONF_DOMESTIC_NO_REVIEW" %}selected{% endif %}>国内研究会</option>
-																																<option value="CONF_NATIONAL" {% if GET_params.book_style == "CONF_NATIONAL" %}selected{% endif %}>全国大会</option>
-																																<option value="BOOK" {% if GET_params.book_style == "BOOK" %}selected{% endif %}>Book/Review/Editor</option>
-																																<option value="KEYNOTE" {% if GET_params.book_style == "KEYNOTE" %}selected{% endif %}>Presentaion/Seminer</option>
-																																<option value="NEWS" {% if GET_params.book_style == "NEWS" %}selected{% endif %}>New Paper article</option>
-																																<option value="OTHERS" {% if GET_params.book_style == "OTHERS" %}selected{% endif %}>others</option>
-																																<option value="AWARD" {% if GET_params.book_style == "AWARD" %}selected{% endif %}>Award</option>
-																																
-																												</select>	
+																						<div class="input-group mb-3">
+																								<div class="input-group-prepend">
+																										<label class="input-group-text" for="inputGroupSelect01">Book Type</label>
 																								</div>
+																								{% get_bib_style_keys as styles %}														
+																								<select class="custom-select" id="search-book_style" name="book_style">
+																										<option value="ALL" disabled="disabled" class="text-dark font-weight-bold bg-light ">ALL</option>																
+																										<option value="ALL" {% if book_style == "ALL" or not style %}selected{% endif %}>All</option>
+																										{% for bs_key, bs_name in styles %}
+																										{% if bs_name == "header" %}
+																										<option value="{{ bs_key }}" disabled="disabled" class="text-dark font-weight-bold bg-light ">{{ bs_key }}</option>
+																										{% else %}
+																										<option value="{{ bs_key }}" {% if GET_params.book_style == bs_key %}selected{% endif %}>{{ bs_name }}</option>
+																										{% endif %}
+																										{% endfor %}																
+																								</select>							
+																						</div>																						
 																				</div>
 																				<div class="col-md-4">
 																								<div class="input-group mb-3">																											
@@ -79,7 +79,7 @@
 																												</div>
 																												<select class="custom-select" id="search-sort" name="search-sort">
 																																<option value="ascending" {% if GET_params.order == "ascending" or not GET_params.period_method %}selected{% endif %}>Date - Ascending</option>
-																																<option value="desending" {% if GET_params.order == "desending" %}selected{% endif %}>Date - Desending</option>																															
+																																<option value="desending" {% if GET_params.order == "desending" %}selected{% endif %}>Date - Descending</option>																															
 																												</select>																			
 																								</div>
 																				</div>
@@ -102,10 +102,12 @@
 																								<div class="btn-group btn-group-sm w-100" role="group" aria-label="Basic example">
 																												<a href="#" class="btn btn{% if display_mode != 'tile' and display_mode %}-outline{% endif %}-primary search-link" mode="tile" >Tile View</a>																												
 																												<a href="#" class="btn btn{% if display_mode != 'list'   %}-outline{% endif %}-primary search-link" mode="list" >List View</a>
-																												<a href="#" class="btn btn{% if display_mode != 'table'  %}-outline{% endif %}-primary search-link" mode="table" >Table View</a>
-																												<a href="#" class="btn btn{% if display_mode != 'bibtex' %}-outline{% endif %}-primary search-link" mode="bibtex" >Bibtex View</a>
-																												<a href="#" class="btn btn{% if display_mode != 'latex'  %}-outline{% endif %}-primary search-link" mode="latex" >Latex View</a>																			
-
+																												<a href="#" class="btn btn{% if display_mode != 'table'  %}-outline{% endif %}-primary search-link {% if not user.is_authenticated %} disabled{% endif %}" mode="table" >Table View<span class="text-danger">*</span></a>
+																												<a href="#" class="btn btn{% if display_mode != 'bibtex' %}-outline{% endif %}-primary search-link {% if not user.is_authenticated %} disabled{% endif %}" mode="bibtex" >Bibtex View<span class="text-danger">*</span></a>
+																												<a href="#" class="btn btn{% if display_mode != 'latex'  %}-outline{% endif %}-primary search-link {% if not user.is_authenticated %} disabled{% endif %}" mode="latex" >Latex View<span class="text-danger">*</span></a>
+																								</div>
+																								<div class="d-flex justify-content-end">
+																									<span class="text-danger">* Login Required</span>
 																								</div>
 																				</div>																			
 																</div>

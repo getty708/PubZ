@@ -1,15 +1,16 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: pubz-pvc
+  name: pubz-mysql-pvc
   labels:
     app: django
   annotations:
     "volume.beta.kubernetes.io/storage-class": "nfs"
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 2Gi
-  volumeName: pubz-pv
+  volumeName: pubz-mysql-pv
+  
