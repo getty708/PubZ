@@ -120,20 +120,21 @@
 																		-
 																		{% endif %}
 																</td>
-														</tr>																																																
-														<tr>
-																<th scope="col">Bibtex</th>
-																<td>
-																		<div style="overflow-x: scroll;">
-																				{{ bibtex | bibtex_bib_format }}
-																		</div>
-																</td>
-														</tr>
+														</tr>	
 												</tbody>
 										</table>
 								</div>
+								<div class="w-100 my-3">
+										<div class="card bg-seconary mb-3 w-100">
+												<div class="card-header text-small">Bibtex</div>
+												<div class="card-body text-dark">
+																{{ bibtex | bibtex_bib_format }}
+												</div>
+										</div>										
+								</div>								
 								<div class="col-12 my-3">
 										<a href="{% url 'dashboard:bibtex_edit' bibtex.id %}" class="btn btn-outline-primary"  >Edit</a>
+										<a href="{% url 'dashboard:tagchain_add'%}?bibtex={{ bibtex.id }}" class="btn btn-outline-primary"  >Add Tag</a>
 								</div>
 								{% if user.is_authenticated %}
 								{% if bibtex.authors.all.0.mail %}
