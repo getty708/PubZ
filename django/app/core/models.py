@@ -224,18 +224,17 @@ class Book(models.Model):
             ('JOURNAL', 'Journal'),
         ),),
         ('INPROCEEDINGS', (
-            ('INPROCEEDINGS', 'in Proceedings'),            
-            ('CONF_DOMESTIC', '国内会議',),
-            ('CONF_DOMESTIC_NO_REVIEW', '国内研究会',),
-            ('CONF_NATIONAL', '全国大会'),
+            ('INPROCEEDINGS', 'International Conference'),
+            ('CONF_DOMESTIC', 'Domestic Conference',),
+            ('CONF_DOMESTIC_NO_REVIEW', '[Warning!! Change to `Domestic Conference`]国内研究会',),
+            ('CONF_NATIONAL', '[Warning!! Change to `Domestic Conference`]全国大会'),
         ),),
         ('BOOK',(
             ('BOOK', 'Book',),
             ('NEWS', 'News Paper',),
-            ('TECHREPORT', 'Tech Report'),
         ),),
         ('Removed in the future', (
-            ('INTPROC', "Int'l Proc.",),            
+            ('INTPROC', "[Warning!! Change to `International Conference.`]Int'l Proc.",),
             ('KEYNOTE', '[Warning!]Keynote'),            
             ('AWARD', '[Warning!]Award',),
         ),),
@@ -250,6 +249,7 @@ class Book(models.Model):
             ('PHDTHESIS','Ph.D Thesis'),
             ('PROCEEDINGS','Proceedings'),
             ('UNPUBLISHED','Unpublished'),
+            ('TECHREPORT', 'Tech Report'),            
         ),),
     )
     

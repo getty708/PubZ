@@ -86,7 +86,7 @@
 					<h4>Our Publications in This Book</h4>
 				</div>
 				<div class="card-body">
-					{% print_bibtexs %}												
+					{% print_bibtexs style='tile' %}
 				</div>
 				<div class="card-body">
 					<a href="{% url 'dashboard:index' %}?keywords={{ book.title }}" class="btn btn-primary btn-block">See More Publications</a>
