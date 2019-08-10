@@ -12,14 +12,14 @@ register = template.Library()
 @register.simple_tag(takes_context=True)
 def print_bibtexs(context,):
     # GET Params
-    display_style = context.get('display_style', 'tile')    
+    display_style = context.get('display_style', 'list')    
     
     # Get a template and Render
     template_name = "custom/bibtex/{}/index.html".format(display_style)
     try:
         html = get_template(template_name,)
     except IndentationError:
-        template_name = "custom/bibtex/tile/index.html"
+        template_name = "custom/bibtex/list/index.html"
         html = get_template(template_name,)
 
     html = mark_safe(html.render({
