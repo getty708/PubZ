@@ -3,7 +3,7 @@
 {% for author in authors %}
 <a href="{% url 'dashboard:author_detail' author.id %}" >{% if bib.language == "EN"  or not author.name_ja %}{{ author.name_en|author_en_default }}{% else %}{{ author.name_ja }}{% endif %}</a>,
 {% endfor %}
-"<a href="{% url 'dashboard:bib_detail' bib.id %}">{{ bib.title }},</a>"
+"<a href="{% url 'dashboard:bib_detail' bib.id %}" class="font-weight-bold text-primary border-bottom border-primary">{{ bib.title }},</a>"
 {{ book.title }}
 {% if bib.volume %}, volume {{ bib.volume }}{% endif %}
 {% if bib.number %}, number {{ bib.number }}{% endif %}

@@ -5,10 +5,10 @@
 {% for bs_key, bs_value, bibs in latest_bibtex_list|divide_by_book_style %}
 <div class="card mb-3 shadow">
 				<div class="card-body">
-								<h4 id="{{book_style}}">{{ bs_value }}</h4>
+								<h4 id="{{book_style}}" class="font-weight-bold">{{ bs_value }}</h4>
 								<ol>
 												{% for bib in bibs %}
-												<li>{{ bib|bibtex_list_format }}</li>
+												<li class="my-3">{{ bib|bibtex_list_format }}</li>
 												{% endfor %}
 								</ol>
 				</div>
