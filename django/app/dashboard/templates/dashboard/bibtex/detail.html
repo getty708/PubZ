@@ -18,7 +18,7 @@
 								</h1>
 								
 								<div class="table-responsive">
-										<table class="table table-sm table-striped w-100" >
+										<table class="table table-striped w-100" >
 												<thead>
 														<tr>
 																<th></th>
@@ -79,24 +79,9 @@
 																		{% for tag in bibtex.tags.all %}
 																		<a href="{% url 'dashboard:tag_detail' tag.id %}" class="btn btn-sm btn-outline-primary d-inline-flex" >{{ tag.name }}</a>
 																		{% endfor %}
-																</td>
-														</tr>
-														<tr>
-																<th scope="col">Abstract</th>
-																<td>
-																		{{ bibtex.abstruct|default:'-' }}
-																</td>
-														</tr>																								
-														<tr>
-																<th scope="col">Acceptance Rate</th>
-																<td>
-																		{{ bibtex.acceptance_rate|default:'-' }}
-																</td>
-														</tr>
-														<tr>
-																<th scope="col">Impact Factor</th>
-																<td>
-																		{{ bibtex.impact_factor|default:'-' }}
+																		{% if user.is_authenticated %}
+																		<a href="{% url 'dashboard:tagchain_add'%}?bibtex={{ bibtex.id }}" class="small text-muted"  >(Add other tags)</a>
+																		{% endif %}
 																</td>
 														</tr>
 														<tr>
@@ -106,12 +91,6 @@
 																</td>
 														</tr>																								
 														<tr>
-																<th scope="col">Memo</th>
-																<td>
-																		{{ bibtex.memo|default:'-' }}
-																</td>
-														</tr>
-														<tr>
 																<th scope="col">URL</th>
 																<td>
 																		{% if bibtex.url %}
@@ -120,23 +99,49 @@
 																		-
 																		{% endif %}
 																</td>
-														</tr>	
+														</tr>
+														{% if bibtex.memo %}
+														<tr>
+																<th scope="col">Memo</th>
+																<td>
+																		{{ bibtex.memo|default:'-' }}
+																</td>
+														</tr>
+														{% endif %}
+														{% if bibtex.abstruct %}														
+														<tr>
+																<th scope="col">Abstruct</th>
+																<td>
+																		<div class="row">
+																				<div class="col">
+																						<div class="collapse multi-collapse" id="multiCollapseExample2">
+																								{{ bibtex.abstruct|default:'-' }}
+																						</div>
+																				</div>
+																		</div>
+																		<div class="w-100 mb-2">
+																				<button class="btn btn-sm btn-outline-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Show</button>
+																		</div>
+																</td>
+														</tr>
+														{% endif %}
 												</tbody>
 										</table>
 								</div>
 								<div class="w-100 my-3">
 										<div class="card bg-seconary mb-3 w-100">
-												<div class="card-header text-small">Bibtex</div>
+												<div class="card-header text-small font-weight-bolder">Bibtex</div>
 												<div class="card-body text-dark">
 																{{ bibtex | bibtex_bib_format }}
 												</div>
 										</div>										
-								</div>								
+								</div>
+
+								{% if user.is_authenticated %}								
 								<div class="col-12 my-3">
 										<a href="{% url 'dashboard:bibtex_edit' bibtex.id %}" class="btn btn-outline-primary"  >Edit</a>
 										<a href="{% url 'dashboard:tagchain_add'%}?bibtex={{ bibtex.id }}" class="btn btn-outline-primary"  >Add Tag</a>
 								</div>
-								{% if user.is_authenticated %}
 								{% if bibtex.authors.all.0.mail %}
 								<div class="col-12 my-3">
 										<a href="{% url 'dashboard:alert_by_author' bibtex.authors.all.0.id bibtex.id%}" class="btn btn-outline-primary">Email Alert</a>
