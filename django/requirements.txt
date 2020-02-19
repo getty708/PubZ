@@ -8,3 +8,4 @@ markdown
 django-filter
 django-autocomplete-light
 django-bootstrap-datepicker-plus
+PyMySQL
