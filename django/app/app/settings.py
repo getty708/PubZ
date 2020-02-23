@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'core.apps.CoreConfig',
     'dashboard.apps.DashboardConfig',
-    'notification.apps.NotificationConfig',
+    # 'notification.apps.NotificationConfig',
     'custom.apps.CustomConfig',
     # Additional Packages
     'dal',
