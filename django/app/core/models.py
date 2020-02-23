@@ -51,13 +51,9 @@ class Bibtex(models.Model):
     pub_date = models.DateField(null=True,blank=True,default="2010-01-01")
     use_date_info = models.BooleanField(default=False, blank=True)
     url = models.URLField(null=True,blank=True)
-    note = models.TextField(null=True,blank=False)
-    memo = models.CharField(max_length=32, null=False,blank=True, default="")
-    priority =  models.CharField(
-        max_length=1,
-        default='0',
-        choices=PRIORITY_CHOICES,)
+    fund = models.CharField(max_length=256, null=False, blank=True, default="")
     abstruct = models.TextField(null=True,blank=True)
+    memo = models.CharField(max_length=32, null=False,blank=True, default="")
     tags = models.ManyToManyField(
         'core.Tag',
         through='core.TagChain',
@@ -74,7 +70,7 @@ class Bibtex(models.Model):
     
     class Meta:
         unique_together = (
-            ("title_en", "book", "pub_date","memo", "page",),
+            ("title_en", "book", "pub_date", "memo", "page",),
         )
     
     def __str__(self):
@@ -220,18 +216,18 @@ class Book(models.Model):
         
         # Official bibtex entries (New)
         #('ARTICLE','Article'),
-        ('ARTICLE',(
+        ('Paper',(
             ('JOURNAL', 'Journal'),
+            ('INPROCEEDINGS', 'International Conference'),            
+            ('CONF_DOMESTIC', 'Domestic Conference',),            
         ),),
-        ('INPROCEEDINGS', (
-            ('INPROCEEDINGS', 'Internatinal Conference'),            
-            ('CONF_DOMESTIC', 'Domestic Conference',),
-        ),),
-        ('BOOK',(
+        # ('INPROCEEDINGS', (
+        # ),),
+        # ('BOOK',(
+        # ),),
+        ('Article', (
             ('BOOK', 'Book',),
-            ('NEWS', 'News Paper',),
-        ),),
-        ('Othres', (
+            ('NEWS', 'News Paper',),            
             ('MISC', 'Others'),
             ('ARTICLE', "Article"),
         ),),
