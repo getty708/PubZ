@@ -114,7 +114,7 @@ data-content="Click the name to edit the relation between the author and the bib
 														</tr>
 														<tr>
 																<th scope="col">
-																		Book<b class="text-danger">*</b>																																
+																		Book<b class="text-danger">*</b>
 																</th>
 																<td>
 																		<div class="row mb-3">
@@ -181,7 +181,7 @@ data-content="If this entry is for an award, select `Award`. Otherwize, select `
 																								</div>
 																								<div class="d-inline-block small text-muted">
 																										Bibtex type of the selected book:
-																										<span class="border border-info badge-pill text-info small">{{ bibtex.book.get_style_display|default:'-' }}</span>
+																										<span class="border border-info badge-pill text-info small d-inline-block">{{ bibtex.book.get_style_display|default:'-' }}</span>
 																								</div>																																												
 																						</div>
 																				</div>																																				
@@ -222,43 +222,18 @@ data-content="Set the date of published. If the date is unknow, please set 1st, 
 																		<div class="form-group row">
 																				{{ form.pub_date.errors }}
 																				<div class="col-5">{{ form.pub_date }}</div>
-																				<div class="col-5">																	
+																				<div class="col-5">
 																						Use date info: {{ form.use_date_info }}
 																				</div>
 																		</div>
 																</td>
 														</tr>
 														<tr>
-																<th scope="col">Acceptance Rate</th>
-																<td>
-																		{{ form.acceptance_rate }}
-																</td>
-														</tr>
-														<tr>
-																<th scope="col">Impact Factor</th>
-																<td>
-																		{{ form.impact_factor }}
-																</td>
-														</tr>
-														<tr>
 																<th scope="col">
-																		URL
+																		Note(Fund)<b class="text-danger">*</b>
 																		<button type="button" class="btn btn-sm btn-outline-info rounded-circle" data-container="body" data-toggle="popover" data-placement="bottom"
-title="URL"
-data-content="URL to arXiv, AMC degital library, IEEE, etc... ">
-																				?
-																		</button>																																
-																</th>
-																<td>
-																		{{ form.url }}
-																</td>
-														</tr>
-														<tr>
-																<th scope="col">
-																		Note
-																		<button type="button" class="btn btn-sm btn-outline-info rounded-circle" data-container="body" data-toggle="popover" data-placement="bottom"
-title="Memo"
-data-content="If there are some same bibtexs with titles, please use this field to distinguish. ">
+																						title="Memo"
+																						data-content="If there are some same bibtexs with titles, please use this field to distinguish. ">
 																				?
 																		</button>
 																</th>
@@ -267,25 +242,60 @@ data-content="If there are some same bibtexs with titles, please use this field 
 																</td>
 														</tr>
 														<tr>
-																<th scope="col">Abstract</th>
+																<th scope="col">
+																		URL
+																		<button type="button" class="btn btn-sm btn-outline-info rounded-circle" data-container="body" data-toggle="popover" data-placement="bottom"
+																						title="URL"
+																						data-content="URL to arXiv, AMC degital library, IEEE, etc... ">
+																				?
+																		</button>																																
+																</th>
 																<td>
-																		{{ form.abstruct }}
+																		{{ form.url }}
 																</td>
-														</tr>
-														<tr>
-																<th scope="col">Image</th>
-																<td>
-																		{{ form.image }}
-																</td>
-														</tr>
-														<tr>
-																<th scope="col">Priority</th>
-																<td>
-																		{{ form.priority }}
-																</td>																								
 														</tr>
 												</tbody>
 										</table>
+
+
+										<!-- Detail Informations -->
+										<div class="mb-3">
+												<p>
+														<button class="btn btn-sm btn-outline-primary w-100" type="button" data-toggle="collapse" data-target="#multiCollapseExample" aria-expanded="false" aria-controls="multiCollapseExample1">More detail</button>
+												</p>
+												<div class="row">
+														<div class="col">
+																<div class="collapse multi-collapse" id="multiCollapseExample">																	
+																		<div class="card card-body">
+																				<div class="row border-bottom border-seconary">
+																						<div class="col-md-2 my-3">
+																								<span class="h6 font-weight-bolder">Abstract</span>
+																						</div>
+																						<div class="col-md-10 my-3">
+																								{{ form.abstruct }}	
+																						</div>
+																				</div>
+																				<div class="row border-bottom border-seconary">
+																						<div class="col-md-2 my-3">
+																								<span class="h6 font-weight-bolder">Memo</span>
+																						</div>
+																						<div class="col-md-10 my-3">
+																								{{ form.memo }}	
+																						</div>
+																				</div> 																				
+																				<div class="row">
+																						<div class="col-md-2 my-3">
+																								<span class="h6 font-weight-bolder">Priority</span>
+																						</div>
+																						<div class="col-md-10 my-3">
+																								{{ form.priority }}
+																						</div>
+																				</div>																			
+																		</div>
+																</div>
+														</div>
+												</div>
+										</div>
 
 										<div class="form-group row">
 												{% if bibtex.is_published %}

@@ -1,5 +1,5 @@
 #URL="https://pubz.private/api/rest/"
-URL_BASE="http://localhost:7000/api/rest"
+URL_BASE="http://localhost:8080/api/rest"
 USER="test@test.com"
 
 
@@ -22,13 +22,13 @@ elif [ ${mode} == "book" ]; then
 	   -u ${USER} \
 	   -f ${CSV}
 elif [ ${mode} == "bibtex" ]; then
-    CSV="./csv/PubZ_Bibtexs.csv"
+    CSV="./csv/PubZ_Bibtexs22.csv"
     python3 bibtex.py CSV \
 	    --url-base ${URL_BASE} \
 	    -u ${USER} \
 	    -f ${CSV}
 elif [ ${mode} == "order" ]; then
-    CSV="./csv/PubZ_Bibtexs2.csv"
+    CSV="./csv/PubZ_Bibtexs22.csv"
     python3 author_order.py CSV \
 	    --url-base ${URL_BASE} \
 	    -u ${USER} \
