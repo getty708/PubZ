@@ -7,134 +7,148 @@
 {% block content %}
 
 <div class="row">
-		<div class="col-12 my-3">
-				<div class="card shadow">
-						<div class="card-body" >
-								<h2>Books</h2>
-						</div>
-						<div class="card-body" >
-								<script>
-								 /* Function to construct URL */
-								 $(function(){
-										 $(".search-link").click(function(){
-												 if ($('#search-book_style').val()){
-														 var url  = "{% url 'dashboard:book_index' %}?style="+ $('#search-book_style').val();
-												 }else{
-														 var url  = "{% url 'dashboard:index' %}?";
-												 }
-												 if ($(this).attr('page')){
-														 url += "&page=" + $(this).attr('page');
-												 }
-												 $(this).attr("href",url);
-										 });
-								 });
-								</script>
-								<div class="input-group mb-3">
-										<div class="input-group-prepend">
-												<label class="input-group-text" for="inputGroupSelect01">Book Type</label>
-										</div>
-										{% get_bib_style_keys as styles %}														
-										<select class="custom-select" id="search-book_style" name="book_style">
-												<option value="ALL" disabled="disabled" class="text-dark font-weight-bold bg-light ">ALL</option>																
-												<option value="ALL" {% if book_style == "ALL" or not style %}selected{% endif %}>All</option>
-												{% for bs_key,bs_name in styles %}
-												{% if bs_name == "header" %}
-												<option value="{{ bs_key }}" disabled="disabled" class="text-dark font-weight-bold bg-light ">{{ bs_key }}</option>
-												{% else %}
-												<option value="{{ bs_key }}" {% if book_style == bs_key %}selected{% endif %}>{{ bs_name }}</option>
-												{% endif %}
-												{% endfor %}																
-										</select>
-										<div class="input-group-append">
-												<a href="#" class="btn btn-primary search-link" id="search-button">Go!</a>
-										</div>												
-								</div>
-
-								<!-- Table -->
-								{% if latest_book_list %}
-								<div class="table-responsive-md">
-										<table class="table table-sm table-striped">
-												<thead>
-														<tr>
-																<th scope="col">#</th>
-																<th scope="col">Book Title</th>
-																<th scope="col">Abbr.</th>
-																<th scope="col">Option</th>
-														</tr>
-												</thead>
-												<tbody>
-														{% substract page_obj.start_index 1 as obj_index_starts %}
-														{% for book in latest_book_list %}
-														<tr>
-																<th>
-																		
-
-																		{{ obj_index_starts|add:forloop.counter }}
-																</th>
-																<td>
-																		<a href="{% url 'dashboard:book_detail' book.id  %}">{{ book.title }}</a>
-																</td>
-																<td>
-																		<a href="{% url 'dashboard:book_detail' book.id  %}">{{ book.abbr }}</a>
-																</td>																								
-																<td>
-																		<a href="{% url 'dashboard:book_detail' book.id  %}" class="btn btn-sm btn-outline-primary">Detail</a>
-																		{% if user.is_authenticated %}
-																		<a href="{% url 'dashboard:book_edit' book.id  %}" class="btn btn-sm btn-outline-primary">Edit</a>
-																		{% endif %}
-																		
-																</td>																								
-														</tr>
-														{% endfor %}																																							
-												</tbody>
-										</table>
-								</div>
-								{% else %}
-								<p>No Books are available.</p>
-								{% endif %}
-
-
-								<!-- Pagination -->
-								<nav aria-label="Page navigation example">
-										<ul class="pagination justify-content-left">
-												<!-- Top Page -->
-												<li class="page-item">
-														<a href="{{ request.path }}" class="page-link search-link" page="1">Top(1)</a>
-												</li>
-												<!-- Previous Page -->
-												{% if page_obj.has_previous %}
-												<li class="page-item">
-														<a href="{{ request.path }}" class="page-link search-link" page="{{ page_obj.previous_page_number }}"> << </a>
-												</li>
-												{% else %}
-												<li class="page-item disabled">
-														<a href="#" class="page-link"> << </a>
-												</li>
-												{% endif %}
-												<!-- Current Page -->
-												<li class="page-item active">
-														<a href="#" class="page-link">{{ page_obj.number }}</a>
-												</li>
-												<!-- Next Page -->																				
-												{% if page_obj.has_next %}
-												<li class="page-item" {% if page_obj.has_next %}disabled{% endif %}>
-														<a href="{{ request.path }}" class="page-link search-link" page="{{ page_obj.next_page_number }}"> >> </a>
-												</li>
-												{% else %}
-												<li class="page-item disabled">
-														<a href="#" class="page-link"> >> </a>
-												</li>																			
-												{% endif %}
-												<!-- Last Page -->
-												<li class="page-item">
-														<a href="{{ request.path }}" class="page-link search-link" page="{{ page_obj.paginator.num_pages }}">
-																End({{ page_obj.paginator.num_pages }})
-														</a>
-												</li>
-										</ul>
-								</nav>
-						</div>
+	<div class="col-12 my-3">
+		<div class="card shadow">
+			<div class="card-body" >
+				<h2>Books</h2>
+			</div>
+			<div class="card-body" >
+				<script>
+				/* Function to construct URL */
+				$(function(){
+								$(".search-link").click(function(){
+												if ($('#search-book_style').val()){
+																var url  = "{% url 'dashboard:book_index' %}?style="+ $('#search-book_style').val();
+												}else{
+																var url  = "{% url 'dashboard:index' %}?";
+												}
+												if ($('#search-keywords').val()){
+																url  = url + "&keywords="+ $('#search-keywords').val();
+												}
+												if ($(this).attr('page')){
+																url += "&page=" + $(this).attr('page');
+												}
+												$(this).attr("href",url);
+								});
+				});
+				</script>
+				<div class="input-group mb-1">
+					<div class="input-group-prepend">
+						<label class="input-group-text" for="inputGroupSelect01">Book Type</label>
+					</div>
+					{% get_bib_style_keys as styles %}														
+					<select class="custom-select" id="search-book_style" name="book_style">
+						<option value="ALL" disabled="disabled" class="text-dark font-weight-bold bg-light ">ALL</option>																
+						<option value="ALL" {% if book_style == "ALL" or not style %}selected{% endif %}>All</option>
+						{% for bs_key,bs_name in styles %}
+						{% if bs_name == "header" %}
+						<option value="{{ bs_key }}" disabled="disabled" class="text-dark font-weight-bold bg-light ">{{ bs_key }}</option>
+						{% else %}
+						<option value="{{ bs_key }}" {% if book_style == bs_key %}selected{% endif %}>{{ bs_name }}</option>
+						{% endif %}
+						{% endfor %}																
+					</select>
+					<div class="input-group-append">
+						<a href="#" class="btn btn-primary search-link" id="search-button">Go!</a>
+					</div>
 				</div>
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<label class="input-group-text" for="search-type">Keywords</label>
+					</div>
+					<input type="text" class="form-control" id="search-keywords" 
+									aria-label="Text input with segmented dropdown button"
+									value="{% if search_keywords %}{{ search_keywords }}{% endif %}" placeholder="keyword ...">										
+					<div class="input-group-append">
+						<a href="#" class="btn btn-primary search-link" id="search-button">Go!</a>
+					</div>																						
+				</div>
+
+				<!-- Table -->
+				{% if latest_book_list %}
+				<div class="table-responsive-md">
+					<table class="table table-sm table-striped">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Book Title</th>
+								<th scope="col">Abbr.</th>
+								<th scope="col">Option</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% substract page_obj.start_index 1 as obj_index_starts %}
+							{% for book in latest_book_list %}
+							<tr>
+								<th>
+									
+
+									{{ obj_index_starts|add:forloop.counter }}
+								</th>
+								<td>
+									<a href="{% url 'dashboard:book_detail' book.id  %}">{{ book.title }}</a>
+								</td>
+								<td>
+									<a href="{% url 'dashboard:book_detail' book.id  %}">{{ book.abbr }}</a>
+								</td>																								
+								<td>
+									<a href="{% url 'dashboard:book_detail' book.id  %}" class="btn btn-sm btn-outline-primary">Detail</a>
+									{% if user.is_authenticated %}
+									<a href="{% url 'dashboard:book_edit' book.id  %}" class="btn btn-sm btn-outline-primary">Edit</a>
+									{% endif %}
+									
+								</td>																								
+							</tr>
+							{% endfor %}																																							
+						</tbody>
+					</table>
+				</div>
+				{% else %}
+				<p>No books found.</p>
+				{% endif %}
+
+
+				<!-- Pagination -->
+				<nav aria-label="Page navigation example">
+					<ul class="pagination justify-content-left">
+						<!-- Top Page -->
+						<li class="page-item">
+							<a href="{{ request.path }}" class="page-link search-link" page="1">Top(1)</a>
+						</li>
+						<!-- Previous Page -->
+						{% if page_obj.has_previous %}
+						<li class="page-item">
+							<a href="{{ request.path }}" class="page-link search-link" page="{{ page_obj.previous_page_number }}"> << </a>
+						</li>
+						{% else %}
+						<li class="page-item disabled">
+							<a href="#" class="page-link"> << </a>
+						</li>
+						{% endif %}
+						<!-- Current Page -->
+						<li class="page-item active">
+							<a href="#" class="page-link">{{ page_obj.number }}</a>
+						</li>
+						<!-- Next Page -->																				
+						{% if page_obj.has_next %}
+						<li class="page-item" {% if page_obj.has_next %}disabled{% endif %}>
+							<a href="{{ request.path }}" class="page-link search-link" page="{{ page_obj.next_page_number }}"> >> </a>
+						</li>
+						{% else %}
+						<li class="page-item disabled">
+							<a href="#" class="page-link"> >> </a>
+						</li>																			
+						{% endif %}
+						<!-- Last Page -->
+						<li class="page-item">
+							<a href="{{ request.path }}" class="page-link search-link" page="{{ page_obj.paginator.num_pages }}">
+								End({{ page_obj.paginator.num_pages }})
+							</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
 		</div>
+	</div>
 </div>
 {% endblock content %}

@@ -112,8 +112,7 @@ def get_bibtex_query_set(params):
                 Q(book__title__icontains=keyword) |
                 Q(book__abbr__icontains=keyword) |
                 Q(authors__name_en__icontains=keyword) |
-                Q(authors__name_ja__icontains=keyword) |
-                Q(note__icontains=keyword)
+                Q(authors__name_ja__icontains=keyword)
             ).distinct()
 
     # Tags

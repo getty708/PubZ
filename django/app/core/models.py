@@ -202,29 +202,11 @@ class Author(models.Model):
 # --------------------------------------------------
 class Book(models.Model):
     STYLE_CHOICES = (
-        # These options are removed in the feature
-        #('INTPROC', "Int'l Proc.",),  # Alias of `in Proceedings`
-        #('JOURNAL', 'Journal',), # Alias of `Article`
-        # ('CONF_DOMESTIC', '国内会議',),
-        # ('CONF_DOMESTIC_NO_REVIEW', '国内研究会',),
-        # ('CONF_NATIONAL', '全国大会'),
-        # ('BOOK', 'Book',),        
-        #('KEYNOTE', 'Keynote'),  # Alias of `Misc`
-        # ('NEWS', 'News Paper',), # Alias of `in Book`
-        #('OTHERS', 'Others',),   # Alias of `Misc`
-        #('AWARD', 'Award',),     # This will be remobed in the future.
-        
-        # Official bibtex entries (New)
-        #('ARTICLE','Article'),
         ('Paper',(
             ('JOURNAL', 'Journal'),
             ('INPROCEEDINGS', 'International Conference'),            
             ('CONF_DOMESTIC', 'Domestic Conference',),            
         ),),
-        # ('INPROCEEDINGS', (
-        # ),),
-        # ('BOOK',(
-        # ),),
         ('Article', (
             ('BOOK', 'Book',),
             ('NEWS', 'News Paper',),            

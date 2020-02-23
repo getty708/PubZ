@@ -78,11 +78,19 @@ class BookIndexView(generic.ListView):
  
     def get_queryset(self):
         self.selected_style = self.request.GET.get("style", "ALL")
+        self.keywords = self.request.GET.get("keywords", "").split()
+        print(self.keywords)
         styles = [s[0] for s in self.styles]
         key = self.selected_style if self.selected_style in styles else False
+        queryset = Book.objects.order_by('title')
         if key:
-            return Book.objects.filter(style=key,).order_by('title')
-        return Book.objects.order_by('title')
+            queryset =  queryset.objects.filter(style=key,).order_by('title')
+        if len(self.keywords):
+            for q in self.keywords:
+                queryset =  queryset.filter(
+                    Q(title__icontains=q) |
+                    Q(abbr__icontains=q))
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -92,6 +100,7 @@ class BookIndexView(generic.ListView):
                 style_active = style[0]
                 continue
         context["book_style"] = style_active #context["style"][1]
+        context["search_keywords"] = " ".join(self.keywords)
         return context
 
     
