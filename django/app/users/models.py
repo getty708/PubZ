@@ -44,17 +44,25 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    """Custom User Model"""
+    """ Custom User Model
+
+    Attributes:
+        email (str): email address of the user
+        first_name (str): given name. Only A-Z are acceptable.
+        last_name (str): 
+        is_staff (bool): 
+        is_active (str): 
+        date_joined (datetime): 
+        EMAIL_FIELD (str): (defalt: email)
+        USERNAME_FIELD (str): (default: email)
+        REQUIRED_FIELDS (str):  (defaukt: [])
+        object (object): (default: UserManager)
+
+    """
 
     email = models.EmailField(_('email address'), unique=True)
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=150, blank=True)
-    # author_obj = models.ForeignKey(
-    #     'core.Author',
-    #     null=True,
-    #     on_delete=models.SET_NULL
-    # )
-
     is_staff = models.BooleanField(
         _('staff status'),
         default=False,
@@ -71,6 +79,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
 
+    
     objects = UserManager()
 
     EMAIL_FIELD = 'email'
