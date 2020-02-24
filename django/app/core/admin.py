@@ -17,7 +17,6 @@ class BookAdmin(admin.ModelAdmin):
     list_display_links = ('title','abbr')
     
 
-
 @admin.register(Bibtex)
 class BibtexAdmin(admin.ModelAdmin):
     list_display = ('id','pub_date','get_title','book','created','modified','owner')

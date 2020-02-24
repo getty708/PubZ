@@ -36,6 +36,14 @@ core.migrations.0004\_auto\_20200223\_1710 module
    :undoc-members:
    :show-inheritance:
 
+core.migrations.0005\_auto\_20200224\_2253 module
+-------------------------------------------------
+
+.. automodule:: core.migrations.0005_auto_20200224_2253
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 
 Module contents
 ---------------

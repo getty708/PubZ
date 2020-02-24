@@ -93,7 +93,13 @@
 								<td>
 									{{ bibtex.fund|default:'-' }}
 								</td>
-							</tr>																								
+							</tr>
+							<tr>
+								<th scope="col">DOI</th>
+								<td>
+									{{ bibtex.doi|default:'-' }}
+								</td>
+							</tr>							
 							<tr>
 								<th scope="col">URL</th>
 								<td>
@@ -146,13 +152,8 @@
 				{% if user.is_authenticated %}								
 				<div class="col-12 my-3">
 					<a href="{% url 'dashboard:bibtex_edit' bibtex.id %}" class="btn btn-outline-primary"  >Edit</a>
-					<a href="{% url 'dashboard:tagchain_add'%}?bibtex={{ bibtex.id }}" class="btn btn-outline-primary"  >Add Tag</a>
+					<a href="{% url 'dashboard:tagchain_add'%}?bibtex={{ bibtex.id }}" class="btn btn-outline-primary" >Add Tag</a>
 				</div>
-				{% if bibtex.authors.all.0.mail %}
-				<div class="col-12 my-3">
-					<a href="{% url 'dashboard:alert_by_author' bibtex.authors.all.0.id bibtex.id%}" class="btn btn-outline-primary">Email Alert</a>
-				</div>
-				{% endif %}
 				{% endif %}
 			</div>								
 		</div>

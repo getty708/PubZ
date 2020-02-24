@@ -1,36 +1,36 @@
-core package
-============
+users package
+=============
 
 Subpackages
 -----------
 
 .. toctree::
 
-   core.migrations
+   users.migrations
 
 Submodules
 ----------
 
-core.admin module
------------------
-
-.. automodule:: core.admin
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-core.apps module
-----------------
-
-.. automodule:: core.apps
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-core.models module
+users.admin module
 ------------------
 
-.. automodule:: core.models
+.. automodule:: users.admin
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+users.apps module
+-----------------
+
+.. automodule:: users.apps
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+users.models module
+-------------------
+
+.. automodule:: users.models
    :members:
    :undoc-members:
    :show-inheritance:
@@ -39,7 +39,7 @@ core.models module
 Module contents
 ---------------
 
-.. automodule:: core
+.. automodule:: users
    :members:
    :undoc-members:
    :show-inheritance:

@@ -10,9 +10,9 @@ Welcome to PubZ's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   ./src/core/modules
+   ./src/core/core
+   ./src/users/users
 
-   
 
 
 Indices and tables

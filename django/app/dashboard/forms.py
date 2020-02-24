@@ -110,10 +110,10 @@ class BookForm(forms.ModelForm):
     class Meta:
         model = models.Book
         fields = [
-            'title','abbr','style','institution','organizer','publisher','address','note',
+            'title', 'abbr', 'style',
+            'publisher', 'note',
         ]
-
-
+        
     def __init__(self,*args,**kwargs):
         super(BookForm,self).__init__(*args, **kwargs)
         for key in self.Meta.fields:
@@ -124,7 +124,7 @@ class BookForm(forms.ModelForm):
         # Cutomize
         self.fields["abbr"].widget.attrs.update({
             'class': 'form-control form-control-sm',
-            'placeholder': 'abbr',
+            'placeholder': 'e.g. CVPR',
         })
 
 
@@ -154,8 +154,6 @@ class BookForm(forms.ModelForm):
         cleaned_data = super().clean()
         return cleaned_data
 
-
-
 """
 Bibtex
 """
@@ -167,7 +165,7 @@ class BibtexForm(forms.ModelForm):
             'book','book_title','bib_type',
             'volume','number','chapter','page','edition',
             'pub_date','use_date_info', 'is_published',
-            'url', 'fund',
+            'url', 'fund', 'doi',
             'memo','abstruct',
         ]
         widgets = {
