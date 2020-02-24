@@ -9,3 +9,5 @@ django-filter
 django-autocomplete-light
 django-bootstrap-datepicker-plus
 PyMySQL
+sphinx
+sphinx_rtd_theme

@@ -43,29 +43,5 @@ services:
     depends_on:
       - db
     tty: true
-  docs:
-    build: ./django
-    # command: mkdocs serve    
-    volumes:
-      - .:/root/docs
-    # ports:
-    #   - "7777:8000"
-    tty: true
-  # docs:
-  #   build: ./docs/docker
-  #   command: mkdocs serve    
-  #   volumes:
-  #     - ./docs:/docs
-  #   ports:
-  #     - "7777:8000"
-  #   tty: true
-  # note:
-  #   image: jupyter/minimal-notebook:latest
-  #   links:
-  #     - django
-  #   ports:
-  #     - "7778:8888"
-  #   volumes:
-  #     - .:/home/jovyan/work
       
 
