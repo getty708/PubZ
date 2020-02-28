@@ -1,14 +1,15 @@
 # from django.contrib.auth.models import User, Grou
 from django.contrib.auth.decorators import user_passes_test
 from rest_framework import viewsets, permissions, filters
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
+
+# Import models
 from users.models import User
+from core.models import Author, AuthorOrder, Bibtex, Book
 
 # Import Serializers
 from api import serializers
 
-# Import models
-from core.models import Author, AuthorOrder, Bibtex, Book
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
 
 
 # -------------------------------------------------------------------

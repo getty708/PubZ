@@ -1,11 +1,13 @@
-from django import forms
-from dal import autocomplete
 import re
+from django import forms
+
+from dal import autocomplete
+from bootstrap_datepicker_plus import DatePickerInput
 
 from core import models
-from dashboard import validators
+# from core import validators
 
-from bootstrap_datepicker_plus import DatePickerInput
+
 
 """
 Author

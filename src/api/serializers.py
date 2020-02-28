@@ -1,11 +1,9 @@
 # from django.contrib.auth.models import User, Group
 import django
 from django.http import  HttpResponseServerError
-from users.models import User
-from rest_framework import serializers
 from django.shortcuts import get_object_or_404
-
-
+from rest_framework import serializers
+from users.models import User
 
 
 # -------------------------------------------------------------------

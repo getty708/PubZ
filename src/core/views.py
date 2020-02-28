@@ -5,7 +5,7 @@ from django.urls import resolve
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from dashboard.templatetags import utils_search as utils
+
 
 import datetime
 from datetime import datetime
@@ -13,7 +13,8 @@ import urllib
 
 from core.models import Author, Bibtex, Book, AuthorOrder, Tag
 from core.forms import BibtexForm
-
+from core.templatetags import utils_search as utils
+# from core.templatetags.utils_search import get_bib_style_keys
 
 """
 Bibtex
@@ -68,12 +69,11 @@ class DetailView(generic.DetailView):
 """
 Book
 """
-from dashboard.templatetags.utils_search import get_bib_style_keys
 class BookIndexView(generic.ListView):
     template_name = 'dashboard/book/index.html'
     context_object_name = 'latest_book_list'
     paginate_by = 30
-    styles = get_bib_style_keys()    
+    styles = utils.get_bib_style_keys()    
  
     def get_queryset(self):
         self.selected_style = self.request.GET.get("style", "ALL")
