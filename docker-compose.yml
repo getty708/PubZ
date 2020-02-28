@@ -42,6 +42,7 @@ services:
       MYSQL_HOST:     db
     volumes:
       - ./src:/code
+      - ./docs:/docs
     ports:
       - "7000:8000"
     depends_on:

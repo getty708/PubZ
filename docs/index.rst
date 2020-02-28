@@ -12,7 +12,6 @@ Welcome to PubZ's documentation!
 
    ./src/core/core
    ./src/users/users
-   ./src/dashboard/dashboard
 
 
 
