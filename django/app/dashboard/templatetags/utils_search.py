@@ -7,19 +7,19 @@ from core.models import Author, Bibtex, Book, AuthorOrder, Tag
 import datetime
 
 
-
-
 @register.inclusion_tag('dashboard/components/search_box.html')
 def search_box(display_mode, query_params, user,  *args, **kwargs):
+    """ Template tag to render the search box.  """
     return {
         "display_mode": display_mode,
         "GET_params": query_params,
         "user": user,
     }
 
-
 @register.simple_tag()
 def get_bib_style_keys():
+    """ Returns bibtex/book style keys for search box. """
+    
     def _parse(t, ret):
         if len(t) > 1 and isinstance(t[0], str) and isinstance(t[1], str):
             if t[0] != "SAMEASBOOK":
@@ -38,16 +38,15 @@ def get_bib_style_keys():
     ret = _parse(Bibtex.BIBSTYLE_CHOICES, ret)
     return ret
 
-# -------------------
 def parse_GET_params(req):
-    """
-     Args.
-     -----
-     - req: requestobject
-     -
-     Return.
-     -------
-     - dict: {key:value}
+    """ Parse GET parameters and returns dict with search params.
+
+     Args:
+         req (requestobject)
+
+     Returns:
+         dict
+
     """
     GET_param_keys = [
         "keywords","book_style","sort",
@@ -62,14 +61,15 @@ def parse_GET_params(req):
 
 
 def get_bibtex_query_set(params):
-    """
-    Args.
-    -----
-    - params: dict which is maded by `parse_GET_params`
+    """ Returns bibtex objects which match the search parameters.
+
+    Args:
+        params: dict which is maded by `parse_GET_params`
     
-    Return.
-    -------
-    - QuerySet, request_dict
+    Returns:
+        QuerySet
+        request_dict
+
     """
     bibtex_queryset = Bibtex.objects.all()
 
@@ -97,9 +97,8 @@ def get_bibtex_query_set(params):
         )
     else:
         pass
-        
 
-                
+    
     # Keywords
     keywords = params.get('keywords')
     if keywords!=None:

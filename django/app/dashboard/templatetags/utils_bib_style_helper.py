@@ -6,35 +6,93 @@ from django.template.loader import get_template
 register = template.Library()
 
 
-"""
-Bib
-"""
+# -------
+#  Bib
+# -------
 @register.filter
 def remove_brace(value):
-    # Captal
+    """ Remove braces  (which indicete capital leters in latex).
+
+    Args:
+        value (str): string which have ``{``, ``}``.
+
+    Returns:
+        str (``{``, ``}`` is removed.)
+   
+    Examples:
+
+        >>> val = "The {CNN}-based ..."
+        >>> remove_brace(val)
+        "The CNN-based ..."
+ 
+    """
     value = value.replace("{", "").replace("}", "")
     return value
 
 
-"""
-Author
-"""
+# --------
+#  Author
+# --------
 @register.filter
 def author_en_default(val):
+    """ Returns the author name in the order of (1) given name, (2) family name.
+
+    Args: 
+        val (str): name string.
+    
+    Returns:
+        str
+
+    Examples:
+    
+        >>> # Example1: with comma
+        >>> name = "Handai, Taro"
+        >>> author_en_default(name)
+        "Taro Handai"
+        >>> # Example2: w/o comma
+        >>> name2 = "Taro Handai"
+        >>> author_en_default(name)
+        "Taro Handai"
+
+    """
     vals = [s.strip() for s in val.split(",")]
     if len(vals) == 2:
-        return "{} {}".format(vals[1], vals[0])
+        return "{} {}".format(vals[1].title(), vals[0].title())
     return val
 
 
 @register.filter
 def author_en_google(val):
-    # Google Scholar  Style
+    """ Returns the author name in the Google Scholar style (e.g. Taro Handai => T. Handai).
+
+    Args: 
+        val (str): name string.
+    
+    Returns:
+        str
+
+    Examples:
+    
+        >>> # Example1: with comma
+        >>> name = "Handai, Taro"
+        >>> author_en_google(name)
+        "T. Handai"
+        >>> # Example2: w/o comma and with middle name.
+        >>> name2 = "Taro Adam Handai"
+        >>> author_en_google(name)
+        "T. Handai"
+
+    """
     val = [v.strip() for v in val.split(",")]
-    if len(val) == 2:
-        family = val[0].title()
+    if len(val) >= 2:
+        # with comma
+        family = val[0].split()[-1].title()
         first = val[1][0].upper()
         return "{}. {}".format(first, family)
+
+    # w/o comma
+    val = val[0].split()
+    if len(val) >= 2:
+        return "{}. {}".format(val[0], val[1])
     else:
         return " ".join(val)
-
