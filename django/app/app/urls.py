@@ -23,7 +23,8 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('dashboard/', include('dashboard.urls'), name='dashboard'),
+    # path('dashboard/', include('dashboard.urls'), name='dashboard'),
+    path('core/', include('core.urls'), name='core'),
     path('api/', include('api.urls'), name='api'),
 
     # Accounts [Login/Logout]

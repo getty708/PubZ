@@ -25,7 +25,7 @@ SECRET_KEY = 'a10^j@6^2q$y*c&ks29$gnb7*3eodvqp!4!$7h31mlsq0ad3+s'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*","example.com"]
+ALLOWED_HOSTS = ["*"]
 
 # User Model
 AUTH_USER_MODEL = 'users.User'
@@ -38,17 +38,20 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',    
     'api.apps.ApiConfig',
     'core.apps.CoreConfig',
-    'dashboard.apps.DashboardConfig',
+    # 'dashboard.apps.DashboardConfig', 
     # 'notification.apps.NotificationConfig',
     'custom.apps.CustomConfig',
+    
     # Additional Packages
     'dal',
     'dal_select2',
     'bootstrap_datepicker_plus',
+    
     ## REST
     'django_filters',
     'rest_framework',
     'rest_framework.authtoken',
+
     # Default
     'django.contrib.admin',
     'django.contrib.auth',
@@ -73,7 +76,7 @@ ROOT_URLCONF = 'app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -94,14 +97,17 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 DATABASES = {
     # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'docker',
+    #     'USER': 'docker',
+    #     'PASSWORD':  'docker',
+    #     'HOST': os.getenv('MYSQL_HOST'),
     # }
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'docker',
-        'USER': 'docker',
-        'PASSWORD':  'docker',
+        'NAME': os.getenv('MYSQL_DATABASE'),
+        'USER': os.getenv('MYSQL_USER'),
+        'PASSWORD':  os.getenv('MYSQL_PW'),
         'HOST': os.getenv('MYSQL_HOST'),
     }
 }
@@ -156,11 +162,11 @@ MEDIA_URL = '/media/'
 # Mail Settings
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'bmanbman888'
-EMAIL_HOST_PASSWORD = 'uetskqmsskqhvpco'
-EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'bmanbman888'
+# EMAIL_HOST_PASSWORD = 'uetskqmsskqhvpco'
+# EMAIL_USE_TLS = True
 
 # REST API Settings
 REST_FRAMEWORK = {
@@ -187,5 +193,5 @@ X_FRAME_OPTIONS = 'ALLOWALL'
 
 
 # Login/Logout
-LOGIN_REDIRECT_URL = 'dashboard:index'
-LOGOUT_REDIRECT_URL= 'dashboard:index'
+LOGIN_REDIRECT_URL = 'core:index'
+LOGOUT_REDIRECT_URL= 'core:index'

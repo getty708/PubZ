@@ -1,0 +1,135 @@
+{% load utils_search %}
+
+<div class="card w-100 shadow">
+		<script>
+		 /* Function to construct URL */
+		 $(function(){
+				 $(".search-link").click(function(){
+						 if ($(this).attr("mode")){
+								 var url  = "{% url 'core:index' %}"+ $(this).attr("mode") +"/?";
+						 }else{
+								 var url  = "{% url 'core:index' %}?";
+						 }
+						 var items = ["keywords", "book_style", "sort", "period_method",  "period_year",];
+						 for( const key of items ){
+								 key_id = "#search-" + key;
+								 if  ($(key_id).val() != ""){
+										 url += "&" + key + "=" + encodeURI($(key_id).val());
+								 }
+						 }
+						 if ($(this).attr("page")){
+								 url += "&page="+  encodeURI($(this).attr("page")); 
+						 }
+						 $(this).attr("href",url);
+				 });
+		 });
+		 $(function(){
+				 $("#search-period_method").change(function(){
+						 console.log($(this).val());
+						 if ($(this).val() == "all"){
+								 $("#search-period_year").prop("disabled", true);
+						 }else{
+								 $("#search-period_year").prop("disabled", false);
+						 }											
+				 });
+		 });
+		</script>				
+		<div class="card-header">
+				Search Box
+		</div>
+		<div>
+				<div class="card-body">
+						<form action="" method="get">
+								<div class="row mb-1">
+										<div class="col-12">
+												<div class="input-group mb-3">
+														<div class="input-group-prepend">
+																<span class="input-group-text">Search</span>
+														</div>
+														<input type="text" aria-label="Search Keyword" class="form-control" id="search-keywords"
+value="{% if GET_params.keywords %}{{GET_params.keywords}}{% endif %}"  placeholder="Keywords....">
+														<div class="input-group-append">
+																<a href="#" class="btn btn-primary search-link" id="search-button">Go!</a>
+														</div>
+												</div>
+										</div>
+										<div class="col-md-4">
+												<div class="input-group mb-3">
+														<div class="input-group-prepend">
+																<label class="input-group-text" for="inputGroupSelect01">Book Type</label>
+														</div>
+														{% get_bib_style_keys as styles %}														
+														<select class="custom-select" id="search-book_style" name="book_style">
+																<option value="ALL" disabled="disabled" class="text-dark font-weight-bold bg-light ">ALL</option>																
+																<option value="ALL" {% if book_style == "ALL" or not style %}selected{% endif %}>All</option>
+																{% for bs_key, bs_name in styles %}
+																{% if bs_name == "header" %}
+																<option value="{{ bs_key }}" disabled="disabled" class="text-dark font-weight-bold bg-light ">{{ bs_key }}</option>
+																{% else %}
+																<option value="{{ bs_key }}" {% if GET_params.book_style == bs_key %}selected{% endif %}>{{ bs_name }}</option>
+																{% endif %}
+																{% endfor %}																
+														</select>							
+												</div>																						
+										</div>
+										<div class="col-md-4">
+												<div class="input-group mb-3">																											
+														<div class="input-group-prepend">
+																<label class="input-group-text" for="inputGroupSelect01">Sort</label>
+														</div>
+														<select class="custom-select" id="search-sort" name="search-sort">
+																<option value="ascending" {% if GET_params.order == "ascending" or not GET_params.period_method %}selected{% endif %}>Date - Ascending</option>
+																<option value="desending" {% if GET_params.order == "desending" %}selected{% endif %}>Date - Descending</option>																															
+														</select>																			
+												</div>
+										</div>
+										<div class="col-md-4">
+												<div class="input-group mb-3">
+														<div class="input-group-prepend">
+																<label class="input-group-text" for="inputGroupSelect01">Date</label>
+														</div>																												
+
+														<select class="custom-select" id="search-period_method">
+																<option value="all"         {% if GET_params.period_method == "all" or not GET_params.period_method  %}selected{% endif %}>See All</option>
+																<option value="year"        {% if GET_params.period_method == "year"        %}selected{% endif %}>Search by Year</option>
+																<option value="fiscal_year" {% if GET_params.period_method == "fiscal_year" %}selected{% endif %}>Search by Fiscal Year (年度検索)</option>
+														</select>																											
+														<input type="text" class="form-control" aria-label="Text input with checkbox" id="search-period_year"
+{% if GET_params.period_year %}value="{{ GET_params.period_year }}"{% endif %} {% if GET_params.period_method == "all" or not GET_params.period_method %}disabled{% endif%}>
+												</div>
+										</div>
+										<div class="col-12">
+												<div class="btn-group btn-group-sm w-100" role="group" aria-label="Basic example">
+														<a href="#" class="btn btn{% if display_mode != 'list' and display_mode %}-outline{% endif %}-primary search-link" mode="list" >List View</a>																								
+														<a href="#" class="btn btn{% if display_mode != 'tile'   %}-outline{% endif %}-primary search-link" mode="tile" >Tile View</a>																												
+														<div class="btn-group" role="group">
+																<button id="btnGroupDrop1" type="button" class="btn btn{% if display_mode == 'list' or display_mode == 'tile' or not display_mode %}-outline{% endif %}-primary dropdown-toggle {% if not user.is_authenticated %} disabled{% endif %}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+																		Others<span class="text-danger">*</span>
+																</button>
+																<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+																		<a href="#" class="dropdown-item search-link {% if display_mode == 'table' %}font-weight-bold bg-light{% endif %}  {% if not user.is_authenticated %} disabled{% endif %} border-bottom border-secondary" mode="table" >
+																				Table View<span class="text-danger">*</span>
+																		</a>
+																		<a href="#" class="dropdown-item search-link {% if display_mode == 'bibtex' %}font-weight-bold bg-light{% endif %} {% if not user.is_authenticated %} disabled{% endif %} border-bottom border-secondary" mode="bibtex" >
+																				Bibtex View<span class="text-danger">*</span>
+																		</a>
+																		<a href="#" class="dropdown-item search-link {% if display_mode == 'latex' %}font-weight-bold bg-light{% endif %}  {% if not user.is_authenticated %} disabled{% endif %} " mode="latex" >
+																				Latex View<span class="text-danger">*</span>
+																		</a>																		
+																</div>
+														</div>
+														
+												</div>
+												<div class="d-flex justify-content-end">
+														<span class="text-danger">* Login Required</span>
+												</div>
+										</div>
+										
+								</div>
+						</form>
+				</div>
+				<div class="card-footer">
+						<div style="text-align: right;color:#3C3C3C;font-size: 80%;">{{ GET_params.num_hits }} hits</div>								
+				</div>
+		</div>
+</div>
