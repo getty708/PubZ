@@ -10,13 +10,11 @@ from api import views_rest
 
 # -----------------------------------------------
 router = routers.DefaultRouter()
-router.register(r'users', views_rest.UserViewSet,)
-router.register(r'authors', views_rest.AuthorViewSet,)
-router.register(r'author-orders', views_rest.AuthorOrderViewSet,)
-router.register(r'books', views_rest.BookViewSet,)
-router.register(r'bibtexs', views_rest.BibtexViewSet,)
-
-
+router.register(r'users', views_rest.UserViewSet)
+router.register(r'authors', views_rest.AuthorViewSet)
+router.register(r'author-orders', views_rest.AuthorOrderViewSet)
+router.register(r'books', views_rest.BookViewSet)
+router.register(r'bibtexs', views_rest.BibtexViewSet)
 
 
 # -----------------------------------------------
@@ -29,6 +27,5 @@ urlpatterns = [
 
     # REST API
     path('rest/', include((router.urls,'api')),name="rest"),
-    # path('rest/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('rest/api-token-auth/', views_rest_auth.obtain_auth_token, name="get_token"),
 ]
