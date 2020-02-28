@@ -34,7 +34,6 @@ def val_author_name_ja_lab_rule(name_ja):
         return name_ja.replace(" ", "")
 
 
-
 # ----------------------------------------------------------
 # ===============
 # Model: Bibtex

@@ -82,8 +82,6 @@ def bibtex_edit_step1(request):
                    'form':form,
                    'submit_url': submit_url})
 
-
-
 """
 Book
 """
@@ -117,7 +115,6 @@ def book_edit(request, book_id=None):
                    'book': book,
                    'submit_text': submit_text,
                    'submit_url': submit_url})
-
 
 
 """
@@ -228,7 +225,6 @@ def tag_edit(request, tag_id=None):
                    'form': form,
                    'tag': tag,
                    'submit_url': submit_url})
-
 
 
 """

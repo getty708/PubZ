@@ -44,41 +44,48 @@ class AuthorForm(forms.ModelForm):
         })
         self.fields["date_join"].widget.attrs.update({
             'class': 'form-control form-control-sm',
-            'placeholder': "Date of Join",
+            'placeholder': "e.g. 2020-01-01",
         })
         self.fields["date_leave"].widget.attrs.update({
             'class': 'form-control form-control-sm',
-            'placeholder': "Date of Leave",
+            'placeholder': "e.g. 2020-01-01",
         })
 
 
-    def clean_base(self, key):
-        validator_dict = validators.validation_callback_author_form
-        val = self.cleaned_data[key]
-        if key in validator_dict.keys():
-            callback_funcs = validator_dict[key]
-            for func in callback_funcs:
-                val = func(val)
-        return val
-
-
     def clean_name_en(self):
-        name_en = self.clean_base('name_en')
+        """ Validate an author name (English).
+        
+        Remove full-witdh space. 
+        
+        """
+        print('clean_name_en is called.')
+        name_en = self.cleaned_data['name_en']
+        name_en = name_en.replace("　", " ") # Replace full-with space with normal space.
+        
+        # Check space
         if ' ' not in name_en:
             raise forms.ValidationError('Please separate your first and last name with a space.')
+        
+        # Auto cleaning
+        name_en = [s.strip().title() for s in name_en.split()]
+        name_en = " ".join(name_en)
         return name_en
 
     def clean_name_ja(self):
-        name_ja = self.clean_base('name_ja')
-        if name_ja is not None and ' ' not in name_ja:
+        """ Validate au author name (Japanese) """ 
+        name_ja = self.cleaned_data['name_ja']
+        if name_ja is None:
+            return None
+        name_ja = name_ja.replace("　", " ") # Replace full-with space with normal space. 
+        
+        # check space
+        if ' ' not in name_ja:
             raise forms.ValidationError('Please separate your first and last name with a space.')
-        return name_ja
-
-    def clean_dep_en(self):
-        return self.clean_base('dep_en')
-
-    def clean_dep_ja(self):
-        return self.clean_base('dep_ja')
+        # remove comma from Japanese name.
+        if name_ja:
+            name_ja = [s.strip().replace(",", "").title() for s in name_ja.split()]
+            name_ja = " ".join(name_ja)
+        return name_ja    
 
     def clean(self):
         cleaned_data = super().clean()
@@ -128,27 +135,58 @@ class BookForm(forms.ModelForm):
         })
 
 
-    def clean_base(self, key):
-        validator_dict = validators.validation_callback_book_form
-        val = self.cleaned_data[key]
-        if key in validator_dict.keys():
-            callback_funcs = validator_dict[key]
-            for func in callback_funcs:
-                val = func(val)
-        return val
-
     def clean_title(self):
-        return self.clean_base('title')
+        """ Validate book title. 
+
+
+        Note:
+            Replace following word with the complete form.
+            
+            * To ``Conference`` : conference, Conf., conf.
+            * To ``Transactions on`` : Trans. on, trans. on, Trans., trans., Transaction on, transaction on
+            * To ``Proceedings of`` : in Proceeding of, in proceeding of, in Proc. of, in proc. of, Proc. of, proc. of, Proc., proc.,
+            * To ``International`` : international, Int'l, int'l, Intl, intl       
+                  
+        """
+        # Replace some words.
+        title = self.cleaned_data['title']
+        CHECK_DICT ={
+            "Conference": [
+                "conference", "Conf.", "conf.",
+            ],
+            "Transactions on": [
+                "Trans. on", "trans. on", "Trans.", "trans.",
+                "Transaction on", "transaction on",
+            ],
+            "Proceedings of": [
+                "in Proceeding of", "in proceeding of",
+                "in Proc. of", "in proc. of", "Proc. of", "proc. of",
+                "Proc.", "proc.",
+            ],
+            "International": [
+                "international", "Int'l", "int'l", "Intl", "intl",
+            ],
+        }
+        for key, value in CHECK_DICT.items():
+            for v in value:
+                title = title.replace(v, key)
+
+        # Convert to Title case.
+        return title.strip()
+        
 
     def clean_abbr(self):
-        abbr = self.cleaned_data['abbr']
+        """ Vlidate abbr.
+
+        Raise:
+            form.validationError: If the abbr string contains 0-9.
+        
+        """
+        abbr = self.cleaned_data['abbr']        
         if abbr is not None and re.search('[0-9]', abbr):
-            raise forms.ValidationError('Do not include year')
+            raise forms.ValidationError('Do not include year.')
         return abbr
-
-    def clean_institution(self):
-        return self.clean_base('institution')
-
+    
 
     def clean(self):
         cleaned_data = super().clean()
@@ -158,6 +196,13 @@ class BookForm(forms.ModelForm):
 Bibtex
 """
 class BibtexForm(forms.ModelForm):
+    """
+
+    Todo:
+        Implement ``self.clean_title_en()``
+
+    """
+    
     class Meta:
         model = models.Bibtex
         fields = [
@@ -187,27 +232,26 @@ class BibtexForm(forms.ModelForm):
         self.fields["is_published"].widget.attrs.update({
             'class': 'form-check-input',
         })
-        
 
-    # Validation
-    def clean_base(self, key):
-        validator_dict = validators.validation_callback_bibtex_form
-        val = self.cleaned_data[key]
-        if key in validator_dict.keys():
-            callback_funcs = validator_dict[key]
-            for func in callback_funcs:
-                val = func(val)
-        return val
-
-
+    # TODO: Implement title validator.
     def clean_title_en(self):
-        return self.clean_base('title_en')
-
-    def clean_title_ja(self):
-        return self.clean_base('title_ja')
+        title_en = self.cleaned_data['title_en']
+        return title_en
 
     def clean_page(self):
-        return self.clean_base('page')
+        """
+
+        Example:
+            >>> page = "1--4"
+            Ok
+            >>> page = "1-4"
+            returns 1--4
+
+        """
+        page = self.cleaned_data['page']
+        if '-' in page and not '--' in page:
+            page = page.replace('-', '--')
+        return page
 
 
     def clean(self):
@@ -244,30 +288,6 @@ class BibtexFormStep1(forms.Form):
     book.widget.attrs.update({
             'class': 'form-control form-control-sm',
     })
-
-    def clean_base(self, key):
-        validator_dict = validators.validation_callback_bibtex_form_step1
-        val = self.cleaned_data[key]
-        if key in validator_dict.keys():
-            callback_funcs = validator_dict[key]
-            for func in callback_funcs:
-                val = func(val)
-        return val
-
-
-    def clean_lang(self):
-        return self.clean_base('lang')
-
-    def clean_title(self):
-        return self.clean_base('title')
-
-    def clean_book(self):
-        return self.clean_base('book')
-
-    def clean(self):
-        cleaned_data = super().clean()
-        return cleaned_data
-
 
 
 """

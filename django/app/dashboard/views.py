@@ -176,62 +176,62 @@ class TagDetailView(generic.DetailView):
         return context
 
 
-"""
-Notification
-"""
-def notification_alert(request):
-    msg = False
-    # Send Email
-    status = alert.send_email_test()
-    return render(request,
-                  'notification/alert.html',
-                  {
-                      'msg': msg,
-                      'status': status,
-                  })
+# """
+# Notification
+# """
+# def notification_alert(request):
+#     msg = False
+#     # Send Email
+#     status = alert.send_email_test()
+#     return render(request,
+#                   'notification/alert.html',
+#                   {
+#                       'msg': msg,
+#                       'status': status,
+#                   })
 
 
-def notification_alert_author(request, author_id, bibtex_id):
-    msg = False
-    # Send Email
-    status = False
+# def notification_alert_author(request, author_id, bibtex_id):
+#     msg = False
+#     # Send Email
+#     status = False
 
-    subject = "Please update the registration information."
-    message = "The following papers have missing items.\n\n\n"
+#     subject = "Please update the registration information."
+#     message = "The following papers have missing items.\n\n\n"
 
-    bibtex_queryset = Bibtex.objects.get(id=bibtex_id)
-    bibtex_name = bibtex_queryset.title_en
+#     bibtex_queryset = Bibtex.objects.get(id=bibtex_id)
+#     bibtex_name = bibtex_queryset.title_en
 
-    author_queryset = Author.objects.get(id=author_id)
-    author_mail = author_queryset.mail
+#     author_queryset = Author.objects.get(id=author_id)
+#     author_mail = author_queryset.mail
 
-    status = alert.send_email_to_appointed_address(author_mail, bibtex_queryset)
+#     status = alert.send_email_to_appointed_address(author_mail, bibtex_queryset)
 
-    return render(request,
-                  'notification/alert.html',
-                  {
-                      'msg': msg,
-                      'status': status,
-                      'author': author_mail,
-                      'bibtex': bibtex_name,
-                      'subject': subject,
-                      'message': message,
-                  })
+#     return render(request,
+#                   'notification/alert.html',
+#                   {
+#                       'msg': msg,
+#                       'status': status,
+#                       'author': author_mail,
+#                       'bibtex': bibtex_name,
+#                       'subject': subject,
+#                       'message': message,
+#                   })
 
 
-def notification_alert_all(request):
-    msg = False
-    subject = "Please update the registration information."
-    message = "The following papers have missing items.\n\n\n"
+# def notification_alert_all(request):
+#     msg = False
+#     subject = "Please update the registration information."
+#     message = "The following papers have missing items.\n\n\n"
 
-    status, not_published_list = alert.send_email_to_all()
+#     status, not_published_list = alert.send_email_to_all()
 
-    return render(request,
-                  'notification/alert_all.html',
-                  {
-                      'msg': msg,
-                      'status': status,
-                      'bibtexs': not_published_list,
-                      'subject': subject,
-                      'message': message,
-                  })
+#     return render(request,
+#                   'notification/alert_all.html',
+#                   {
+#                       'msg': msg,
+#                       'status': status,
+#                       'bibtexs': not_published_list,
+#                       'subject': subject,
+#                       'message': message,
+#                   })
