@@ -78,7 +78,6 @@ class BookIndexView(generic.ListView):
     def get_queryset(self):
         self.selected_style = self.request.GET.get("style", "ALL")
         self.keywords = self.request.GET.get("keywords", "").split()
-        print(self.keywords)
         styles = [s[0] for s in self.styles]
         key = self.selected_style if self.selected_style in styles else False
         queryset = Book.objects
@@ -132,8 +131,8 @@ class AuthorIndexView(generic.ListView):
                 queryset =  queryset.filter(
                     Q(name_en__icontains=q) |
                     Q(name_ja__icontains=q) |
-                    Q(dep_en__icontains=q)  |
-                    Q(dep_ja__icontains=q)
+                    Q(affiliation_en__icontains=q)  |
+                    Q(affiliation_ja__icontains=q)
                 )
             return queryset.order_by('name_en')
         return Author.objects.order_by('name_en')

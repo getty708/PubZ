@@ -96,14 +96,12 @@ def get_bibtex_query_set(params):
         )
     else:
         pass
-
     
     # Keywords
     keywords = params.get('keywords')
     if keywords!=None:
         keywords_list = keywords.split(" ")        
         for keyword in keywords_list:
-            print("keyword: ", keyword)
             bibtex_queryset = bibtex_queryset.filter(
                 Q(title_en__icontains=keyword) |
                 Q(title_ja__icontains=keyword) |

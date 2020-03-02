@@ -7,7 +7,7 @@ from core.models import Author, Bibtex, Book, Tag, AuthorOrder, TagChain
 # ---------------------------
 @admin.register(Author)
 class AuthorAdmin(admin.ModelAdmin):
-    list_display = ('id','name_en', 'dep_en', 'created', 'modified', 'owner')
+    list_display = ('id','name_en', 'affiliation_en', 'created', 'modified', 'owner')
     list_display_links = ('name_en',)
 
 
@@ -19,7 +19,7 @@ class BookAdmin(admin.ModelAdmin):
 
 @admin.register(Bibtex)
 class BibtexAdmin(admin.ModelAdmin):
-    list_display = ('id','pub_date','get_title','book','created','modified','owner')
+    list_display = ('id','pub_date','get_title','book','bib_type','created','modified','owner')
     list_display_links = ('id', 'get_title',)
 
     def get_title(self, obj):

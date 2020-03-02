@@ -51,7 +51,7 @@ Constant Params
 """
 KEYS_CREATE_BIBTEX = [
     "language", "title_en", "title_ja",
-    "volume", "number", "chapter", "page", "edition",
+    "volume", "number", "chapter", "page", "edition", "bib_type",
     "pub_date", "use_date_info",
     "url","fund", "memo", "book", "book_title",
 ]
@@ -113,7 +113,10 @@ def create_bibtex(url_base, token, bibtex_dict, logger=getLogger(__name__+'.crea
     def _get_book_data(bibtex_dict):
         url_get_book = os.path.join(url_base, "books/")
         books = get_books(url_base, bibtex_dict["book"]["title"])
-        books_selected = [book for book in books if (book["style"] == bibtex_dict["book"]["style"]) and (book["title"] == bibtex_dict["book"]["title"])]
+        books_selected = [
+            book for book in books
+            if (book["title"] == bibtex_dict["book"]["title"])
+        ]
         if len(books_selected) == 1:
             book = books_selected[0]
             bibtex_dict["book_id"] = book["id"]
@@ -175,7 +178,7 @@ def main_single(args):
     url = args.url_base
     bibtex_dict = {
         "language": "EN",
-        "title_en": "bibtex entry 1",
+        "title_en": "bibtex entry 2",
         "title_ja": "",
         "volume":   "0",
         "number":   "1",
@@ -187,7 +190,8 @@ def main_single(args):
         "url": "",
         "fund": "",
         "memo": "",
-        "book": {"title":"TestBook1", "style": "INPROCEEDINGS"},
+        "bib_type": "AWARD",
+        "book": {"title":"TestBook1", "style": "BOOK"},
         "book_title": "Test Book title",
     }
     create_bibtex(url, token, bibtex_dict)
@@ -241,12 +245,13 @@ def main_csv(args):
                 "page":     row["page"],
                 "edition":  row["edition"],
                 "pub_date": row["pub_date"],
-                "use_data_info": False if row["use_data_info"] == 0 else True,
+                "use_date_info": False if row["use_date_info"] == 0 else True,
                 "url": row["url"],
-                "note": row["note"],
+                "fund": row["fund"],
                 "memo": row["memo"],
-                "book": {"title": row["book"], "style": row["key_book_style"]},
+                "book": {"title": row["book"], "style": row["bib_type"]},
                 "book_title": row["book_title"],
+                "bib_type": row["bib_type"]
             }
             #raise NotImplementedError("OK!")
             status, msg = create_bibtex(args.url_base, token, bibtex_dict)

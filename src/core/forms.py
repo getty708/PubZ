@@ -16,11 +16,13 @@ class AuthorForm(forms.ModelForm):
     class Meta:
         model = models.Author
         fields = [
-            'name_en','name_ja','dep_en','dep_ja','mail','date_join','date_leave',
+            'name_en', 'name_ja',
+            'affiliation_en', 'affiliation_ja',
+            'mail', 'date_join', 'date_leave',
         ]
         widgets = {
-            'dep_en': forms.Textarea(attrs={'cols': 80, 'rows': 3}),
-            'dep_ja': forms.Textarea(attrs={'cols': 80, 'rows': 3}),
+            'affiliation_en': forms.Textarea(attrs={'cols': 80, 'rows': 3}),
+            'affiliation_ja': forms.Textarea(attrs={'cols': 80, 'rows': 3}),
         }
 
     def __init__(self, *args, **kwargs):
@@ -33,11 +35,11 @@ class AuthorForm(forms.ModelForm):
             'class': 'form-control form-control-sm',
             'placeholder': "日本語",
         })
-        self.fields["dep_en"].widget.attrs.update({
+        self.fields["affiliation_en"].widget.attrs.update({
             'class': 'form-control form-control-sm',
             'placeholder': "English",
         })
-        self.fields["dep_ja"].widget.attrs.update({
+        self.fields["affiliation_ja"].widget.attrs.update({
             'class': 'form-control form-control-sm',
             'placeholder': "日本語",
         })

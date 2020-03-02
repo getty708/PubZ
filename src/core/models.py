@@ -13,9 +13,9 @@ class Bibtex(models.Model):
         :header: Var, Type, Description
         :widths: 5, 5, 10
 
-        ``AWARD``, Award, TBA
-        ``KEYNOTE``, Keynote (Presentation), TBA
-        ``SAMEASBOOK``, Same as the Book, TBA
+        ``AWARD``, Award, 受賞
+        ``KEYNOTE``, Keynote (Presentation), 基調講演/セミナー・パネル討論等
+        ``SAMEASBOOK``, Same as the Book, 
 
     """
 
@@ -233,6 +233,7 @@ class Bibtex(models.Model):
         """ Returns bibtex tyepe (display string) 
         
         """
+        print(self.title_en, self.bib_type)
         if self.bib_type == "SAMEASBOOK":
             return self.book.get_style_display()
         return self.get_bib_type_display()
@@ -324,16 +325,16 @@ class Author(models.Model):
             "The author's full Name (Japanese). First name and family name should be split by space."
             "See validation rules.  (len=128, null=True, blank=True)"
         ))
-    dep_en = models.TextField(
+    affiliation_en = models.TextField(
         null=True, blank=True,
         help_text=(
-            "The name of their depertment in English."
+            "Affiliation (in English)"
             "(null=True, blank=True)"
         ))
-    dep_ja = models.TextField(
+    affiliation_ja = models.TextField(
         null=True, blank=True,
         help_text=(
-            "The name of their depertment in Japanese."
+            "Affiliation (in Japanese)"
             "(null=True, blank=True)"
         ))
     mail = models.EmailField(
@@ -398,27 +399,25 @@ class Book(models.Model):
         :header: Key, Type, Memo
         :widths: 5, 5, 10
     
-        ``JOURNAL``, Journal, - 
-        ``INPROCEEDINGS``, In Proceedings of International Conference,  -
-        ``CONF_DOMESTIC``, Domestic Conference, -
-        ``BOOK``, Book, -
-        ``NEWS``, News Paper, -            
-        ``MISC``, Others, -
-        ``ARTICLE``, Article, -
+        ``ARTICLE``, Journal, Journal Paper
+        ``INPROCEEDINGS_INTERNATIONAL``, International Conference, Proceedings of International Conference
+        ``INPROCEEDINGS_DOMESTIC``, Domestic Conference, (国内会議 (査読付き), 国内研究会, 全国大会)
+        ``BOOK``, Book, 出版社が刊行した書籍。(著書／監修／編集／訳書)
+        ``NEWS``, News Paper, 新聞記事
+        ``MISC``, Others, その他該当種別が無いもの。
     
     """
     
     STYLE_CHOICES = (
         ('Paper',(
-            ('JOURNAL', 'Journal'),
-            ('INPROCEEDINGS', 'International Conference'),            
-            ('CONF_DOMESTIC', 'Domestic Conference',),            
+            ('ARTICLE',                     'Journal'),
+            ('INPROCEEDINGS_INTERNATIONAL', 'International Conference'),            
+            ('INPROCEEDINGS_DOMESTIC',      'Domestic Conference',),            
         ),),
         ('Article', (
             ('BOOK', 'Book',),
-            ('NEWS', 'News Paper',),            
+            ('NEWS', 'News Paper',),
             ('MISC', 'Others'),
-            ('ARTICLE', "Article"),
         ),),
     )
     

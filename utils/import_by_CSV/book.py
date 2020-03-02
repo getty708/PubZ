@@ -145,7 +145,7 @@ def main_single(args):
     book_dict = {
         "title": "TestBook1",
         "abbr": "test conf.",
-        "style": "INPROCEEDINGS",
+        "style": "BOOK",
     }
     create_book(url, token, book_dict)
 

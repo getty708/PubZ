@@ -71,8 +71,8 @@ $(function(){
 																		</a>																												
 																</td>
 																<td>
-																		{{ author.dep_en }}
-																		{% if author.dep_ja %}<sapn class="px-1">/ {{ author.dep_ja }}</sapn>{% endif %}
+																		{{ author.affiliation_en|default:'-' }}
+																		{% if author.affiliation_ja %}<sapn class="px-1">/ {{ author.affiliation_ja }}</sapn>{% endif %}
 																</td>
 																<td>
 																		<a href="{% url 'core:author_detail' author.id  %}" class="btn btn-sm btn-outline-primary">Detail</a>

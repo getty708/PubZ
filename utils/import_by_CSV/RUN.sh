@@ -21,7 +21,7 @@ elif [ ${mode} == "book" ]; then
 	   -u ${USER} \
 	   -f ${CSV}
 elif [ ${mode} == "bibtex" ]; then
-    CSV="./csv/PubZ_Bibtexs22.csv"
+    CSV="./csv/PubZ_Bibtex.csv"
     python3 bibtex.py CSV \
 	    --url-base ${URL_BASE} \
 	    -u ${USER} \

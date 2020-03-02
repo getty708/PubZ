@@ -6,8 +6,8 @@ from getpass import getpass
 from logging import getLogger, basicConfig, DEBUG, INFO
 logger = getLogger(__name__)
 LOG_FMT = "{asctime} | {levelname:<5s} | {name} | {message}"
-basicConfig(level=DEBUG, format=LOG_FMT, style="{")
-#basicConfig(level=INFO, format=LOG_FMT, style="{")
+#basicConfig(level=DEBUG, format=LOG_FMT, style="{")
+basicConfig(level=INFO, format=LOG_FMT, style="{")
 
 from auth_token import get_auth_token
 
@@ -48,7 +48,7 @@ def make_parser():
 """
 Constant Params
 """
-KEYS_CREATE_AUTHOR = ["name_en", "name_ja", "dep_en", "dep_ja", "mail",]
+KEYS_CREATE_AUTHOR = ["name_en", "name_ja", "affiliation_en", "affiliation_ja", "mail",]
 
 
 # -----------------------------------------------------------------------
@@ -146,14 +146,14 @@ def main_single(args):
     # POST
     url = args.url_base # + "authors/"
     author_dict = {
-        "name_en": "Test Author3",
-        "name_ja": "テスト 3",
-        "dep_en":  "Osaka University",
-        "dep_ja":  "Osaka University",
-        "mail":    "test2@test.com",
+        "name_en":         "Test Author4",
+        "name_ja":         "テスト 4",
+        "affiliation_en":  "Osaka University",
+        "affiliation_ja":  "Osaka University",
+        "mail":            "test2@test.com",
     }
     create_author(url, token, author_dict)
-
+    
 
 def main_csv(args):
     """
@@ -193,11 +193,11 @@ def main_csv(args):
         for i in range(len(df)):
             row = df.loc[i, :]
             author_dict = {
-                "name_en": row["name_en"],
-                "name_ja": row["name_ja"],
-                "dep_en":  row["dep_en"],
-                "dep_ja":  row["dep_ja"],
-                "mail":    row["mail"],
+                "name_en":         row["name_en"],
+                "name_ja":         row["name_ja"],
+                "affiliation_en":  row["affiliation_en"],
+                "affiliation_ja":  row["affiliation_ja"],
+                "mail":            row["mail"],
             }
             status, msg = create_author(args.url_base, token, author_dict)
             df.loc[i, "status"] = status
