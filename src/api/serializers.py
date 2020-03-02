@@ -31,8 +31,7 @@ from core.models import Author, AuthorOrder, Bibtex, Book
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author        
-        fields = ('id','name_en', 'name_ja', 'dep_en', 'dep_ja', 'mail', 'modified')
-        
+        fields = ('id','name_en', 'name_ja', 'dep_en', 'dep_ja', 'mail', 'modified')    
         
     def create(self, validated_data):
         author  = Author.objects.create(**validated_data)
@@ -63,8 +62,9 @@ class BibtexSerializer(serializers.ModelSerializer):
             'id','language',
             'pub_date','title_en', 'title_ja',
             "volume","number","page", "pub_date",
-            'book','book_title','modified',"book_id",
-            'url','note',
+            'book', "book_id", 'book_title',
+            'url','fund',
+            'modified',
             )
 
     def create(self, validated_data):

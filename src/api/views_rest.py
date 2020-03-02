@@ -20,7 +20,7 @@ class IsAdminOrReadOnly(permissions.BasePermission):
     """
     def has_permission(self, request, view):
         # Read permissions are allowed to any request,
-        # so we'll always allow GET, HEAD or OPTIONS requests.        
+        # so we'll always allow GET, HEAD or OPTIONS requests.
         if request.method in permissions.SAFE_METHODS:
             return True
         # Instance must have an attribute named `owner`.
@@ -47,9 +47,9 @@ class AuthorViewSet(viewsets.ModelViewSet):
     queryset = Author.objects.all().order_by('name_en')
     serializer_class = serializers.AuthorSerializer
     permission_classes = (IsAdminOrReadOnly,)
-    authentication_classes = (SessionAuthentication,TokenAuthentication,)
+    authentication_classes = (SessionAuthentication, TokenAuthentication,)
     filter_backends = (filters.SearchFilter,)
-    search_fields = ('name_en','name_ja',)
+    search_fields = ('name_en',)
 
 
 class AuthorOrderViewSet(viewsets.ModelViewSet):
@@ -58,7 +58,7 @@ class AuthorOrderViewSet(viewsets.ModelViewSet):
     """
     queryset = AuthorOrder.objects.all().order_by('bibtex','order')
     serializer_class = serializers.AuthorOrderSerializer
-    permission_classes = (IsAdminOrReadOnly,)    
+    permission_classes = (IsAdminOrReadOnly,)
     authentication_classes = (SessionAuthentication, TokenAuthentication,)
 
 

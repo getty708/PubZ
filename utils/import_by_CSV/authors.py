@@ -6,8 +6,8 @@ from getpass import getpass
 from logging import getLogger, basicConfig, DEBUG, INFO
 logger = getLogger(__name__)
 LOG_FMT = "{asctime} | {levelname:<5s} | {name} | {message}"
-# basicConfig(level=DEBUG, format=LOG_FMT, style="{")
-basicConfig(level=INFO, format=LOG_FMT, style="{")
+basicConfig(level=DEBUG, format=LOG_FMT, style="{")
+#basicConfig(level=INFO, format=LOG_FMT, style="{")
 
 from auth_token import get_auth_token
 
@@ -22,7 +22,7 @@ def make_parser():
     # single
     single_parser = subparsers.add_parser('SINGLE')
     single_parser.set_defaults(func=main_single)
-    single_parser.add_argument('--url-base', default="http://localhost:7000/api/rest/",
+    single_parser.add_argument('--url-base', default="http://django:8000/api/rest/",
                                 help="URL to get auth token")
     single_parser.add_argument('-u', '--username', required=True,
                                 help="User ID (email)")
@@ -30,7 +30,7 @@ def make_parser():
     # CSV
     csv_parser = subparsers.add_parser('CSV')
     csv_parser.set_defaults(func=main_csv)
-    csv_parser.add_argument('--url-base', default="http://localhost:7000/api/rest/",
+    csv_parser.add_argument('--url-base', default="http://django:8000/api/rest/",
                                 help="URL to get auth token")
     csv_parser.add_argument('-u', '--username', required=True,
                                 help="User ID (email)")
@@ -70,7 +70,7 @@ def get_authors(url_base, param, logger=getLogger(__name__+'.get_authot')):
     headers = {
         "Accept": "application/json",
         "Content-type": "application/json",
-        # "Authorization": "Token {}".format(token),
+        # "Authorization": "Token {}".format(Token),
     }
     r = requests.get(url_with_param, headers=headers, verify=False)
     logger.debug(r.status_code)
@@ -127,7 +127,7 @@ def create_author(url_base, token, author_dict, logger=getLogger(__name__+'.crea
         if "non_field_errors" in data.keys():
             logger.warning("Failed: Already exists (DB internal error.)")
             return True, str(data)
-        logger.warning("Failed: Cannot create new book. {}".format(data))
+        logger.warning("Failed: Cannot create new author. {}".format(data))
     return False, str(data)
 
 
@@ -136,16 +136,18 @@ def create_author(url_base, token, author_dict, logger=getLogger(__name__+'.crea
 Main
 """
 def main_single(args):
+    """ Test: add single user."""
+    
     # Get Token
     url = args.url_base + "api-token-auth/"
     token = get_auth_token(url, args.username)
     logger.debug("Token [{}]: {}".format(args.username, token))
 
     # POST
-    url = args.url_base + "authors/"
+    url = args.url_base # + "authors/"
     author_dict = {
-        "name_en": "TestAuthor2",
-        "name_ja": "テスト2",
+        "name_en": "Test Author3",
+        "name_ja": "テスト 3",
         "dep_en":  "Osaka University",
         "dep_ja":  "Osaka University",
         "mail":    "test2@test.com",
@@ -155,15 +157,16 @@ def main_single(args):
 
 def main_csv(args):
     """
-    Args.
-    -----
-    - url       : str, API Endpoint
-    - token     : str, Authentication Token
-    - file_path : str, path to CSV file
 
-    Returns.
-    --------
-    - pd.DataFrame
+
+    Args:
+        url       (str): API Endpoint
+        token     (str): authentication token
+        file_path (str): path to CSV file
+
+    Returns:
+        pd.DataFrame
+
     """
     def _auth_token():        
         url = os.path.join(args.url_base, "api-token-auth/")

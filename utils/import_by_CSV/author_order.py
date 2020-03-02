@@ -25,7 +25,7 @@ def make_parser():
     # single
     single_parser = subparsers.add_parser('SINGLE')
     single_parser.set_defaults(func=main_single) 
-    single_parser.add_argument('--url-base', default="http://localhost:7000/api/rest/",
+    single_parser.add_argument('--url-base', default="http://django:8000/api/rest/",
                                 help="URL to get auth token")
     single_parser.add_argument('-u', '--username', required=True,
                                 help="User ID (email)")
@@ -34,7 +34,7 @@ def make_parser():
     # CSV
     csv_parser = subparsers.add_parser('CSV')
     csv_parser.set_defaults(func=main_csv)
-    csv_parser.add_argument('--url-base', default="http://localhost:7000/api/rest/",
+    csv_parser.add_argument('--url-base', default="http://django:8000/api/rest/",
                                 help="URL to get auth token")
     csv_parser.add_argument('-u', '--username', required=True,
                                 help="User ID (email)")
@@ -42,9 +42,6 @@ def make_parser():
                                 help="file path")
     csv_parser.add_argument('--debug', action='store_true',
                                 help="Debug flag")
-
-    
-    
     return parser
 
 
@@ -219,8 +216,11 @@ def main_single(args):
     # POST
     url = args.url_base
     author_order_dict = {
-        "bibtex": {"title": "{IoT}環境における処理削減によるストリーミング処理時間短縮手法",},
-        "authors": "AI-Sakib Khan Pathan,Akihito Hiromori,Akiko Yamazoe-Umemoto",
+        "bibtex": "bibtex entry 1",
+        "book": "TestBook1",
+        "pub_date": "2018-01-02",
+        "page": "123-124",
+        "authors": "Test Author3, Test Author, Test Abc",    
     }
     df = create_author_order(url, token, author_order_dict)
     print(df)

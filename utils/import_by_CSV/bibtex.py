@@ -22,7 +22,7 @@ def make_parser():
     # single
     single_parser = subparsers.add_parser('SINGLE')
     single_parser.set_defaults(func=main_single)
-    single_parser.add_argument('--url-base', default="http://localhost:7000/api/rest/",
+    single_parser.add_argument('--url-base', default="http://django:8000/api/rest/",
                                 help="URL to get auth token")
     single_parser.add_argument('-u', '--username', required=True,
                                 help="User ID (email)")
@@ -31,7 +31,7 @@ def make_parser():
     # CSV
     csv_parser = subparsers.add_parser('CSV')
     csv_parser.set_defaults(func=main_csv)
-    csv_parser.add_argument('--url-base', default="http://localhost:7000/api/rest/",
+    csv_parser.add_argument('--url-base', default="http://django:8000/api/rest/",
                                 help="URL to get auth token")
     csv_parser.add_argument('-u', '--username', required=True,
                                 help="User ID (email)")
@@ -50,10 +50,10 @@ def make_parser():
 Constant Params
 """
 KEYS_CREATE_BIBTEX = [
-    "language","title_en","title_ja",
-    "volume","number","chapter","page","edition",
-    "pub_date","use_data_info",
-    "url","note","memo","book","book_title",
+    "language", "title_en", "title_ja",
+    "volume", "number", "chapter", "page", "edition",
+    "pub_date", "use_date_info",
+    "url","fund", "memo", "book", "book_title",
 ]
 
 
@@ -91,11 +91,11 @@ POST
 """
 def create_bibtex(url_base, token, bibtex_dict, logger=getLogger(__name__+'.create_bibtex')):
     """
-    Args.
-    -----
-    - url         : str, API Endpoint
-    - token       : str, Authentication Token
-    - bibtex_dict : dict object which contains KEYS_POST_BIBTEX
+
+    Args:
+        url         (str): API Endpoint
+        token       (str): Authentication Token
+        bibtex_dict (dict): dict object which contains KEYS_POST_BIBTEX
 
     Returns.
     --------
@@ -175,18 +175,20 @@ def main_single(args):
     url = args.url_base
     bibtex_dict = {
         "language": "EN",
-        "title":    "bibtex entry 1",
+        "title_en": "bibtex entry 1",
+        "title_ja": "",
         "volume":   "0",
         "number":   "1",
         "chapter":  "2",
         "page":     "123-124",
         "edition":  "",
         "pub_date": "2018-01-02",
-        "use_data_info": False,
+        "use_date_info": False,
         "url": "",
-        "note": "",
+        "fund": "",
         "memo": "",
-        "book": {"title":"IEEE Int'l Conf. on Mobile Data Management (MDM2015)", "style": "INTPROC"},
+        "book": {"title":"TestBook1", "style": "INPROCEEDINGS"},
+        "book_title": "Test Book title",
     }
     create_bibtex(url, token, bibtex_dict)
 

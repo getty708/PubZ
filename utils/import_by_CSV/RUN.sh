@@ -1,7 +1,6 @@
 #URL="https://pubz.private/api/rest/"
-URL_BASE="http://localhost:8080/api/rest"
+URL_BASE="http://django:8000/api/rest"
 USER="test@test.com"
-
 
 mode=$1
 

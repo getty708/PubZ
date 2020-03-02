@@ -22,7 +22,7 @@ def make_parser():
     # single
     single_parser = subparsers.add_parser('SINGLE')
     single_parser.set_defaults(func=main_single)
-    single_parser.add_argument('--url-base', default="http://localhost:7000/api/rest/",
+    single_parser.add_argument('--url-base', default="http://django:8000/api/rest/",
                                 help="URL to get auth token")
     single_parser.add_argument('-u', '--username', required=True,
                                 help="User ID (email)")
@@ -31,7 +31,7 @@ def make_parser():
     # CSV
     csv_parser = subparsers.add_parser('CSV')
     csv_parser.set_defaults(func=main_csv)
-    csv_parser.add_argument('--url-base', default="http://localhost:7000/api/rest/",
+    csv_parser.add_argument('--url-base', default="http://django:8000/api/rest/",
                                 help="URL to get auth token")
     csv_parser.add_argument('-u', '--username', required=True,
                                 help="User ID (email)")
@@ -145,7 +145,7 @@ def main_single(args):
     book_dict = {
         "title": "TestBook1",
         "abbr": "test conf.",
-        "style": "INTPROC",
+        "style": "INPROCEEDINGS",
     }
     create_book(url, token, book_dict)
 

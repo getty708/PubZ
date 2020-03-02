@@ -14,7 +14,7 @@ import argparse
 
 def make_parser():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--url', default="http://localhost:7000/api/rest/api-token-auth/",
+    parser.add_argument('--url', default="http://django:8000/api/rest/api-token-auth/",
                               help="URL to get auth token")
     parser.add_argument('-u', '--username', required=True,
                         help="User ID (email)")
