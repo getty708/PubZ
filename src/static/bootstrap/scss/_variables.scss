@@ -366,7 +366,6 @@ $table-dark-accent-bg:        rgba($white, .05) !default;
 $table-dark-hover-color:      $table-dark-color !default;
 $table-dark-hover-bg:         rgba($white, .075) !default;
 $table-dark-border-color:     lighten($table-dark-bg, 7.5%) !default;
-$table-dark-color:            $white !default;
 
 $table-striped-order:         odd !default;
 
@@ -526,6 +525,8 @@ $custom-control-indicator-bg-size:      50% 50% !default;
 $custom-control-indicator-box-shadow:   $input-box-shadow !default;
 $custom-control-indicator-border-color: $gray-500 !default;
 $custom-control-indicator-border-width: $input-border-width !default;
+
+$custom-control-label-color:            null !default;
 
 $custom-control-indicator-disabled-bg:          $input-disabled-bg !default;
 $custom-control-label-disabled-color:           $gray-600 !default;
@@ -899,7 +900,7 @@ $toast-color:                       null !default;
 $toast-background-color:            rgba($white, .85) !default;
 $toast-border-width:                1px !default;
 $toast-border-color:                rgba(0, 0, 0, .1) !default;
-$toast-border-radius:               .25rem !default;
+$toast-border-radius:               $border-radius !default;
 $toast-box-shadow:                  0 .25rem .75rem rgba($black, .1) !default;
 
 $toast-header-color:                $gray-600 !default;
@@ -911,17 +912,10 @@ $toast-header-border-color:         rgba(0, 0, 0, .05) !default;
 
 $badge-font-size:                   75% !default;
 $badge-font-weight:                 $font-weight-bold !default;
+$badge-color:                       $white !default;
 $badge-padding-y:                   .25em !default;
-$badge-padding-x:                   .4em !default;
+$badge-padding-x:                   .5em !default;
 $badge-border-radius:               $border-radius !default;
-
-$badge-transition:                  $btn-transition !default;
-$badge-focus-width:                 $input-btn-focus-width !default;
-
-$badge-pill-padding-x:              .6em !default;
-// Use a higher than normal value to ensure completely rounded edges when
-// customizing padding or font-size on labels.
-$badge-pill-border-radius:          10rem !default;
 
 
 // Modals
@@ -1037,7 +1031,7 @@ $figure-caption-color:              $gray-600 !default;
 
 $breadcrumb-padding-y:              .75rem !default;
 $breadcrumb-padding-x:              1rem !default;
-$breadcrumb-item-padding:           .5rem !default;
+$breadcrumb-item-padding-x:         .5rem !default;
 
 $breadcrumb-margin-bottom:          1rem !default;
 
