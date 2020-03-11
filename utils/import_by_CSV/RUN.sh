@@ -1,6 +1,5 @@
-#URL="https://pubz.private/api/rest/"
 URL_BASE="http://django:8000/api/rest"
-USER="test@test.com"
+USER="mmde-netwg@mmde-mail.ise.eng.osaka-u.ac.jp"
 
 mode=$1
 
@@ -9,7 +8,7 @@ then
     URL="${URL_BASE}/api-token-auth/"
     python auth_token.py --url ${URL} -u ${USER}
 elif [ ${mode} == "author" ]; then
-    CSV="./csv/PubZ_Authors.csv"
+    CSV="./csv/Pubz_Authors.csv"
     python3 authors.py CSV \
 	   --url-base ${URL_BASE} \
 	   -u ${USER} \
