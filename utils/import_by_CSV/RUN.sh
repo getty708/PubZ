@@ -27,7 +27,7 @@ elif [ ${mode} == "bibtex" ]; then
 	    -u ${USER} \
 	    -f ${CSV}
 elif [ ${mode} == "order" ]; then
-    CSV="./csv/PubZ_Bibtexs22.csv"
+    CSV="./csv/PubZ_Bibtex.csv"
     python3 author_order.py CSV \
 	    --url-base ${URL_BASE} \
 	    -u ${USER} \

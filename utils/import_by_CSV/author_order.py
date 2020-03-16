@@ -148,7 +148,7 @@ def create_author_order(url_base, token, data, logger=getLogger(__name__+'.creat
                 
         for _author in [s.strip() for s in author_name.split()]:
             for author_db in get_authors(url_base, _author):
-                if  _check_name(author_name, author_db, ):
+                if _check_name(author_name, author_db):
                     return author_db
         return None
 
@@ -220,7 +220,7 @@ def main_single(args):
         "book": "TestBook1",
         "pub_date": "2018-01-02",
         "page": "123-124",
-        "authors": "Test Author3, Test Author, Test Abc",    
+        "authors": "Test Author4, Test Author, Test Abc",    
     }
     df = create_author_order(url, token, author_order_dict)
     print(df)
