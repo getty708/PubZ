@@ -3,6 +3,6 @@
 {% for author in authors %}
 <a href="{% url 'core:author_detail' author.id %}" >{% if bib.language == "EN"  or not author.name_ja %}{{ author.name_en|author_en_default }}{% else %}{{ author.name_ja }}{% endif %}</a>,
 {% endfor %}
-"<a href="{% url 'core:bib_detail' bib.id %}" class="font-weight-bold text-primary border-bottom border-primary">{{ bib.title }},</a>"
+"<a href="{% url 'core:bib_detail' bib.id %}" class="font-weight-bold text-primary border-bottom border-primary">{{ bib.title|remove_brace }},</a>"
 {{ book.title }}
 {% if bib.pub_date %}, {{ bib.pub_date|date:"Y年n月" }}{% endif %}.
