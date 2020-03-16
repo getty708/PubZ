@@ -49,7 +49,7 @@ class AuthorViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAdminOrReadOnly,)
     authentication_classes = (SessionAuthentication, TokenAuthentication,)
     filter_backends = (filters.SearchFilter,)
-    search_fields = ('name_en',)
+    search_fields = ('name_en','name_ja')
 
 
 class AuthorOrderViewSet(viewsets.ModelViewSet):
