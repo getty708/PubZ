@@ -8,7 +8,7 @@ from django import template
 from django.template.loader import get_template
 register = template.Library()
 
-from core.models import Author, AuthorOrder, Book
+from core.models import Author, AuthorOrder, Book, Bibtex
 
 
 # ===================
@@ -173,64 +173,121 @@ def filter_by_book_style(bibtexs, book_style):
     return [bib for bib in bibtexs if bib.bib_type_key == book_style]
 
 
-@register.filter(name='divide_by_book_style')
-def divide_by_book_style(bibtexs):
-    """ 
+# @register.filter(name='divide_by_book_style')
+# def divide_by_book_style(bibtexs):
+#     """ 
 
-    Todo:
-        replace ``_filter`` private function with ``filter_by_book_style``
+#     Todo:
+#         replace ``_filter`` private function with ``filter_by_book_style``
+
+#     """
+    
+#     def _filter(bibtexs, _q):
+#         """ 
+        
+#         Doing the same things as filter_by_book_style
+        
+#         Args:
+#             bibtexs (list or queryset): list of Bibtex objects
+#             _q (str): book style key (e.g. JOUNRAL)
+
+#         Returns:
+#             list or queryset of Bibtex objects.
+        
+#         """
+#         if isinstance(bibtexs, QuerySet):
+#             bibs = bibtexs.filter(
+#                 Q(bib_type=_q) |
+#                 Q(book__style=_q)
+#             )
+#         elif isinstance(bibtexs, list):
+#             bibs = [b for b in bibtexs if (b.bib_type == _q) or (b.book.style == _q)]
+#         else:
+#             raise ValueError("Unexpected bibtex type. expected QuerySet or list, but got {}".format(type(bibtex)))
+#         return bibs
+                
+#     def _search(t, ret):
+#         """
+
+#         Args:
+#             t (tuple of str): tuple of Book's STYLE_CHOICE (e.g. ('JOURNAL', 'Journal'))
+#             ret (list of tuple): store resules to this list.
+        
+#         Returns:
+#             list of tuple
+
+#         """
+        
+#         if isinstance(t[0], str) and isinstance(t[1], str):
+#             bibs = _filter(bibtexs, t[0])
+#             if len(bibs) > 0:
+#                 ret.append((t[0],t[1],bibs))
+#         elif isinstance(t[0], str):
+#             ret = _search(t[1], ret)
+#         else:
+#             for t2 in t:
+#                 ret = _search(t2, ret)
+#         return ret
+    
+#     ret = []
+#     choises = list(Book.STYLE_CHOICES) + [Bibtex.BIBSTYLE_CHOICES[:2]]
+#     print(choises)
+#     for t in Book.STYLE_CHOICES:
+#         ret = _search(t, ret)
+#     return ret    
+
+
+def expand_book_style_tuple(choices):
+    """
+    Args:
+        choises (tuple): Book.STYLE_CHOICES
+    
+    Returns:
+        tuple: 2d
+
+    """    
+    choices_ret = []
+    for t in choices:
+        if isinstance(t[0], str) and isinstance(t[1], tuple):
+            for t2 in t[1]:
+                choices_ret.append(t2)
+    return choices_ret
+
+
+@register.filter(name='split_bibtexs_by_bib_style')
+def split_bibtexs_by_bib_style(bibtexs):
+    """
+
+    Args:
+        bibtexs (list of Queryset of Bibtex): 
+
+    Returns:
+        list of tuple: (Style Key, Display Name, Bibtex List)
 
     """
+    # Get STYLE KYES
+    bibtex_backet = dict()
+        
     
-    def _filter(bibtexs, _q):
-        """ 
-        
-        Doing the same things as filter_by_book_style
-        
-        Args:
-            bibtexs (list or queryset): list of Bibtex objects
-            _q (str): book style key (e.g. JOUNRAL)
-
-        Returns:
-            list or queryset of Bibtex objects.
-        
-        """
-        if isinstance(bibtexs, QuerySet):
-            bibs = bibtexs.filter(
-                Q(bib_type=_q) |
-                Q(book__style=_q)
-            )
-        elif isinstance(bibtexs, list):
-            bibs = [b for b in bibtexs if (b.bib_type == _q) or (b.book.style == _q)]
+    choices = expand_book_style_tuple(Book.STYLE_CHOICES) \
+        + list(Bibtex.BIBSTYLE_CHOICES)
+    for i,(key, _) in enumerate(choices):
+        if key == 'SAME_AS_BOOK':
+            idx_same_as_book = i
         else:
-            raise ValueError("Unexpected bibtex type. expected QuerySet or list, but got {}".format(type(bibtex)))
-        return bibs
-                
-    def _search(t, ret):
-        """
-
-        Args:
-            t (tuple of str): tuple of Book's STYLE_CHOICE (e.g. ('JOURNAL', 'Journal'))
-            ret (list of tuple): store resules to this list.
-        
-        Returns:
-            list of tuple
-
-        """
-        
-        if isinstance(t[0], str) and isinstance(t[1], str):
-            bibs = _filter(bibtexs, t[0])
-            if len(bibs) > 0:
-                ret.append((t[0],t[1],bibs))
-        elif isinstance(t[0], str):
-            ret = _search(t[1], ret)
-        else:
-            for t2 in t:
-                ret = _search(t2, ret)
-        return ret
+            bibtex_backet[key] = []
+    choices.pop(i)
     
+    # Split by Style
+    for bib in bibtexs:
+        bibtex_backet[bib.bib_type_key].append(bib)
+
+    # Make list of tuple
     ret = []
-    for t in Book.STYLE_CHOICES:
-        ret = _search(t, ret)
-    return ret    
-                    
+    for key, display_name in choices:
+        if len(bibtex_backet[key]) > 0:
+            ret.append((key, display_name, bibtex_backet[key]))
+    return ret
+    
+    
+    
