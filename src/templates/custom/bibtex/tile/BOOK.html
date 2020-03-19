@@ -37,7 +37,6 @@
 																{% endfor %}																
 												</div>
 												<div class="col-md-6 d-flex justify-content-end">
-																<span class="badge badge-light">{{ bib.book.get_style_display }}</span>
 																<a href="{% url 'core:bib_detail' bib.id %}" class="btn btn-primary mx-1" >Detail</a>
 																{% if bib.url %}																
 																<a href="{{ bib.url }}" class="btn btn-primary mx-1" >URL</a>																
