@@ -29,7 +29,6 @@ def print_bibtexs(context, style=False,):
     display_style = context.get('display_style', 'list')
     if isinstance(style, str):
         display_style = style
-    # print(display_style, style, )
     
     # Get a template and Render
     template_name = "custom/bibtex/{}/index.html".format(display_style)
