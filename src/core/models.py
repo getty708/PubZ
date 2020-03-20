@@ -233,7 +233,6 @@ class Bibtex(models.Model):
         """ Returns bibtex tyepe (display string) 
         
         """
-        print(self.title_en, self.bib_type)
         if self.bib_type == "SAMEASBOOK":
             return self.book.get_style_display()
         return self.get_bib_type_display()

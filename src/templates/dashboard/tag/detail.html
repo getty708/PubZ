@@ -49,10 +49,10 @@
 		<div class="col-12 my-3">				
 			<div class="card shadow">
 				<div class="card-body border-bottom border-secondary">
-					<h4>Our Publications</h4>
+					<h4>Related Publications</h4>
 				</div>
-				<div class="card-body">
-					{% print_bibtexs %}												
+				<div class="card-body pt-0">
+					{% print_bibtexs style='tile' %}
 				</div>
 				<div class="card-body">
 					<a href="{% url 'core:index' %}?keywords={{ tag.title }}" class="btn btn-primary btn-block">See More Publications</a>

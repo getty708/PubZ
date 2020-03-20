@@ -11,7 +11,7 @@
 			<div class="card-body">								
 				<div class="d-block h4">
 					<span class="badge badge-primary">Bibtex</span>
-					<span class="border border-info badge-pill text-info small">{{ bibtex.bib_type_display }}</span>
+					<span class="d-inline-block border border-info badge-pill text-info small">{{ bibtex.bib_type_display }}</span>
 				</div>
 				<h1 class="h3" >
 					<span class="d-inline-flex">{{ bibtex.title|remove_brace }}</span>
@@ -30,7 +30,7 @@
 								<th scope="col">Authors</th>
 								<td>
 									{% for author in bibtex.authors.all %}
-									<a href="{% url 'core:author_detail' author.id %}" class="btn btn-sm btn-outline-primary d-inline-flex" >
+									<a href="{% url 'core:author_detail' author.id %}" class="btn btn-sm btn-outline-primary d-inline-flex mb-1" >
 										{% if bibtex.language == "EN" or not author.name_ja %}
 										{{ author.name_en|author_en_default }}
 										{% else %}
