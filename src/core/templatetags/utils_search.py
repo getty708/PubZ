@@ -75,10 +75,13 @@ def get_bibtex_query_set(params):
     # Book_style
     book_style = params.get('book_style')
     if (not book_style == None) and (not book_style == "ALL"):
-        bibtex_queryset = bibtex_queryset.filter(
-            Q(bib_type=book_style) |
-            Q(book__style=book_style)
-        )
+        # TODO: Make it more better (remove if sentence)
+        if (book_style == "AWARD") or (book_style == "KEYNOTE"):
+            bibtex_queryset = bibtex_queryset.filter(bib_type=book_style)
+        else:
+            bibtex_queryset = bibtex_queryset.filter(
+                book__style=book_style, bib_type="SAMEASBOOK",)
+        
 
     # Filter by published year
     period_method = params.get('period_method', 'all')

@@ -8,7 +8,7 @@
 						 if ($(this).attr("mode")){
 								 var url  = "{% url 'core:index' %}"+ $(this).attr("mode") +"/?";
 						 }else{
-								 var url  = "{% url 'core:index' %}?";
+								 var url  = "{% url 'core:index' %}{{ display_mode}}?";
 						 }
 						 var items = ["keywords", "book_style", "sort", "period_method",  "period_year",];
 						 for( const key of items ){

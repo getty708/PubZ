@@ -18,7 +18,7 @@
 																</a>
 												</div>
 												<div class="col-12">
-														{% for author in authors %}
+													{% for author in authors %}
 														<a href="{% url 'core:author_detail' author.id %}" class="d-inline-flex" >
 																{% if bib.language == "EN" or not author.name_ja %}
 																{{ author.name_en|author_en_default }}
