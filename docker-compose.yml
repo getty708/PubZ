@@ -11,53 +11,42 @@ services:
     hostname: db
     environment:
       MYSQL_ROOT_PASSWORD: docker
-      MYSQL_DATABASE: docker
-      MYSQL_USER: docker
-      MYSQL_PASSWORD: docker
+      MYSQL_DATABASE:      docker
+      MYSQL_USER:          docker
+      MYSQL_PASSWORD:      docker
     volumes:
-      - ./storage/db:/var/lib/mysgql
-      - ./mysql:/etc/mysql/conf.d
+      - ./storage/db/data:/var/lib/mysql
+      # - ./storage/db/init:/docker-entrypoint-initdb.d
+      - ./docker/mysql:/etc/mysql/conf.d
     volumes_from:
       - storage
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     environment:
-      - PMA_ARBITRARY=1g
-      - PMA_HOST=db
-      - PMA_USER=root
-      - PMA_PASSWORD=docker
+      PMA_ARBITRARY: 1
+      PMA_HOST:      db
+      PMA_USER:      root
+      PMA_PASSWORD:  docker
     links:
       - db
     ports:
       - "7070:80"
   django:
-    build: ./django
+    build: ./docker/django
     # command: python /code/app/manage.py runserver 0.0.0.0:8000
     hostname: django
     environment:
-      MYSQL_HOST: db
+      MYSQL_DATABASE: docker
+      MYSQL_USER:     docker
+      MYSQL_PASSWORD: docker
+      MYSQL_HOST:     db
     volumes:
-      - ./django:/code
+      - ./src:/code
+      - ./docs:/root/docs
+      - ./utils:/root/utils
     ports:
       - "7000:8000"
     depends_on:
       - db
     tty: true
-  docs:
-    build: ./docs/docker
-    command: mkdocs serve    
-    volumes:
-      - ./docs:/docs
-    ports:
-      - "7777:8000"
-    tty: true
-  # note:
-  #   image: jupyter/minimal-notebook:latest
-  #   links:
-  #     - django
-  #   ports:
-  #     - "7778:8888"
-  #   volumes:
-  #     - .:/home/jovyan/work
-      
 

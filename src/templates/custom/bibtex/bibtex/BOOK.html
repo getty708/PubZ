@@ -1,0 +1,10 @@
+<pre class="mb-0" >
+@article{{ cb_left }}<a href="{% url 'core:bib_detail' bib.id %}">id_{{bib.id}}</a>,
+  title     = {{ cb_left }}{{ bib.title }}{{ cb_right }},
+  author    = {{ cb_left }}{% for author in authors %}{% if bib.language == "EN"  or not author.name_ja %}{{ author.name_en }}{% else %}{{ author.name_ja }}{% endif %}{% if not forloop.last %} and {% endif %}{% endfor %}{{ cb_right }},
+  booktitle = {{ cb_left }}{{ book.title }}{{ cb_right }},{% if bib.page %}
+  pages     = {{ cb_left }}{{ bib.page }}{{ cb_right}},{% endif %}{% if bib.pub_date %}
+  month     = {{ cb_left }}{{ bib.pub_date|date:"n" }}{{ cb_right }},
+  year      = {{ cb_left }}{{ bib.pub_date|date:"Y" }}{{ cb_right }},{% endif %}
+{{ cb_right }}
+</pre>

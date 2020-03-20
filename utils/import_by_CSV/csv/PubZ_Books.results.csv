@@ -1,0 +1,635 @@
+,CHECKED,style_old,style,title,abbr,Publisher,note,status,msg
+0,,JOURNAL,ARTICLE,ACM Applied Computing Review,ACM ACR,,,True,Created
+1,,JOURNAL,ARTICLE,ACM SIGMOD Record,,,,True,Created
+2,,JOURNAL,ARTICLE,ACM Transactions on Asian and Low-Resource Language Information Processing,,,,True,Created
+3,,JOURNAL,ARTICLE,ACM Transactions on Embedded Computing Systems,,,,True,Created
+4,,JOURNAL,ARTICLE,ACM Transactions on Information Systems,,,,True,Created
+5,,JOURNAL,ARTICLE,ACM Transactions on Internet Technology,ACM TOIT,,,True,Created
+6,,JOURNAL,ARTICLE,"ACM Transactions on Multimedia Computing, Communications, and Applications",,,,True,Created
+7,,JOURNAL,ARTICLE,ACM Transactions on Spatial Algorithms and Systems,,,,True,Created
+8,,JOURNAL,ARTICLE,ACM-Kluwer Journal on Mobile Networks and Applications,MONET,,,True,Created
+9,,JOURNAL,ARTICLE,ACM/Springer Personal and Ubiquitous Computing,ACM/Springer PUC,,,True,Created
+10,,JOURNAL,ARTICLE,Ad Hoc Networks,,,,True,Created
+11,,JOURNAL,ARTICLE,Data & Knowledge Engineering,,,,True,Created
+12,,JOURNAL,ARTICLE,DBSJ Journal,,,,True,Created
+13,,JOURNAL,ARTICLE,Distributed and Parallel Databases,,,,True,Created
+14,,JOURNAL,ARTICLE,Future Generation Computer Systems,,Elsevier,,True,Created
+15,,JOURNAL,ARTICLE,IEEE Access,,,,True,Created
+16,,JOURNAL,ARTICLE,IEEE COMSOC MMTC E-Letter,,,,True,Created
+17,,JOURNAL,ARTICLE,IEEE Journal of Selected Topics in Signal Processing,,,,True,Created
+18,,JOURNAL,ARTICLE,IEEE Sensors Journal,,,,True,Created
+19,,JOURNAL,ARTICLE,IEEE Transaction on Consumer Electronics,,,,True,Created
+20,,JOURNAL,ARTICLE,IEEE Transactions on Broadcasting,,,,True,Created
+21,,JOURNAL,ARTICLE,IEEE Transactions on Communications,,,,True,Created
+22,,JOURNAL,ARTICLE,IEEE Transactions on Data and Knowledge Engineering,,,,True,Created
+23,,JOURNAL,ARTICLE,IEEE Transactions on Emerging Topics in Computing,,,,True,Created
+24,,JOURNAL,ARTICLE,IEEE Transactions on Industrial Electronics,,,,True,Created
+25,,JOURNAL,ARTICLE,IEEE Transactions on Knowledge and Data Engineering,,,,True,Created
+26,,JOURNAL,ARTICLE,IEEE Transactions on Mobile Computing,,,,True,Created
+27,,JOURNAL,ARTICLE,IEEE Transactions on Nanobioscience,,,,True,Created
+28,,JOURNAL,ARTICLE,IEEE Transactions on Services Computing,,,,True,Created
+29,,JOURNAL,ARTICLE,IEICE Transactions on Communications,,,,True,Created
+30,,JOURNAL,ARTICLE,IEICE Transactions on Information and Systems,,,,True,Created
+31,,JOURNAL,ARTICLE,IIE Transactions,,,,True,Created
+32,,JOURNAL,ARTICLE,In ACM/Springer Journal on Mobile Networks and Applications,MONET,,,True,Created
+33,,JOURNAL,ARTICLE,INFORMATION Journal,,,,True,Created
+34,,JOURNAL,ARTICLE,Information Systems and Operational Research,INFOR,,,True,Created
+35,,JOURNAL,ARTICLE,Internatioinal Journal of Informatics Society,,,,True,Created
+36,,JOURNAL,ARTICLE,International Jornal of Web and Grid Services,IJWGS,,,True,Created
+37,,JOURNAL,ARTICLE,International Journal of Ad Hoc and Ubiquitous Computing,IJAHUC,,,True,Created
+38,,JOURNAL,ARTICLE,International Journal of Advanced Computer Science,,,,True,Created
+39,,JOURNAL,ARTICLE,International Journal of Advanced Media and Communication,IJAMC,,,True,Created
+40,,JOURNAL,ARTICLE,International Journal of Communication Systems,,,,True,Created
+41,,JOURNAL,ARTICLE,International Journal of Computer Systems Science and Engineering,,,,True,Created
+42,,JOURNAL,ARTICLE,International Journal of Computing and Informatics,Informatica,,,True,Created
+43,,JOURNAL,ARTICLE,International Journal of Grid and Utility Computing,,,,True,Created
+44,,JOURNAL,ARTICLE,International Journal of Handheld Computing Research,IJHCR,,,True,Created
+45,,JOURNAL,ARTICLE,International Journal of Informatics Society,IJIS,,,True,Created
+46,,JOURNAL,ARTICLE,International Journal of Information Technology,IJIT,,,True,Created
+47,,JOURNAL,ARTICLE,International Journal of Multimedia Intelligence and Security,,,,True,Created
+48,,JOURNAL,ARTICLE,International Journal of Next-Generation Computing,,,,True,Created
+49,,JOURNAL,ARTICLE,International Journal of Personal and Ubiquitous Computing,,,,True,Created
+50,,JOURNAL,ARTICLE,International Journal of Pervasive Computing and Communications,IJPCC,,,True,Created
+51,,JOURNAL,ARTICLE,International Journal of Research and Innovation (Advances in Information Sciences and Service Sciences),,,,True,Created
+52,,JOURNAL,ARTICLE,International Journal of Smart Home,IJSH,,,True,Created
+53,,JOURNAL,ARTICLE,International Journal of Space-Based and Situated Computing,IJSSC,,,True,Created
+54,,JOURNAL,ARTICLE,International Journal of Web Information Systems,IJWIS,,,True,Created
+55,,JOURNAL,ARTICLE,International Journal of Web Information Systems,,,,True,"{'non_field_errors': ['The fields title, style must make a unique set.']}"
+56,,JOURNAL,ARTICLE,International Journal on Mobile Information Systems,,,,True,Created
+57,,JOURNAL,ARTICLE,IPSJ Journal,,,,True,Created
+58,,JOURNAL,ARTICLE,Journal of Ambient Intelligence and Humanized Computing,,,,True,Created
+59,,JOURNAL,ARTICLE,Journal of Ambient Intelligent and Humanized Computing,,,,True,Created
+60,,JOURNAL,ARTICLE,Journal of Communications,,,,True,Created
+61,,JOURNAL,ARTICLE,Journal of Information Processing,JIP,,,True,Created
+62,,JOURNAL,ARTICLE,Journal of Interconnection Network,JOIN,,,True,Created
+63,,JOURNAL,ARTICLE,Journal of Internet Technology,,,,True,Created
+64,,JOURNAL,ARTICLE,Journal of Mobile Multimedia,,,,True,Created
+65,,JOURNAL,ARTICLE,Journal of Network and Computer Applications,,Elsevier,,True,Created
+66,,JOURNAL,ARTICLE,Journal of Network and Computer Applications,,,,True,"{'non_field_errors': ['The fields title, style must make a unique set.']}"
+67,,JOURNAL,ARTICLE,Journal of Networking Technology,,,,True,Created
+68,,JOURNAL,ARTICLE,"Journal of Networks, Special issue on Recent Network Technologies and its Advanced Applications",,,,True,Created
+69,,JOURNAL,ARTICLE,Journal of Sensors,,,,True,Created
+70,,JOURNAL,ARTICLE,Journal of Systems and Software,,,,True,Created
+71,,JOURNAL,ARTICLE,Journal of Systems Integration,,,,True,Created
+72,,JOURNAL,ARTICLE,Journal of Telecommunication Systems,JTS,,,True,Created
+73,,JOURNAL,ARTICLE,Journal of Universal Computer Science,,,,True,Created
+74,,JOURNAL,ARTICLE,"Knowledge Building and Knowledge Sharing, Ohmsha and IOS Press",,,,True,Created
+75,,JOURNAL,ARTICLE,KSII Transactions on Internet and Information Systems,,,,True,Created
+76,,JOURNAL,ARTICLE,Mobile Computing,,,,True,Created
+77,,JOURNAL,ARTICLE,Mobile Information Systems,,,,True,Created
+78,,JOURNAL,ARTICLE,Mobile Information Systems Journal,,,,True,Created
+79,,JOURNAL,ARTICLE,"Morgan Kaufmann Publishers, Inc.",,,,True,Created
+80,,JOURNAL,ARTICLE,Nano Communication Networks,,,,True,Created
+81,,JOURNAL,ARTICLE,New Generation Computing,,,,True,Created
+82,,JOURNAL,ARTICLE,Personal and Ubiquitous Computing,,,,True,Created
+83,,JOURNAL,ARTICLE,Pervasive and Mobile,,Elsevier,,True,Created
+84,,JOURNAL,ARTICLE,Proceedings of International Conference on Advances in Computer Entertainment Technology,ACE,,,True,Created
+85,,JOURNAL,ARTICLE,Proceedings of the 6th Annual Interanational Conference on Mobile Computing and Networking,MobiCom,,,True,Created
+86,,JOURNAL,ARTICLE,"Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies",IMWUT,,,True,Created
+87,,JOURNAL,ARTICLE,Proceedings of the Japan Academy,,,,True,Created
+88,,JOURNAL,ARTICLE,Rangsit Journal of Information Technology,,,,True,Created
+89,,JOURNAL,ARTICLE,Security and Communication Networks,,,,True,Created
+90,,JOURNAL,ARTICLE,Sensors,,,,True,Created
+91,,JOURNAL,ARTICLE,Soft Computing,,,,True,Created
+92,,JOURNAL,ARTICLE,Springer Computing,,,,True,Created
+93,,JOURNAL,ARTICLE,Springer Universal Access in the Information Society,,,,True,Created
+94,,JOURNAL,ARTICLE,Telecommunication Systems,,,,True,Created
+95,,JOURNAL,ARTICLE,The Computer Journal,,In Oxford,,True,Created
+96,,JOURNAL,ARTICLE,The Scientific World Journal,,,,True,Created
+97,,JOURNAL,ARTICLE,"Topical Journal on Mobility of Systems, Users, Data and Computing",,,,True,Created
+98,,JOURNAL,ARTICLE,Transactions on Emerging Telecommunications Technologies,,,,True,Created
+99,,JOURNAL,ARTICLE,Wireless Communications and Mobile Computing,,,,True,Created
+100,,JOURNAL,ARTICLE,World Wide Web,,,,True,Created
+101,,JOURNAL,ARTICLE,"Worldwide Computing and Its Applications, Lecture Notes in Computer Science 1274",,,,True,Created
+102,,JOURNAL,ARTICLE,オブジェクト指向コンピューティングIII(論文選集),,,,True,Created
+103,,JOURNAL,ARTICLE,コンピュータソフトウェア(日本ソフトウェア科学会論文誌),,,,True,Created
+104,,JOURNAL,ARTICLE,コンピュータソフトウェア(日本ソフトウェア科学会論文誌)インタラクティブソフトウェア特集,,,,True,Created
+105,,JOURNAL,ARTICLE,システム制御情報学会誌,,,,True,Created
+106,,JOURNAL,ARTICLE,データベース学会論文誌,,,,True,Created
+107,,JOURNAL,ARTICLE,ヒューマンインタフェース学会論文誌,,,,True,Created
+108,,JOURNAL,ARTICLE,芸術科学会論文誌,,,,True,Created
+109,,JOURNAL,ARTICLE,滋賀論叢 (岡部昭二教授退官記念論文集),,,,True,Created
+110,,JOURNAL,ARTICLE,情報科学技術レターズ,,,,True,Created
+111,,JOURNAL,ARTICLE,情報技術レターズ,,,,True,Created
+112,,JOURNAL,ARTICLE,情報処理学会 論文誌,,,,True,Created
+113,,JOURNAL,ARTICLE,"情報処理学会マルチメディア, 分散, 協調とモバイル シンポジウム",DICOMO,,,True,Created
+114,,JOURNAL,ARTICLE,人工知能学会 論文誌,,,,True,Created
+115,,JOURNAL,ARTICLE,"田中 克己, 西尾 章治郎(編): オブジェクト指向コンピューティングI(論文選集), レクチャーノート/ソフトウェア学 4, 近代科学社",,,,True,Created
+116,,JOURNAL,ARTICLE,電気学会誌C部門論文誌,,,,True,Created
+117,,JOURNAL,ARTICLE,電気学会論文誌,,,,True,Created
+118,,JOURNAL,ARTICLE,電子情報処理学会論文誌,,,,True,Created
+119,,JOURNAL,ARTICLE,電子情報通信学会 論文誌,,,,True,Created
+120,,JOURNAL,ARTICLE,日本ソフトウェア科学会 論文誌,,,,True,Created
+121,,JOURNAL,ARTICLE,日本データベース学会 Letters,,,,True,Created
+122,,JOURNAL,ARTICLE,日本データベース学会 論文誌,,,,True,Created
+123,,JOURNAL,ARTICLE,日本バーチャルリアリティ学会 論文誌,,,,True,Created
+124,,JOURNAL,ARTICLE,日本ロボット学会誌,,,,True,Created
+125,,BOOK,BOOK,Adaptive Mobile Computing: Advances in Processing Mobile Data Sets (Chapter 3),,,,True,Created
+126,,BOOK,BOOK,Advancements in Distributed Computing and Internet Technologies: Trends and Issues,,,,True,Created
+127,,BOOK,BOOK,"Book Chapter (Chapter II-1), Wireless Sensor Network Technologies for Information Explosion Era (Book Series: Studies in Computational Intelligence), Springer-Verlag",,,,True,Created
+128,,BOOK,BOOK,"Book Chapter (Chapter III-3), Wireless Sensor Network Technologies for Information Explosion Era (Book Series: Studies in Computational Intelligence), Springer-Verlag",,,,True,Created
+129,,BOOK,BOOK,"Book Series: Studies in Computational Intelligence,Springer-Verlag",,,,True,Created
+130,,BOOK,BOOK,"Book Series:Springer Optimization and Its Applications,Springer-Verlag",,,,True,Created
+131,,BOOK,BOOK,"Communication and Collaboration Support Systems (Eds. Okada, K., Hoshi, T., and Inoue, T.)",,,,True,Created
+132,,BOOK,BOOK,"Distributed Networks: Intelligence, Security, and Applications (Chapter 2), CRC Press, Taylor and Francis",,,,True,Created
+133,,BOOK,BOOK,Handbook on Mobile Ad Hoc and Pervasive Communications,,,,True,Created
+134,,BOOK,BOOK,"Handheld Computing for Mobile Commerce:Applications, Concepts and Technologies,IGI Global",,,,True,Created
+135,,BOOK,BOOK,ICガイドブック　未来を創る！半導体,,,,True,Created
+136,,BOOK,BOOK,Modelling and Proceedingsssing for Next Generation Big-Data Technologies,,,,True,Created
+137,,BOOK,BOOK,Smart Sensors Networks: Communication Technologies and Intelligent Applications (Series: Intelligent Data Centric Systems),,,,True,Created
+138,,BOOK,BOOK,Springer-Verlag,,,,True,Created
+139,,BOOK,BOOK,"Using Cross-Layer Techniques for Communication Systems, IGI GlobalUsing Cross-Layer Techniques for Communication Systems: Techniques and Applications",,,,True,Created
+140,,BOOK,BOOK,オーム社,,,,True,Created
+141,,BOOK,BOOK,マイドームおおさか,,,,True,Created
+142,,BOOK,BOOK,わたしの整理術 (岩波アクティブ新書),岩波アクティブ新書,,,True,Created
+143,,BOOK,BOOK,共立出版,,,,True,Created
+144,,BOOK,BOOK,三田出版会大阪事務所,,,,True,Created
+145,,BOOK,BOOK,大阪大学工学部データベース委員会,,,,True,Created
+146,,KEYNOTE,INPROCEEDINGS_DOMESTIC,(社)生産技術振興協会/大阪大学生産技術研究会,,,,True,Created
+147,,KEYNOTE,INPROCEEDINGS_DOMESTIC,「IT連携フォーラムOACIS」第11回シンポジウム,,,,True,Created
+148,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,『高度データベース』松江ワークショップ講演論文集,,,,True,Created
+149,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,『高度データベース』諏訪ワークショップ講演論文集,,,,True,Created
+150,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,『高度データベース』東京ワークショップ講演論文集,,,,True,Created
+151,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,『知識科学の最前線』シンポジウム論文集,,,,True,Created
+152,,KEYNOTE,INPROCEEDINGS_DOMESTIC,1993年度 人工知能学会全国大会 (第7回) チュートリアル講演テキスト,,,,True,Created
+153,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,IEICE DE研究会,,,,True,Created
+154,,CONF_NATIONAL,INPROCEEDINGS_DOMESTIC,IPSJ情報処理学会 全国大会,,,,True,Created
+155,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,JC/OLU/ITRC シンポジウム論文集,,,,True,Created
+156,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,NLP若手の会 (YANS) シンポジウム,YANS,,,True,Created
+157,,AWARD,INPROCEEDINGS_DOMESTIC,Webとデータベースに関するフォーラム,WebDB Forum,,,True,Created
+158,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,インターネット技術研究委員会 シンポジウム論文集,ITRC,,,True,Created
+159,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,ウェアラブルコンピューティング研究会 研究報告,,,,True,Created
+160,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,エンタテインメントコンピューティング,,,,True,Created
+161,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,システム制御情報学会研究発表講演会,SCI,,,True,Created
+162,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,ソーシャルコンピューティングシンポジウム,SoC,,,True,Created
+163,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,データ工学と情報マネジメントに関するフォーラム,DEIM,,,True,Created
+164,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,バイオロギングシンポジウム,,,,True,Created
+165,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,ヒューマンインタフェースシンポジウム 論文集,HIS,,,True,Created
+166,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,モバイルコンピューティングとユビキタス通信研究会,,,,True,Created
+167,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,ユビキタス・ウェアラブルワークショップ,UWW,,,True,Created
+168,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,ロボティクス・メカトロニクス 講演会,,,,True,Created
+169,,CONF_NATIONAL,INPROCEEDINGS_DOMESTIC,映像情報メディア学会 冬季大会論文集,,,,True,Created
+170,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,映像情報メディア学会技術報告,,,,True,Created
+171,,CONF_NATIONAL,INPROCEEDINGS_DOMESTIC,画像電子学会 年次大会予稿集,,,,True,Created
+172,,AWARD,INPROCEEDINGS_DOMESTIC,関西データベースワークショップ2017,,,,True,Created
+173,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,計測自動制御学会システムインテグレーション部門講演会,,,,True,Created
+174,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,言語処理学会 年次大会,NLP,,,True,Created
+175,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,高度データベース』諏訪ワークショップ講演論文集,,,,True,Created
+176,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,重点領域研究「自律分散システム」全体講演会論文集,,,,True,Created
+177,,CONF_NATIONAL,INPROCEEDINGS_DOMESTIC,情報科学技術フォーラム,FIT,,,True,Created
+178,,CONF_DOMESTIC,INPROCEEDINGS_DOMESTIC,情報処理学会 Webとデータベースに関するフォーラム,WebDB Forum,,,True,Created
+179,,CONF_DOMESTIC,INPROCEEDINGS_DOMESTIC,情報処理学会 アドバンストデータベースシステムシンポジウム,ADS,,,True,Created
+180,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,情報処理学会 アドバンストデータベースシステムシンポジウム予稿集,,,,True,Created
+181,,CONF_DOMESTIC,INPROCEEDINGS_DOMESTIC,情報処理学会 インタラクション,Interaction,,,True,Created
+182,,CONF_DOMESTIC,INPROCEEDINGS_DOMESTIC,情報処理学会 グループウェアとネットワークサービスワークショップ,GNWS,,,True,Created
+183,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,情報処理学会 グループウェアとネットワークサービスワークショップ 論文集,,,,True,Created
+184,,AWARD,INPROCEEDINGS_DOMESTIC,情報処理学会 データベースシステム研究会,,,,True,Created
+185,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,情報処理学会 データベースシステム研究会報告,,,,True,Created
+186,,CONF_DOMESTIC,INPROCEEDINGS_DOMESTIC,情報処理学会 データベースとWeb情報システムに関するシンポジウム,DBWeb,,,True,Created
+187,,AWARD,INPROCEEDINGS_DOMESTIC,"情報処理学会 マルチメディア, 分散, 協調とモバイル シンポジウム",DICOMO,,,True,Created
+188,,AWARD,INPROCEEDINGS_DOMESTIC,情報処理学会 マルチメディア通信と分散処理ワークショップ,DPSWS,,,True,Created
+189,,CONF_DOMESTIC,INPROCEEDINGS_DOMESTIC,情報処理学会 マルチメディア通信と分散処理ワークショップ,DPSWS,,,True,"{'non_field_errors': ['The fields title, style must make a unique set.']}"
+190,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,情報処理学会 モバイルコンピューティングとパーベイシブシステム研究会,,,,True,Created
+191,,AWARD,INPROCEEDINGS_DOMESTIC,情報処理学会 ユビキタスコンピューティングシステム研究会,,,,True,Created
+192,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,情報処理学会 ユビキタスコンピューティングシステム研究会,,,,True,"{'non_field_errors': ['The fields title, style must make a unique set.']}"
+193,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,情報処理学会 夏のプログラミングシンポジウム,,,,True,Created
+194,,CONF_NATIONAL,INPROCEEDINGS_DOMESTIC,情報処理学会 関西支部支部大会 講演論文集,,,,True,Created
+195,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,情報処理学会 研究報告,,,,True,Created
+196,,CONF_DOMESTIC,INPROCEEDINGS_DOMESTIC,情報処理学会 情報アクセスシンポジウム,IAS,,,True,Created
+197,,CONF_NATIONAL,INPROCEEDINGS_DOMESTIC,情報処理学会 全国大会 講演論文集,,,,True,Created
+198,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,情報処理学会 分散処理とマルチメディア通信研究会報告,,,,True,Created
+199,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,情報処理学会 放送コンピューティング研究グループ研究会 研究報告,,,,True,Created
+200,,KEYNOTE,INPROCEEDINGS_DOMESTIC,情報処理学会第52回全国大会ミニ・シンポジウム インダストリアル セッション論文集,,,,True,Created
+201,,KEYNOTE,INPROCEEDINGS_DOMESTIC,"情報処理学会第75回全国大会, 司会",,,,True,Created
+202,,KEYNOTE,INPROCEEDINGS_DOMESTIC,情報処理学会第75回全国大会招待講演,,,,True,Created
+203,,KEYNOTE,INPROCEEDINGS_DOMESTIC,情報処理学会連続セミナー 第5回『ネットワーク・コンピューティング』,,,,True,Created
+204,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,情報論的学習理論と機械学習研究会,,,,True,Created
+205,,CONF_NATIONAL,INPROCEEDINGS_DOMESTIC,人工知能学会 全国大会,,,,True,Created
+206,,CONF_NATIONAL,INPROCEEDINGS_DOMESTIC,人工知能学会 全国大会 論文集,,,,True,Created
+207,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,人工知能学会 知識ベースシステム研究会資料,,,,True,Created
+208,,KEYNOTE,INPROCEEDINGS_DOMESTIC,全サイバーメディアセンターシンポジウム,,,,True,Created
+209,,KEYNOTE,INPROCEEDINGS_DOMESTIC,大学基礎講座チュートリアル,,,,True,Created
+210,,KEYNOTE,INPROCEEDINGS_DOMESTIC,大阪大学ゆらぎプロジェクトシンポジウム,,,,True,Created
+211,,AWARD,INPROCEEDINGS_DOMESTIC,第160回データベースシステム研究会,,,,True,Created
+212,,AWARD,INPROCEEDINGS_DOMESTIC,第16回情報科学技術フォーラム,FIT,,,True,Created
+213,,KEYNOTE,INPROCEEDINGS_DOMESTIC,第１回人文・社会科学系研究推進フォーラム,,,,True,Created
+214,,KEYNOTE,INPROCEEDINGS_DOMESTIC,第2回日立総研Knowledge Sparks Forum,,,,True,Created
+215,,KEYNOTE,INPROCEEDINGS_DOMESTIC,第69回情報処理学会全国大会 特別セッション(4),,,,True,Created
+216,,KEYNOTE,INPROCEEDINGS_DOMESTIC,第69回情報処理学会全国大会 特別セッション(5),,,,True,Created
+217,,KEYNOTE,INPROCEEDINGS_DOMESTIC,第6回データ工学と情報マネジメントに関するフォーラム・特別セッション(2)クラウドソーシング企画第2段「クラウドソーシングがDB研究に何をもたらすか？」講演,,,,True,Created
+218,,KEYNOTE,INPROCEEDINGS_DOMESTIC,第6回データ工学と情報マネジメントに関するフォーラム(DEIM2013),,,,True,Created
+219,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,知識の自己組織化と専門用語シンポジウム予稿集,,,,True,Created
+220,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,知能情報・高度情報処理シンポジウム論文集,,,,True,Created
+221,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,地理情報システム学会 空間IT分科会 空間ITワークショップ,,,,True,Created
+222,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,電気学会 情報システム研究会,,,,True,Created
+223,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,電気学会研究会資料,,,,True,Created
+224,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,電気関係学会北陸支部連合大会予稿集,,,,True,Created
+225,,CONF_NATIONAL,INPROCEEDINGS_DOMESTIC,電子情報通信学会,,,,True,Created
+226,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,電子情報通信学会 Webインテリジェンスとインタラクション研究会,,,,True,Created
+227,,CONF_DOMESTIC,INPROCEEDINGS_DOMESTIC,電子情報通信学会 データ工学ワークショップ,DEWS,,,True,Created
+228,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,電子情報通信学会 データ工学研究会報告,,,,True,Created
+229,,KEYNOTE,INPROCEEDINGS_DOMESTIC,電子情報通信学会 パターン認識・メディア理解研究会(PRMU),,,,True,Created
+230,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,電子情報通信学会 技術研究報告,,,,True,Created
+231,,CONF_NATIONAL,INPROCEEDINGS_DOMESTIC,電子情報通信学会 総合大会 講演論文集,,,,True,Created
+232,,KEYNOTE,INPROCEEDINGS_DOMESTIC,電子情報通信学会 第4回アドホックネットワークワークショップ特別講演,,,,True,Created
+233,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,電子情報通信学会 第二種研究会技術研究報告 (Webインテリジェンスとインタラクション研究会),,,,True,Created
+234,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,電子情報通信学会 第二種研究会技術研究報告 (センサネットワーク研究会),,,,True,Created
+235,,KEYNOTE,INPROCEEDINGS_DOMESTIC,電子情報通信学会 知的環境とセンサネットワーク研究会(ASN),,,,True,Created
+236,,KEYNOTE,INPROCEEDINGS_DOMESTIC,電子情報通信学会アドホックネットワーク研究会(AN),,,,True,Created
+237,,KEYNOTE,INPROCEEDINGS_DOMESTIC,電子情報通信学会北海道支部講演会,,,,True,Created
+238,,CONF_DOMESTIC,INPROCEEDINGS_DOMESTIC,日本ソフトウェア科学会 インタラクティブシステムとソフトウェアに関するワークショップ,WISS,,,True,Created
+239,,CONF_NATIONAL,INPROCEEDINGS_DOMESTIC,日本ソフトウェア科学会 インタラクティブシステムとソフトウェアに関するワークショップ,,,,True,"{'non_field_errors': ['The fields title, style must make a unique set.']}"
+240,,CONF_DOMESTIC,INPROCEEDINGS_DOMESTIC,日本ソフトウェア科学会 オブジェクト指向計算ワークショップ,WOOC,,,True,Created
+241,,CONF_DOMESTIC,INPROCEEDINGS_DOMESTIC,日本ソフトウェア科学会 プログラミングや応用のシステムに関するワークショップ,SPA,,,True,Created
+242,,CONF_NATIONAL,INPROCEEDINGS_DOMESTIC,日本ソフトウェア科学会,,,,True,Created
+243,,CONF_DOMESTIC_NO_REVIEW,INPROCEEDINGS_DOMESTIC,日本バーチャルリアリティ学会 研究報告 (サイバースペースと仮想都市研究会),,,,True,Created
+244,,CONF_NATIONAL,INPROCEEDINGS_DOMESTIC,日本バーチャルリアリティ学会 研究報告 サイ バースペースと仮想都市研究会,,,,True,Created
+245,,CONF_NATIONAL,INPROCEEDINGS_DOMESTIC,日本バーチャルリアリティ学会 大会論文集,,,,True,Created
+246,,KEYNOTE,INPROCEEDINGS_DOMESTIC,日本学術会議 第5回情報学シンポジウム,,,,True,Created
+247,,KEYNOTE,INPROCEEDINGS_DOMESTIC,日本学術会議公開シンポジウム「ICTを生かした社会デザインと人材育成(実践編)」,,,,True,Created
+248,,KEYNOTE,INPROCEEDINGS_DOMESTIC,日本学術会議第1回情報学シンポジウム,,,,True,Created
+249,,KEYNOTE,INPROCEEDINGS_DOMESTIC,平成23年電気関係学会関西連合大会,,,,True,Created
+250,,INTPROC,INPROCEEDINGS_INTERNATIONAL,21st International C. elegans Conference,,,,True,Created
+251,,AWARD,INPROCEEDINGS_INTERNATIONAL,Asian Conference on Information Systems,ACIS,,,True,Created
+252,,KEYNOTE,INPROCEEDINGS_INTERNATIONAL,Computer Entertainment Developers Conference (CEDEC2012),,,,True,Created
+253,,KEYNOTE,INPROCEEDINGS_INTERNATIONAL,IEEE International Conference on Advanced Information Networking and Applications (AINA 2014),,,,True,Created
+254,,AWARD,INPROCEEDINGS_INTERNATIONAL,IEEE International Conference on Mobile Data Management,MDM,,,True,Created
+255,,AWARD,INPROCEEDINGS_INTERNATIONAL,IEEE International Conference on Pervasive Computing and Communications,PerCom,,,True,Created
+256,,AWARD,INPROCEEDINGS_INTERNATIONAL,IEEE International Conference on Wireless and Mobile Computing,,,,True,Created
+257,,AWARD,INPROCEEDINGS_INTERNATIONAL,"Proceedings of International Conference on Ambient System, Network and Technologies",ANT,,,True,Created
+258,,AWARD,INPROCEEDINGS_INTERNATIONAL,International Conference on Mobile Computing and Ubiquitous Networking,ICMU,,,True,Created
+259,,AWARD,INPROCEEDINGS_INTERNATIONAL,International Conference on Mobile Data Management,MDM,,,True,Created
+260,,AWARD,INPROCEEDINGS_INTERNATIONAL,"International Conference on P2P, Parallel, Grid, Cloud and Internet Computing",3PGCIC,,,True,Created
+261,,KEYNOTE,INPROCEEDINGS_INTERNATIONAL,International Workshop on Informatics (IWIN 2016),,,,True,Created
+262,,KEYNOTE,INPROCEEDINGS_INTERNATIONAL,"International Workshop on Mobile Information Retrieval for Future (MIRF 2011), Invited Talk",,,,True,Created
+263,,KEYNOTE,INPROCEEDINGS_INTERNATIONAL,International Workshop on Information Communication Technology Theory and Practice towards u-World,,,,True,Created
+264,,KEYNOTE,INPROCEEDINGS_INTERNATIONAL,Korea Multimedia Society Autumn Conference,,,,True,Created
+265,,KEYNOTE,INPROCEEDINGS_INTERNATIONAL,PerCom 2017 Workshop on Annotation of useR Data for UbiquitOUs Systems (ARDUOUS2017),,,,True,Created
+266,,KEYNOTE,INPROCEEDINGS_INTERNATIONAL,PRAGMA11 Workshop,,,,True,Created
+267,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of AAAI Conference on Artificial Intelligence,AAAI,,,True,Created
+268,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of AAAI Workshop on Knowledge Discovery in Databases,KDD,,,True,Created
+269,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of ACM Asian Internet Engineering Conference,AINTEC,,,True,Created
+270,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of ACM International Conference on Advances in Mobile Computing and Multimedia,MoMM,,,True,Created
+271,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of ACM International Conference on Distributed and Event-Based Systems,DEBS,,,True,Created
+272,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of ACM International Conference on Information and Knowledge Management,CIKM,,,True,Created
+273,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of ACM International Conference on Multimedia,MM,,,True,Created
+274,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of ACM International Conference on Nanoscale Computing and Communication,NanoCom,,,True,Created
+275,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of ACM International Workshop on Multimedia Databases,MMDB,,,True,Created
+276,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of ACM Symposium on Applied Computing,SAC,,,True,Created
+277,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of ACM User Interface Software and Technology Symposium,UIST,,,True,Created
+278,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of ACS/IEEE International Conference on Computer Systems and Applications,AICCSA,,,True,Created
+279,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of Asia Information Retrieval Societies Conference,AIRS,,,True,Created
+280,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of Asia Pacific Web Conference,APWeb,,,True,Created
+281,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of Asia-Pacific Microwave Conference,APMC,,,True,Created
+282,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of Asian Conference on Information Systems,ACIS,,,True,Created
+283,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of Asian International Mobile Computing Conference,AMOC,,,True,Created
+284,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of Asian Thermophysical Properties Conference,ATPC,,,True,Created
+285,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of Brazilian Symposium on Databases,SBBD,,,True,Created
+286,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of Computer Security Symposium,CSS,,,True,Created
+287,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of Conference on Empirical Methods in Natural Language Processing,EMNLP,,,True,Created
+288,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of EAI International Conference on Bio-inspired Information and Communications Technologies,BICT,,,True,Created
+289,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of European Conference on Ambient Intelligence,Aml,,,True,Created
+290,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of FTRA Intrnational Conference on Advanced IT engineering and Management,AIM,,,True,Created
+291,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IASTED International Conference on ACIT-Software Engineering,ACIT-SE,,,True,Created
+292,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IASTED International Conference on Advances in Communications,AIC,,,True,Created
+293,,INTPROC,INPROCEEDINGS_INTERNATIONAL,"Proceedings of IASTED International Conference on Communications, Internet and Information Technology",CIIT,,,True,Created
+294,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IASTED International Conference on Internet and Multimedia Systems and Applications,EuroIMSA,,,True,Created
+295,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IEEE and ACM International Symposium on Mixed and Augmented Reality,ISMAR,,,True,Created
+296,,INTPROC,INPROCEEDINGS_INTERNATIONAL,"Proceedings of IEEE Communications Society Conference on Sensor, Mesh and Ad Hoc Communications and Networks",SECON,,,True,Created
+297,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IEEE Consumer Communications and Networking Conference,CCNC,,,True,Created
+298,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IEEE Global Communication Conference,GLOBECOM,,,True,Created
+299,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IEEE Global Conference on Consumer Electronics,GCCE,,,True,Created
+300,,INTPROC,INPROCEEDINGS_INTERNATIONAL,"Proceedings of IEEE International COMPSAC Workshop on Security, Trust and Privacy for Software Applications",STPSA,,,True,Created
+301,,INTPROC,INPROCEEDINGS_INTERNATIONAL,"Proceedings of IEEE International Computers, Software and Applications Conference",COMPSA,,,True,Created
+302,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IEEE International Conference on Advanced Information Networking and Applications,AINA,,,True,Created
+303,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IEEE International Conference on Big Data,BigData,,,True,Created
+304,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IEEE International Conference on Computer Communications,INFOCOM,,,True,Created
+305,,INTPROC,INPROCEEDINGS_INTERNATIONAL,"Proceedings of IEEE International Conference on Computing, Networking and Communications",ICNC,,,True,Created
+306,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IEEE International Conference on Data Engineering,ICDE,,,True,Created
+307,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IEEE International Conference on Distributed Computing Systems,ICDCS,,,True,Created
+308,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IEEE International Conference on E-Commerce Technology,CEC,,,True,Created
+309,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IEEE International Conference on Emerging Technologies and Factory Automation,ETFA,,,True,Created
+310,,INTPROC,INPROCEEDINGS_INTERNATIONAL,"Proceedings of IEEE International Conference on Intelligent Sensors, Sensor Networks and Information Processing",ISSNIP,,,True,Created
+311,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IEEE International Conference on Mechatronics and Automation,ICMA,,,True,Created
+312,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IEEE International Conference on Mobile Data Management,MDM,,,True,Created
+313,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IEEE International Conference on Parallel and Distributed Systems,ICPADS,,,True,Created
+314,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IEEE International Conference on Pervasive Computing and Communications,PerCom,,,True,Created
+315,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IEEE International Conference on Pervasive Services,ICPS,,,True,Created
+316,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IEEE International Conference on Semantic Computing,ICSC,,,True,Created
+317,,INTPROC,INPROCEEDINGS_INTERNATIONAL,"Proceedings of IEEE International Conference on Sensing, Communication and Networking",SECON,,,True,Created
+318,,KEYNOTE,INPROCEEDINGS_INTERNATIONAL,"Proceedings of IEEE International Conference on Sensor Networks, Ubiquitous, and Trustworthy Computing (SUTC 2010), Invited Talk",,,,True,Created
+319,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IEEE International Symposium on Intelligent Signal Processing and Communication Systems,ISPACS,,,True,Created
+320,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IEEE International Symposium on Local and Metropolitan Area Networks,LANMAN,,,True,Created
+321,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IEEE International Symposium on Mining and Web,MAW,,,True,Created
+322,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IEEE International Symposium on Networks Computing and Applications,NCA,,,True,Created
+323,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IEEE International Workshop on Enablers for Ubiquitous Computing and Smart Services,EUCASS,,,True,Created
+324,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IEEE International Workshop on Signal Processing Advances in Wireless Communications,SPAWC,,,True,Created
+325,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IEEE International Workshops on Multimedia Network Systems,MMNS,,,True,Created
+326,,INTPROC,INPROCEEDINGS_INTERNATIONAL,"Proceedings of IEEE Pacific Rim Conference on Communications, Computers and Signal Processing",PACRIM,,,True,Created
+327,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IEEE Region 10 Conference,TENCON,,,True,Created
+328,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IEEE Virtual Reality,VR,,,True,Created
+329,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IEEE Wireless Communications and Networking Conference,WCNC,,,True,Created
+330,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IEEE Workshop on Internet Applications,WIAPP,,,True,Created
+331,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IEEE/IPSJ International Symposium on Applications and the Internet,SAINT,,,True,Created
+332,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IEEE/WIC/ACM International Conference on Web Intelligence,WI,,,True,Created
+333,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IFIP/IEEE International Conference on Mobile and Wireless Communication Networks,MWCN,,,True,Created
+334,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of IFIP/IEEE International Workshop on Broadband Convergence Networks,BcN,,,True,Created
+335,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of Innovations in Information Technology,IIT,,,True,Created
+336,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International ACM SIGIR Conference on Research and Development in Information Retrieval,SIGIR,,,True,Created
+337,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International C. elegans Conference,,,,True,Created
+338,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Computer Music Conference,ICMC,,,True,Created
+339,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Active Media Technology,AMT,,,True,Created
+340,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Advanced Computing and Communications,ADCOM,,,True,Created
+341,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Advanced Multimedia Content Processing,AMCP,,,True,Created
+342,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Advances in Geographic Information Systems,GIS,,,True,Created
+343,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Advances in P2P Systems,AP2PS,,,True,Created
+344,,INTPROC,INPROCEEDINGS_INTERNATIONAL,"Proceedings of International Conference on Ambient Systems, Networks and Technologies",ANT,,,True,Created
+345,,INTPROC,INPROCEEDINGS_INTERNATIONAL,"Proceedings of International Conference on Broadband and Wireless Computing, Communication and Applications",BWCCA,,,True,Created
+346,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Building and Sharing of Very Large-Scale Knowledge Bases,KB,,,True,Created
+347,,INTPROC,INPROCEEDINGS_INTERNATIONAL,"Proceedings of International Conference on Communication, Computing and Control Applications",CCCA,,,True,Created
+348,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Communications,ICC,,,True,Created
+349,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Communications and Networking in China,Chinacom,,,True,Created
+350,,INTPROC,INPROCEEDINGS_INTERNATIONAL,"Proceedings of International Conference on Complex, Intelligent and Software Intensive Systems",CISIS,,,True,Created
+351,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Computer Applications in Industry and Engineering,CAINE,,,True,Created
+352,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Computer Communications and Networks,ICCCN,,,True,Created
+353,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Computers in Education,ICCE,,,True,Created
+354,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Cooperative Information Systems,CooplS,,,True,Created
+355,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Database and Expert Systems Applications,DEXA,,,True,Created
+356,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Database Systems for Advanced Applications,DASFAA,,,True,Created
+357,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Deductive and Object-Oriented Databases,DOOD,,,True,Created
+358,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Digital Information Management,ICDIM,,,True,Created
+359,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Distributed Computing in Sensor Systems,DCOSS,,,True,Created
+360,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Embedded and Ubiquitous Computing,EUC,,,True,Created
+361,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Entertainment Computing,ICEC,,,True,Created
+362,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Extending Database Technology,EDBT,,,True,Created
+363,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Foundations of Data Organization,FODO,,,True,Created
+364,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Green Communications and Networking,GreeNets,,,True,Created
+365,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Human-Computer Interaction,HCI,,,True,Created
+366,,INTPROC,INPROCEEDINGS_INTERNATIONAL,"Proceedings of International Conference on Industrial Engineering Theory, Applications, and Practice",IJIE,,,True,Created
+367,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Information Integration and Web-based Applications and Services,iiWAS,,,True,Created
+368,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Information Networking,ICOIN,,,True,Created
+369,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Information Systems and Databases,ISDB,,,True,Created
+370,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of international Conference on Mobile Ad-hoc and Sensor Networks,MSN,,,True,Created
+371,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Mobile and Ubiquitous Multimedia,MUM,,,True,Created
+372,,INTPROC,INPROCEEDINGS_INTERNATIONAL,"Proceedings of International Conference on Mobile and Ubiquitous Systems: Computing, Networking and Services",MOBIQUITOUS,,,True,Created
+373,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Mobile Computing and Networking,Mobicom,,,True,Created
+374,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Mobile Computing and Ubiquitous Networking,ICMU,,,True,Created
+375,,INTPROC,INPROCEEDINGS_INTERNATIONAL,"Proceedings of International Conference on Mobile Systems, Applications and Services",MobiSys,,,True,Created
+376,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Multimedia Expo,ICME,,,True,Created
+377,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Multimedia Modeling,MMM,,,True,Created
+378,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Network Protocols,ICNP,,,True,Created
+379,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Network-Based Information Systems,NBiS,,,True,Created
+380,,KEYNOTE,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Network-Based Information Systems (NBiS 2010),,,,True,Created
+381,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Networked Computing and Advanced Information Management,NCM,,,True,Created
+382,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Networked Sensing Systems,INSS,,,True,Created
+383,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on New Interfaces for Musical Expression,NIME,,,True,Created
+384,,INTPROC,INPROCEEDINGS_INTERNATIONAL,"Proceedings of International Conference on P2P, Parallel, Grid, Cloud and Internet Computing",3PGCIC,,,True,Created
+385,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Pervasive Computing,Pervasive,,,True,Created
+386,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Scientific and Statistical Database Management,SSDBM,,,True,Created
+387,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Ubiquitous Information Management and Communication,IMCOM,,,True,Created
+388,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Very Large Data Bases,VLDB,,,True,Created
+389,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Conference on Web Information System Engineering,WISE,,,True,Created
+390,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Cross-disciplinary Workshop on Web Accessibility,W4A,,,True,Created
+391,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International ICST Conference on Body Area Networks,BodyNets,,,True,Created
+392,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International International Conference on Advances in Information Systems,ADVIS,,,True,Created
+393,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Joint Conference on Pervasive and Ubiquitous Computing,UbiComp,,,True,Created
+394,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Semantic Search Workshop,SemSearch,,,True,Created
+395,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Special Workshop on Databases for Next Generation Researchers,SWOD,,,True,Created
+396,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Stability and Technology Conference,SWIIS,,,True,Created
+397,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Symposium on Advanced Database Technologies and Their Integration,ADTI,,,True,Created
+398,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Symposium on Cooperative Database Systems for Advanced Applications,CODAS,,,True,Created
+399,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Symposium on Database Applications in Non-Traditional Environments,DANTE,,,True,Created
+400,,INTPROC,INPROCEEDINGS_INTERNATIONAL,"Proceedings of International Symposium on Database, Web, and Cooperative Systems",DWACOS,,,True,Created
+401,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Symposium on Digital Media Information Base,DMIB,,,True,Created
+402,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Symposium on Distributed Computing and Artificial Intelligence,DCAI,,,True,Created
+403,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Symposium on Frontiers in Networking with Applications,FINA,,,True,Created
+404,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Symposium on Reliable Distributed Systems,SRDS,,,True,Created
+405,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Symposium on Ubiquitous Computing Systems,UCS,,,True,Created
+406,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Symposium on Wearable Computers,ISWC,,,True,Created
+407,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Symposium on Wireless Pervasive Computing,ISWPC,,,True,Created
+408,,INTPROC,INPROCEEDINGS_INTERNATIONAL,"Proceedings of International Technical Conference on Circuits/Systems, Computers and Communications",ITC-CSCC,,,True,Created
+409,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Wikimedia Conference,Wikimania,,,True,Created
+410,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Wireless Communications and Mobile Computing Conference,IWCMC,,,True,Created
+411,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Wireless Internet Conference,WICON,,,True,Created
+412,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workchop on Smart Appliances and Wearable Computing,IWSAWC,,,True,Created
+413,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop for Ubiquitous Networking and Enablers to Context-Aware Services,UNECAS,,,True,Created
+414,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on Advanced Distributed and Parallel Network Applications,ADPNA,,,True,Created
+415,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on Advanced Sensor Integration Technology,ASIT,,,True,Created
+416,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on Advances in Data Engineering and Mobile Computing,DEMoC,,,True,Created
+417,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on Ambient Information Technologies,AMBIT,,,True,Created
+418,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on Biologically Inspired Approaches to Advanced Information,Bio-ADIT,,,True,Created
+419,,INTPROC,INPROCEEDINGS_INTERNATIONAL,"Proceedings of International Workshop on Crowd Assisted Sensing, Pervasive Systems and Communications",CASPer,,,True,Created
+420,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on Data Management for Information Explosion in Wireless Networks,DMIEW,,,True,Created
+421,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on Data Management for Wireless and Pervasive Communications,DMWPC,,,True,Created
+422,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on Data Management in Global Data Repositories,GRep,,,True,Created
+423,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on Enablers for Ubiquitous and Context-Aware Services on Sensor Networks,EUCASS,,,True,Created
+424,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on Entertainment Computing,IWEC,,,True,Created
+425,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on Future Mobile and Ubiquitous Information Technologies,FMUIT,,,True,Created
+426,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on Future Technologies for Smart Information Systems,FTSIS,,,True,Created
+427,,INTPROC,INPROCEEDINGS_INTERNATIONAL,"Proceedings of International Workshop on Heterogeneous, Multi-Hop, Wireless and Mobile Networks",HeterWMN,,,True,Created
+428,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on Informatics,IWIN,,,True,Created
+429,,INTPROC,INPROCEEDINGS_INTERNATIONAL,"Proceedings of International Workshop on Information Search, Integration, and Personalization",ISIP,,,True,Created
+430,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on Intelligent,,,,True,Created
+431,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on Managing Context Information and Semantics in Mobile Environments,MCISME,,,True,Created
+432,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on Mobile Agents for Telecommunication Applications,MATA,,,True,Created
+433,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on Mobile Collaborative Crowdsourcing and Sensing,M-CROS,,,True,Created
+434,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on Mobile Distributed Computing,MDC,,,True,Created
+435,,KEYNOTE,INPROCEEDINGS_INTERNATIONAL,"Proceedings of International Workshop on Mobile P2P Data Management, Security and Trust (M-PDMST'10), Invited Talk",,,,True,Created
+436,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on Mobility in Databases and Distributed Systems,MDDS,,,True,Created
+437,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on Multi-Dimensional Mobile Communications,MDMC,,,True,Created
+438,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on Multimedia Information Systems,MIS,,,True,Created
+439,,INTPROC,INPROCEEDINGS_INTERNATIONAL,"Proceedings of International Workshop on P2P Data Management, Security and Trust",PDMST,,,True,Created
+440,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on Pervasive Wireless Networking,PWN,,,True,Created
+441,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on Protocols for Multimedia Systems,PROMS,,,True,Created
+442,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on Quality of Service,IWQoS,,,True,Created
+443,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on Quality of Service in Multiservice IP Networks,QoS-IP,,,True,Created
+444,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on Scalable Semantic Web Knowledge Base Systems,SSWS,,,True,Created
+445,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on Sensor Network Technologies for Information Explosion Era,SeNTIE,,,True,Created
+446,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on Smart Home,IWSH,,,True,Created
+447,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on Smart Object Systems,SOBS,,,True,Created
+448,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on Streaming Media Delivery and Management Systems,SMDMS,,,True,Created
+449,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on the Cyberinfrastructure for Science and Education,,,,True,Created
+450,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on Tools and Applications for Mobile Contents,TAMC,,,True,Created
+451,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on Ubiquitous Data Management,UDM,,,True,Created
+452,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on Ubiquitous Mobile Information and Collaboration Systems,UMICS,,,True,Created
+453,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International Workshop on Web Information and Data Management,WIDM,,,True,Created
+454,,INTPROC,INPROCEEDINGS_INTERNATIONAL,"Proceedings of International Workshop on Wireless Sensor, Actuator, and Robot Networks",WiSARN,,,True,Created
+455,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of International World Wide Web Conference,WWW,,,True,Created
+456,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of ISCA International Conference on Computers and Their Applications,CATA,,,True,Created
+457,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of the International Symposium on Next Generation Database Systems and Their Applications,,,,True,Created
+458,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of User-Contributed Knowledge and Artificial Intelligence,WIKIAI,,,True,Created
+459,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of Workshop on Mobile Big Data,Mobidata,,,True,Created
+460,,INTPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of Worldwide Computing and Its Applications,WWCA,,,True,Created
+461,,KEYNOTE,INPROCEEDINGS_INTERNATIONAL,The Sixth Asian Conference on Information Systems (ACIS 2017),,,,True,Created
+462,,KEYNOTE,INPROCEEDINGS_INTERNATIONAL,"Tutorial Workshops on Systems Science of Bio-navigation, 2017 IEEE International Conference on Mechatronics and Automation (ICMA 2017)",,,,True,Created
+463,,KEYNOTE,MISC,"2011 IT EXPO BUSAN Workshop, Invited Talk",,,,True,Created
+464,,KEYNOTE,MISC,2012年IEEE関西支部総会,,,,True,Created
+465,,KEYNOTE,MISC,2013年度 情報処理学会関西支部 報告会・記念講演会,,,,True,Created
+466,,AWARD,MISC,4th International Workshop on Sensor-based Activity Recognition and Interaction,iWoar,,,True,Created
+467,,AWARD,MISC,ACM,,,,True,Created
+468,,MISC,MISC,AIセンターだより No. 25,,,,True,Created
+469,,KEYNOTE,MISC,Asia-Pacific Advanced Network 30th Meeting (APAN),,,,True,Created
+470,,AWARD,MISC,Award,,,,True,Created
+471,,MISC,MISC,bit,,,,True,Created
+472,,MISC,MISC,Computer Today,,,,True,Created
+473,,MISC,MISC,CQ出版,,,,True,Created
+474,,MISC,MISC,"Database, 関西データベース協議会",,,,True,Created
+475,,KEYNOTE,MISC,ICT地域連携セミナー,,,,True,Created
+476,,KEYNOTE,MISC,INSプラザ(NTT情報文化センタ),,,,True,Created
+477,,AWARD,MISC,KDDI財団,DEIM,,,True,Created
+478,,KEYNOTE,MISC,"NETWORLD+INTEROP 97 TOKYO パネル討論座長, Conference Notes (Thursday, June 5, 1997)",,,,True,Created
+479,,MISC,MISC,NICT Journal,,,,True,Created
+480,,KEYNOTE,MISC,"NUA 第10回研究会フォーラム基調講演, 全NECユーザー会",,,,True,Created
+481,,MISC,MISC,Open Network 創刊号,,,,True,Created
+482,,MISC,MISC,SCIENCE of HUMANITY 39,,,,True,Created
+483,,KEYNOTE,MISC,"Seminar (Department of Computer Science at Missouri University of Science and Technology, Rolla, MO, USA)",,,,True,Created
+484,,KEYNOTE,MISC,"Seminar (Microsoft Research Asia, Beijing, China, May 29, 2006)",,,,True,Created
+485,,KEYNOTE,MISC,"Seminar (Peking University, China, May 30, 2006)",,,,True,Created
+486,,MISC,MISC,Technical report of Osaka University,,,,True,Created
+487,,MISC,MISC,インターフェース,,,,True,Created
+488,,MISC,MISC,オペレーションズ・リサーチ,,,,True,Created
+489,,MISC,MISC,コンセンサス(全NECユーザー会誌),,,,True,Created
+490,,MISC,MISC,コンピュートロール 第38号,,,,True,Created
+491,,MISC,MISC,コンピュートロール 第43号,,,,True,Created
+492,,MISC,MISC,"システム制御情報学会, システム/制御/情報「アンビエントインテリジェンス技術とその応用」",,,,True,Created
+493,,MISC,MISC,シミュレーション(日本シミュレーション学会誌),,,,True,Created
+494,,MISC,MISC,ヒューマンインタフェース学会誌,,,,True,Created
+495,,KEYNOTE,MISC,メディア科学リサーチセンター設立記念シンポジウム,,,,True,Created
+496,,KEYNOTE,MISC,リアライズ社 最新技術講座資料集,,,,True,Created
+497,,KEYNOTE,MISC,ワイヤレス高度情報通信研究会第1回研究会資料,,,,True,Created
+498,,MISC,MISC,映像情報メディア学会誌,,,,True,Created
+499,,KEYNOTE,MISC,於 アイシン・エイ・ダブリュ,,,,True,Created
+500,,KEYNOTE,MISC,於 凸版印刷株式会社,,,,True,Created
+501,,KEYNOTE,MISC,於 兵庫県立宝塚北高等学校,,,,True,Created
+502,,MISC,MISC,科学 2002年9月号,,,,True,Created
+503,,KEYNOTE,MISC,科学技術振興機構研究開発戦略センター講演会,,,,True,Created
+504,,KEYNOTE,MISC,科学研究費補助金「特定領域研究」情報爆発IT基盤平成18年度成果報告会,,,,True,Created
+505,,MISC,MISC,関西データベース協議会,,,,True,Created
+506,,KEYNOTE,MISC,関西データベース協議会 平成7年度 第1回『次世代DBフォーラム』講演論文集,,,,True,Created
+507,,MISC,MISC,"共通教育だより, No.20",,,,True,Created
+508,,MISC,MISC,月間DBマガジン1月号(翔泳社),,,,True,Created
+509,,AWARD,MISC,公益財団法人 立石科学技術振興財団,,,,True,Created
+510,,MISC,MISC,工学教育,,,,True,Created
+511,,MISC,MISC,三田出版会 工学部シリーズ,,,,True,Created
+512,,MISC,MISC,社団法人生産技術振興協会,,,,True,Created
+513,,KEYNOTE,MISC,住友電設(株)大阪本社会議室,,,,True,Created
+514,,KEYNOTE,MISC,春の情報処理祭 in 京都,,,,True,Created
+515,,MISC,MISC,情報・システムソサイエティ誌,,,,True,Created
+516,,MISC,MISC,情報処理,,,,True,Created
+517,,MISC,MISC,情報処理(情報処理学会誌),,,,True,Created
+518,,MISC,MISC,情報処理/解説,,,,True,Created
+519,,MISC,MISC,情報処理/特集 ビッグデータがもたらす超情報社会 ―すべてを視る情報処理技術：基盤から応用まで―,,,,True,Created
+520,,MISC,MISC,情報処理/特集 モバイル時代のサービスを支える技術,,,,True,Created
+521,,AWARD,MISC,情報処理学会,,,,True,Created
+522,,AWARD,MISC,情報処理学会 全国大会,,,,True,Created
+523,,MISC,MISC,情報処理学会会誌「日本を元気にするICT」,,,,True,Created
+524,,MISC,MISC,情報処理学会会誌「未来社会をプロデュースするICT」,,,,True,Created
+525,,MISC,MISC,情報処理学会研究報告(ヒューマンインタフェース研究会),,,,True,Created
+526,,MISC,MISC,"情報処理学会研究報告(ヒューマンコ ンピュータインタラクション, 2008-HCI-127)",,,,True,Created
+527,,AWARD,MISC,情報処理学会平成22年度山下記念研究賞,,,,True,Created
+528,,AWARD,MISC,情報処理学会論文誌ジャーナル,,,,True,Created
+529,,MISC,MISC,情報処理学会論文誌デジタルコンテンツ (DCON),,,,True,Created
+530,,MISC,MISC,情報通信研究機構研究報告,,,,True,Created
+531,,MISC,MISC,神戸大学総合情報処理センター広報 MAGE,,,,True,Created
+532,,MISC,MISC,人工知能学会誌,,,,True,Created
+533,,MISC,MISC,生産と技術,,,,True,Created
+534,,AWARD,MISC,大阪大学,,,,True,Created
+535,,MISC,MISC,大阪大学サイバーメディアセンターHPCジャーナル,,,,True,Created
+536,,MISC,MISC,大阪大学工業会誌テクノネット,,,,True,Created
+537,,MISC,MISC,大阪大学情報処理教育センター『廣広報』,,,,True,Created
+538,,MISC,MISC,大阪大学情報処理教育センター『廣報』,,,,True,Created
+539,,AWARD,MISC,(一財)大阪科学技術センター,,,,True,Created
+540,,KEYNOTE,MISC,"第9回企業人セミナーテキスト, ワイヤレス 高度情報通信システムの将来展望",,,,True,Created
+541,,KEYNOTE,MISC,第一回ビジネスedgeセミナー「AIは経営とビジネスモデルにどんなイノベーションを起こすのか」基調講演,,,,True,Created
+542,,KEYNOTE,MISC,筑波大学知的コミュニティ基盤センター研究談話会(コロキウム),,,,True,Created
+543,,AWARD,MISC,電気学会,,,,True,Created
+544,,MISC,MISC,電子情報通信学会誌,,,,True,Created
+545,,MISC,MISC,電子情報通信学会誌「学会90周年記念特集号」,,,,True,Created
+546,,MISC,MISC,電子情報通信学会情報・システムソサイエティ誌,,,,True,Created
+547,,MISC,MISC,電子情報通信学会第6回データ工学ワークショップ(DEWS95)論文集,,,,True,Created
+548,,KEYNOTE,MISC,東京メガセミナー,,,,True,Created
+549,,KEYNOTE,MISC,"統合画像データベース構築・活用研究会(ADVANCEコース) 第8回研究会資料, 関西データベース協議会",,,,True,Created
+550,,KEYNOTE,MISC,特定非営利活動法人ウェアラブルコンピュータ研究開発機構HMDミーティング,,,,True,Created
+551,,KEYNOTE,MISC,特定非営利活動法人ウェアラブルコンピュータ研究開発機構ウェアラブルコンピューティング交流会,,,,True,Created
+552,,KEYNOTE,MISC,特定非営利活動法人ウェアラブルコンピュータ研究開発機構第9回定例会,,,,True,Created
+553,,KEYNOTE,MISC,日本OR学会「情報ネットワーク性能評価」研究会 招待講演,,,,True,Created
+554,,AWARD,MISC,日本データベース学会,,,,True,Created
+555,,MISC,MISC,日本バーチャルリアリティ学会誌,,,,True,Created
+556,,AWARD,MISC,日本学術振興会,,,,True,Created
+557,,KEYNOTE,MISC,日本学術振興会研究拠点形成事業　第６回国際セミナー「生物多様性と進化：新バイオロギング手法による野生動物研究」,,,,True,Created
+558,,KEYNOTE,MISC,分子科学研究所所長招聘会議 「未来を拓く学術のあり方：教育と研究」,,,,True,Created
+559,,AWARD,MISC,文部科学省,,,,True,Created
+560,,KEYNOTE,MISC,兵庫県下団体連携事業 夏のビッグイベント2006 シンポジウム「ニュービジネスを兵庫から」,,,,True,Created
+561,,AWARD,MISC,情報処理学会関西支部大会,,,,True,Created
+562,,MISC,MISC,學鐙 (丸善),,,,True,Created
+563,,MISC,MISC,澪電,,,,True,Created
+564,,NEWS,NEWS,(株)毎日コミュニケーションズ Web Designing,,,,True,Created
+565,,NEWS,NEWS,(財) 日本産業デザイン振興会 デザインニュース 266,,,,True,Created
+566,,NEWS,NEWS,ASAHIパソコン,,,,True,Created
+567,,NEWS,NEWS,Cabiネット,,,,True,Created
+568,,NEWS,NEWS,Daily Yomiuri,,,,True,Created
+569,,NEWS,NEWS,Hanako,,,,True,Created
+570,,NEWS,NEWS,IBM USERS,,,,True,Created
+571,,NEWS,NEWS,MAC POWER,,,,True,Created
+572,,NEWS,NEWS,MBSテレビ ちちんぷいぷい,,,,True,Created
+573,,NEWS,NEWS,Nature Interface,,,,True,Created
+574,,NEWS,NEWS,"Nature Interface,",,,,True,Created
+575,,NEWS,NEWS,PDAマガジン,,,,True,Created
+576,,NEWS,NEWS,RINTERS CIRCLE,,,,True,Created
+577,,NEWS,NEWS,The Neighbor,,,,True,Created
+578,,NEWS,NEWS,Web Designing,,,,True,Created
+579,,NEWS,NEWS,Yahoo! BBマガジン,,,,True,Created
+580,,NEWS,NEWS,YOMIURI PC,,,"2004.8月号, 読売新聞東京本社",True,Created
+581,,NEWS,NEWS,オーム社 COMPUTER & NETWORK LAN,,,,True,Created
+582,,NEWS,NEWS,センイ・ジヤァナル,,,,True,Created
+583,,NEWS,NEWS,ダイヤモンドLOOP,,,,True,Created
+584,,NEWS,NEWS,ダイヤモンドループ,,,,True,Created
+585,,NEWS,NEWS,プレジデント,,,,True,Created
+586,,NEWS,NEWS,マイナビニュース,,,,True,Created
+587,,NEWS,NEWS,科学新聞,,,,True,Created
+588,,NEWS,NEWS,学研「大人の科学マガジン」,,,,True,Created
+589,,NEWS,NEWS,関塾タイムス,,,,True,Created
+590,,NEWS,NEWS,技術評論社Mobile Press,,,,True,Created
+591,,NEWS,NEWS,京大学生新聞,,,,True,Created
+592,,NEWS,NEWS,京都新聞,,,平成24年5月25日付,True,Created
+593,,NEWS,NEWS,近未来予測SP第1弾,,,,True,Created
+594,,NEWS,NEWS,蛍雪時代,,,,True,Created
+595,,NEWS,NEWS,月刊アスキー,,,,True,Created
+596,,NEWS,NEWS,阪大ニューズレター,,,,True,Created
+597,,NEWS,NEWS,産経新聞,,,,True,Created
+598,,NEWS,NEWS,産經新聞夕刊,,,,True,Created
+599,,NEWS,NEWS,週刊SPA!,,,,True,Created
+600,,NEWS,NEWS,週刊アスキー,,,,True,Created
+601,,NEWS,NEWS,週刊大衆,,,,True,Created
+602,,NEWS,NEWS,週刊宝島,,,,True,Created
+603,,NEWS,NEWS,週間アスキー,,,,True,Created
+604,,NEWS,NEWS,商工ジャーナル,,,,True,Created
+605,,NEWS,NEWS,繊維新聞,,,,True,Created
+606,,NEWS,NEWS,大商ニュース,,,,True,Created
+607,,NEWS,NEWS,中京スポーツ,,,,True,Created
+608,,NEWS,NEWS,朝日新聞,,,,True,Created
+609,,NEWS,NEWS,朝日新聞朝刊,,,,True,Created
+610,,NEWS,NEWS,朝日新聞夕刊,,,,True,Created
+611,,NEWS,NEWS,朝日新聞夕刊 3面,,,,True,Created
+612,,NEWS,NEWS,読売新聞,,,,True,Created
+613,,NEWS,NEWS,日刊スポーツ,,,,True,Created
+614,,NEWS,NEWS,日経コンピュータ,,,,True,Created
+615,,NEWS,NEWS,日経ゼロワン,,,,True,Created
+616,,NEWS,NEWS,日経ネットナビ,,,,True,Created
+617,,NEWS,NEWS,日経バイオテクONLINE,,,,True,Created
+618,,NEWS,NEWS,日経ビジネスアソシエ,,,,True,Created
+619,,NEWS,NEWS,日経産業新聞,,,,True,Created
+620,,NEWS,NEWS,日本経済新聞,,,,True,Created
+621,,NEWS,NEWS,日本繊維新聞,,,,True,Created
+622,,NEWS,NEWS,日本農業新聞,,,,True,Created
+623,,NEWS,NEWS,博報堂「広告」,,,,True,Created
+624,,NEWS,NEWS,服飾手帖,,,,True,Created
+625,,NEWS,NEWS,文教速報,,,,True,Created
+626,,NEWS,NEWS,文藝春秋,,,,True,Created
+627,,NEWS,NEWS,北海道新聞,,,,True,Created
+628,,NEWS,NEWS,毎日新聞,,,,True,Created
+629,,NEWS,NEWS,夕刊フジ,,,,True,Created
+630,,INPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of the Human Interface Symposium,,,,True,Created
+631,,INPROC,INPROCEEDINGS_INTERNATIONAL,Symposium on ASIA GIS,,,,True,Created
+632,,INPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of UASS,,,,True,Created
+633,,INPROC,INPROCEEDINGS_INTERNATIONAL,Proceedings of HWISE,,,,True,Created

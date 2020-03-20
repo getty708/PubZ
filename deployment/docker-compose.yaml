@@ -1,0 +1,44 @@
+version: '2'
+services:
+  https-portal:
+    image: steveltn/https-portal:1
+    ports:
+      - '80:80'
+      - '443:443'
+    environment:
+      DOMAINS: 'pubz.private -> http://dockerhost:8080'
+      STAGE: 'local' # or 'production'
+    volumes:
+      - ./certs:/var/lib/https-portal
+  storage:
+    image: busybox
+    volumes:
+      - ../../storage/db:/var/lib/mysql
+  db:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    hostname: db
+    environment:
+      MYSQL_ROOT_PASSWORD: docker
+      MYSQL_DATABASE:      docker
+      MYSQL_USER:          docker
+      MYSQL_PASSWORD:      docker
+    volumes:
+      - ../storage/db/data:/var/lib/mysql
+      - ../docker/mysql:/etc/mysql/conf.d
+    volumes_from:
+      - storage
+  django:
+    build: ./django-uwsgi-nginx
+    environment:
+      MYSQL_DATABASE: docker
+      MYSQL_USER:     docker
+      MYSQL_PASSWORD: docker
+      MYSQL_HOST:     db
+    volumes:
+      - ../src:/code/app
+    ports:
+      - '8080:8080'
+    depends_on:
+      - db

@@ -1,0 +1,50 @@
+{% load utils_bib_style_helper %}
+<div class="row  border-bottom border-secondary py-3">
+				<div class="col-12">
+								<div class="row">
+												<div class="col-12">
+																<span class="border border-info badge-pill text-info small">Book</span>
+																<small class="text-info">
+																				{{ book.title }},
+																				{% if bib.pub_date %} {% if bib.language == "EN" %}{{ bib.pub_date|date:"F Y" }}{% else %}{{ bib.pub_date|date:"Y年n月" }}{% endif %}{% endif %}
+																</small>
+												</div>				
+												<div class="col-12">
+																<a href="{% url 'core:bib_detail' bib.id %}" class="text-primary h5">
+																				{{ bib.title|remove_brace }}
+																				{% if not bib.is_published %}
+																				<span class="text-danger">*</span>
+																				{% endif %}																				
+																</a>
+												</div>
+												<div class="col-12">
+														{% for author in authors %}
+														<a href="{% url 'core:author_detail' author.id %}" class="d-inline-flex" >
+																{% if bib.language == "EN" or not author.name_ja %}
+																{{ author.name_en|author_en_default }}
+																{% else %}
+																{{ author.name_ja }}
+																{% endif %}
+														</a>,
+														{% endfor %}						
+												</div>
+								</div>
+								<div class="row">								
+												<div class="col-md-6">
+																<span class="badge badge-light">{{ bib.pub_date|date:"Y-m" }}</span>
+																{% for tag in bib.tags.all %}
+																<a href="{% url 'core:tag_detail' tag.id %}" class="badge badge-light">{{ tag.name }}</a>
+																{% endfor %}																
+												</div>
+												<div class="col-md-6 d-flex justify-content-end">
+																<a href="{% url 'core:bib_detail' bib.id %}" class="btn btn-primary mx-1" >Detail</a>
+																{% if bib.url %}																
+																<a href="{{ bib.url }}" class="btn btn-primary mx-1" >URL</a>																
+																{% else %}
+																<a href="#" class="btn btn-primary mx-1 disabled">URL</a>																																
+																{% endif %}
+																
+												</div>
+								</div>
+				</div>
+</div>

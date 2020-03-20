@@ -1,0 +1,23 @@
+{% load utils_bib_format %}
+
+<!-- Main List -->
+{% if latest_bibtex_list %}
+{% for bs_key, bs_value, bibs in latest_bibtex_list|split_bibtexs_by_bib_style %}
+<div class="card mb-3 shadow">
+				<div class="card-body">
+								<h4 id="{{book_style}}" class="font-weight-bold">{{ bs_value }}</h4>
+								<ol>
+												{% for bib in bibs %}
+												<li class="my-3">{{ bib|bibtex_list_format }}</li>
+												{% endfor %}
+								</ol>
+				</div>
+</div>
+{% endfor %}
+{% else%}
+<div class="card mb-3">
+		<div class="card-body">												
+				<span>No Data ...</span>
+		</div>
+</div>
+{% endif %}
