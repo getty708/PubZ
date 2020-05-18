@@ -672,4 +672,4 @@ ASALocalRun/
 
 src/**/migrations/
 django/app/notification/const.py
-utils/import_by_CSV/csv/*.csv
+utils/import_by_CSV/csv/

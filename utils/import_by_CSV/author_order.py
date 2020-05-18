@@ -129,7 +129,10 @@ def create_author_order(url_base, token, data, logger=getLogger(__name__+'.creat
     def _get_author(author_name):
         def _check_name(author_name, author_db):
             name_en = author_db["name_en"].upper()
-            name_ja = "".join(author_db["name_ja"].split())
+            if author_db['name_ja'] ==  None:
+                name_ja = ""
+            else:
+                name_ja = "".join(author_db["name_ja"].split())
             #print(author_name, "=>", name_en, name_ja)
             if author_name.upper() == name_en:
                 return True
@@ -182,6 +185,8 @@ def create_author_order(url_base, token, data, logger=getLogger(__name__+'.creat
         ## Check Responce
         logger.info("Response: status={} [{}]".format(r.status_code,author_name))
         _data = json.loads(r.text)
+        print(r.status_code)
+        print(_data)
         if r.status_code == 201:
             logger.info("Success: Create new author_order. [Bib{} - {} ({})]".format(bibtex["id"],author_name,no+1))
             authors_success.append(author_name)
@@ -197,6 +202,8 @@ def create_author_order(url_base, token, data, logger=getLogger(__name__+'.creat
     ret = {
         "bib_title": data["bibtex"],
         "bib_id": bibtex["id"],
+        "pub_date": data["pub_date"],
+        "book": data["book"],
         "author_success": authors_success,
         "author_fail": authors_fail,
         "status": True,
@@ -276,6 +283,8 @@ def main_csv(args):
                 status = {
                     "bib_title":row["bib_title"],
                     "bib_id": -1,
+                    "book": row["book"],
+                    "pub_date": row["bib_pub_date"],
                     "author_success": None,
                     "author_fail": row["keys_author"],
                     "status": False,
@@ -288,7 +297,7 @@ def main_csv(args):
 
     # == Main ==
     token = _get_auth_token()
-    df = _load_csv()
+    df = _load_csv()[:]
     df_results = _create_author_orders(df)
     
     # Results

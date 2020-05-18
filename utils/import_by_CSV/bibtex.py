@@ -152,6 +152,11 @@ def create_bibtex(url_base, token, bibtex_dict, logger=getLogger(__name__+'.crea
     # Check Responce
     data = json.loads(r.text)
     logger.debug("Response: status={}, data={}".format(r.status_code, data))
+    print(payload)
+    print(r.status_code)
+    print(data)
+    print()
+    
     if r.status_code == 201:
         logger.info("Success: Create new bibtex. [{}]".format(bibtex_dict["title_en"]))
         return True, "Created"
@@ -263,7 +268,7 @@ def main_csv(args):
 
     # == Main == 
     token = _auth_token()
-    df = _load_csv()
+    df = _load_csv()[:]
     df = _create_bibtexs(df)
 
     
@@ -280,7 +285,8 @@ def main_csv(args):
         logger.info("- No.{}: {} {}".format(
             no,
             df_error.loc[idx, ["status", "msg"]].values,
-            df_error.loc[idx, ["key_book_style", "title", "key_book",]].values))
+            df_error.loc[idx, ["key_book_style_old", "title", "book_title",]].values,
+        ))
     logger.info("==============")
 
     # Write Results

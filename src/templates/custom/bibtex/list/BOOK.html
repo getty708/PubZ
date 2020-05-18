@@ -5,5 +5,5 @@
 "<a href="{% url 'core:bib_detail' bib.id %}" class="font-weight-bold text-primary border-bottom border-primary">{{ bib.title|remove_brace }},</a>"
 {{ book.title }}
 {% if bib.page or bib.pub_date %},{% endif %}
-{% if bib.page %} pages {{ bib.page }}{% endif %}
+{% if bib.page %} pages {{ bib.page }}{% endif %},
 {% if bib.pub_date %} {% if bib.language == "EN" %}{{ bib.pub_date|date:"F Y" }}{% else %}{{ bib.pub_date|date:"Y年n月" }}{% endif %}{% endif %}.
