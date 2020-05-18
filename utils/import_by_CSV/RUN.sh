@@ -20,13 +20,17 @@ elif [ ${mode} == "book" ]; then
 	   -u ${USER} \
 	   -f ${CSV}
 elif [ ${mode} == "bibtex" ]; then
-    CSV="./csv/PubZ_Bibtex.csv"
+    # CSV="./csv/PubZ_Bibtex.csv"
+    # CSV="./csv/bibtex_test.csv"
+    CSV="./csv/bibtex_import_new.csv"
     python3 bibtex.py CSV \
 	    --url-base ${URL_BASE} \
 	    -u ${USER} \
 	    -f ${CSV}
 elif [ ${mode} == "order" ]; then
-    CSV="./csv/PubZ_Bibtex.csv"
+    # CSV="./csv/PubZ_Bibtex.csv"
+    CSV="./csv/bibtex_import_new.csv"
+    #CSV="./csv/bibtex_test.csv"
     python3 author_order.py CSV \
 	    --url-base ${URL_BASE} \
 	    -u ${USER} \
