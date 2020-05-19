@@ -29,11 +29,11 @@ class AuthorForm(forms.ModelForm):
         super(AuthorForm, self).__init__(*args, **kwargs)
         self.fields["name_en"].widget.attrs.update({
             'class': 'form-control form-control-sm',
-            'placeholder': "English",
+            'placeholder': "FamilyName, (MiddleName) FirstName",
         })
         self.fields["name_ja"].widget.attrs.update({
             'class': 'form-control form-control-sm',
-            'placeholder': "日本語",
+            'placeholder': "姓 名",
         })
         self.fields["affiliation_en"].widget.attrs.update({
             'class': 'form-control form-control-sm',
@@ -220,7 +220,7 @@ class BibtexForm(forms.ModelForm):
         widgets = {
             'book': autocomplete.ListSelect2(
                 url='api:autocomplete_book',),
-            'pub_date': DatePickerInput(),
+            # 'pub_date': DatePickerInput(),
         }
 
     def __init__(self,*args,**kwargs):
@@ -232,6 +232,10 @@ class BibtexForm(forms.ModelForm):
         self.fields["book_title"].widget.attrs.update({
             'class': 'form-control form-control-sm',
             'disabled': True,
+        })
+        self.fields["pub_date"].widget.attrs.update({
+            'class': 'form-check-input',
+            'placeholder': 'YYYY-mm-dd',
         })            
         self.fields["is_published"].widget.attrs.update({
             'class': 'form-check-input',
