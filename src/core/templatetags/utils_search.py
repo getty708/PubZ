@@ -66,6 +66,10 @@ def parse_GET_params(req):
         params['period_year'] = int(params['period_year'])
     except ValueError:
         params['period_year'] = datetime.datetime.now().year
+
+    # == For usability ==
+    if params['keywords'] is not None:
+        params['period_method'] = 'ALL'
     return params
 
 
