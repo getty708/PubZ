@@ -44,9 +44,16 @@ class IndexViewPagination(generic.ListView):
     template_name = 'dashboard/bibtex/index_page.html'
     context_object_name = 'latest_bibtex_list'
     paginate_by = 30
+
+    def get_paginate_by(self, queryset):
+        """ Returns the number of items to paginate by, or None for no pagination. """
+        if hasattr(self, 'GET_params') and self.GET_params.get('period_method', 'ACADEMIC_YEAR') in ['ACADEMIC_YEAR', 'YEAR']:
+            if 'period_year' in self.GET_params.keys() and self.GET_params.keys() is not None:
+                return 200
+        return self.paginate_by
     
     def get_queryset(self):
-        self.GET_params = utils.parse_GET_params(self.request)
+        self.GET_params = utils.parse_GET_params(self.request)        
         query_set = utils.get_bibtex_query_set(self.GET_params)
         self.GET_params["num_hits"] = len(query_set)
         return query_set
@@ -59,7 +66,7 @@ class IndexViewPagination(generic.ListView):
             context["display_style"] = current_url_name.split("_")[-1]
         context["year"] = datetime.now().year
         return context    
-
+    
 
 class DetailView(generic.DetailView):
     model = Bibtex

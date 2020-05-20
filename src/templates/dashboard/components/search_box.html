@@ -56,6 +56,25 @@ value="{% if GET_params.keywords %}{{GET_params.keywords}}{% endif %}"  placehol
 										<div class="col-md-4">
 												<div class="input-group mb-3">
 														<div class="input-group-prepend">
+																<label class="input-group-text" for="inputGroupSelect01">Date Filter</label>
+														</div>
+														<select class="custom-select" id="search-period_method">
+															<option value="ACADEMIC_YEAR" {% if GET_params.period_method == "ACADEMIC_YAER" or not GET_params.period_method %}selected{% endif %}>
+																AY (年度)
+															</option>
+															<option value="YEAR" {% if GET_params.period_method == "YEAR" %}selected{% endif %}>Year</option>
+															<option value="ALL"  {% if GET_params.period_method == "ALL"  %}selected{% endif %}>All</option>
+														</select>																											
+														<input type="number" class="form-control" aria-label="Text input with checkbox" id="search-period_year"
+																		{% if GET_params.period_year %}value="{{ GET_params.period_year }}"{% endif %}
+																		{% if GET_params.period_method == "ALL" %}disabled{% endif%}>
+														
+												</div>
+										</div>
+										
+										<div class="col-md-4">
+												<div class="input-group mb-3">
+														<div class="input-group-prepend">
 																<label class="input-group-text" for="inputGroupSelect01">Book Type</label>
 														</div>
 														{% get_bib_style_keys as styles %}														
@@ -78,24 +97,9 @@ value="{% if GET_params.keywords %}{{GET_params.keywords}}{% endif %}"  placehol
 																<label class="input-group-text" for="inputGroupSelect01">Sort</label>
 														</div>
 														<select class="custom-select" id="search-sort" name="search-sort">
-																<option value="ascending" {% if GET_params.order == "ascending" or not GET_params.period_method %}selected{% endif %}>Date - Ascending</option>
-																<option value="desending" {% if GET_params.order == "desending" %}selected{% endif %}>Date - Descending</option>																															
+																<option value="ascending" {% if GET_params.order == "ascending" or not GET_params.period_method %}selected{% endif %}>Ascending (Date)</option>
+																<option value="desending" {% if GET_params.order == "desending" %}selected{% endif %}>Descending (Date)</option>
 														</select>																			
-												</div>
-										</div>
-										<div class="col-md-4">
-												<div class="input-group mb-3">
-														<div class="input-group-prepend">
-																<label class="input-group-text" for="inputGroupSelect01">Date</label>
-														</div>																												
-
-														<select class="custom-select" id="search-period_method">
-																<option value="all"         {% if GET_params.period_method == "all" or not GET_params.period_method  %}selected{% endif %}>See All</option>
-																<option value="year"        {% if GET_params.period_method == "year"        %}selected{% endif %}>Search by Year</option>
-																<option value="fiscal_year" {% if GET_params.period_method == "fiscal_year" %}selected{% endif %}>Search by Fiscal Year (年度検索)</option>
-														</select>																											
-														<input type="text" class="form-control" aria-label="Text input with checkbox" id="search-period_year"
-{% if GET_params.period_year %}value="{{ GET_params.period_year }}"{% endif %} {% if GET_params.period_method == "all" or not GET_params.period_method %}disabled{% endif%}>
 												</div>
 										</div>
 										<div class="col-12">
