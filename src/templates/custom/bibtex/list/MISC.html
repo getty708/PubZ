@@ -9,4 +9,4 @@
 {% if bib.number %},number {{ bib.number }}{% endif %}
 {% if bib.page or bib.pub_date %},{% endif %}
 {% if bib.page %} pages {{ bib.page }},{% endif %}
-{% if bib.pub_date %} {% if bib.language == "EN" %}{{ bib.pub_date|date:"F Y" }}{% else %}{{ bib.pub_date|date:"Y年n月" }}{% endif %}{% endif %}.
+{% if bib.pub_date %} {% if bib.language == "EN" %}{{ bib.pub_date|date:"F Y" }}{% else %}{{ bib.pub_date|date:"Y年n月" }}{% endif %}.{% endif %}
