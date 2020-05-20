@@ -220,7 +220,6 @@ class BibtexForm(forms.ModelForm):
         widgets = {
             'book': autocomplete.ListSelect2(
                 url='api:autocomplete_book',),
-            # 'pub_date': DatePickerInput(),
         }
 
     def __init__(self,*args,**kwargs):
@@ -229,9 +228,24 @@ class BibtexForm(forms.ModelForm):
             self.fields[key].widget.attrs.update({
                 'class': 'form-control form-control-sm',
             })
+        self.fields["title_en"].widget.attrs.update({
+            'placeholder': '(If this entry has no English title, leave this as blank.)',
+        })
+        self.fields["title_ja"].widget.attrs.update({
+            'placeholder': '(日本のタイトルがない場合は空欄)',
+        })                
         self.fields["book_title"].widget.attrs.update({
             'class': 'form-control form-control-sm',
             'disabled': True,
+        })
+        self.fields["volume"].widget.attrs.update({
+            'placeholder': 'Volume',
+        })
+        self.fields["number"].widget.attrs.update({
+            'placeholder': 'Number',
+        })        
+        self.fields["chapter"].widget.attrs.update({
+            'placeholder': 'Chapter',
         })
         self.fields["pub_date"].widget.attrs.update({
             'class': 'form-check-input',
