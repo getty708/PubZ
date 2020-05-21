@@ -7,5 +7,5 @@
 {{ book.title }} {%if book.abbr %}({{ book.abbr }}){% endif %},
 {% if bib.volume %}vol.{{ bib.volume }},{% endif %}
 {% if bib.number %}no.{{ bib.number }},{% endif %}
-{% if bib.page %} pp.{{ bib.page }},{% endif %}
+{% if bib.page %} pp.{{ bib.page|replace_double_hyphen }},{% endif %}
 {% if bib.pub_date %} {% if bib.language == "EN" %}{{ bib.pub_date|date:"F Y" }}{% else %}{{ bib.pub_date|date:"Y年n月" }}{% endif %}.{% endif %}

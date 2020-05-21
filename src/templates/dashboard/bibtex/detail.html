@@ -62,7 +62,7 @@
 										{% if bibtex.volume %}Vol.{{ bibtex.volume }}, {% endif %}
 										{% if bibtex.number %}Number.{{ bibtex.number }}, {% endif %}
 										{% if bibtex.chapter %}Chapter.{{ bibtex.chapter }}, {% endif %}
-										{% if bibtex.page %}Page.{{ bibtex.page }}, {% endif %}
+										{% if bibtex.page %}Page.{{ bibtex.page|replace_double_hyphen }}, {% endif %}
 										{% if bibtex.pub_date %} {% if bibtex.language == "EN" %}{{ bib.pub_date|date:"F Y" }}{% else %}{{ bib.pub_date|date:"Y年n月" }}{% endif %}{% endif %}
 									</span>
 								</td>

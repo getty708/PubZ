@@ -4,5 +4,5 @@
 {% endfor %}
 "<a href="{% url 'core:bib_detail' bib.id %}" class="font-weight-bold text-primary border-bottom border-primary">{{ bib.title|remove_brace }},</a>"
 {{ book.title }} {%if book.abbr %}({{ book.abbr }}){% endif %},
-{% if bib.page %}pp.{{ bib.page }},{% endif %}
+{% if bib.page %}pp.{{ bib.page|replace_double_hyphen }},{% endif %}
 {% if bib.pub_date %}{{bib.pub_date|date:"Y年n月"}}.{% endif %}
