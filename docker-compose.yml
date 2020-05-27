@@ -46,7 +46,7 @@ services:
       - ./utils:/root/utils
     ports:
       - "7000:8000"
+      - "7777:7777"
     depends_on:
       - db
     tty: true
-

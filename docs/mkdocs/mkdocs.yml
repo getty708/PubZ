@@ -1,6 +1,6 @@
 site_name: PubZ - Publication Zoo
 repo_url: https://github.com/getty708/PubZ
-dev_addr: 127.0.0.1:7777
+dev_addr: 0.0.0.0:7777
 site_dir: ./site
 theme:
   name: 'material'
