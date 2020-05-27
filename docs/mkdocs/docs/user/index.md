@@ -1,4 +1,4 @@
-# User Guide
+# User's Guide
 
 ## Contents
 + [基本機能 (業績の閲覧・著者/文献一覧)](#基本機能)
