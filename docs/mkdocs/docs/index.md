@@ -1,6 +1,10 @@
 # PubZ: Publication Zoo
-User/Developer guide.
+Publication management system for our lab.
+
 
 ## Contents
++ [User Guide](./user/index.md)
+  + [Guide for Editors](./user/editor_guide.md)
+
 + [Developer Guide](./dev/index-dev.md)
-+ User Guide
+  + [API Referebce](../sphinx/_build/)
