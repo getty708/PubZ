@@ -15,7 +15,7 @@
     
     
       
-        <title>Coding Policy - PubZ - Publication Zoo</title>
+        <title>URL Structure - PubZ - Publication Zoo</title>
       
     
     
@@ -48,7 +48,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#coding-policy" class="md-skip">
+        <a href="#url-structure" class="md-skip">
           Skip to content
         </a>
       
@@ -76,7 +76,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Coding Policy
+              URL Structure
             
           </span>
         </div>
@@ -340,8 +340,15 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#reference" class="md-nav__link">
-    Reference
+  <a href="#dashboard" class="md-nav__link">
+    Dashboard
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    API
   </a>
   
 </li>
@@ -358,7 +365,7 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/getty708/PubZ/edit/master/docs/dev/code.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/getty708/PubZ/edit/master/docs/dev/urls.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
@@ -366,16 +373,56 @@
                   
                 
                 
-                <h1 id="coding-policy">Coding Policy</h1>
-<div class="admonition wargning">
-<p class="admonition-title">This page is under construction ...</p>
+                <h1 id="url-structure">URL Structure</h1>
+<div class="admonition warning">
+<p class="admonition-title">This page is under construction...</p>
 </div>
-<h2 id="reference">Reference</h2>
-<ul>
-<li>Google Python Style Guide</li>
-<li>PEP8</li>
-<li>OpenStack Style Guidelines</li>
-</ul>
+<h2 id="dashboard">Dashboard</h2>
+<table>
+<thead>
+<tr>
+<th>URI</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>^core/$</code></td>
+<td>Root URI of this application</td>
+</tr>
+<tr>
+<td><code>^core/list/$</code></td>
+<td>List view</td>
+</tr>
+<tr>
+<td><code>^core/bibtex/$</code></td>
+<td>Bibtex style view</td>
+</tr>
+<tr>
+<td><code>^core/table/$</code></td>
+<td>Table style view</td>
+</tr>
+<tr>
+<td><code>^core/tile/$</code></td>
+<td>Tile style view</td>
+</tr>
+</tbody>
+</table>
+<h2 id="api">API</h2>
+<table>
+<thead>
+<tr>
+<th>URI</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>^api/$</code></td>
+<td>Root URI of this application</td>
+</tr>
+</tbody>
+</table>
                 
               
               
