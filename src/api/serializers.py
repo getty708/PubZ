@@ -79,8 +79,8 @@ class BibtexSerializer(serializers.ModelSerializer):
             bibtex = Bibtex.objects.create(book_id=book.id, **validated_data)
             bibtex.owner = self.context['request'].user
             bibtex.save()
-        except django.db.utils.IntegrityError:
-            raise serializers.ValidationError("DB IntegrityError")
+        except django.db.u0tils.IntegrityError as e:
+            raise serializers.ValidationError("DB IntegrityError: {}".format(e))
         return bibtex
 
         

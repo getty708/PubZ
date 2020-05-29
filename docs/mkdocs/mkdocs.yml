@@ -1,0 +1,22 @@
+site_name: PubZ - Publication Zoo
+repo_name: getty708/PubZ
+repo_url: https://github.com/getty708/PubZ
+dev_addr: 0.0.0.0:7777
+site_dir: ./site
+theme:
+  language: en
+  name: 'material'
+markdown_extensions:
+    - admonition
+    - pymdownx.keys
+    - codehilite
+nav:
+- Home: './index.md'
+- User Guide:
+    - "User Guide": './user/index.md'
+    - 'Guide for Editors':  './user/editor_guide.md'
+    - 'Local Rules':  './user/local.md'
+- Developer Guide:
+    - 'Home': './dev/index.md'
+    - 'Display Styles': './dev/display_styles.md'
+- 'License': './license.md'

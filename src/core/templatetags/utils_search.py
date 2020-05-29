@@ -48,14 +48,28 @@ def parse_GET_params(req):
 
     """
     GET_param_keys = [
-        "keywords","book_style","sort",
-        "period_method","period_year",
-        "tags","display_style",
-    ]
-    
+        # key, default value,
+        ("keywords",      None),
+        ("book_style",    None),
+        ("sort",          None),
+        ("period_method", 'ACADEMIC_YEAR'),
+        ("period_year",   datetime.datetime.now().year),
+        ("tags",          None),
+        ("display_style", None),
+    ]    
     params = {}
-    for key in GET_param_keys:
-        params[key] = req.GET.get(key, None)        
+    for key, default_val in GET_param_keys:
+        params[key] = req.GET.get(key, default_val)
+
+    # == Validation ==
+    try:
+        params['period_year'] = int(params['period_year'])
+    except ValueError:
+        params['period_year'] = datetime.datetime.now().year
+
+    # == For usability ==
+    if params['keywords'] is not None:
+        params['period_method'] = 'ALL'
     return params
 
 
@@ -84,14 +98,14 @@ def get_bibtex_query_set(params):
         
 
     # Filter by published year
-    period_method = params.get('period_method', 'all')
-    if period_method == "year":
+    period_method = params.get('period_method', 'ACADEMIC_YEAR')
+    if period_method == "YEAR":
         year = params.get('period_year', datetime.datetime.now().year)
         bibtex_queryset = bibtex_queryset.filter(
             pub_date__gte=datetime.date(int(year), 1,1),
             pub_date__lte=datetime.date(int(year), 12,31),
         )
-    elif period_method == "fiscal_year":
+    elif period_method == "ACADEMIC_YEAR":
         year = params.get('period_year', datetime.datetime.now().year)
         bibtex_queryset = bibtex_queryset.filter(
             pub_date__gte=datetime.date(int(year), 4,  1),

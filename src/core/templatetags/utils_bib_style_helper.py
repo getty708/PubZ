@@ -28,6 +28,26 @@ def remove_brace(value):
     value = value.replace("{", "").replace("}", "")
     return value
 
+@register.filter
+def replace_double_hyphen(value):
+    """ Replace ``--`` (double) with ``-`` (single).
+
+    Args:
+        value (str): string which have ``--``.
+
+    Returns:
+        str (``--`` is replaced with ``-``.)
+   
+    Examples:
+
+        >>> val = "123--456"
+        >>> replace_double_hyphen(val)
+        "123-456"
+ 
+    """
+    value = value.replace("--", "-")
+    return value
+
 
 # --------
 #  Author
