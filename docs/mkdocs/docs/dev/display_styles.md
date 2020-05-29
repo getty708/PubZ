@@ -1,24 +1,9 @@
-# Application Dashboard
+### Display Style Examples
 
-This application provides all users to view and search function.
-
-
-## Basic URL Structures
-
-| URI | Usage |
-|-----|-------------|
-| `^dashboard/$`              |  Root URI of this application |
-| `^/dashboard/view/$`        | List view |
-| `^/dashboard/view/list/$`   | List view |
-| `^/dashboard/view/bibtex/$` | Bibtex style view |
-| `^/dashboard/view/table/$`  | Table style view  |
-| `^/dashboard/view/tile/$`   | Tile style view   |
+!!! warning "This page is under construction."
+   
 
 
-## How to Edit Display Style
-The style template are placed in [`dashbord/templates/custom/`](https://github.com/getty708/PubZ/tree/master/django/app/dashboard/templates/custom/bibtex). You can edit as you like.
-
-### Default Style Examples
 #### International Proceedings
 
 + Bibtex View
@@ -113,7 +98,7 @@ The style template are placed in [`dashbord/templates/custom/`](https://github.c
 |論文誌|ACM/Springer Personal and Ubiquitous Computing (ACM/Springer PUC)|J. Korpela and T. Maekawa|Privacy-Preserving Recognition of Object-Based Activities Using Near-Infrared Reflective Markers|2018年4月|link|
 
 
-#### Domestic Conference(査読付き)
+#### Domestic Conference
 
 + Bibtex View
 ```
@@ -200,46 +185,6 @@ The style template are placed in [`dashbord/templates/custom/`](https://github.c
 |----|----|----|----|----|----|
 |国内研究会|情報処理学会マルチメディア，分散，協調とモバイル(DICOMO2018)シンポジウム論文集|加藤 慎也, 天方 大地, 西尾 俊哉, 原 隆浩|位置情報サービス利用におけるダミーを用いたユーザ位置曖昧化手法の視認性評価|2018年7月|link|
 
-
-#### National Conference
-
-+ Bibtex View
-```
-@inproceedings{<id>,
-         title = {<title_ja>or<title_en>},
-        author = {<authors_ja>},
-     booktitle = {<book>},
-         month = {<pub_date[1]>},
-          year = {<pub_date[0]>},
-}
-```
-```
-@inproceedings{id914,
-         title = {社会センサデータ生成・共有基盤におけるストリーミングデータ処理機構},
-        author = {中嶋 奎介 and 横山 正浩 and 義久 智樹 and 原 隆浩},
-     booktitle = {IPSJ情報処理学会第80回全国大会},
-         month = {3},
-          year = {2018},
-}
-```
-
-+ List View
-```
-[1] <authors_ja>, "<title_ja>or<title_en>," <book>,  <pub_date[0]>年<pub_date[1]>月.
-```
-```
-[1] 中嶋 奎介, 横山 正浩, 義久 智樹, 原 隆浩, "社会センサデータ生成・共有基盤におけるストリーミングデータ処理機構," IPSJ情報処理学会第80回全国大会, 2018年3月.
-```
-
-+ Table View
-
-|/|論文誌/会議名|著者名|表題|出版年月|Link|
-|----|----|----|----|----|----|
-|type|book|authors|title|pub_date[0]年 pub_date[1]月|link|
-
-|/|論文誌/会議名|著者名|表題|出版年月|Link|
-|----|----|----|----|----|----|
-|全国大会|IPSJ情報処理学会第80回全国大会|中嶋 奎介, 横山 正浩, 義久 智樹, 原 隆浩|社会センサデータ生成・共有基盤におけるストリーミングデータ処理機構|2018年3月|link|
 
 
 #### Book/Review/Editor/Translation
@@ -454,4 +399,7 @@ The style template are placed in [`dashbord/templates/custom/`](https://github.c
 |----|----|----|----|----|----|
 |受賞|ヤングリサーチャ賞|神谷 俊充, 中村 達哉, 前川 卓也, 天方 大地, 原 隆浩|情報処理学会マルチメディア，分散，協調とモバイル(DICOMO2018)シンポジウム論文集|2018年7月|link|
 
+
+## How to Edit Display Style
+The style template are placed in [`dashbord/templates/custom/`](https://github.com/getty708/PubZ/tree/master/django/app/dashboard/templates/custom/bibtex). You can edit as you like.
 

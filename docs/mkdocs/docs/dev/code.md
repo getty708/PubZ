@@ -1,17 +1,7 @@
 # Coding Policy
 
+!!! wargning "This page is under construction ..."
 
----------
-## Variable Naming
-### Do
-TBA
-
-### Don't
-TBA
-
-
-
----------------
 ## Reference
 + Google Python Style Guide
 + PEP8
