@@ -29,7 +29,7 @@ class AuthorForm(forms.ModelForm):
         super(AuthorForm, self).__init__(*args, **kwargs)
         self.fields["name_en"].widget.attrs.update({
             'class': 'form-control form-control-sm',
-            'placeholder': "FamilyName, (MiddleName) FirstName",
+            'placeholder': "FamilyName, FirstName (MiddleName)",
         })
         self.fields["name_ja"].widget.attrs.update({
             'class': 'form-control form-control-sm',
@@ -232,8 +232,8 @@ class BibtexForm(forms.ModelForm):
             'placeholder': '(If this entry has no English title, leave this as blank.)',
         })
         self.fields["title_ja"].widget.attrs.update({
-            'placeholder': '(日本のタイトルがない場合は空欄)',
-        })                
+            'placeholder': '(日本語のタイトルがない場合は空欄)',
+        })
         self.fields["book_title"].widget.attrs.update({
             'class': 'form-control form-control-sm',
             'disabled': True,
