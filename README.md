@@ -12,8 +12,6 @@ Publication management system for your lab.
   + docker-compose
   
 
-
-
 ## Instlation
 ### Step.1 Build Docker Containers
 Move to the directory which `docker-compose.yml` exists and issue these commands
