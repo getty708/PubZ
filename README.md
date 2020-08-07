@@ -3,7 +3,7 @@ Publication management system for your lab.
 
 
 ## Full Document
-[Document](https://getty708.github.io/PubZ/)
+[Document](https://getty708.github.io/PubZ/mkdocs/site/)
 
 
 ## Requirements for Dev Env
@@ -11,8 +11,6 @@ Publication management system for your lab.
   + docker
   + docker-compose
   
-
-
 
 ## Instlation
 ### Step.1 Build Docker Containers
