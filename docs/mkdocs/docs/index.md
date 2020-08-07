@@ -1,10 +1,7 @@
 # PubZ: Publication Zoo
 Publication management system for our lab.
 
-## Pubzとは
-
-
-## ドキュメントの構成
+## Table of Contents
 
 + [User's Guide](./user/index.md)
   + [Guide for Editors](./user/editor_guide.md)
