@@ -182,9 +182,9 @@ class Bibtex(models.Model):
     
     def __str__(self):
         if self.language == 'EN':
-            return self.title_en
+            return str(self.title_en)
         elif self.language == 'JA':
-            return self.title_ja
+            return str(self.title_ja)
         return "Bibtex[{}]".format(self.id)
 
     @property
@@ -369,7 +369,7 @@ class Author(models.Model):
         )
         
     def __str__(self):
-        return self.name_en
+        return str(self.name_en)
 
 
     @property
@@ -466,7 +466,7 @@ class Book(models.Model):
     def __str__(self):
         if self.abbr != "":
             return "{title} ({abbr})".format(title=self.title, abbr=self.abbr)
-        return self.title
+        return str(self.title)
 
 
 class Tag(models.Model):
@@ -510,7 +510,7 @@ class Tag(models.Model):
         )
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
   
 class AuthorOrder(models.Model):
@@ -553,8 +553,10 @@ class AuthorOrder(models.Model):
         elif self.order == 3:
             order = "3rd"
         else:
-            order = "{}th".format(self.order)
-        return "Bibtex[{}] {}".format(self.bibtex.id, order)
+            order = "{}th".format(self.order if self.order else '' )
+        bib_id = self.bibtex.id if self.bibtex.id else 0
+        s = "Bibtex[{}] {}".format(bib_id, order)
+        return s
 
 
 class TagChain(models.Model):
