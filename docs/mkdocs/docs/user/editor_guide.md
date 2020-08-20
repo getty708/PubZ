@@ -13,7 +13,7 @@
 !!! warning "エントリの削除について"
 	編集者 (一般の staff account) では，一度登録したエントリの削除はできません．
 	削除したい場合は管理者に連絡してください．	
-	管理者はDjangoの管理サイトから該当のオブジェクトを選択肢，削除を行ってください．
+	管理者はDjangoの管理サイトから該当のオブジェクトを選択し，削除を行ってください．
 
 !!! Warning "重複エントリ"
 	出版物とは著者は，既に登録がある場合は重複を防ぐために新しく作成してはいけません．
@@ -27,20 +27,22 @@
 表示される以下の項目を入力し，`Add New` ボタンをクリックしてください．
 以上で，登録が完了です．
 
+### 登録項目 (Books)
+
 | 項目             | 必須項目 | 備考        |
 |:-----------------|:---------|:------------|
 | Book Title       | Yes | 出版物名 (e.g. Proccedings of Computer Vision and Pattern Recognition) |
 | Abbreviation     | No  | 会議・雑誌の略称 (e.g. CVPR) |
-| Publication Type | Yes | 出版物のカテゴリ<br>(Journal, International/Domestic Conference, Book, Newpaper, Others) |
+| Publication Type | Yes | 出版物のカテゴリ<br>(Journal, International/Domestic Conference, Book, News Paper, Others) |
 | Publisher        | No  | 出版社 |
 | Note             | No  | メモ・コメント |
 
 
 
 !!! info "Book Title/Abbreviation: 出版物名の表記について"
-	開催年度など毎年更新される情報は除いて登録してください (e.g. X: ISWC2020, O: ISWC)．
+	開催年度など毎年更新される情報は除いて登録してください (e.g. Don't ==> ISWC2020, Do ==> ISWC)．
 	同じ会議に対する研究業績を紐付けるために必要です．
-	開催年が含まれる出版物名はBibtexエントリに対して登録できます．
+	開催年が含まれる出版物名はBibtexエントリの `Overwrite Book Title` に対して登録できます．
 
 
 ## 著者 (Authors) の登録
@@ -51,10 +53,12 @@
 表示される以下の項目を入力し，`Add New` ボタンをクリックしてください．
 以上で，登録が完了です．
 
+### 登録項目 (Authors)
+
 | 項目             | 必須項目 | 備考        |
 |:-----------------|:---------|:------------|
 | Name (en)        | Yes   | 氏名 (英語表記)．Family nameを一番最初に書きカンマで区切ってください (e.g. Handai, Taro)． |
-| Name (ja)        | No    | 氏名 (日本語表記) |
+| Name (ja)        | No    | 氏名 (日本語表記, 姓名の間は半角スペース) |
 | Affiliation (en) | No    | 所属 (英語表記) |
 | Affiliation (ja) | No    | 所属 (日本語表記) |
 | Mail             | No (可能な限り登録) | メールアドレス |
@@ -71,6 +75,9 @@
 `Add New` をクリックすると，該当エントリの詳細情報が入力できるようになります．
 入力フォームの指示に従って以下の項目を入力していきます．
 
+### 登録項目 (Bibtexs)
+
+
 | 項目        | 必須項目 | 備考        |
 |:------------|:---------|:------------|
 | Language    | Yes | 研究業績の言語 (この登録内容に従って，著者の英語表記と日本語表記が選択されます．) |
@@ -78,7 +85,7 @@
 | Title (ja)  | No  | タイトル (日本語). 無い場合は空欄 |
 | Book        | Yes | 出版物 |
 | Overwrite Book Title | No | 出版物に開催年などの情報を含める場合は，チェックボックスにチェックを入れた上で，出版物名を登録します． |
-| Bibtex Type | Yes | 業績エントリのタイプ．基本的には`Same as the Book`．登録しているエントリが，受賞歴や公園の場合は，それぞれ `Award`・`Keynote` を選択してください． |
+| Bibtex Type | Yes | 業績エントリのタイプ．基本的には`Same as the Book`．登録しているエントリが，受賞歴や講演の場合は，それぞれ `Award`・`Keynote` を選択してください． |
 | Volume      | No | 巻 (文字列も可) |
 | Number      | No | 号 |
 | Chapter     | No | 章 |
@@ -98,6 +105,8 @@
 研究業績の詳細情報を登録するページで `Add New/Update` をクリックすると，一度研究業績の詳細表示が表示されます．登録事項に間違いがないか一度確認をしてください．
 
 次に，研究業績の詳細ページの下部にある`Edit` ボタンをクリックすると，研究業績の詳細情報登録ページが表示されます．次に，Authorの行にある `Add Author` ボタンをクリックすると，Bibitexの項目が入力済みの登録フォームが表示されます．残りのフィールド (Author, Order) を入力し，`Add` をクリックして登録完了です．
+
+### 登録項目 
 
 | 項目   | 必須項目 | 備考        |
 |:-------|:---------|:------------|
