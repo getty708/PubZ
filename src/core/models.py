@@ -191,9 +191,9 @@ class Bibtex(models.Model):
     def title(self):
         """ Returns a title of this entry in the default language. """
         if self.language == 'EN':
-            return self.title_en
+            return str(self.title_en)
         elif self.language == 'JA':
-            return self.title_ja
+            return str(self.title_ja)
 
     @property
     def book_title_display(self):
