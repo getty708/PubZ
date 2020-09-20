@@ -76,3 +76,49 @@ With this setup, we launched 4 containers. You can access to 3 of them with your
 ## Licence
 [MIT License](./LICENSE)
 
+
+## Dev - Memo
+### Integrate Title feiled @ 2020.09.20
+
+```bash
+$ docker-compose exec django bash 
+
+root@django:/code# python manage.py makemigrations core
+Migrations for 'core':
+  core/migrations/0008_auto_20200920_1157.py
+    - Add field title to bibtex
+    - Add field title_2nd_lang to bibtex
+root@django:/code# 
+root@django:/code# python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, authtoken, contenttypes, core, sessions, users
+Running migrations:
+  Applying core.0008_auto_20200920_1157... OK
+
+```
+
+
+```SQL
+-- prime lang --
+UPDATE `core_bibtex`
+SET `core_bibtex`.`title` = `core_bibtex`.`title_en`
+WHERE
+	`core_bibtex`.`language` = 'EN' ;
+
+UPDATE `core_bibtex`
+SET `core_bibtex`.`title` = `core_bibtex`.`title_ja`
+WHERE
+	`core_bibtex`.`language` = 'JA' ;
+
+-- 2nd lang --
+UPDATE `core_bibtex`
+SET `core_bibtex`.`title_2nd_lang` = `core_bibtex`.`title_ja`
+WHERE
+	`core_bibtex`.`language` = 'EN' ;
+
+UPDATE `core_bibtex`
+SET `core_bibtex`.`title_2nd_lang` = `core_bibtex`.`title_en`
+WHERE
+	`core_bibtex`.`language` = 'JA' ;
+```
+

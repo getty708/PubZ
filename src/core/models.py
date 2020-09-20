@@ -5,10 +5,10 @@ from users.models import User
 # --------------------------------------------------
 class Bibtex(models.Model):
     """ Bibtex object. All information of your publications are represented as this model.
-    
-    
+
+
     Possible choices for ``bib_style`` filed are follows.
-  
+
     .. csv-table::
         :header: Var, Type, Description
         :widths: 5, 5, 10
@@ -27,15 +27,27 @@ class Bibtex(models.Model):
     BIBSTYLE_CHOICES = (
         ('AWARD', 'Award',),
         ('KEYNOTE', 'Keynote',),
-        ('SAMEASBOOK','Same as the Book'),
+        ('SAMEASBOOK', 'Same as the Book'),
     )
-    
+
     # Fields
-    # Todo: change this filed to title/title_secondary and language/langage_secondary    
+    # Todo: change this filed to title/title_secondary and language/langage_secondary
     language = models.CharField(
         max_length=2,
         choices=LANGUAGE_CHOICES,
         help_text="Default language setting for this publication. (choise=EN/JA")
+    title = models.CharField(
+        max_length=512, null=True, blank=True, default="",
+        help_text=(
+            "Title of this pubilication (Primary Language). Check validation rules."
+            "(len=512, blank=True)"
+        ))
+    title_2nd_lang = models.CharField(
+        max_length=512, null=True, blank=True, default="",
+        help_text=(
+            "Title of this pubilication (Primary Language). Check validation rules."
+            "(len=512, blank=True)"
+        ))
     title_en = models.CharField(
         max_length=512, null=True, blank=True, default="",
         help_text=(
@@ -76,18 +88,18 @@ class Bibtex(models.Model):
         help_text=(
             "The title of the book, if only part of it is being cited. "
             "This field include more detail information like year."
-            "For example, the title of book object is 'ICLR', set 'the 20th ICML'."            
+            "For example, the title of book object is 'ICLR', set 'the 20th ICML'."
             "(len=512, blank=True)"
         ))
     volume = models.CharField(
-        max_length=128,null=True,blank=True,
+        max_length=128, null=True, blank=True,
         help_text=(
             "The volume of a journal or multi-volume book."
             "Before published, ignore this field."
             "(len=128, blank=True)"
         ))
     number = models.CharField(
-        max_length=128, null=True,blank=True,
+        max_length=128, null=True, blank=True,
         help_text=(
             "The '(issue) number' of a journal, magazine, or tech-report,"
             "if applicable. Note that this is not the 'article number' assigned by some journals."
@@ -141,7 +153,7 @@ class Bibtex(models.Model):
         help_text=(
             "The Digital Object Identifier."
             "(len=128, optional)"
-        ))    
+        ))
     abstruct = models.TextField(
         null=True, blank=True,
         help_text=(
@@ -174,12 +186,12 @@ class Bibtex(models.Model):
     owner = models.ForeignKey(
         'users.User',
         null=True, on_delete=models.SET_NULL)
-    
+
     class Meta:
         unique_together = (
             ("title_en", "book", "pub_date", "memo", "page",),
         )
-    
+
     def __str__(self):
         if self.language == 'EN':
             return str(self.title_en)
@@ -187,18 +199,18 @@ class Bibtex(models.Model):
             return str(self.title_ja)
         return "Bibtex[{}]".format(self.id)
 
-    @property
-    def title(self):
-        """ Returns a title of this entry in the default language. """
-        if self.language == 'EN':
-            return str(self.title_en)
-        elif self.language == 'JA':
-            return str(self.title_ja)
+    # @property
+    # def title_2nd_lang(self):
+    #     """ Returns a title of this entry in the default language. """
+    #     if self.language == 'EN':
+    #         return str(self.title_en)
+    #     elif self.language == 'JA':
+    #         return str(self.title_ja)
 
     @property
     def book_title_display(self):
         """ Returns a book title of this entry.
-        
+
         If this enttry has ``book_title`` itself, return it.
         Otherwise, returns a book title of linked ``book`` entry.
 
@@ -222,7 +234,7 @@ class Bibtex(models.Model):
 
         Returns:
             str (``Bitex.BIBTEXSTYLE_CHOICES`` or ``Book.STYLE_CHOICES``)
-        
+
         """
         if self.bib_type == "SAMEASBOOK":
             return self.book.style
@@ -231,7 +243,7 @@ class Bibtex(models.Model):
     @property
     def bib_type_display(self):
         """ Returns bibtex tyepe (display string) 
-        
+
         """
         if self.bib_type == "SAMEASBOOK":
             return self.book.get_style_display()
@@ -262,10 +274,10 @@ class Bibtex(models.Model):
 
         Todo:
             Check whether this property is used or not. If not, remove this.
-        
+
         """
         return self.authororder_set.all().order_by('order')
-    
+
     @property
     def date_str(self):
         """ Returns date in display format.
@@ -295,22 +307,22 @@ class Bibtex(models.Model):
 
         Todo:
             Check whether this property is used or not. If not, remove this.        
-        
+
         """
         dict_ret = {
             "original": self.pub_date,
         }
         if self.pub_date:
-            dict_ret["year"]  = self.pub_date.year
+            dict_ret["year"] = self.pub_date.year
             dict_ret["month"] = self.pub_date.month
             dict_ret["month_string"] = self.pub_date.strftime("%B")
         else:
             dict_ret["year"] = "None"
             dict_ret["month"] = "None"
             dict_ret["month_string"] = "None"
-        return dict_ret                
+        return dict_ret
 
-    
+
 class Author(models.Model):
     name_en = models.CharField(
         max_length=128,
@@ -360,17 +372,16 @@ class Author(models.Model):
         auto_now=True, blank=False)
     owner = models.ForeignKey(
         'users.User',
-        null=True,blank=False,
+        null=True, blank=False,
         on_delete=models.SET_NULL)
-    
+
     class Meta:
         unique_together = (
             ("name_en", "mail",),
         )
-        
+
     def __str__(self):
         return str(self.name_en)
-
 
     @property
     def name(self, lang="EN"):
@@ -386,32 +397,33 @@ class Author(models.Model):
         if lang == "EN":
             return self.dep_en
         else:
-            return self.dep_ja                
+            return self.dep_ja
+
 
 class Book(models.Model):
     """ 
 
     Publication object   
     Available Book stype.
-   
+
     .. csv-table::
         :header: Key, Type, Memo
         :widths: 5, 5, 10
-    
+
         ``ARTICLE``, Journal, Journal Paper
         ``INPROCEEDINGS_INTERNATIONAL``, International Conference, Proceedings of International Conference
         ``INPROCEEDINGS_DOMESTIC``, Domestic Conference, (国内会議 (査読付き), 国内研究会, 全国大会)
         ``BOOK``, Book, 出版社が刊行した書籍。(著書／監修／編集／訳書)
         ``NEWS``, News Paper, 新聞記事
         ``MISC``, Others, その他該当種別が無いもの。
-    
+
     """
-    
+
     STYLE_CHOICES = (
-        ('Paper',(
+        ('Paper', (
             ('ARTICLE',                     'Journal'),
-            ('INPROCEEDINGS_INTERNATIONAL', 'International Conference'),            
-            ('INPROCEEDINGS_DOMESTIC',      'Domestic Conference',),            
+            ('INPROCEEDINGS_INTERNATIONAL', 'International Conference'),
+            ('INPROCEEDINGS_DOMESTIC',      'Domestic Conference',),
         ),),
         ('Article', (
             ('BOOK', 'Book',),
@@ -419,7 +431,7 @@ class Book(models.Model):
             ('MISC', 'Others'),
         ),),
     )
-    
+
     title = models.CharField(
         max_length=256,
         help_text=(
@@ -427,7 +439,7 @@ class Book(models.Model):
             "See validation rules."
             "(len=256, blank=False)"
         ))
-    abbr  = models.CharField(
+    abbr = models.CharField(
         max_length=256, blank=True, null=False, default="",
         help_text=(
             "The book title (Abbreviation)."
@@ -453,11 +465,11 @@ class Book(models.Model):
             "(blank=True)"
         ))
     created = models.DateTimeField(auto_now_add=True, blank=False)
-    modified = models.DateTimeField(auto_now=True, blank=False)    
+    modified = models.DateTimeField(auto_now=True, blank=False)
     owner = models.ForeignKey(
         'users.User', null=True,
         on_delete=models.SET_NULL)
-    
+
     class Meta:
         unique_together = (
             ("title", "style",),
@@ -475,9 +487,9 @@ class Tag(models.Model):
     Via objects, you can make links among related bibtex entries.
     For example, make a tag for a working group (e.g. Ubiquitous),
     you can pick up all bibtex of this team through the tag.
-    
+
     """
-    
+
     name = models.CharField(
         max_length=32,
         help_text=(
@@ -497,13 +509,13 @@ class Tag(models.Model):
             "(model=Tag, blank=True)"
         ))
     created = models.DateTimeField(auto_now_add=True, blank=False)
-    modified = models.DateTimeField(auto_now=True, blank=False)    
+    modified = models.DateTimeField(auto_now=True, blank=False)
     owner = models.ForeignKey(
         'users.User',
         null=True,
         on_delete=models.SET_NULL,
     )
-    
+
     class Meta:
         unique_together = (
             ("name", "parent",),
@@ -512,14 +524,14 @@ class Tag(models.Model):
     def __str__(self):
         return str(self.name)
 
-  
+
 class AuthorOrder(models.Model):
     """ This is an intermidiate model to link bibtex and author objects.
     """
-    
+
     bibtex = models.ForeignKey(
         'core.Bibtex',
-        on_delete=models.PROTECT,        
+        on_delete=models.PROTECT,
     )
     author = models.ForeignKey(
         'core.Author',
@@ -532,13 +544,12 @@ class AuthorOrder(models.Model):
             "(Only positive integer is acceptable)"
         ))
     created = models.DateTimeField(auto_now_add=True, blank=False)
-    modified = models.DateTimeField(auto_now=True, blank=False)    
+    modified = models.DateTimeField(auto_now=True, blank=False)
     owner = models.ForeignKey(
         'users.User',
         null=True,
         on_delete=models.SET_NULL
     )
-
 
     class Meta:
         unique_together = (
@@ -546,14 +557,14 @@ class AuthorOrder(models.Model):
         )
 
     def __str__(self):
-        if self.order == 1:            
+        if self.order == 1:
             order = "1st"
         elif self.order == 2:
             order = "2nd"
         elif self.order == 3:
             order = "3rd"
         else:
-            order = "{}th".format(self.order if self.order else '' )
+            order = "{}th".format(self.order if self.order else '')
         bib_id = self.bibtex.id if self.bibtex.id else 0
         s = "Bibtex[{}] {}".format(bib_id, order)
         return s
@@ -561,9 +572,9 @@ class AuthorOrder(models.Model):
 
 class TagChain(models.Model):
     """ This is an intermidiate model to link bibtex and tag objects.
-    
+
     """
-    
+
     bibtex = models.ForeignKey(
         'core.Bibtex',
         on_delete=models.PROTECT,
@@ -573,16 +584,14 @@ class TagChain(models.Model):
         on_delete=models.PROTECT,
     )
     created = models.DateTimeField(auto_now_add=True, blank=False)
-    modified = models.DateTimeField(auto_now=True, blank=False)    
+    modified = models.DateTimeField(auto_now=True, blank=False)
     owner = models.ForeignKey(
         'users.User',
         null=True,
         on_delete=models.SET_NULL
     )
 
-    
     class Meta:
         unique_together = (
             ("bibtex", "tag",),
         )
-    

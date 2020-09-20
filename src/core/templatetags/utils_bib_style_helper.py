@@ -17,16 +17,17 @@ def remove_brace(value):
 
     Returns:
         str (``{``, ``}`` is removed.)
-   
+
     Examples:
 
         >>> val = "The {CNN}-based ..."
         >>> remove_brace(val)
         "The CNN-based ..."
- 
+
     """
-    value = value.replace("{", "").replace("}", "")
+    value = str(value).replace("{", "").replace("}", "")
     return value
+
 
 @register.filter
 def replace_double_hyphen(value):
@@ -37,15 +38,15 @@ def replace_double_hyphen(value):
 
     Returns:
         str (``--`` is replaced with ``-``.)
-   
+
     Examples:
 
         >>> val = "123--456"
         >>> replace_double_hyphen(val)
         "123-456"
- 
+
     """
-    value = value.replace("--", "-")
+    value = str(value).replace("--", "-")
     return value
 
 
@@ -58,12 +59,12 @@ def author_en_default(val):
 
     Args: 
         val (str): name string.
-    
+
     Returns:
         str
 
     Examples:
-    
+
         >>> # Example1: with comma
         >>> name = "Handai, Taro"
         >>> author_en_default(name)
@@ -74,6 +75,7 @@ def author_en_default(val):
         "Taro Handai"
 
     """
+    val = str(val)
     vals = [s.strip() for s in val.split(",")]
     if len(vals) == 2:
         return "{} {}".format(vals[1].title(), vals[0].title())
@@ -86,12 +88,12 @@ def author_en_google(val):
 
     Args: 
         val (str): name string.
-    
+
     Returns:
         str
 
     Examples:
-    
+
         >>> # Example1: with comma
         >>> name = "Handai, Taro"
         >>> author_en_google(name)
@@ -102,6 +104,7 @@ def author_en_google(val):
         "T. Handai"
 
     """
+    val = str(val)
     val = [v.strip() for v in val.split(",")]
     if len(val) >= 2:
         # with comma
