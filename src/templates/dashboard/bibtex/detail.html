@@ -27,6 +27,20 @@
 							</tr>
 						</thead>
 						<tbody>
+							{% if bibtex.title_2nd_lang %}
+							<tr>
+								<th scope="col">
+									{% if bibtex.language == 'EN' %}
+									Title (Japanese)
+									{% else %}
+									Title (English)
+									{% endif %}
+								</th>
+								<td>
+									{{ bibtex.title_2nd_lang }}
+								</td>
+							</tr>
+							{% endif %}
 							<tr>
 								<th scope="col">Authors</th>
 								<td>
@@ -123,14 +137,14 @@
 								</td>
 							</tr>
 							{% endif %}
-							{% if bibtex.abstruct %}
+							{% if bibtex.abstract %}
 							<tr>
 								<th scope="col">Abstruct</th>
 								<td>
 									<div class="row">
 										<div class="col">
 											<div class="collapse multi-collapse" id="multiCollapseExample2">
-												{{ bibtex.abstruct|default:'-' }}
+												{{ bibtex.abstract|default:'-' }}
 											</div>
 										</div>
 									</div>

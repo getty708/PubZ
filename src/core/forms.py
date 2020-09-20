@@ -218,7 +218,7 @@ class BibtexForm(forms.ModelForm):
     class Meta:
         model = models.Bibtex
         fields = [
-            'language', 'title_en', 'title_ja',
+            'language', 'title', 'title_2nd_lang',
             'book', 'book_title', 'bib_type',
             'volume', 'number', 'chapter', 'page', 'edition',
             'pub_date', 'use_date_info', 'is_published',
@@ -236,11 +236,8 @@ class BibtexForm(forms.ModelForm):
             self.fields[key].widget.attrs.update({
                 'class': 'form-control form-control-sm',
             })
-        self.fields["title_en"].widget.attrs.update({
-            'placeholder': '(If this entry has no English title, leave this as blank.)',
-        })
-        self.fields["title_ja"].widget.attrs.update({
-            'placeholder': '(日本語のタイトルがない場合は空欄)',
+        self.fields["title"].widget.attrs.update({
+            'placeholder': '(title of your publication)',
         })
         self.fields["book_title"].widget.attrs.update({
             'class': 'form-control form-control-sm',
@@ -264,9 +261,9 @@ class BibtexForm(forms.ModelForm):
         })
 
     # TODO: Implement title validator.
-    def clean_title_en(self):
-        title_en = self.cleaned_data['title_en']
-        return title_en
+    def clean_title(self):
+        title = self.cleaned_data['title']
+        return title
 
     def clean_page(self):
         """
