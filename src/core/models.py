@@ -48,18 +48,6 @@ class Bibtex(models.Model):
             "Title of this pubilication (Primary Language). Check validation rules."
             "(len=512, blank=True)"
         ))
-    title_en = models.CharField(
-        max_length=512, null=True, blank=True, default="",
-        help_text=(
-            "(Deprecated) English title of this pubilication. Check validation rules."
-            "(len=512, blank=True)"
-        ))
-    title_ja = models.CharField(
-        max_length=512, null=True, blank=True, default="",
-        help_text=(
-            "(Deprecated) Japanese title of your pubilication. "
-            "Check validation rules. (len=512, blank=True)"
-        ))
     authors = models.ManyToManyField(
         'core.Author',
         through='AuthorOrder',
@@ -189,23 +177,13 @@ class Bibtex(models.Model):
 
     class Meta:
         unique_together = (
-            ("title_en", "book", "pub_date", "memo", "page",),
+            ("title", "book", "pub_date", "memo", "page",),
         )
 
     def __str__(self):
-        if self.language == 'EN':
-            return str(self.title_en)
-        elif self.language == 'JA':
-            return str(self.title_ja)
+        if self.title is not None:
+            return str(self.title)
         return "Bibtex[{}]".format(self.id)
-
-    # @property
-    # def title_2nd_lang(self):
-    #     """ Returns a title of this entry in the default language. """
-    #     if self.language == 'EN':
-    #         return str(self.title_en)
-    #     elif self.language == 'JA':
-    #         return str(self.title_ja)
 
     @property
     def book_title_display(self):
