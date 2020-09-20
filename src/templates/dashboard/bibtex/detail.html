@@ -8,17 +8,18 @@
 <div class="row">
 	<div class="col-12 my-3">
 		<div class="card">
-			<div class="card-body">								
+			<div class="card-body">
 				<div class="d-block h4">
 					<span class="badge badge-primary">Bibtex</span>
-					<span class="d-inline-block border border-info badge-pill text-info small">{{ bibtex.bib_type_display }}</span>
+					<span
+						class="d-inline-block border border-info badge-pill text-info small">{{ bibtex.bib_type_display }}</span>
 				</div>
-				<h1 class="h3" >
+				<h1 class="h3">
 					<span class="d-inline-flex">{{ bibtex.title|remove_brace }}</span>
 				</h1>
-				
+
 				<div class="table-responsive">
-					<table class="table table-striped w-100" >
+					<table class="table table-striped w-100">
 						<thead>
 							<tr>
 								<th></th>
@@ -26,11 +27,26 @@
 							</tr>
 						</thead>
 						<tbody>
+							{% if bibtex.title_2nd_lang %}
+							<tr>
+								<th scope="col">
+									{% if bibtex.language == 'EN' %}
+									Title (Japanese)
+									{% else %}
+									Title (English)
+									{% endif %}
+								</th>
+								<td>
+									{{ bibtex.title_2nd_lang }}
+								</td>
+							</tr>
+							{% endif %}
 							<tr>
 								<th scope="col">Authors</th>
 								<td>
 									{% for author in bibtex.authors.all %}
-									<a href="{% url 'core:author_detail' author.id %}" class="btn btn-sm btn-outline-primary d-inline-flex mb-1" >
+									<a href="{% url 'core:author_detail' author.id %}"
+										class="btn btn-sm btn-outline-primary d-inline-flex mb-1">
 										{% if bibtex.language == "EN" or not author.name_ja %}
 										{{ author.name_en|author_en_default }}
 										{% else %}
@@ -42,18 +58,18 @@
 							<tr>
 								<th scope="col">Book</th>
 								<td class="row">
-									<span class="col-12" >
+									<span class="col-12">
 										{% if bibtex.book_title %}
-										<a href="{% url 'core:book_detail' bibtex.book.id %}" class="d-block" >
+										<a href="{% url 'core:book_detail' bibtex.book.id %}" class="d-block">
 											<span class="d-block">
 												{{ bibtex.book_title_display }}
 											</span>
 											<span class="d-block text-muted small">
 												(From {{ bibtex.book.title }})
 											</span>
-										</a>																																				
+										</a>
 										{% else %}
-										<a href="{% url 'core:book_detail' bibtex.book.id %}" class="d-inline-flex" >
+										<a href="{% url 'core:book_detail' bibtex.book.id %}" class="d-inline-flex">
 											{{ bibtex.book.title }}
 										</a>
 										{% endif %}
@@ -63,7 +79,8 @@
 										{% if bibtex.number %}Number.{{ bibtex.number }}, {% endif %}
 										{% if bibtex.chapter %}Chapter.{{ bibtex.chapter }}, {% endif %}
 										{% if bibtex.page %}Page.{{ bibtex.page|replace_double_hyphen }}, {% endif %}
-										{% if bibtex.pub_date %} {% if bibtex.language == "EN" %}{{ bib.pub_date|date:"F Y" }}{% else %}{{ bib.pub_date|date:"Y年n月" }}{% endif %}{% endif %}
+										{% if bibtex.pub_date %}
+										{% if bibtex.language == "EN" %}{{ bib.pub_date|date:"F Y" }}{% else %}{{ bib.pub_date|date:"Y年n月" }}{% endif %}{% endif %}
 									</span>
 								</td>
 							</tr>
@@ -81,10 +98,12 @@
 								<th scope="col">Tags</th>
 								<td>
 									{% for tag in bibtex.tags.all %}
-									<a href="{% url 'core:tag_detail' tag.id %}" class="btn btn-sm btn-outline-primary d-inline-flex" >{{ tag.name }}</a>
+									<a href="{% url 'core:tag_detail' tag.id %}"
+										class="btn btn-sm btn-outline-primary d-inline-flex">{{ tag.name }}</a>
 									{% endfor %}
 									{% if user.is_authenticated %}
-									<a href="{% url 'core:tagchain_add'%}?bibtex={{ bibtex.id }}" class="small text-muted"  >(Add other tags)</a>
+									<a href="{% url 'core:tagchain_add'%}?bibtex={{ bibtex.id }}"
+										class="small text-muted">(Add other tags)</a>
 									{% endif %}
 								</td>
 							</tr>
@@ -99,12 +118,12 @@
 								<td>
 									{{ bibtex.doi|default:'-' }}
 								</td>
-							</tr>							
+							</tr>
 							<tr>
 								<th scope="col">URL</th>
 								<td>
 									{% if bibtex.url %}
-									<a href="{{ bibtex.url }}" >{{ bibtex.url|default:'-' }}</a>
+									<a href="{{ bibtex.url }}">{{ bibtex.url|default:'-' }}</a>
 									{% else %}
 									-
 									{% endif %}
@@ -118,19 +137,20 @@
 								</td>
 							</tr>
 							{% endif %}
-							{% if bibtex.abstruct %}														
+							{% if bibtex.abstract %}
 							<tr>
 								<th scope="col">Abstruct</th>
 								<td>
 									<div class="row">
 										<div class="col">
 											<div class="collapse multi-collapse" id="multiCollapseExample2">
-												{{ bibtex.abstruct|default:'-' }}
+												{{ bibtex.abstract|default:'-' }}
 											</div>
 										</div>
 									</div>
 									<div class="w-100 mb-2">
-										<a class="" data-toggle="collapse" href="#multiCollapseExample2" role="button" aria-expanded="false" aria-controls="multicollapseExample2">
+										<a class="" data-toggle="collapse" href="#multiCollapseExample2" role="button"
+											aria-expanded="false" aria-controls="multicollapseExample2">
 											<u class="text-muted">Show/Hide</u>
 										</a>
 									</div>
@@ -146,25 +166,25 @@
 						<div class="card-body text-dark">
 							{{ bibtex | bibtex_bib_format }}
 						</div>
-					</div>										
+					</div>
 				</div>
 
-				{% if user.is_authenticated %}								
+				{% if user.is_authenticated %}
 				<div class="col-12 my-3">
-					<a href="{% url 'core:bibtex_edit' bibtex.id %}" class="btn btn-outline-primary"  >Edit</a>
-					<a href="{% url 'core:tagchain_add'%}?bibtex={{ bibtex.id }}" class="btn btn-outline-primary" >Add Tag</a>
+					<a href="{% url 'core:bibtex_edit' bibtex.id %}" class="btn btn-outline-primary">Edit</a>
+					<a href="{% url 'core:tagchain_add'%}?bibtex={{ bibtex.id }}" class="btn btn-outline-primary">Add
+						Tag</a>
 				</div>
 				{% endif %}
-			</div>								
+			</div>
 		</div>
 	</div>
 </div>
 <script>
-function clickDownload(aLink)  
-{
-				var str = document.getElementById("bibtex").innerHTML;  
-				str =  encodeURIComponent(str);  
-				aLink.href = "data:text;charset=utf-8,"+str;  
-}  
-</script> 
+	function clickDownload(aLink) {
+		var str = document.getElementById("bibtex").innerHTML;
+		str = encodeURIComponent(str);
+		aLink.href = "data:text;charset=utf-8," + str;
+	}  
+</script>
 {% endblock content %}

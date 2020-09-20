@@ -52,7 +52,7 @@ To use django commands, you have 2 choice.
 ```
 # Pattern 1
 $ docker-compose exec django bash
-(contena) $ <django command>
+(container) $ <django command>
 ```
 
 ```
@@ -75,4 +75,3 @@ With this setup, we launched 4 containers. You can access to 3 of them with your
 
 ## Licence
 [MIT License](./LICENSE)
-
