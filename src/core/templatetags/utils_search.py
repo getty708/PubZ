@@ -139,8 +139,8 @@ def get_bibtex_query_set(params):
     # Sort
     sort = params.get('sort')
     if sort == None:
-        return bibtex_queryset.order_by('-pub_date', 'title')
+        return bibtex_queryset.order_by('-pub_date', 'book', 'title')
     elif sort == "ascending":
-        return bibtex_queryset.order_by('-pub_date', 'title')
+        return bibtex_queryset.order_by('-pub_date', 'book', 'title')
     elif sort == "desending":
-        return bibtex_queryset.order_by('pub_date', 'title')
+        return bibtex_queryset.order_by('pub_date',  'book', 'title')
