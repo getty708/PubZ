@@ -52,7 +52,7 @@ To use django commands, you have 2 choice.
 ```
 # Pattern 1
 $ docker-compose exec django bash
-(contena) $ <django command>
+(container) $ <django command>
 ```
 
 ```
