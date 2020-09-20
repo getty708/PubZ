@@ -1,9 +1,5 @@
-version: '2'
+version: '3'
 services:
-  storage:
-    image: busybox
-    volumes:
-      - ./storage/db:/var/lib/mysql
   db:
     image: mysql:5.7
     ports:
@@ -15,11 +11,8 @@ services:
       MYSQL_USER:          docker
       MYSQL_PASSWORD:      docker
     volumes:
-      - ./storage/db/data:/var/lib/mysql
-      # - ./storage/db/init:/docker-entrypoint-initdb.d
+      - storage:/var/lib/mysql
       - ./docker/mysql:/etc/mysql/conf.d
-    volumes_from:
-      - storage
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     environment:
@@ -50,3 +43,11 @@ services:
     depends_on:
       - db
     tty: true
+
+volumes:
+  storage:
+    driver: local
+    driver_opts:
+      type: none
+      device: $PWD/storage/db/data/
+      o: bind
