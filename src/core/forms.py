@@ -8,10 +8,11 @@ from core import models
 # from core import validators
 
 
-
 """
 Author
 """
+
+
 class AuthorForm(forms.ModelForm):
     class Meta:
         model = models.Author
@@ -55,41 +56,45 @@ class AuthorForm(forms.ModelForm):
             'placeholder': "e.g. 2020-01-01",
         })
 
-
     def clean_name_en(self):
         """ Validate an author name (English).
-        
+
         Remove full-witdh space. 
-        
+
         """
         print('clean_name_en is called.')
         name_en = self.cleaned_data['name_en']
-        name_en = name_en.replace("　", " ") # Replace full-with space with normal space.
-        
+        # Replace full-with space with normal space.
+        name_en = name_en.replace("　", " ")
+
         # Check space
         if ' ' not in name_en:
-            raise forms.ValidationError('Please separate your first and last name with a space.')
-        
+            raise forms.ValidationError(
+                'Please separate your first and last name with a space.')
+
         # Auto cleaning
         name_en = [s.strip().title() for s in name_en.split()]
         name_en = " ".join(name_en)
         return name_en
 
     def clean_name_ja(self):
-        """ Validate au author name (Japanese) """ 
+        """ Validate au author name (Japanese) """
         name_ja = self.cleaned_data['name_ja']
         if name_ja is None:
             return None
-        name_ja = name_ja.replace("　", " ") # Replace full-with space with normal space. 
-        
+        # Replace full-with space with normal space.
+        name_ja = name_ja.replace("　", " ")
+
         # check space
         if ' ' not in name_ja:
-            raise forms.ValidationError('Please separate your first and last name with a space.')
+            raise forms.ValidationError(
+                'Please separate your first and last name with a space.')
         # remove comma from Japanese name.
         if name_ja:
-            name_ja = [s.strip().replace(",", "").title() for s in name_ja.split()]
+            name_ja = [s.strip().replace(",", "").title()
+                       for s in name_ja.split()]
             name_ja = " ".join(name_ja)
-        return name_ja    
+        return name_ja
 
     def clean(self):
         cleaned_data = super().clean()
@@ -100,7 +105,7 @@ class AuthorOrderForm(forms.ModelForm):
     class Meta:
         model = models.AuthorOrder
         fields = [
-            'bibtex','author','order',
+            'bibtex', 'author', 'order',
         ]
         widgets = {
             'author': autocomplete.ListSelect2(
@@ -114,9 +119,12 @@ class AuthorOrderForm(forms.ModelForm):
                 'class': 'form-control form-control-sm',
             })
 
+
 """
 Book
 """
+
+
 class BookForm(forms.ModelForm):
     class Meta:
         model = models.Book
@@ -124,9 +132,9 @@ class BookForm(forms.ModelForm):
             'title', 'abbr', 'style',
             'publisher', 'note',
         ]
-        
-    def __init__(self,*args,**kwargs):
-        super(BookForm,self).__init__(*args, **kwargs)
+
+    def __init__(self, *args, **kwargs):
+        super(BookForm, self).__init__(*args, **kwargs)
         for key in self.Meta.fields:
             self.fields[key].widget.attrs.update({
                 'class': 'form-control form-control-sm',
@@ -138,23 +146,22 @@ class BookForm(forms.ModelForm):
             'placeholder': 'e.g. CVPR',
         })
 
-
     def clean_title(self):
         """ Validate book title. 
 
 
         Note:
             Replace following word with the complete form.
-            
+
             * To ``Conference`` : conference, Conf., conf.
             * To ``Transactions on`` : Trans. on, trans. on, Trans., trans., Transaction on, transaction on
             * To ``Proceedings of`` : in Proceeding of, in proceeding of, in Proc. of, in proc. of, Proc. of, proc. of, Proc., proc.,
             * To ``International`` : international, Int'l, int'l, Intl, intl       
-                  
+
         """
         # Replace some words.
         title = self.cleaned_data['title']
-        CHECK_DICT ={
+        CHECK_DICT = {
             "Conference": [
                 "conference", "Conf.", "conf.",
             ],
@@ -177,28 +184,29 @@ class BookForm(forms.ModelForm):
 
         # Convert to Title case.
         return title.strip()
-        
 
     def clean_abbr(self):
         """ Vlidate abbr.
 
         Raise:
             form.validationError: If the abbr string contains 0-9.
-        
+
         """
-        abbr = self.cleaned_data['abbr']        
+        abbr = self.cleaned_data['abbr']
         if abbr is not None and re.search('[0-9]', abbr):
             raise forms.ValidationError('Do not include year.')
         return abbr
-    
 
     def clean(self):
         cleaned_data = super().clean()
         return cleaned_data
 
+
 """
 Bibtex
 """
+
+
 class BibtexForm(forms.ModelForm):
     """
 
@@ -206,24 +214,24 @@ class BibtexForm(forms.ModelForm):
         Implement ``self.clean_title_en()``
 
     """
-    
+
     class Meta:
         model = models.Bibtex
         fields = [
-            'language','title_en','title_ja',
-            'book','book_title','bib_type',
-            'volume','number','chapter','page','edition',
-            'pub_date','use_date_info', 'is_published',
+            'language', 'title_en', 'title_ja',
+            'book', 'book_title', 'bib_type',
+            'volume', 'number', 'chapter', 'page', 'edition',
+            'pub_date', 'use_date_info', 'is_published',
             'url', 'fund', 'doi',
-            'memo','abstruct',
+            'memo', 'abstract',
         ]
         widgets = {
             'book': autocomplete.ListSelect2(
                 url='api:autocomplete_book',),
         }
 
-    def __init__(self,*args,**kwargs):
-        super(BibtexForm,self).__init__(*args,**kwargs)
+    def __init__(self, *args, **kwargs):
+        super(BibtexForm, self).__init__(*args, **kwargs)
         for key in self.Meta.fields:
             self.fields[key].widget.attrs.update({
                 'class': 'form-control form-control-sm',
@@ -243,14 +251,14 @@ class BibtexForm(forms.ModelForm):
         })
         self.fields["number"].widget.attrs.update({
             'placeholder': 'Number',
-        })        
+        })
         self.fields["chapter"].widget.attrs.update({
             'placeholder': 'Chapter',
         })
         self.fields["pub_date"].widget.attrs.update({
             'class': 'form-check-input',
             'placeholder': 'YYYY-mm-dd',
-        })            
+        })
         self.fields["is_published"].widget.attrs.update({
             'class': 'form-check-input',
         })
@@ -277,23 +285,21 @@ class BibtexForm(forms.ModelForm):
             page = page.replace('-', '--')
         return page
 
-
     def clean(self):
         cleaned_data = super().clean()
         return cleaned_data
 
 
-
-
-
 """
 Registration Form
 """
+
+
 class BibtexFormStep1(forms.Form):
     # language
     lang = forms.ChoiceField(choices=models.Bibtex.LANGUAGE_CHOICES)
     lang.widget.attrs.update({
-            'class': 'form-control form-control-sm',
+        'class': 'form-control form-control-sm',
     })
     # Title
     title = forms.CharField(
@@ -308,15 +314,17 @@ class BibtexFormStep1(forms.Form):
         queryset=models.Book.objects.order_by('style', 'title',),
         empty_label='---',
         widget=autocomplete.ListSelect2(url='api:autocomplete_book')
-        )
+    )
     book.widget.attrs.update({
-            'class': 'form-control form-control-sm',
+        'class': 'form-control form-control-sm',
     })
 
 
 """
 Tag
 """
+
+
 class TagForm(forms.ModelForm):
     class Meta:
         model = models.Tag

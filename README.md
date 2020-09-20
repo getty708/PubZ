@@ -120,5 +120,21 @@ UPDATE `core_bibtex`
 SET `core_bibtex`.`title_2nd_lang` = `core_bibtex`.`title_en`
 WHERE
 	`core_bibtex`.`language` = 'JA' ;
+
 ```
 
+
+```bash
+root@django:/code# python manage.py  makemigrations core
+Did you rename bibtex.abstruct to bibtex.abstract (a TextField)? [y/N] y
+Migrations for 'core':
+  core/migrations/0009_auto_20200920_2341.py
+    - Rename field abstruct on bibtex to abstract
+    - Alter field title_en on bibtex
+    - Alter field title_ja on bibtex
+root@django:/code# python manage.py  migrate
+Operations to perform:
+  Apply all migrations: admin, auth, authtoken, contenttypes, core, sessions, users
+Running migrations:
+  Applying core.0009_auto_20200920_2341... OK
+```

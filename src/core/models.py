@@ -51,13 +51,13 @@ class Bibtex(models.Model):
     title_en = models.CharField(
         max_length=512, null=True, blank=True, default="",
         help_text=(
-            "English title of this pubilication. Check validation rules."
+            "(Deprecated) English title of this pubilication. Check validation rules."
             "(len=512, blank=True)"
         ))
     title_ja = models.CharField(
         max_length=512, null=True, blank=True, default="",
         help_text=(
-            "Japanese title of your pubilication. "
+            "(Deprecated) Japanese title of your pubilication. "
             "Check validation rules. (len=512, blank=True)"
         ))
     authors = models.ManyToManyField(
@@ -154,7 +154,7 @@ class Bibtex(models.Model):
             "The Digital Object Identifier."
             "(len=128, optional)"
         ))
-    abstruct = models.TextField(
+    abstract = models.TextField(
         null=True, blank=True,
         help_text=(
             "Abstract of the paper."
