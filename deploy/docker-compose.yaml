@@ -1,16 +1,5 @@
 version: '3'
 services:
-  # https-portal:
-  #   image: steveltn/https-portal:1
-  #   ports:
-  #     - '80:80'
-  #     - '443:443'
-  #   environment:
-  #     DOMAINS: 'pubz.private -> http://dockerhost:8080'
-  #     STAGE: 'local' # or 'production'
-  #   volumes:
-  #     - ./certs:/var/lib/https-portal
-
   db:
     image: mysql:5.7
     ports:
