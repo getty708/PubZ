@@ -15,21 +15,30 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.shortcuts import redirect
 
 from django.conf import settings
 from django.conf.urls.static import static
 
 from django.contrib.auth import views as auth_views
 
+
+def redirect_view(request):
+    response = redirect('core/')
+    return response
+
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    # path('dashboard/', include('dashboard.urls'), name='dashboard'),
+    path('', redirect_view),
     path('core/', include('core.urls'), name='core'),
     path('api/', include('api.urls'), name='api'),
 
     # Accounts [Login/Logout]
     path('accounts/', include('django.contrib.auth.urls'), name="accounts"),
+    path('admin/', admin.site.urls),
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
