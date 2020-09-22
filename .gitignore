@@ -12,7 +12,6 @@ storage/
 !storage/Dockerfile
 
 
-
 ### Emacs ###
 # -*- mode: gitignore; -*-
 *~
@@ -46,7 +45,7 @@ tramp
 
 # cask packages
 .cask/
-dist/
+# dist/
 
 # Flycheck
 flycheck_*.el
