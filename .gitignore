@@ -12,7 +12,6 @@ storage/
 !storage/Dockerfile
 
 
-
 ### Emacs ###
 # -*- mode: gitignore; -*-
 *~
