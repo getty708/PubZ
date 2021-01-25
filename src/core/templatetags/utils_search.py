@@ -58,6 +58,7 @@ def parse_GET_params(req):
         ("tags",          None),
         ("display_style", None),
     ]
+    period_method_exists =  "period_method" in req.GET.keys()
     params = {}
     for key, default_val in GET_param_keys:
         params[key] = req.GET.get(key, default_val)
@@ -69,10 +70,11 @@ def parse_GET_params(req):
         params['period_year'] = datetime.datetime.now().year
 
     if params['period_method'] == "ACADEMIC_YEAR":
-        if datetime.datetime.now().month < 4:
-            # NOTE: Translate to the academic year if the page was accessed
-            # between January and March.
-            params["period_year"] -= 1
+        if not period_method_exists:
+            if datetime.datetime.now().month < 4:
+                # NOTE: Translate to the academic year if the page was accessed
+                # between January and March.
+                params["period_year"] -= 1
 
     # == For usability ==
     if params['keywords'] is not None:
