@@ -13,6 +13,17 @@ Publication management system for your lab.
   
 
 ## Instlation
+### Step.Make DB's Configuration File 
+Make `PubZ/.env` and `PubZ/deploy/.env`.
+
+Example:
+```
+MYSQL_ROOT_PASSWORD=mJKB26xRuY
+MYSQL_DATABASE=docker
+MYSQL_USER=docker
+MYSQL_PASSWORD=ipTVFzI5Hx
+```
+
 ### Step.1 Build Docker Containers
 Move to the directory which `docker-compose.yml` exists and issue these commands
 ```
@@ -23,9 +34,9 @@ docker-compose up
 ```
 Then, you get 3 containers `db, phpmyadmin, django, (storage)` and each containers are connected each others.
 
-
 ### Step.2 Start Django App
-For starting djangp App, you need to initalize database (this system use `mysql`). Issue these commands,
+For starting django App, you need to initalize database (this system use `mysql`). Issue these commands,
+
 
 ```
 # Enter into the django container
