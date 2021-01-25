@@ -68,6 +68,12 @@ def parse_GET_params(req):
     except ValueError:
         params['period_year'] = datetime.datetime.now().year
 
+    if params['period_method'] == "ACADEMIC_YEAR":
+        if datetime.datetime.now().month < 4:
+            # NOTE: Translate to the academic year if the page was accessed
+            # between January and March.
+            params["period_year"] -= 1
+
     # == For usability ==
     if params['keywords'] is not None:
         params['period_method'] = 'ALL'
@@ -99,14 +105,13 @@ def get_bibtex_query_set(params):
 
     # Filter by published year
     period_method = params.get('period_method', 'ACADEMIC_YEAR')
+    year = params.get('period_year', datetime.datetime.now().year)
     if period_method == "YEAR":
-        year = params.get('period_year', datetime.datetime.now().year)
         bibtex_queryset = bibtex_queryset.filter(
             pub_date__gte=datetime.date(int(year), 1, 1),
             pub_date__lte=datetime.date(int(year), 12, 31),
         )
     elif period_method == "ACADEMIC_YEAR":
-        year = params.get('period_year', datetime.datetime.now().year)
         bibtex_queryset = bibtex_queryset.filter(
             pub_date__gte=datetime.date(int(year), 4,  1),
             pub_date__lte=datetime.date(int(year)+1, 3, 31),
