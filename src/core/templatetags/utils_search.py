@@ -58,6 +58,7 @@ def parse_GET_params(req):
         ("tags",          None),
         ("display_style", None),
     ]
+    period_method_exists =  "period_method" in req.GET.keys()
     params = {}
     for key, default_val in GET_param_keys:
         params[key] = req.GET.get(key, default_val)
@@ -67,6 +68,13 @@ def parse_GET_params(req):
         params['period_year'] = int(params['period_year'])
     except ValueError:
         params['period_year'] = datetime.datetime.now().year
+
+    if params['period_method'] == "ACADEMIC_YEAR":
+        if not period_method_exists:
+            if datetime.datetime.now().month < 4:
+                # NOTE: Translate to the academic year if the page was accessed
+                # between January and March.
+                params["period_year"] -= 1
 
     # == For usability ==
     if params['keywords'] is not None:
@@ -99,14 +107,13 @@ def get_bibtex_query_set(params):
 
     # Filter by published year
     period_method = params.get('period_method', 'ACADEMIC_YEAR')
+    year = params.get('period_year', datetime.datetime.now().year)
     if period_method == "YEAR":
-        year = params.get('period_year', datetime.datetime.now().year)
         bibtex_queryset = bibtex_queryset.filter(
             pub_date__gte=datetime.date(int(year), 1, 1),
             pub_date__lte=datetime.date(int(year), 12, 31),
         )
     elif period_method == "ACADEMIC_YEAR":
-        year = params.get('period_year', datetime.datetime.now().year)
         bibtex_queryset = bibtex_queryset.filter(
             pub_date__gte=datetime.date(int(year), 4,  1),
             pub_date__lte=datetime.date(int(year)+1, 3, 31),

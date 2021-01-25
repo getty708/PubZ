@@ -6,12 +6,12 @@ services:
       - "3306:3306" # <-これがないと外からアクセス出来ない
     hostname: db
     environment:
-      MYSQL_ROOT_PASSWORD: docker
-      MYSQL_DATABASE:      docker
-      MYSQL_USER:          docker
-      MYSQL_PASSWORD:      docker
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_DATABASE: $MYSQL_DATABASE
+      MYSQL_USER:     $MYSQL_USER
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
     volumes:
-      - storage:/var/lib/mysql
+      - dev-storage:/var/lib/mysql
       - ./docker/mysql:/etc/mysql/conf.d
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -29,9 +29,9 @@ services:
     # command: python /code/app/manage.py runserver 0.0.0.0:8000
     hostname: django
     environment:
-      MYSQL_DATABASE: docker
-      MYSQL_USER:     docker
-      MYSQL_PASSWORD: docker
+      MYSQL_DATABASE: $MYSQL_ROOT_PASSWORD
+      MYSQL_USER:     $MYSQL_USER
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
       MYSQL_HOST:     db
     volumes:
       - ./src:/code
@@ -45,7 +45,7 @@ services:
     tty: true
 
 volumes:
-  storage:
+  dev-storage:
     driver: local
     driver_opts:
       type: none
