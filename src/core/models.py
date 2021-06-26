@@ -1,4 +1,5 @@
 import datetime
+
 from django.db import models
 
 
@@ -193,7 +194,9 @@ class Bibtex(models.Model):
         null=False,
         blank=True,
         default="",
-        help_text=("[Deprecated] Short Note to distinguish similar entries." "(blank=True)"),
+        help_text=(
+            "[Deprecated] Short Note to distinguish similar entries." "(blank=True)"
+        ),
     )
     note = models.TextField(
         null=False,
