@@ -1,0 +1,839 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="canonical" href="http://localhost:7777/user/">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.1.9">
+    
+    
+      
+        <title>User Guide - PubZ - Publication Zoo</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ca7ac06f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#user-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="PubZ - Publication Zoo" class="md-header__button md-logo" aria-label="PubZ - Publication Zoo" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PubZ - Publication Zoo
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              User Guide
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/getty708/PubZ/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    getty708/PubZ
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="PubZ - Publication Zoo" class="md-nav__button md-logo" aria-label="PubZ - Publication Zoo" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    PubZ - Publication Zoo
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/getty708/PubZ/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    getty708/PubZ
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      <label class="md-nav__link" for="__nav_2">
+        User Guide
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="User Guide" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          User Guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          User Guide
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        User Guide
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#contents" class="md-nav__link">
+    Contents
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    基本機能
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    研究業績の一覧表示
+  </a>
+  
+    <nav class="md-nav" aria-label="研究業績の一覧表示">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    検索機能
+  </a>
+  
+    <nav class="md-nav" aria-label="検索機能">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#keyword" class="md-nav__link">
+    キーワード検索 (Keyword)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#date-filter" class="md-nav__link">
+    表示期間選択 (Date Filter)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#book-type" class="md-nav__link">
+    業績カテゴリ (Book Type)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sort" class="md-nav__link">
+    表示順序 (Sort)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#books" class="md-nav__link">
+    Books: 掲載出版物
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authors" class="md-nav__link">
+    Authors: 著者名
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tags" class="md-nav__link">
+    Tags: タグ
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="editor_guide/" class="md-nav__link">
+        Guide for Editors
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="local/" class="md-nav__link">
+        Local Rules
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Developer Guide
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Developer Guide" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Developer Guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dev/" class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dev/display_styles/" class="md-nav__link">
+        Display Styles
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../license/" class="md-nav__link">
+        License
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#contents" class="md-nav__link">
+    Contents
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    基本機能
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    研究業績の一覧表示
+  </a>
+  
+    <nav class="md-nav" aria-label="研究業績の一覧表示">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    検索機能
+  </a>
+  
+    <nav class="md-nav" aria-label="検索機能">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#keyword" class="md-nav__link">
+    キーワード検索 (Keyword)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#date-filter" class="md-nav__link">
+    表示期間選択 (Date Filter)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#book-type" class="md-nav__link">
+    業績カテゴリ (Book Type)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sort" class="md-nav__link">
+    表示順序 (Sort)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#books" class="md-nav__link">
+    Books: 掲載出版物
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authors" class="md-nav__link">
+    Authors: 著者名
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tags" class="md-nav__link">
+    Tags: タグ
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/getty708/PubZ/edit/master/docs/user/index.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="user-guide">User Guide</h1>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#基本機能">基本機能 (業績の閲覧・著者/文献一覧)</a></li>
+<li><a href="#Search">検索機能</a></li>
+<li><a href="editor_guide/">業績の登録</a></li>
+<li><a href="admin/">管理者向けガイド</a></li>
+</ul>
+<h2 id="_1">基本機能</h2>
+<p>PubZでは研究業績が，掲載されている出版物 (Books)，著者 (Authors)，関連項目をまとめたタグ (Tags) によって整理されています．
+研究業績はトップページ (Home) で表示されます．Author/Book/Tagはページ上部のヘッダーのリンクから一覧を見ることができます．</p>
+<h2 id="_2">研究業績の一覧表示</h2>
+<p>研究業績の一覧はトップページ (ナビゲーションバーのHome) で見ることができます．
+デフォルトでは，今年度の研究業績一覧が表示されます．表示したい年度を変更したい場合は，<a href="#検索機能">検索機能</a>で期間を指定してください．</p>
+<p>PubZでは，現在5種類の表示方法が利用できます．表示の仕方は，Search Box 下部のボタンで切り替えることができます．いずれの表示方法でも，タイトルや著者名などをクリックするとその詳細情報が表示されます．</p>
+<table>
+<thead>
+<tr>
+<th align="left">表示方法</th>
+<th align="left">備考</th>
+<th align="left">Login</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">List View</td>
+<td align="left">業績がカテゴリ毎にリスト形式で表示されます. <br> (デフォルトの表示形式)</td>
+<td align="left">不要</td>
+</tr>
+<tr>
+<td align="left">Tile View</td>
+<td align="left">業績が新着順にタイルレイアウトで表示されます．業績の関連ページ (e.g. ACM Digital Library) へのリンクも表示されます．</td>
+<td align="left">不要</td>
+</tr>
+<tr>
+<td align="left">Table View</td>
+<td align="left">業績のタイトル・掲載雑誌名・著者の一覧が，カテゴリ毎に別の表として表示されます．</td>
+<td align="left">必要</td>
+</tr>
+<tr>
+<td align="left">Bibtex View</td>
+<td align="left">カテゴリ毎に業績のBibtexの一覧が表示されます．</td>
+<td align="left">必要</td>
+</tr>
+<tr>
+<td align="left">Latex View</td>
+<td align="left">カテゴリ毎に業績のBibtexの一覧が表示されます．</td>
+<td align="left">必要</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_3">検索機能</h3>
+<p>トップページ上部の検索ボックスで，表示する業績エントリを選択することができます．
+現在提供されている検索条件は以下の4項目です．</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>絞り込みを実行するためには，キーワードボックスの <code>GO</code> または 表示形式選択ボタンをクリックしてください．値の変更を行っただけでは絞り込みが実行されません．</p>
+</div>
+<h4 id="keyword">キーワード検索 (Keyword)</h4>
+<p>フリーワード検索ができます．検索ワードを半角スペースで区切るとAND検索になります．
+PubZは入力されたキーワードが「タイトル・著者名・出版物名」に含まれているか検索を行い，表示する業績情報を絞り込みます．出版物名は略称でも可です (e.g. IMWUT, ISWC, SIGMOD)．</p>
+<h4 id="date-filter">表示期間選択 (Date Filter)</h4>
+<p>以下の3種類の方法で表示する期間を指定できます．</p>
+<table>
+<thead>
+<tr>
+<th align="left">期間指定方法</th>
+<th align="left">備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">AY (年度)</td>
+<td align="left">表示する期間を Academic Year (4月-翌年3月) で指定できます．</td>
+</tr>
+<tr>
+<td align="left">Year</td>
+<td align="left">表示する期間を 年単位 (1月-12月) で指定できます．</td>
+</tr>
+<tr>
+<td align="left">ALL</td>
+<td align="left">期間指定をせずに業績を表示します．Table/Bibtex/Latex Viewでは表示に時間がかかるため使用には注意が必要です．</td>
+</tr>
+</tbody>
+</table>
+<h4 id="book-type">業績カテゴリ (Book Type)</h4>
+<p>表示する研究業績をカテゴリで絞り込むことができます．
+現在，8種類のカテゴリがサポートされています．デフォルトは <code>All</code> で，カテゴリの絞り込みをしません．
+サポートされてるカテゴリは以下の通りです．</p>
+<table>
+<thead>
+<tr>
+<th align="left">親カテゴリ名</th>
+<th align="left">カテゴリ名</th>
+<th align="left">備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">ALL</td>
+<td align="left">All</td>
+<td align="left">(全てのカテゴリ)</td>
+</tr>
+<tr>
+<td align="left">Paper</td>
+<td align="left">Journal</td>
+<td align="left">学術論文誌</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">International Conference</td>
+<td align="left">国際学会</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">Domestic Conference</td>
+<td align="left">国内会議 (査読付き), 国内研究会, 全国大会)</td>
+</tr>
+<tr>
+<td align="left">Article</td>
+<td align="left">Book</td>
+<td align="left">出版社が刊行した書籍 (著書／監修／編集／訳書)</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">NEWS</td>
+<td align="left">新聞記事・雑誌</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">Others</td>
+<td align="left">その他該当種別が無いもの</td>
+</tr>
+<tr>
+<td align="left">Others</td>
+<td align="left">Award</td>
+<td align="left">受賞関係</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">Keynote</td>
+<td align="left">基調講演/セミナー・パネル討論等</td>
+</tr>
+</tbody>
+</table>
+<h4 id="sort">表示順序 (Sort)</h4>
+<p>該当した業績エントリを出版日の新しい順番 (<code>Ascending (Data)</code>)， または古い順 (<code>Descending (Data)</code>) で並べ替えることができます．</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>年度始めなどで研究業績の登録がない場合は何も表示されません．
+年度始めの等のデフォルト表示に関しては今後対応していきます．</p>
+</div>
+<h2 id="books">Books: 掲載出版物</h2>
+<p>ナビゲーションバーの <code>Books</code> をクリックすることで，出版物の一覧を見ることができます．
+また，出版物名をクリックすることで，選択した出版物の詳細情報，および関連する研究業績を見ることができます．</p>
+<p>一覧表示では，カテゴリと出版物タイトルに対するキーワード検索が可能です．</p>
+<h2 id="authors">Authors: 著者名</h2>
+<p>ナビゲーションバーの <code>Authors</code> をクリックすることで，著者の一覧を見ることができます．
+また，著者名をクリックすることで，選択した著者の詳細情報，および関連する研究業績を見ることができます．</p>
+<p>一覧表示では，著者名 (英語/日本語) に対するキーワード検索が可能です．</p>
+<h2 id="tags">Tags: タグ</h2>
+<p>ナビゲーションバーの <code>Tags</code> をクリックすることで，登録されているタグの一覧を見ることができます．
+また，タグ名をクリックすることで，選択したタグの詳細情報，および関連する研究業績を見ることができます．</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Home" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Home
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="editor_guide/" class="md-footer__link md-footer__link--next" aria-label="Next: Guide for Editors" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Guide for Editors
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.477d984a.min.js", "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.82b56eb2.min.js"></script>
+      
+    
+  </body>
+</html>

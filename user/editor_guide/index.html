@@ -1,0 +1,917 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="canonical" href="http://localhost:7777/user/editor_guide/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.1.9">
+    
+    
+      
+        <title>Guide for Editors - PubZ - Publication Zoo</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ca7ac06f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#guide-for-edtitors" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="PubZ - Publication Zoo" class="md-header__button md-logo" aria-label="PubZ - Publication Zoo" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PubZ - Publication Zoo
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Guide for Editors
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/getty708/PubZ/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    getty708/PubZ
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="PubZ - Publication Zoo" class="md-nav__button md-logo" aria-label="PubZ - Publication Zoo" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    PubZ - Publication Zoo
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/getty708/PubZ/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    getty708/PubZ
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      <label class="md-nav__link" for="__nav_2">
+        User Guide
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="User Guide" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          User Guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        User Guide
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Guide for Editors
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Guide for Editors
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#books" class="md-nav__link">
+    出版物 (Books) の登録
+  </a>
+  
+    <nav class="md-nav" aria-label="出版物 (Books) の登録">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#books_1" class="md-nav__link">
+    登録項目 (Books)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authors" class="md-nav__link">
+    著者 (Authors) の登録
+  </a>
+  
+    <nav class="md-nav" aria-label="著者 (Authors) の登録">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#authors_1" class="md-nav__link">
+    登録項目 (Authors)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bibtex" class="md-nav__link">
+    研究業績 (Bibtex) の登録
+  </a>
+  
+    <nav class="md-nav" aria-label="研究業績 (Bibtex) の登録">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bibtexs" class="md-nav__link">
+    登録項目 (Bibtexs)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    著者の紐付け
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    登録項目
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../local/" class="md-nav__link">
+        Local Rules
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Developer Guide
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Developer Guide" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Developer Guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/" class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev/display_styles/" class="md-nav__link">
+        Display Styles
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../license/" class="md-nav__link">
+        License
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#books" class="md-nav__link">
+    出版物 (Books) の登録
+  </a>
+  
+    <nav class="md-nav" aria-label="出版物 (Books) の登録">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#books_1" class="md-nav__link">
+    登録項目 (Books)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authors" class="md-nav__link">
+    著者 (Authors) の登録
+  </a>
+  
+    <nav class="md-nav" aria-label="著者 (Authors) の登録">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#authors_1" class="md-nav__link">
+    登録項目 (Authors)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bibtex" class="md-nav__link">
+    研究業績 (Bibtex) の登録
+  </a>
+  
+    <nav class="md-nav" aria-label="研究業績 (Bibtex) の登録">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bibtexs" class="md-nav__link">
+    登録項目 (Bibtexs)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    著者の紐付け
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    登録項目
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/getty708/PubZ/edit/master/docs/user/editor_guide.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="guide-for-edtitors">Guide for Edtitors</h1>
+<p>このページでは，研究業績の登録方法について説明します．
+研究情報を登録するためには，まず最初に出版物 (Books) と著者 (Authors) のエントリを用意する必要があります．その後，これらのエントリと紐付ける形で研究業績 (Bibtex) エントリを作成していきます．
+登録操作をするためには，ログインが必要です．事前にアカウントを作成しておいてください．</p>
+<p>このページでは，次の順番で説明をしていきます．</p>
+<ol>
+<li>出版物 (Books) の登録</li>
+<li>著者 (Authors) の登録</li>
+<li>研究業績 (Bibtex) の登録</li>
+<li>研究業績と著者の紐付け</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">エントリの削除について</p>
+<p>編集者 (一般の staff account) では，一度登録したエントリの削除はできません．
+削除したい場合は管理者に連絡してください． <br />
+管理者はDjangoの管理サイトから該当のオブジェクトを選択し，削除を行ってください．</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">重複エントリ</p>
+<p>出版物とは著者は，既に登録がある場合は重複を防ぐために新しく作成してはいけません．
+システム側で，重複した登録を許さないように対策はしていますが，こららのエントリに関して作成する前に十分に確認するようにしてください．</p>
+</div>
+<h2 id="books">出版物 (Books) の登録</h2>
+<p>出版物と著者の登録は簡単に行うことができます．
+登録する出版物はあらかじめ検索機能などを使って，既に登録がないことを確認してから以後の操作を行ってください．</p>
+<p>まず，画面上部のナビゲーションバーから <code>Add New &gt;&gt; New Book</code> をクリックし，出版物の登録ページを開きます．
+表示される以下の項目を入力し，<code>Add New</code> ボタンをクリックしてください．
+以上で，登録が完了です．</p>
+<h3 id="books_1">登録項目 (Books)</h3>
+<table>
+<thead>
+<tr>
+<th align="left">項目</th>
+<th align="left">必須項目</th>
+<th align="left">備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Book Title</td>
+<td align="left">Yes</td>
+<td align="left">出版物名 (e.g. Proccedings of Computer Vision and Pattern Recognition)</td>
+</tr>
+<tr>
+<td align="left">Abbreviation</td>
+<td align="left">No</td>
+<td align="left">会議・雑誌の略称 (e.g. CVPR)</td>
+</tr>
+<tr>
+<td align="left">Publication Type</td>
+<td align="left">Yes</td>
+<td align="left">出版物のカテゴリ<br>(Journal, International/Domestic Conference, Book, News Paper, Others)</td>
+</tr>
+<tr>
+<td align="left">Publisher</td>
+<td align="left">No</td>
+<td align="left">出版社</td>
+</tr>
+<tr>
+<td align="left">Note</td>
+<td align="left">No</td>
+<td align="left">メモ・コメント</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">Book Title/Abbreviation: 出版物名の表記について</p>
+<p>開催年度など毎年更新される情報は除いて登録してください (e.g. Don't ==&gt; ISWC2020, Do ==&gt; ISWC)．
+同じ会議に対する研究業績を紐付けるために必要です．
+開催年が含まれる出版物名はBibtexエントリの <code>Overwrite Book Title</code> に対して登録できます．</p>
+</div>
+<h2 id="authors">著者 (Authors) の登録</h2>
+<p>次に著者を登録します．
+登録する著者はあらかじめ検索機能などを使って，既に登録がないことを確認してから以後の操作を行ってください．</p>
+<p>まず，画面上部のナビゲーションバーから <code>Add New &gt;&gt; New Author</code> をクリックし，出版物の登録ページを開きます．
+表示される以下の項目を入力し，<code>Add New</code> ボタンをクリックしてください．
+以上で，登録が完了です．</p>
+<h3 id="authors_1">登録項目 (Authors)</h3>
+<table>
+<thead>
+<tr>
+<th align="left">項目</th>
+<th align="left">必須項目</th>
+<th align="left">備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Name (en)</td>
+<td align="left">Yes</td>
+<td align="left">氏名 (英語表記)．Family nameを一番最初に書きカンマで区切ってください (e.g. Handai, Taro)．</td>
+</tr>
+<tr>
+<td align="left">Name (ja)</td>
+<td align="left">No</td>
+<td align="left">氏名 (日本語表記, 姓名の間は半角スペース)</td>
+</tr>
+<tr>
+<td align="left">Affiliation (en)</td>
+<td align="left">No</td>
+<td align="left">所属 (英語表記)</td>
+</tr>
+<tr>
+<td align="left">Affiliation (ja)</td>
+<td align="left">No</td>
+<td align="left">所属 (日本語表記)</td>
+</tr>
+<tr>
+<td align="left">Mail</td>
+<td align="left">No (可能な限り登録)</td>
+<td align="left">メールアドレス</td>
+</tr>
+<tr>
+<td align="left">Date - Join/Left</td>
+<td align="left">No (可能な限り登録)</td>
+<td align="left">該当著者が上記で登録した所属先に，配属/離任した日付．</td>
+</tr>
+</tbody>
+</table>
+<h2 id="bibtex">研究業績 (Bibtex) の登録</h2>
+<p>研究業績の登録は，およそ3段階の処理になります．
+まず，画面上部のナビゲーションバーから <code>Add New &gt;&gt; New Bibtex</code> をクリックし，研究業績の登録ページ (Step.1) を開きます．
+表示されたフォームに従って，出版物の言語 (Language)，タイトル (Title)，出版物エントリ (Book) を入力します．
+出版物エントリは，登録したい出版物名またはその略称の一部を入力すると候補が表示されます．
+以上の3項目が入力できたら，<code>Add New</code> をクリックします．</p>
+<p><code>Add New</code> をクリックすると，該当エントリの詳細情報が入力できるようになります．
+入力フォームの指示に従って以下の項目を入力していきます．</p>
+<h3 id="bibtexs">登録項目 (Bibtexs)</h3>
+<table>
+<thead>
+<tr>
+<th align="left">項目</th>
+<th align="left">必須項目</th>
+<th align="left">備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Language</td>
+<td align="left">Yes</td>
+<td align="left">研究業績の言語 (この登録内容に従って，著者の英語表記と日本語表記が選択されます．)</td>
+</tr>
+<tr>
+<td align="left">Title (en)</td>
+<td align="left">Yes</td>
+<td align="left">タイトル (英語) 無い場合は空欄</td>
+</tr>
+<tr>
+<td align="left">Title (ja)</td>
+<td align="left">No</td>
+<td align="left">タイトル (日本語). 無い場合は空欄</td>
+</tr>
+<tr>
+<td align="left">Book</td>
+<td align="left">Yes</td>
+<td align="left">出版物</td>
+</tr>
+<tr>
+<td align="left">Overwrite Book Title</td>
+<td align="left">No</td>
+<td align="left">出版物に開催年などの情報を含める場合は，チェックボックスにチェックを入れた上で，出版物名を登録します．</td>
+</tr>
+<tr>
+<td align="left">Bibtex Type</td>
+<td align="left">Yes</td>
+<td align="left">業績エントリのタイプ．基本的には<code>Same as the Book</code>．登録しているエントリが，受賞歴や講演の場合は，それぞれ <code>Award</code>・<code>Keynote</code> を選択してください．</td>
+</tr>
+<tr>
+<td align="left">Volume</td>
+<td align="left">No</td>
+<td align="left">巻 (文字列も可)</td>
+</tr>
+<tr>
+<td align="left">Number</td>
+<td align="left">No</td>
+<td align="left">号</td>
+</tr>
+<tr>
+<td align="left">Chapter</td>
+<td align="left">No</td>
+<td align="left">章</td>
+</tr>
+<tr>
+<td align="left">Page</td>
+<td align="left">No</td>
+<td align="left">ページ．複数ページに渡る場合は数字を <code>--</code> で区切る (e.g. 123--456)．</td>
+</tr>
+<tr>
+<td align="left">Edition</td>
+<td align="left">No</td>
+<td align="left">版</td>
+</tr>
+<tr>
+<td align="left">pub_date</td>
+<td align="left">Yes</td>
+<td align="left">出版された年月(日)．新聞記事など日付情報まで必要な場合は，日付も登録し，<code>Use data info</code> にチェックを入れる．</td>
+</tr>
+<tr>
+<td align="left">Use date info</td>
+<td align="left">Yes</td>
+<td align="left">日付まで表示するか？ (Default is No)</td>
+</tr>
+<tr>
+<td align="left">Url</td>
+<td align="left">No</td>
+<td align="left">ACM Digital Library, arXive など関連する外部リンク．</td>
+</tr>
+<tr>
+<td align="left">Fund</td>
+<td align="left">No</td>
+<td align="left">科研費などの番号．Grant Number． (論文の場合は必ず登録)</td>
+</tr>
+<tr>
+<td align="left">DOI</td>
+<td align="left">No</td>
+<td align="left">Digital Object Identifier</td>
+</tr>
+<tr>
+<td align="left">Memo</td>
+<td align="left">No</td>
+<td align="left">メモ・コメント</td>
+</tr>
+<tr>
+<td align="left">Abstruct</td>
+<td align="left">No</td>
+<td align="left">概要 (アブストラクト)</td>
+</tr>
+<tr>
+<td align="left">Mark as Completed/Completed</td>
+<td align="left">No</td>
+<td align="left">全項目の入力が完了したか？完了したらチェックしてください． (Default is No.)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_1">著者の紐付け</h3>
+<p>研究業績の詳細情報を登録するページで <code>Add New/Update</code> をクリックすると，一度研究業績の詳細表示が表示されます．登録事項に間違いがないか一度確認をしてください．</p>
+<p>次に，研究業績の詳細ページの下部にある<code>Edit</code> ボタンをクリックすると，研究業績の詳細情報登録ページが表示されます．次に，Authorの行にある <code>Add Author</code> ボタンをクリックすると，Bibitexの項目が入力済みの登録フォームが表示されます．残りのフィールド (Author, Order) を入力し，<code>Add</code> をクリックして登録完了です．</p>
+<h3 id="_2">登録項目</h3>
+<table>
+<thead>
+<tr>
+<th align="left">項目</th>
+<th align="left">必須項目</th>
+<th align="left">備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Bibtex</td>
+<td align="left">Yes</td>
+<td align="left">研究業績エントリ(入力済み)</td>
+</tr>
+<tr>
+<td align="left">Author</td>
+<td align="left">Yes</td>
+<td align="left">著者エントリ (一部を入力することで候補が表示されます．)</td>
+</tr>
+<tr>
+<td align="left">Order</td>
+<td align="left">Yes</td>
+<td align="left">著者の掲載順序 (&gt; 1)</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">著者の変更方法</p>
+<p>著者の入力を間違えた場合は，研究業績の詳細情報登録ページで著者名をクリックすると，編集ページが開きます．ここで正しい情報を入力し，<code>Update</code> をクリックして修正を確定してください．
+必要数以上の著者を登録してしまった場合 (e.g. 3人登録の予定が，4人登録された場合) は，不要なエントリを管理者に削除してもらう必要があります． 
+Orderのフィールドの値を，100に設定し，管理者に削除をお願いしてください．</p>
+</div>
+<p>以上で登録方法の説明は終わりです．お疲れ様でした！</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: User Guide" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              User Guide
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../local/" class="md-footer__link md-footer__link--next" aria-label="Next: Local Rules" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Local Rules
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.477d984a.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.82b56eb2.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,38 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-     <loc>None</loc>
-     <lastmod>2018-12-15</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>http://localhost:7777/</loc>
+         <lastmod>2021-06-26</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc></loc>
-     
-     <changefreq>daily</changefreq>
+         <loc>http://localhost:7777/license/</loc>
+         <lastmod>2021-06-26</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>None</loc>
-     <lastmod>2018-12-15</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>http://localhost:7777/dev/</loc>
+         <lastmod>2021-06-26</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>None</loc>
-     <lastmod>2018-12-15</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>http://localhost:7777/dev/code/</loc>
+         <lastmod>2021-06-26</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>None</loc>
-     <lastmod>2018-12-15</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>http://localhost:7777/dev/display_styles/</loc>
+         <lastmod>2021-06-26</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>None</loc>
-     <lastmod>2018-12-15</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>http://localhost:7777/dev/urls/</loc>
+         <lastmod>2021-06-26</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>None</loc>
-     <lastmod>2018-12-15</lastmod>
-     <changefreq>daily</changefreq>
+         <loc>http://localhost:7777/user/</loc>
+         <lastmod>2021-06-26</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>http://localhost:7777/user/admin/</loc>
+         <lastmod>2021-06-26</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>http://localhost:7777/user/editor_guide/</loc>
+         <lastmod>2021-06-26</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>http://localhost:7777/user/local/</loc>
+         <lastmod>2021-06-26</lastmod>
+         <changefreq>daily</changefreq>
     </url>
 </urlset>
