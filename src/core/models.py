@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 
 
@@ -153,7 +154,7 @@ class Bibtex(models.Model):
     pub_date = models.DateField(
         null=True,
         blank=True,
-        default="2000-01-01",
+        default=datetime.date.today,
         help_text=(
             "The date (year, month, date) on which the book is published. "
             "If date-info is no needed, set 01 to the date field."
