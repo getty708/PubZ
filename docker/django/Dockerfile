@@ -21,5 +21,5 @@ RUN apt-get update \
 # Install Jupyter
 RUN echo 'alias python=python3' >> ~/.bashrc
 COPY --from=builder /root/src/requirements.txt .
-RUN pip install -r /requirements.txt
+RUN pip install -r requirements.txt
 
