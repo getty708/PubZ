@@ -97,8 +97,8 @@ value="{% if GET_params.keywords %}{{GET_params.keywords}}{% endif %}"  placehol
 																<label class="input-group-text" for="inputGroupSelect01">Sort</label>
 														</div>
 														<select class="custom-select" id="search-sort" name="search-sort">
-																<option value="ascending" {% if GET_params.order == "ascending" or not GET_params.period_method %}selected{% endif %}>Ascending (Date)</option>
-																<option value="desending" {% if GET_params.order == "desending" %}selected{% endif %}>Descending (Date)</option>
+																<option value="ascending" {% if GET_params.sort == "ascending" or not GET_params.sort %}selected{% endif %}>Ascending (Date)</option>
+																<option value="desending" {% if GET_params.sort == "desending" %}selected{% endif %}>Descending (Date)</option>
 														</select>																			
 												</div>
 										</div>
