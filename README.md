@@ -3,7 +3,7 @@ Publication management system for your lab.
 
 ## Full Document
 
-[Document](https://getty708.github.io/PubZ/mkdocs/site/)
+[Document](https://getty708.github.io/PubZ/)
 
 ## Requirements
 
@@ -91,7 +91,7 @@ $ mkdocs serve
 
 ### Step.4 Check website
 
-With this setup, we launched 4 containers. You can access to 3 of them with your browser.
+With this setup, we launched 3 containers. You can access to 3 of them with your browser.
 
 | App        | URL              |
 |------------|------------------|
