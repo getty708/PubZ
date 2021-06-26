@@ -11,7 +11,6 @@ Publication management system for your lab.
 - docker-compose
 - (poetry)
 
-
 ## Instlation (Dev Environment)
 
 Here, let's install PubZ app for development environemnt.
@@ -28,7 +27,10 @@ MYSQL_ROOT_PASSWORD=mJKB26xRuY
 MYSQL_DATABASE=docker
 MYSQL_USER=docker
 MYSQL_PASSWORD=ipTVFzI5Hx
+DJANGO_SECRET_KEY="a10^j@6^2q$y*c&ks29$gnb7*3eodvqp!4!$7h31mlsq0ad3+s"
 ```
+
+**WARNING: Please change secret key by yorself for production mode.**
 
 ### Step.1 Build Docker Containers
 
@@ -69,9 +71,9 @@ For development, use `Username=root, email=test@test.com, pw=password (pwBman88)
 
 After these commands, please restart all the conatiners.
 
-### Step.3 Start Development Server
+### Step.3 Start Development Servers
 
-In `django` container, issue this command.
+Django application:
 
 ```bash
 # == In django container ==
@@ -79,19 +81,12 @@ cd /code
 bash run
 ```
 
-### Step.3 Use Command in Containers
-
-To use django commands, you have 2 choice.
+PubZ docs (dev server):
 
 ```bash
-# Pattern 1
-$ docker-compose exec django bash
-(container) $ <django command>
-```
-
-```bash
-# Pattern 2
-$ docker-compose exec django <django command>
+# == In django container ==
+$ cd /root/docs/mkdocs
+$ mkdocs serve
 ```
 
 ### Step.4 Check website

@@ -35,6 +35,7 @@ services:
       MYSQL_USER:     $MYSQL_USER
       MYSQL_PASSWORD: $MYSQL_PASSWORD
       MYSQL_HOST:     db
+      DJANGO_SECRET_KEY: $DJANGO_SECRET_KEY
     volumes:
       - ./src:/code
       - ./docs:/root/docs
