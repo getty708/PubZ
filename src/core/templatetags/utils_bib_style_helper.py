@@ -1,7 +1,5 @@
-from django.shortcuts import reverse
-from django.utils.safestring import mark_safe
 from django import template
-from django.template.loader import get_template
+
 register = template.Library()
 
 
@@ -10,7 +8,7 @@ register = template.Library()
 # -------
 @register.filter
 def remove_brace(value):
-    """ Remove braces  (which indicete capital leters in latex).
+    """Remove braces  (which indicete capital leters in latex).
 
     Args:
         value (str): string which have ``{``, ``}``.
@@ -31,7 +29,7 @@ def remove_brace(value):
 
 @register.filter
 def replace_double_hyphen(value):
-    """ Replace ``--`` (double) with ``-`` (single).
+    """Replace ``--`` (double) with ``-`` (single).
 
     Args:
         value (str): string which have ``--``.
@@ -55,9 +53,9 @@ def replace_double_hyphen(value):
 # --------
 @register.filter
 def author_en_default(val):
-    """ Returns the author name in the order of (1) given name, (2) family name.
+    """Returns the author name in the order of (1) given name, (2) family name.
 
-    Args: 
+    Args:
         val (str): name string.
 
     Returns:
@@ -84,9 +82,9 @@ def author_en_default(val):
 
 @register.filter
 def author_en_google(val):
-    """ Returns the author name in the Google Scholar style (e.g. Taro Handai => T. Handai).
+    """Returns the author name in the Google Scholar style (e.g. Taro Handai => T. Handai).
 
-    Args: 
+    Args:
         val (str): name string.
 
     Returns:

@@ -13,6 +13,7 @@ PubZで快適な研究ライフを！
 
 + [User's Guide](./user/index.md)
   + [Guide for Editors](./user/editor_guide.md)
+  + [Guide for Admin](./user/admin.md)
   + [Local Rules](./user/local.md)
-+ [Developer's Guide](./dev/index-dev.md)
++ [Developer's Guide](./dev/index.md)
   + [API Referebce](../sphinx/_build/)

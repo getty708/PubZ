@@ -25,14 +25,17 @@ services:
     ports:
       - "7070:80"
   django:
-    build: ./docker/django
+    build:
+      context: ./
+      dockerfile: ./docker/django/Dockerfile
     # command: python /code/app/manage.py runserver 0.0.0.0:8000
     hostname: django
     environment:
-      MYSQL_DATABASE: $MYSQL_ROOT_PASSWORD
+      MYSQL_DATABASE: $MYSQL_DATABASE
       MYSQL_USER:     $MYSQL_USER
       MYSQL_PASSWORD: $MYSQL_PASSWORD
       MYSQL_HOST:     db
+      DJANGO_SECRET_KEY: $DJANGO_SECRET_KEY
     volumes:
       - ./src:/code
       - ./docs:/root/docs

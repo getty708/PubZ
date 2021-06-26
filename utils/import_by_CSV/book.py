@@ -1,46 +1,45 @@
-import os
+import argparse
 import json
+import os
+from logging import INFO, basicConfig, getLogger
+
 import requests
-from getpass import getpass
-
-from logging import getLogger, basicConfig, DEBUG, INFO
-logger = getLogger(__name__)
-LOG_FMT = "{asctime} | {levelname:<5s} | {name} | {message}"
-# basicConfig(level=DEBUG, format=LOG_FMT, style="{")
-basicConfig(level=INFO, format=LOG_FMT, style="{")
-
 from auth_token import get_auth_token
 
+logger = getLogger(__name__)
+LOG_FMT = "{asctime} | {levelname:<5s} | {name} | {message}"
+basicConfig(level=INFO, format=LOG_FMT, style="{")
 
 # -----------------------------------------------------------------------
-import argparse
+
 
 def make_parser():
     parser = argparse.ArgumentParser()
-    subparsers = parser.add_subparsers(title='Sub-Commands')
+    subparsers = parser.add_subparsers(title="Sub-Commands")
 
     # single
-    single_parser = subparsers.add_parser('SINGLE')
+    single_parser = subparsers.add_parser("SINGLE")
     single_parser.set_defaults(func=main_single)
-    single_parser.add_argument('--url-base', default="http://django:8000/api/rest/",
-                                help="URL to get auth token")
-    single_parser.add_argument('-u', '--username', required=True,
-                                help="User ID (email)")
-
+    single_parser.add_argument(
+        "--url-base",
+        default="http://django:8000/api/rest/",
+        help="URL to get auth token",
+    )
+    single_parser.add_argument(
+        "-u", "--username", required=True, help="User ID (email)"
+    )
 
     # CSV
-    csv_parser = subparsers.add_parser('CSV')
+    csv_parser = subparsers.add_parser("CSV")
     csv_parser.set_defaults(func=main_csv)
-    csv_parser.add_argument('--url-base', default="http://django:8000/api/rest/",
-                                help="URL to get auth token")
-    csv_parser.add_argument('-u', '--username', required=True,
-                                help="User ID (email)")
-    csv_parser.add_argument('-f', '--file', required=True,
-                                help="file path")
-    csv_parser.add_argument('--debug', action='store_true',
-                                help="Debug flag")
-
-
+    csv_parser.add_argument(
+        "--url-base",
+        default="http://django:8000/api/rest/",
+        help="URL to get auth token",
+    )
+    csv_parser.add_argument("-u", "--username", required=True, help="User ID (email)")
+    csv_parser.add_argument("-f", "--file", required=True, help="file path")
+    csv_parser.add_argument("--debug", action="store_true", help="Debug flag")
 
     return parser
 
@@ -49,14 +48,20 @@ def make_parser():
 """
 Constant Params
 """
-KEYS_CREATE_BOOK = ["title","abbr","style",]
+KEYS_CREATE_BOOK = [
+    "title",
+    "abbr",
+    "style",
+]
 
 
 # -----------------------------------------------------------------------
 """
 GET
 """
-def get_books(url_base, param, logger=getLogger(__name__+'.get_book')):
+
+
+def get_books(url_base, param, logger=getLogger(__name__ + ".get_book")):
     """
     Args.
     -----
@@ -73,7 +78,9 @@ def get_books(url_base, param, logger=getLogger(__name__+'.get_book')):
         "Content-type": "application/json",
     }
     r = requests.get(url_with_param, headers=headers, verify=False)
-    if r.status_code in [200,]:
+    if r.status_code in [
+        200,
+    ]:
         data = json.loads(r.text)
         books = data["results"]
     else:
@@ -84,7 +91,11 @@ def get_books(url_base, param, logger=getLogger(__name__+'.get_book')):
 """
 POST
 """
-def create_book(url_base, token, book_dict, logger=getLogger(__name__+'.create_book')):
+
+
+def create_book(
+    url_base, token, book_dict, logger=getLogger(__name__ + ".create_book")
+):
     """
     Args.
     -----
@@ -99,7 +110,11 @@ def create_book(url_base, token, book_dict, logger=getLogger(__name__+'.create_b
     # Check payload
     key_expected, key_actual = set(KEYS_CREATE_BOOK), set(book_dict.keys())
     if not key_expected == key_actual:
-        logger.warning("Check book_dict. some keys are missing or it contains unsed keys. [diff={}]".format(key_expected - key_actual))
+        logger.warning(
+            "Check book_dict. some keys are missing or it contains unsed keys. [diff={}]".format(
+                key_expected - key_actual
+            )
+        )
         return False
 
     # Make Post Request
@@ -114,7 +129,7 @@ def create_book(url_base, token, book_dict, logger=getLogger(__name__+'.create_b
     logger.debug("- url    : {}".format(url_post))
     logger.debug("- headers: {}".format(headers))
     logger.debug("- params : {}".format(payload))
-    r = requests.post(url_post,  headers=headers, data=json.dumps(payload),verify=False)
+    r = requests.post(url_post, headers=headers, data=json.dumps(payload), verify=False)
 
     # Check Responce
     data = json.loads(r.text)
@@ -123,7 +138,10 @@ def create_book(url_base, token, book_dict, logger=getLogger(__name__+'.create_b
         logger.info("Success: Create new book.")
         return True, "Created"
     else:
-        if str(data) == "{'non_field_errors': ['The fields title, style must make a unique set.']}":
+        if (
+            str(data)
+            == "{'non_field_errors': ['The fields title, style must make a unique set.']}"
+        ):
             logger.warning("Failed: Already exists (DB internal error.)\n")
             return True, str(data)
         logger.warning("Failed: Cannot create new book. {}".format(data))
@@ -134,6 +152,8 @@ def create_book(url_base, token, book_dict, logger=getLogger(__name__+'.create_b
 """
 Main
 """
+
+
 def main_single(args):
     # Get Token
     url = args.url_base + "api-token-auth/"
@@ -172,11 +192,16 @@ def main_csv(args):
     def _load_csv():
         # Read and Check CSV
         import pandas as pd
+
         df = pd.read_csv(args.file).fillna("")
         print(df.head())
         key_expected, key_actual = set(KEYS_CREATE_BOOK), set(df.columns)
         if not key_expected <= key_actual:
-            raise ValueError("Check CSV some keys are missing [diff={}]".format(key_expected - key_actual))
+            raise ValueError(
+                "Check CSV some keys are missing [diff={}]".format(
+                    key_expected - key_actual
+                )
+            )
         return df
 
     def _create_books(df):
@@ -188,7 +213,7 @@ def main_csv(args):
             row = df.loc[i, :]
             book_dict = {
                 "title": row["title"],
-                "abbr":  row["abbr"],
+                "abbr": row["abbr"],
                 "style": row["style"],
             }
             status, msg = create_book(args.url_base, token, book_dict)
@@ -201,15 +226,31 @@ def main_csv(args):
         df_tried = df[df["status"].isin([True, False])]
         df_success, df_error = df[df["status"] == True], df[df["status"] == False]
         logger.info("Total  : {}".format(len(df_tried)))
-        logger.info("Success: {} [{}%]".format(
-            len(df_success), len(df_success)/len(df_tried)*100))
-        logger.info("Errors : {} [{}%]".format(
-            len(df_error), len(df_error)/len(df_tried)*100))
-        for no,idx in enumerate(df_error.index):
-            logger.info("- No.{}: {} {}".format(
-                no,
-                df_error.loc[idx, ["status", "msg"]].values,
-                df_error.loc[idx, ["style", "title", "abbr",]].values))
+        logger.info(
+            "Success: {} [{}%]".format(
+                len(df_success), len(df_success) / len(df_tried) * 100
+            )
+        )
+        logger.info(
+            "Errors : {} [{}%]".format(
+                len(df_error), len(df_error) / len(df_tried) * 100
+            )
+        )
+        for no, idx in enumerate(df_error.index):
+            logger.info(
+                "- No.{}: {} {}".format(
+                    no,
+                    df_error.loc[idx, ["status", "msg"]].values,
+                    df_error.loc[
+                        idx,
+                        [
+                            "style",
+                            "title",
+                            "abbr",
+                        ],
+                    ].values,
+                )
+            )
             logger.info("==============")
 
         # Write Results
@@ -218,7 +259,7 @@ def main_csv(args):
             filename = "." + filename
         df.to_csv(filename)
 
-    # == Main == 
+    # == Main ==
     token = _auth_token()
     df = _load_csv()
     df = _create_books(df)
@@ -226,7 +267,7 @@ def main_csv(args):
 
 
 # -----------------------------------------------------------------------
-if __name__=='__main__':
+if __name__ == "__main__":
     parser = make_parser()
     args = parser.parse_args()
     args_dict = vars(args)
