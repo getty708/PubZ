@@ -1,16 +1,25 @@
-FROM python:3.7
+# == Stage.1: Make requirements.txt by poetry ==
+FROM python:3.9-slim as builder
+WORKDIR /root/src/
+RUN pip install poetry
+COPY pyproject.toml poetry.lock ./
+RUN poetry export -f requirements.txt > requirements.txt
+
+# == Stage.3: Build Minimum Images ==
+FROM python:3.9
 ENV PYTHONUNBUFFERED 1
-RUN mkdir /code
+VOLUME /code/
 WORKDIR /code
-ADD requirements.txt /code/
-RUN apt-get update
 
-# Emacsのインストール
-RUN apt-get update
-RUN apt-get install emacs24-nox -y
+# == Ubuntu Packages ==
+RUN apt-get update \
+    && apt-get install -y \
+        emacs24-nox \
+        mysql-common \
+        mariadb-client
 
-# MySQLクライアントとPythonドライバ
-RUN apt-get install -y mysql-common mariadb-client
-RUN pip3 install -r requirements.txt
+# Install Jupyter
+RUN echo 'alias python=python3' >> ~/.bashrc
+COPY --from=builder /root/src/requirements.txt .
+RUN pip install -r /requirements.txt
 
-ADD . /code/

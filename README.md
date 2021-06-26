@@ -5,12 +5,13 @@ Publication management system for your lab.
 
 [Document](https://getty708.github.io/PubZ/mkdocs/site/)
 
-## Requirements for Dev Env
+## Requirements
 
-+ Main Host Server
-  + docker
-  + docker-compose
-  
+- docker
+- docker-compose
+- (poetry)
+
+
 ## Instlation (Dev Environment)
 
 Here, let's install PubZ app for development environemnt.
@@ -44,12 +45,17 @@ docker-compose up
 
 Then, you get 3 containers `db, phpmyadmin, django, (storage)` and each containers are connected each others.
 
-### Step.2 Start Django App
+### Step.2 Initalize Django App
+
 For starting django App, you need to initalize database (this system use `mysql`). Issue these commands,
 
 ```bash
 # Enter into the django container
 docker-compose exec django bash
+```
+
+```bash
+# == In django container ==
 # Migrate database
 python manage.py migrate
 # Create Super User
@@ -62,6 +68,16 @@ python manage.py migrate
 For development, use `Username=root, email=test@test.com, pw=password (pwBman88)`
 
 After these commands, please restart all the conatiners.
+
+### Step.3 Start Development Server
+
+In `django` container, issue this command.
+
+```bash
+# == In django container ==
+cd /code
+bash run
+```
 
 ### Step.3 Use Command in Containers
 
