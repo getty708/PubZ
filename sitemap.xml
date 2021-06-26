@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>http://localhost:7777/</loc>
+         <loc>https://getty708.github.io/PubZ/mkdocs/site/</loc>
          <lastmod>2021-06-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>http://localhost:7777/license/</loc>
+         <loc>https://getty708.github.io/PubZ/mkdocs/site/license/</loc>
          <lastmod>2021-06-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>http://localhost:7777/dev/</loc>
+         <loc>https://getty708.github.io/PubZ/mkdocs/site/dev/</loc>
          <lastmod>2021-06-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>http://localhost:7777/dev/code/</loc>
+         <loc>https://getty708.github.io/PubZ/mkdocs/site/dev/code/</loc>
          <lastmod>2021-06-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>http://localhost:7777/dev/display_styles/</loc>
+         <loc>https://getty708.github.io/PubZ/mkdocs/site/dev/display_styles/</loc>
          <lastmod>2021-06-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>http://localhost:7777/dev/urls/</loc>
+         <loc>https://getty708.github.io/PubZ/mkdocs/site/dev/urls/</loc>
          <lastmod>2021-06-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>http://localhost:7777/user/</loc>
+         <loc>https://getty708.github.io/PubZ/mkdocs/site/user/</loc>
          <lastmod>2021-06-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>http://localhost:7777/user/admin/</loc>
+         <loc>https://getty708.github.io/PubZ/mkdocs/site/user/admin/</loc>
          <lastmod>2021-06-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>http://localhost:7777/user/editor_guide/</loc>
+         <loc>https://getty708.github.io/PubZ/mkdocs/site/user/editor_guide/</loc>
          <lastmod>2021-06-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>http://localhost:7777/user/local/</loc>
+         <loc>https://getty708.github.io/PubZ/mkdocs/site/user/local/</loc>
          <lastmod>2021-06-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
