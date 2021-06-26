@@ -6,7 +6,7 @@ authors = ["Yoshimura Naoya <yoshimura708x@gmail.com>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.9"
 Django = "^2.2.24"
 django-bootstrap4 = "^3.0.1"
 mysqlclient = "^2.0.3"
@@ -26,3 +26,33 @@ pysen = {version = "0.9.1", extras = ["lint"]}
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pysen]
+version = "0.9"
+
+[tool.pysen.lint]
+enable_black = true
+enable_flake8 = true
+enable_isort = true
+enable_mypy = false
+mypy_preset = "strict"
+line_length = 88
+py_version = "py37"
+isort_known_third_party = ["numpy"]
+isort_known_first_party = ["pysen"]
+mypy_ignore_packages = ["pysen.generated.*"]
+mypy_path = ["stubs"]
+[[tool.pysen.lint.mypy_targets]]
+  paths = [".", "tests/"]
+
+[tool.pysen.lint.source]
+  includes = ["src", "utils"]
+  include_globs = []
+  excludes = ["third_party/"]
+  exclude_globs = ["**/migrations/*.py"]
+
+[tool.pysen.lint.mypy_modules."pysen.scripts"]
+  preset = "entry"
+
+[tool.pysen.lint.mypy_modules."numpy"]
+  ignore_errors = true
