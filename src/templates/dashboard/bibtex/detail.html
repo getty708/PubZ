@@ -137,6 +137,22 @@
 								</td>
 							</tr>
 							{% endif %}
+							{% if bibtex.note %}
+							<tr>
+								<th scope="col">Note</th>
+								<td>
+									{{ bibtex.note|default:'-' }}
+								</td>
+							</tr>
+							{% endif %}
+							{% if bibtex.related_entry %}
+							<tr>
+								<th scope="col">Related Entry</th>
+								<td>
+									<a href="{{ bibtex.related_entry }}">{{ bibtex.related_entry|default:'-' }}</a>
+								</td>
+							</tr>
+							{% endif %}
 							{% if bibtex.abstract %}
 							<tr>
 								<th scope="col">Abstruct</th>

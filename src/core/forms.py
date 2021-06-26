@@ -280,6 +280,8 @@ class BibtexForm(forms.ModelForm):
             "fund",
             "doi",
             "memo",
+            "note",
+            "related_entry",
             "abstract",
         ]
         widgets = {

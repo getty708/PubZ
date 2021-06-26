@@ -192,7 +192,16 @@ class Bibtex(models.Model):
         null=False,
         blank=True,
         default="",
+        help_text=("[Deprecated] Short Note to distinguish similar entries." "(blank=True)"),
+    )
+    note = models.TextField(
+        null=False,
+        blank=True,
+        default="",
         help_text=("Note or comment." "(blank=True)"),
+    )
+    related_entry = models.URLField(
+        null=True, blank=True, help_text=("URL to a related PubZ entry. (blank=True)")
     )
     tags = models.ManyToManyField(
         "core.Tag",
@@ -220,7 +229,7 @@ class Bibtex(models.Model):
                 "title",
                 "book",
                 "pub_date",
-                "memo",
+                # "memo",
                 "page",
             ),
         )
