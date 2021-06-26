@@ -34,10 +34,8 @@ class BibtexAdmin(admin.ModelAdmin):
     )
 
     def get_title(self, obj):
-        if obj.language == "EN":
-            return obj.title_en
-        elif obj.language == "JA":
-            return obj.title_ja
+        if obj.title is not None:
+            return obj.title
         return "Bibtex[{}]".format(obj.id)
 
     get_title.short_description = "Title"
