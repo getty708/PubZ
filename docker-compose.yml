@@ -2,6 +2,7 @@ version: '3'
 services:
   db:
     image: mysql:5.7
+    container_name: pubz-db-dev-v${PUBZ_VERSION}
     ports:
       - "3306:3306" # <-これがないと外からアクセス出来ない
     hostname: db
@@ -11,10 +12,11 @@ services:
       MYSQL_USER:     $MYSQL_USER
       MYSQL_PASSWORD: $MYSQL_PASSWORD
     volumes:
-      - dev-storage:/var/lib/mysql
+      - storage-dev:/var/lib/mysql
       - ./docker/mysql:/etc/mysql/conf.d
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
+    container_name: pubz-phpmyadmin-dev-v${PUBZ_VERSION}
     environment:
       PMA_ARBITRARY: 1
       PMA_HOST:      db
@@ -28,6 +30,8 @@ services:
     build:
       context: ./
       dockerfile: ./docker/django/Dockerfile
+    image: pubz:dev-v${PUBZ_VERSION}
+    container_name: pubz-web-dev-v${PUBZ_VERSION}
     # command: python /code/app/manage.py runserver 0.0.0.0:8000
     hostname: django
     environment:
@@ -48,7 +52,7 @@ services:
     tty: true
 
 volumes:
-  dev-storage:
+  storage-dev:
     driver: local
     driver_opts:
       type: none
