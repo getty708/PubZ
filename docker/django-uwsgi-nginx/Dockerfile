@@ -12,10 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# == Stage.1: Make requirements.txt by poetry ==
+FROM python:3.9-slim as builder
+WORKDIR /root/src/
+RUN pip install poetry
+COPY pyproject.toml poetry.lock ./
+RUN poetry export -f requirements.txt > requirements.txt
+
+
+# == Stage.3: Build Minimum Images ==
 FROM ubuntu:18.04
-
-MAINTAINER Dockerfiles
-
 
 # timezone setting
 RUN DEBIAN_FRONTEND=noninteractive
@@ -23,31 +29,43 @@ RUN apt-get update && apt-get install -y tzdata
 # timezone setting
 ENV TZ=Asia/Tokyo 
 
-
 # Install required packages and remove the apt packages cache when done.
-
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y \
-	git \
-  	vim \
-	python3 \
-	python3-dev \
-	python3-setuptools \
-	python3-pip \
-	nginx \
-	supervisor \
-	sqlite3  && \
-   rm -rf /var/lib/apt/lists/*
-RUN apt-get update && apt-get install emacs -y
-RUN apt-get update && apt-get install python-pip -y
-RUN pip install --upgrade pip && \
-	pip3 install -U pip setuptools
-
+		default-libmysqlclient-dev \
+		emacs \
+		git \
+		mysql-client \
+		nginx \
+		supervisor \
+	&& rm -rf /var/lib/apt/lists/*
+# Install Python3.8
+RUN : \
+    && apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+        software-properties-common \
+    && add-apt-repository -y ppa:deadsnakes \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+        python3.8-venv \
+		libpython3.8-dev \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* \
+    && :
+RUN python3.8 -m venv /venv
+ENV PATH=/venv/bin:$PATH
+RUN apt-get update \
+	&& apt-get install -y \
+		python-pip \
+		python3-pip \
+	&& pip install --upgrade pip \
+	&& pip3 install -U pip setuptools
 
 # encode setting
 # set the locale
-RUN apt-get clean && apt-get update && apt-get install -y locales
+RUN apt-get clean \
+	&& apt-get update \
+	&& apt-get install -y locales
 RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
@@ -63,25 +81,20 @@ RUN pip3 install uwsgi
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 
-COPY nginx-app.conf /etc/nginx/sites-available/default
-COPY supervisor-app.conf /etc/supervisor/conf.d/
+COPY ./docker/django-uwsgi-nginx/nginx-app.conf /etc/nginx/sites-available/default
+COPY ./docker/django-uwsgi-nginx/supervisor-app.conf /etc/supervisor/conf.d/
 
 # COPY requirements.txt and RUN pip install BEFORE adding the rest of your code, this will cause Docker's caching mechanism
 # to prevent re-installing (all your) dependencies when you made a change a line or two in your app.
 
-COPY app/requirements.txt /code/app/
-RUN apt-get update && apt-get install -y \
-    	    mysql-client \
-    	    python-dev \
-    	    default-libmysqlclient-dev
-RUN pip3 install -r /code/app/requirements.txt
-RUN pip3 install PyMySQL
+COPY --from=builder /root/src/requirements.txt .
+RUN pip3 install -r requirements.txt --no-deps
 
 # add (the rest of) our code
-COPY . /code/
+COPY ./src /code/
 
+# ENV PYTHONPATH /usr/bin/python3
 
-ENV PYTHONPATH /usr/bin/python3
 
 # install django, normally you would remove this step because your project would already
 # be installed in the code/app/ directory
