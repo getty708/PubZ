@@ -7,4 +7,4 @@ help:
 build:
 	cp ../../pyproject.toml .
 	cp ../../poetry.lock .
-	docker build -t pubz:dev-v${PUBZ_VERSION} .
+	docker build -t pubz:web-dev-v${PUBZ_VERSION} .
