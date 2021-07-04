@@ -81,8 +81,10 @@ RUN pip3 install uwsgi
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 
-COPY ./docker/django-uwsgi-nginx/nginx-app.conf /etc/nginx/sites-available/default
-COPY ./docker/django-uwsgi-nginx/supervisor-app.conf /etc/supervisor/conf.d/
+COPY ./nginx-app.conf /etc/nginx/sites-available/default
+COPY ./supervisor-app.conf /etc/supervisor/conf.d/
+COPY ./uwsgi.ini /code/
+COPY ./uwsgi_params /code/
 
 # COPY requirements.txt and RUN pip install BEFORE adding the rest of your code, this will cause Docker's caching mechanism
 # to prevent re-installing (all your) dependencies when you made a change a line or two in your app.
@@ -91,7 +93,7 @@ COPY --from=builder /root/src/requirements.txt .
 RUN pip3 install -r requirements.txt --no-deps
 
 # add (the rest of) our code
-COPY ./src /code/
+COPY ./src /code/app/
 
 # ENV PYTHONPATH /usr/bin/python3
 
