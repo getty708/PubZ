@@ -3,7 +3,7 @@ version: '3'
 services:
   db:
     image: mysql:5.7
-    container_name: pubz-db-prd-v${PUBZ_VERSION}
+    container_name: pubz-db-prd
     ports:
       - "3306:3306"
     hostname: db
@@ -21,16 +21,14 @@ services:
       dockerfile: ./docker/django-uwsgi-nginx/Dockerfile
     image: pubz:prd-v${PUBZ_VERSION}
     container_name: pubz-web-prd-v${PUBZ_VERSION}
+    hostname: pubz-web-prd
     environment:
       MYSQL_DATABASE: $MYSQL_DATABASE
       MYSQL_USER:     $MYSQL_USER
       MYSQL_PASSWORD: $MYSQL_PASSWORD
-      MYSQL_HOST:     db
+      MYSQL_HOST:     pubz-db-prd
       DJANGO_SECRET_KEY: $DJANGO_SECRET_KEY
-      VIRTUAL_HOST: app.www-mmde.ist.osaka-u.ac.jp
-      VIRTUAL_PORT: '8080'
-    # volumes:
-    #   - ../src:/code/app
+      VIRTUAL_HOST: $VIRTUAL_HOST
     ports:
       - '80:8080'
     depends_on:
