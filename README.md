@@ -31,7 +31,17 @@ DJANGO_SECRET_KEY="a10^j@6^2q$y*c&ks29$gnb7*3eodvqp!4!$7h31mlsq0ad3+s"
 VIRTUAL_HOST="pubz.example.com"
 ```
 
-**WARNING: Please change secret key by yorself for production mode.**
+**WARNING: Please change secret key by yorself for production mode. To generate own key, check [here](https://qiita.com/frosty/items/bb5bc1553f452e5bb8ff).**
+
+
+```python
+# Generate Secret Key
+from django.core.management.utils import get_random_secret_key
+
+secret_key = get_random_secret_key()
+text = 'SECRET_KEY = \'{0}\''.format(secret_key)
+print(text)
+```
 
 ### Step.1 Build Docker Containers
 
@@ -40,7 +50,7 @@ Move to the directory which `docker-compose.yml` exists and issue these commands
 ```bash
 # Create Storage Directory
 mkdir -p ./storage/db/data
-# Create containers with make command
+# Create docker image with make command
 cd docker/django
 make build
 # Start containers
@@ -108,6 +118,15 @@ With this setup, we launched 3 containers. You can access to 3 of them with your
 ---
 
 ## Setup Production Server
+
+```bash
+# Create Image with make command
+cd docker/django-uwsgi-nginx/
+make build
+# Start containers
+cd ../../
+docker-compose -f docker-compose-prd.yaml up -d
+```
 
 ### Container and Ports
 

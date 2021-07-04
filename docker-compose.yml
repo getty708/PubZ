@@ -27,9 +27,6 @@ services:
     ports:
       - "7070:80"
   django:
-    build:
-      context: ./
-      dockerfile: ./docker/django/Dockerfile
     image: pubz:web-dev-v${PUBZ_VERSION}
     container_name: pubz-web-dev
     # command: python /code/app/manage.py runserver 0.0.0.0:8000
