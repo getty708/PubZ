@@ -28,6 +28,7 @@ MYSQL_DATABASE=docker
 MYSQL_USER=docker
 MYSQL_PASSWORD=ipTVFzI5Hx
 DJANGO_SECRET_KEY="a10^j@6^2q$y*c&ks29$gnb7*3eodvqp!4!$7h31mlsq0ad3+s"
+VIRTUAL_HOST="pubz.example.com"
 ```
 
 **WARNING: Please change secret key by yorself for production mode.**
@@ -39,9 +40,11 @@ Move to the directory which `docker-compose.yml` exists and issue these commands
 ```bash
 # Create Storage Directory
 mkdir -p ./storage/db/data
-# Create containers with docker-compose
-docker-compose build
+# Create containers with make command
+cd docker/django
+make build
 # Start containers
+cd ../../
 docker-compose up 
 ```
 
@@ -65,6 +68,8 @@ python manage.py createsuperuser
 # Migrate Bibtex models
 python manage.py makemigrations core
 python manage.py migrate
+# Collect static files (e.g., js, css)
+python manage.py collectstatic
 ```
 
 For development, use `Username=root, email=test@test.com, pw=password (pwBman88)`
@@ -93,12 +98,25 @@ $ mkdocs serve
 
 With this setup, we launched 3 containers. You can access to 3 of them with your browser.
 
+
 | App        | URL              |
 |------------|------------------|
 | Django     | http://localhost:7000 |
 | phpmyadmin | http://localhost:7070 |
 | docs       | http://localhost:7777 |
 
+---
+
+## Setup Production Server
+
+### Container and Ports
+
+| App        | Container Name   | Port (External) |
+|------------|------------------|-----------------|
+| Django     | pubz-web-prd     | 8000            |
+| MarinaDB   | pubz-db-prd      | 3306            |
+
+---
 ## Licence
 
 [MIT License](./LICENSE)
