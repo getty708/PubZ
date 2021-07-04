@@ -1,0 +1,43 @@
+# Docker Compose for Production Mode
+version: '3'
+services:
+  db:
+    image: mysql:5.7
+    container_name: pubz-db-prd
+    ports:
+      - "3306:3306"
+    hostname: db
+    environment:
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_DATABASE: $MYSQL_DATABASE
+      MYSQL_USER:     $MYSQL_USER
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
+    volumes:
+      - storage-prd:/var/lib/mysql
+      - ./docker/mysql:/etc/mysql/conf.d
+  web:
+    build:
+      context: ./
+      dockerfile: ./docker/django-uwsgi-nginx/Dockerfile
+    image: pubz:prd-v${PUBZ_VERSION}
+    container_name: pubz-web-prd-v${PUBZ_VERSION}
+    hostname: pubz-web-prd
+    environment:
+      MYSQL_DATABASE: $MYSQL_DATABASE
+      MYSQL_USER:     $MYSQL_USER
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
+      MYSQL_HOST:     pubz-db-prd
+      DJANGO_SECRET_KEY: $DJANGO_SECRET_KEY
+      VIRTUAL_HOST: $VIRTUAL_HOST
+    ports:
+      - '80:8080'
+    depends_on:
+      - db
+
+volumes:
+  storage-prd:
+    driver: local
+    driver_opts:
+      type: none
+      device: $PWD/storage/db/data/
+      o: bind

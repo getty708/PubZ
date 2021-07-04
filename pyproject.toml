@@ -15,7 +15,7 @@ Markdown = "^3.3.4"
 django-filter = "^2.4.0"
 django-autocomplete-light = "^3.8.2"
 django-bootstrap-datepicker-plus = "^3.0.5"
-PyMySQL = "^1.0.2"
+PyMySQL = "=1.0.2"
 
 [tool.poetry.dev-dependencies]
 mkdocs = "^1.2.1"
