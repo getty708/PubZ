@@ -6,24 +6,24 @@ authors = ["Yoshimura Naoya <yoshimura708x@gmail.com>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "=3.9"
-Django = "=2.2.24"
-django-bootstrap4 = "=3.0.1"
-mysqlclient = "=2.0.3"
-djangorestframework = "=3.12.4"
+python = "^3.9"
+Django = "^2.2.24"
+django-bootstrap4 = "^3.0.1"
+mysqlclient = "^2.0.3"
+djangorestframework = "^3.12.4"
 Markdown = "^3.3.4"
-django-filter = "=2.4.0"
-django-autocomplete-light = "=3.8.2"
-django-bootstrap-datepicker-plus = "=3.0.5"
+django-filter = "^2.4.0"
+django-autocomplete-light = "^3.8.2"
+django-bootstrap-datepicker-plus = "^3.0.5"
 PyMySQL = "=1.0.2"
 
 [tool.poetry.dev-dependencies]
-mkdocs = "=1.2.1"
-Sphinx = "=4.0.2"
-sphinx-rtd-theme = "=0.5.2"
+mkdocs = "^1.2.1"
+Sphinx = "^4.0.2"
+sphinx-rtd-theme = "^0.5.2"
 pysen = {version = "0.9.1", extras = ["lint"]}
-pysen-ls = "=0.1.1"
-mkdocs-material = "=7.1.9"
+pysen-ls = "^0.1.1"
+mkdocs-material = "^7.1.9"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
