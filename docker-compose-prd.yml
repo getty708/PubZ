@@ -15,12 +15,10 @@ services:
     volumes:
       - storage-prd:/var/lib/mysql
       - ./docker/mysql:/etc/mysql/conf.d
+    restart: always
   web:
-    build:
-      context: ./
-      dockerfile: ./docker/django-uwsgi-nginx/Dockerfile
-    image: pubz:prd-v${PUBZ_VERSION}
-    container_name: pubz-web-prd-v${PUBZ_VERSION}
+    image: pubz:web-prd-v${PUBZ_VERSION}
+    container_name: pubz-web-prd
     hostname: pubz-web-prd
     environment:
       MYSQL_DATABASE: $MYSQL_DATABASE
@@ -30,9 +28,11 @@ services:
       DJANGO_SECRET_KEY: $DJANGO_SECRET_KEY
       VIRTUAL_HOST: $VIRTUAL_HOST
     ports:
-      - '80:8080'
+      - '8000:8000'
     depends_on:
       - db
+    restart: always
+
 
 volumes:
   storage-prd:
@@ -41,3 +41,8 @@ volumes:
       type: none
       device: $PWD/storage/db/data/
       o: bind
+
+networks:
+  default:
+    external:
+      name: shared
